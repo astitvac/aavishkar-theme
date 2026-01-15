@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repository | Aavishkar.ai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-P9GI9TwhUxA+dRsClwsiJiMtBvR5CwQXPTNOqwQYBlhDVOjxl7cD6KPBGyqxeCvvYxlGIIE7XM9Hz97LUqNkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.3/dist/purify.min.js"></script>
+    <style>
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'gill-sans';
+            src: url('fonts/GillSansMedium.otf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinmedium';
+            src: url('fonts/DINAlternateMedium_0.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinalternate';
+            src: url('fonts/DINBlackAlternate.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'din1451';
+            src: url('fonts/DIN1451-36breit.ttf') format('truetype');
+        }
+
+        /* Root Variables */
+        :root {
+            --border-radius1: 40px;
+            --border-radius2: 20px;
+            --border-radius3: 10px;
+            --border-radius4: 5px;
+
+            --avishkar-header1: 20px;
+            --avishkar-header2: 16px;
+            --avishkar-header3: 12px;
+
+            --avishkar-margin1: 20px;
+            --avishkar-margin2: 16px;
+            --avishkar-margin3: 12px;
+            --avishkar-margin4: 8px;
+            --avishkar-margin5: 4px;
+            --avishkar-margin51: 2px;
+
+            --avishkar-padding1: 40px;
+            --avishkar-padding2: 30px;
+            --avishkar-padding3: 20px;
+            --avishkar-padding4: 10px;
+            --avishkar-padding5: 4px;
+            --avishkar-padding51: 2px;
+
+            --avishkar-borderColor: #4A67B1;
+            --avishkar-ink: #393B9B;
+            --avishkar-green: #1B487E;
+            --avishkar-purple: #9E23A3;
+            --avishkar-brinjal: #6C3CA8;
+            --avishkar-blue: #4A67B1;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'dinmedium', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0b447b;
+            line-height: 1.6;
+            background-color: #f5f8fa;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0b447b;
+        }
+
+        /* Header Navigation */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'dinalternate';
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--avishkar-purple);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: #0b447b;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--avishkar-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu li.current-menu-item a::after {
+            width: 100%;
+        }
+
+        /* Repository Page Specific Styles */
+        .page-title {
+            font-family: 'dinalternate';
+            font-size: 45px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 20px;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .page-description {
+            font-size: 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+            color: var(--avishkar-green);
+        }
+
+        .repository-banner {
+            background-color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .cta-section {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .cta-heading {
+            font-family: 'dinalternate';
+            font-size: 30px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 30px;
+        }
+
+        .repo-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .repo-button {
+            background-color: #f5f8fa;
+            color: var(--avishkar-green);
+            border: 1px solid var(--avishkar-green);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .repo-button:hover {
+            background-color: var(--avishkar-green);
+            color: white;
+        }
+
+        .repo-button.primary {
+            background-color: var(--avishkar-green);
+            color: white;
+        }
+
+        .repo-button.primary:hover {
+            background-color: #083460;
+        }
+
+        .repo-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+
+        .repo-nav {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+
+        .repo-nav-item {
+            margin-right: 30px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .repo-nav-item.active {
+            color: var(--avishkar-purple);
+        }
+
+        .repo-nav-item.active::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--avishkar-purple);
+            bottom: -15px;
+            left: 0;
+        }
+
+        .readme-content {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+        }
+
+        .readme-content h1 {
+            font-size: 32px;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-bottom: 16px;
+        }
+
+        .readme-content h2 {
+            font-size: 24px;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .readme-content code {
+            background-color: #f6f8fa;
+            padding: 0.2em 0.4em;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        .file-list {
+            border: 1px solid #eaecef;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .file-list-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eaecef;
+            display: flex;
+            align-items: center;
+        }
+
+        .file-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-icon {
+            color: #0366d6;
+            margin-right: 10px;
+        }
+
+        .file-folder {
+            color: #79b8ff;
+        }
+
+        .contribution-section {
+            background-color: #f7f9fc;
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .contribution-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .contribution-header {
+            font-family: 'dinalternate';
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contribution-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Pipe Design Elements */
+        .trianglePipe {
+            display: flex;
+            position: relative;
+            margin: 40px 0;
+            justify-content: center;
+            gap: 3.4rem;
+        }
+
+        .pipe {
+            z-index: 1;
+            height: 100%;
+            width: 3.5rem;
+            border-left: 1px solid var(--avishkar-purple);
+            border-right: 1px solid var(--avishkar-purple);
+        }
+
+        .pipeOpenRight {
+            border: 1px solid var(--avishkar-purple);
+            border-radius: 0 0 46px 0;
+            height: 3rem;
+            flex-grow: 1;
+            clip-path: inset(8% 0% 0% 9.8%);
+        }
+
+        .pipeOpenLeft {
+            flex-grow: 1;
+            border: 1px solid var(--avishkar-purple);
+            border-radius: 0 0 0 46px;
+            height: 3rem;
+            clip-path: inset(8% 9.8% 0 0%);
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 1024px) {
+            .page-title {
+                font-size: 38px;
+            }
+
+            .page-description {
+                font-size: 18px;
+                margin-bottom: 40px;
+            }
+
+            .cta-heading {
+                font-size: 26px;
+            }
+
+            .pipe {
+                width: 2.5rem;
+            }
+
+            .trianglePipe {
+                gap: 2.4rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 13.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 13.8% 0 0%);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .page-title {
+                font-size: 32px;
+                padding-top: 40px;
+            }
+
+            .page-description {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .repo-content {
+                padding: 25px;
+            }
+
+            .pipe {
+                width: 2rem;
+            }
+
+            .trianglePipe {
+                gap: 1.9rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 17%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 17% 0 0%);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hamburger-line {
+                width: 25px;
+                height: 3px;
+                background-color: #0b447b;
+                margin: 5px 0;
+            }
+        }
+
+        @media screen and (max-width: 426px) {
+            .page-title {
+                font-size: 28px;
+                padding-top: 30px;
+            }
+
+            .page-description {
+                font-size: 15px;
+                margin-bottom: 25px;
+            }
+
+            .repo-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .trianglePipe {
+                gap: 1.2rem;
+            }
+
+            .pipe {
+                width: 1.5rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 30.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 30.8% 0 0%);
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-menu a {
+            color: #0b447b;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        @media only screen and (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Repository Card Grid System */
+        .repository-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .repository-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eaecef;
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .repository-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        .repo-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .repo-icon {
+            color: var(--avishkar-purple);
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .repo-description {
+            color: #555;
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .repo-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Enhanced README Display */
+        .readme-content code {
+            background-color: #f6f8fa;
+            padding: 0.2em 0.4em;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+
+        .readme-content pre {
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            padding: 16px;
+            overflow: auto;
+            line-height: 1.45;
+            margin-bottom: 16px;
+        }
+
+        .readme-content blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+
+        .readme-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Improved File Browser */
+        .file-browser {
+            border: 1px solid #eaecef;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .file-browser-header {
+            background-color: #f6f8fa;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eaecef;
+            font-weight: 600;
+            color: #586069;
+        }
+
+        .file-list-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid #eaecef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.2s ease;
+        }
+
+        .file-list-item:hover {
+            background-color: #f6f8fa;
+            cursor: pointer;
+        }
+
+        .file-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .file-icon {
+            margin-right: 10px;
+            color: #0366d6;
+        }
+
+        .file-folder {
+            color: #79b8ff;
+        }
+
+        .file-date {
+            color: #586069;
+            font-size: 14px;
+        }
+
+        /* Enhanced Contribution Section */
+        .contribution-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .contribution-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .contribution-icon {
+            font-size: 32px;
+            color: var(--avishkar-purple);
+            margin-bottom: 20px;
+            display: inline-block;
+            background-color: rgba(158, 35, 163, 0.1);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contribution-list {
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+
+        .contribution-list li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .contribution-button {
+            display: inline-block;
+            background-color: var(--avishkar-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .contribution-button:hover {
+            background-color: #083460;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Repository Search and Filter */
+        .repository-tools {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-container {
+            position: relative;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border-radius: 50px;
+            border: 1px solid #e1e4e8;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--avishkar-purple);
+            box-shadow: 0 0 0 3px rgba(158, 35, 163, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6a737d;
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid #e1e4e8;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+            min-width: 180px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--avishkar-purple);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .repository-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .repository-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* Tab improvements */
+        .repo-nav-item {
+            transition: color 0.3s ease;
+        }
+
+        .repo-nav-item.active::after {
+            transition: width 0.3s ease;
+        }
+
+        /* Button hover effects */
+        .repo-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-button:after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(255,255,255,0.1);
+            transition: width 0.3s ease;
+        }
+
+        .repo-button:hover:after {
+            width: 100%;
+        }
+
+        /* Mobile responsiveness for new elements */
+        @media screen and (max-width: 768px) {
+            .repository-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .repo-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .repository-tools {
+                flex-direction: column;
+            }
+        }
+
+        /* Repository language statistics */
+        .repo-languages {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaecef;
+        }
+
+        .language-bar {
+            height: 10px;
+            display: flex;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .language-segment {
+            height: 100%;
+        }
+
+        .language-segment.jupyter {
+            background-color: #F37626;
+        }
+
+        .language-segment.python {
+            background-color: #3572A5;
+        }
+
+        .language-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .language-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .language-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .language-color.jupyter {
+            background-color: #F37626;
+        }
+
+        .language-color.python {
+            background-color: #3572A5;
+        }
+
+        /* New styles for markdown rendering */
+        .content-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            max-width: 100%;
+        }
+
+        .markdown-body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 16px;
+        }
+
+        /* Custom scrollbar for the README content */
+        .markdown-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .markdown-body::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .markdown-body::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .markdown-body::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .markdown-body h1,
+        .markdown-body h2 {
+            padding-bottom: .3em;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        .markdown-body code {
+            padding: .2em .4em;
+            margin: 0;
+            font-size: 85%;
+            background-color: rgba(27,31,35,.05);
+            border-radius: 3px;
+            font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+        }
+
+        .markdown-body pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f6f8fa;
+            border-radius: 3px;
+        }
+
+        .markdown-body pre code {
+            display: inline;
+            max-width: auto;
+            padding: 0;
+            margin: 0;
+            overflow: visible;
+            line-height: inherit;
+            word-wrap: normal;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .markdown-body blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: .25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+
+        .markdown-body table {
+            display: block;
+            width: 100%;
+            overflow: auto;
+            margin-bottom: 16px;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        .markdown-body table th,
+        .markdown-body table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">Aavishkar.ai</div>
+            <ul class="nav-menu">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">NOTEBOOKS</a></li>
+                <li class="current-menu-item"><a href="#">REPOSITORY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">NOTEBOOKS</a></li>
+            <li><a href="#">REPOSITORY</a></li>
+            <li><a href="#">ABOUT US</a></li>
+        </ul>
+    </div>
+
+    <!-- Repository Content Section -->
+    <section class="repo-content-section">
+        <div class="container">
+            <!-- Repository Structure Box -->
+            <div class="content-panel" style="margin-bottom: 40px;">
+                <div class="panel-header">
+                    <h2 class="af1 bold colorGreen">
+                        <i class="fas fa-sitemap"></i> Repository Explorer
+                    </h2>
+                    <p class="af3 header-description">Browse through the organized structure of our AI4Science codebase</p>
+                </div>
+                <div class="file-browser">
+                    <div class="file-browser-header">
+                        <span>Name</span>
+                        <span>Last updated</span>
+                    </div>
+                    <div id="file-list" class="file-list">
+                        <div class="loading-spinner">Loading repository structure...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Triangle Pipe Divider -->
+            <div class="trianglePipe">
+                <div class="pipeOpenLeft"></div>
+                <div class="pipe"></div>
+                <div class="pipeOpenRight"></div>
+            </div>
+
+            <!-- README Box -->
+            <div class="content-panel" style="margin-bottom: 40px;">
+                <div class="panel-header">
+                    <h2 class="af1 bold colorGreen">
+                        <i class="fas fa-book-open"></i> Project Documentation
+                    </h2>
+                    <p class="af3 header-description">Comprehensive guide to AI4Science's mission and features</p>
+                </div>
+                <div class="readme-banner" id="readme-banner">
+                    <!-- Banner will be loaded here -->
+                </div>
+                <div id="readme-content" class="readme-content">
+                    <div class="loading-spinner">Loading README...</div>
+                </div>
+            </div>
+
+            <!-- Triangle Pipe Divider -->
+            <div class="trianglePipe">
+                <div class="pipeOpenLeft"></div>
+                <div class="pipe"></div>
+                <div class="pipeOpenRight"></div>
+            </div>
+
+            <!-- Repository Stats Box -->
+            <div class="content-panel">
+                <div class="panel-header">
+                    <h2 class="af1 bold colorGreen">
+                        <i class="fas fa-chart-bar"></i> Repository Analytics
+                    </h2>
+                    <p class="af3 header-description">Key metrics and activity indicators of our project</p>
+                </div>
+                <div class="repo-stats-grid">
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span class="stat-value af2" id="repo-stars">Loading...</span>
+                        <span class="stat-label af3">Stars</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-code-branch"></i>
+                        <span class="stat-value af2" id="repo-forks">Loading...</span>
+                        <span class="stat-label af3">Forks</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span class="stat-value af2" id="repo-updated">Loading...</span>
+                        <span class="stat-label af3">Last Updated</span>
+                    </div>
+                </div>
+                <div class="repo-languages">
+                    <h3 class="af2 colorGreen">Technology Stack</h3>
+                    <div class="language-bar" id="language-bar"></div>
+                    <div class="language-stats" id="language-stats"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triangle Pipe Divider -->
+    <div class="container">
+        <div class="trianglePipe">
+            <div class="pipeOpenLeft"></div>
+            <div class="pipe"></div>
+            <div class="pipeOpenRight"></div>
+        </div>
+    </div>
+
+    <!-- Contribution Section -->
+    <section class="contribution-section">
+        <div class="container">
+            <h2 class="cta-heading">How to Contribute</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="contribution-card">
+                        <div class="contribution-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="contribution-header">FOR SCIENTISTS</h3>
+                        <ul class="contribution-list">
+                            <li>Share research challenges that could benefit from AI</li>
+                            <li>Contribute domain expertise to existing projects</li>
+                            <li>Test and validate AI models in your research</li>
+                            <li>Suggest improvements to scientific workflows</li>
+                        </ul>
+                        <a href="#" class="contribution-button">Submit Research Challenge</a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="contribution-card">
+                        <div class="contribution-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="contribution-header">FOR TECHNOLOGISTS</h3>
+                        <ul class="contribution-list">
+                            <li>Contribute code to existing AI4Science projects</li>
+                            <li>Develop new tools for scientific research</li>
+                            <li>Optimize performance of computational methods</li>
+                            <li>Create visualizations for scientific data</li>
+                        </ul>
+                        <a href="#" class="contribution-button">Submit Code Contribution</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #0b447b; color: white; padding: 50px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Aavishkar.ai</h3>
+                    <p>Accelerating Scientific Discovery with AI-Powered Expert Systems</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Notebooks</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Repository</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Stay Connected</h3>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; border-radius: 20px; border: none; margin-bottom: 10px;">
+                    <button type="submit" style="background: transparent; color: white; border: 1px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Sign Up</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p>© 2024 Aavishkar.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- Add this new script section for the dynamic repository loading -->
+    <script>
+        const GITHUB_API = {
+            owner: 'astitvac',
+            repo: 'AI4Science',
+            baseUrl: 'https://api.github.com/repos'
+        };
+
+        async function initializeRepository() {
+            try {
+                // Fetch repository data
+                const response = await fetch(`${GITHUB_API.baseUrl}/${GITHUB_API.owner}/${GITHUB_API.repo}`);
+                const repoData = await response.json();
+                
+                // Update repository stats
+                document.getElementById('repo-stars').textContent = repoData.stargazers_count;
+                document.getElementById('repo-forks').textContent = repoData.forks_count;
+                document.getElementById('repo-updated').textContent = getTimeAgo(repoData.updated_at);
+                
+                // Load README content
+                await loadReadmeContent();
+                
+                // Load repository structure
+                await loadRepositoryStructure();
+                
+                // Initialize tab switching
+                initializeTabs();
+            } catch (error) {
+                console.error('Error initializing repository:', error);
+                showErrorMessage('Failed to load repository data');
+            }
+        }
+
+        async function loadReadmeContent() {
+            try {
+                // Fetch the README using the raw content URL directly
+                const readmeResponse = await fetch('https://raw.githubusercontent.com/astitvac/AI4Science/main/README.md');
+                if (!readmeResponse.ok) throw new Error('Failed to fetch README');
+                
+                const rawContent = await readmeResponse.text();
+                
+                // Extract banner image URL from the raw markdown content
+                const bannerMatch = rawContent.match(/!\[.*?\]\((.*?)\)/);
+                if (bannerMatch) {
+                    const bannerUrl = bannerMatch[1].startsWith('http') 
+                        ? bannerMatch[1] 
+                        : `https://raw.githubusercontent.com/astitvac/AI4Science/main/${bannerMatch[1]}`;
+                    
+                    // Insert the banner image
+                    document.getElementById('readme-banner').innerHTML = `
+                        <img src="${bannerUrl}" alt="Repository Banner" style="width: 100%; max-width: 100%; height: auto; margin-bottom: 20px;">
+                    `;
+                }
+
+                // Use GitHub's markdown API to render the content
+                const renderResponse = await fetch('https://api.github.com/markdown', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: rawContent.replace(/!\[.*?\]\(.*?\)/, ''), // Remove banner image from content
+                        mode: 'gfm',
+                        context: 'astitvac/AI4Science'
+                    })
+                });
+
+                if (!renderResponse.ok) throw new Error('Failed to render markdown');
+                const htmlContent = await renderResponse.text();
+
+                // Update the content
+                document.getElementById('readme-content').innerHTML = `
+                    <div class="markdown-body" style="max-height: 600px; overflow-y: auto;">
+                        ${htmlContent}
+                    </div>
+                `;
+                
+                console.log('Banner URL found:', bannerMatch ? bannerMatch[1] : 'No banner found');
+                
+            } catch (error) {
+                console.error('Error loading README:', error);
+                document.getElementById('readme-content').innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Failed to load README content: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        async function loadRepositoryStructure() {
+            try {
+                const response = await fetch(`${GITHUB_API.baseUrl}/${GITHUB_API.owner}/${GITHUB_API.repo}/contents`);
+                const files = await response.json();
+                
+                const fileList = document.getElementById('file-list');
+                fileList.innerHTML = files.map(file => `
+                    <div class="file-list-item">
+                        <div class="file-info">
+                            <span class="file-icon ${file.type === 'dir' ? 'file-folder' : ''}">
+                                <i class="fas fa-${file.type === 'dir' ? 'folder' : 'file-alt'}"></i>
+                            </span>
+                            <span class="file-name">${file.name}</span>
+                        </div>
+                        <span class="file-date">Recently updated</span>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading repository structure:', error);
+                document.getElementById('file-list').innerHTML = '<p>Failed to load repository structure</p>';
+            }
+        }
+
+        function initializeTabs() {
+            const tabs = document.querySelectorAll('.repo-nav-item');
+            const panels = {
+                'readme': document.getElementById('readme-panel'),
+                'files': document.getElementById('files-panel')
+            };
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show/hide panels
+                    Object.entries(panels).forEach(([name, panel]) => {
+                        panel.style.display = name === tabName ? 'block' : 'none';
+                    });
+                });
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeRepository);
+
+        // Helper function to format time
+        function getTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+            
+            if (diffInDays < 1) return 'today';
+            if (diffInDays === 1) return 'yesterday';
+            if (diffInDays < 7) return `${diffInDays} days ago`;
+            if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
+            return `${Math.floor(diffInDays / 30)} months ago`;
+        }
+
+        // Function to show error message
+        function showErrorMessage(message) {
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = message;
+            document.body.appendChild(errorMessage);
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

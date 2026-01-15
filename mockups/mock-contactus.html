@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Aavishkar.ai</title>
+    <style>
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'gill-sans';
+            src: url('fonts/GillSansMedium.otf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinmedium';
+            src: url('fonts/DINAlternateMedium_0.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinalternate';
+            src: url('fonts/DINBlackAlternate.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'din1451';
+            src: url('fonts/DIN1451-36breit.ttf') format('truetype');
+        }
+
+        /* Root Variables */
+        :root {
+            --border-radius1: 40px;
+            --border-radius2: 20px;
+            --border-radius3: 10px;
+            --border-radius4: 5px;
+            
+            --avishkar-margin1: 20px;
+            --avishkar-margin2: 16px;
+            --avishkar-margin3: 12px;
+            --avishkar-margin4: 8px;
+            --avishkar-margin5: 4px;
+            
+            --avishkar-padding1: 40px;
+            --avishkar-padding2: 30px;
+            --avishkar-padding3: 20px;
+            --avishkar-padding4: 10px;
+            --avishkar-padding5: 4px;
+            
+            --avishkar-borderColor: #4a67b1;
+            --avishkar-ink: #393b9b;
+            --avishkar-green: #1b487e;
+            --avishkar-purple: #9e23a3;
+            --avishkar-brinjal: #6c3ca8;
+            --avishkar-blue: #4a67b1;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'dinmedium', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0b447b;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-header h1 {
+            font-family: 'dinalternate';
+            font-size: 48px;
+            color: var(--avishkar-green);
+            margin-bottom: 15px;
+        }
+
+        .contact-header p {
+            font-size: 18px;
+            color: var(--avishkar-green);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Form Styles */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            background-color: #fff;
+            border-radius: var(--border-radius2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: var(--avishkar-padding1);
+        }
+
+        .contact-info h2 {
+            font-family: 'dinalternate';
+            font-size: 28px;
+            color: var(--avishkar-purple);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: var(--border-radius2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: var(--avishkar-padding1);
+        }
+
+        .form-row {
+            margin-bottom: 20px;
+        }
+
+        .form-row label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--avishkar-green);
+        }
+
+        input.form-control, textarea.form-control {
+            font-family: 'dinmedium', sans-serif;
+            font-size: 16px;
+            padding: 12px 24px;
+            border: 1px solid #0b447b;
+            width: 100%;
+            border-radius: 25px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+
+        input.form-control:focus, textarea.form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(158, 35, 163, 0.25);
+            border-color: var(--avishkar-purple);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--avishkar-purple);
+        }
+
+        .form-submit {
+            text-align: right;
+        }
+
+        input.submit-btn {
+            background: #0b447b;
+            border: 1px solid #0b447b;
+            font-size: 22px;
+            padding: 8px 30px;
+            font-weight: 500;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input.submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(11, 68, 123, 0.3);
+            background-color: #0a3963;
+        }
+
+        /* Conditional fields */
+        .expert-system-fields {
+            display: none;
+            padding: 20px;
+            background-color: #f0f4f8;
+            border-radius: var(--border-radius3);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--avishkar-purple);
+        }
+
+        /* Responsive adjustments */
+        @media only screen and (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-info, .contact-form {
+                max-width: 100%;
+            }
+            
+            input.form-control, textarea.form-control {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .contact-header h1 {
+                font-size: 36px;
+            }
+            
+            .contact-info, .contact-form {
+                padding: var(--avishkar-padding3);
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            input.submit-btn {
+                font-size: 18px;
+                padding: 8px 20px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Whether you have a question about our AI expert systems, want to collaborate, or have an idea for a new system, please reach out using the form below.</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Why Connect With Us?</h2>
+                <p>At Aavishkar.ai, we're building AI-powered Expert Systems that accelerate scientific discovery. Our community brings together scientists and technologists to create powerful research tools.</p>
+                
+                <h3>Looking to:</h3>
+                <ul>
+                    <li>Learn more about our existing expert systems</li>
+                    <li>Collaborate on scientific research</li>
+                    <li>Suggest a new expert system idea</li>
+                    <li>Join our community of researchers</li>
+                </ul>
+                
+                <p>We're open to exploring new ideas and collaborations that align with our mission to put powerful research tools in every scientist's hands.</p>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm" action="#" method="POST">
+                    <div class="form-row">
+                        <label>What brings you here today?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="contact-purpose" value="general" checked> General Inquiry
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact-purpose" value="expert-system"> Expert System Idea
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="your-name" class="form-control" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="your-email" class="form-control" placeholder="Your email address" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="What's this about?" required>
+                    </div>
+
+                    <!-- Conditional fields for Expert System Idea -->
+                    <div id="expertSystemFields" class="expert-system-fields">
+                        <div class="form-row">
+                            <label for="domain">Scientific Domain</label>
+                            <input type="text" id="domain" name="scientific-domain" class="form-control" placeholder="e.g., Biology, Chemistry, Physics">
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="problem">Problem to Solve</label>
+                            <textarea id="problem" name="problem-description" class="form-control" placeholder="Describe the scientific problem your expert system would address"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="your-message" class="form-control" placeholder="Your message" required></textarea>
+                    </div>
+
+                    <div class="form-submit">
+                        <input type="submit" value="Submit" class="submit-btn">
+                    </div>
+
+                    <!-- Hidden field for recipient email -->
+                    <input type="hidden" name="recipient" value="astitvac@gmail.com">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show/hide expert system fields based on radio selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioBtns = document.querySelectorAll('input[name="contact-purpose"]');
+            const expertSystemFields = document.getElementById('expertSystemFields');
+            
+            // Function to toggle expert system fields
+            function toggleExpertFields() {
+                const selectedValue = document.querySelector('input[name="contact-purpose"]:checked').value;
+                if (selectedValue === 'expert-system') {
+                    expertSystemFields.style.display = 'block';
+                } else {
+                    expertSystemFields.style.display = 'none';
+                }
+            }
+            
+            // Add event listeners to radio buttons
+            radioBtns.forEach(radio => {
+                radio.addEventListener('change', toggleExpertFields);
+            });
+            
+            // Initial toggle based on default selection
+            toggleExpertFields();
+            
+            // Form submission handler for the mock version
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real implementation, this would send the data to the server
+                // For mock purposes, just show a success message
+                alert('Thank you for your message! In a live environment, this would be sent to astitvac@gmail.com');
+                
+                // You could also collect and log the form data
+                const formData = new FormData(this);
+                console.log('Form data that would be sent:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

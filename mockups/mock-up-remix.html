@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aavishkar.ai - Remix Features Demo</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; line-height: 1.5; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .header { background: #0b447b; color: white; padding: 15px 0; }
+        .feature-box { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .code { background: #f5f5f5; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
+        .nav-list { display: flex; gap: 20px; list-style: none; padding: 0; }
+        .nav-list a { color: white; text-decoration: none; }
+        .nested-layout { border: 1px dashed #9e23a3; padding: 15px; margin-top: 15px; }
+        .error { background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; }
+        .loading { opacity: 0.7; background: #f0f4fa; }
+        .tab-container { border: 1px solid #ddd; border-radius: 0 5px 5px 5px; padding: 20px; }
+        .tabs { display: flex; gap: 0; margin-bottom: -1px; }
+        .tab { padding: 10px 20px; cursor: pointer; border: 1px solid #ddd; background: #f5f5f5; border-radius: 5px 5px 0 0; }
+        .tab.active { background: white; border-bottom-color: white; }
+        .progress-bar { height: 3px; background: linear-gradient(to right, #9e23a3, #4a67b1); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation progress bar (Remix feature) -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header class="header">
+        <div class="container">
+            <h1>Aavishkar.ai Remix Demo</h1>
+            <ul class="nav-list">
+                <li><a href="#" data-route="/">Home</a></li>
+                <li><a href="#" data-route="/notebooks">Notebooks</a></li>
+                <li><a href="#" data-route="/repository">Repository</a></li>
+                <li><a href="#" data-route="/about">About</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h2>Key Remix Features for Aavishkar.ai</h2>
+        
+        <!-- Feature 1: File-based routing -->
+        <div class="feature-box">
+            <h3>1. File-based Routing & Nested Layouts</h3>
+            <p>Remix uses a file-based routing system that maps directly to URL paths.</p>
+            
+            <div class="code">
+                <pre>
+app/
+├── root.tsx             # Root layout (header/footer)
+├── routes/
+│   ├── _index.tsx       # Home page 
+│   ├── notebooks/
+│   │   ├── _index.tsx   # /notebooks
+│   │   ├── $id.tsx      # /notebooks/:id
+│   │   └── create.tsx   # /notebooks/create
+│   ├── repository/
+│   │   ├── _index.tsx   # /repository
+│   │   └── $id.tsx      # /repository/:id
+│   └── about.tsx        # /about
+                </pre>
+            </div>
+            
+            <div id="nestedDemo">
+                <!-- Nested routes demo will be shown here -->
+                <div style="padding: 20px; border: 1px solid #ddd; margin-top: 20px;">
+                    <h4>Nested Layouts Demo</h4>
+                    <p>Click the links above to see nested layouts in action</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 2: Data loading with loaders -->
+        <div class="feature-box">
+            <h3>2. Data Loading with Loaders</h3>
+            <p>Each route can define a loader function that fetches data before rendering.</p>
+            
+            <div class="code">
+                <pre>
+// app/routes/notebooks/$id.tsx
+export async function loader({ params }) {
+  // This runs on the server before rendering
+  const notebook = await getNotebook(params.id);
+  if (!notebook) {
+    throw new Response("Notebook not found", { status: 404 });
+  }
+  return notebook;
+}
+
+export default function NotebookPage() {
+  // Data is already available when component renders
+  const notebook = useLoaderData();
+  
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{notebook.title}&lt;/h1&gt;
+      &lt;div&gt;{notebook.content}&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+                </pre>
+            </div>
+            
+            <div id="dataLoadingDemo" style="margin-top: 20px;">
+                <h4>Notebooks</h4>
+                <div class="tabs">
+                    <div class="tab active" data-tab="notebook1">Literature Review</div>
+                    <div class="tab" data-tab="notebook2">Data Analysis</div>
+                    <div class="tab" data-tab="notebook3">Agent Systems</div>
+                </div>
+                <div class="tab-container">
+                    <div id="notebookContent">
+                        <h3>Automating Literature Review with LLMs</h3>
+                        <p>This notebook demonstrates how to use AI to streamline literature surveys.</p>
+                        <ul>
+                            <li><strong>Publication Date:</strong> June 2024</li>
+                            <li><strong>Category:</strong> Natural Language Processing</li>
+                            <li><strong>Author:</strong> Aavishkar Team</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature 3: Form handling with actions -->
+        <div class="feature-box">
+            <h3>3. Form Handling with Actions</h3>
+            <p>Remix provides built-in form handling that works even without JavaScript.</p>
+            
+            <div class="code">
+                <pre>
+// app/routes/contact.tsx
+export async function action({ request }) {
+  const formData = await request.formData();
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const message = formData.get("message");
+  
+  // Validate
+  const errors = {};
+  if (!name) errors.name = "Name is required";
+  if (!email) errors.email = "Email is required";
+  if (!message) errors.message = "Message is required";
+  
+  if (Object.keys(errors).length) {
+    return { errors };
+  }
+  
+  // Process form (e.g., send email)
+  await sendContactEmail({ name, email, message });
+  return { success: true };
+}
+
+export default function Contact() {
+  const actionData = useActionData();
+  const navigation = useNavigation();
+  const busy = navigation.state === "submitting";
+  
+  return (
+    &lt;Form method="post"&gt;
+      &lt;input name="name" /&gt;
+      {actionData?.errors?.name && (
+        &lt;p className="error"&gt;{actionData.errors.name}&lt;/p&gt;
+      )}
+      &lt;input name="email" type="email" /&gt;
+      {actionData?.errors?.email && (
+        &lt;p className="error"&gt;{actionData.errors.email}&lt;/p&gt;
+      )}
+      &lt;textarea name="message"&gt;&lt;/textarea&gt;
+      {actionData?.errors?.message && (
+        &lt;p className="error"&gt;{actionData.errors.message}&lt;/p&gt;
+      )}
+      &lt;button type="submit" disabled={busy}&gt;
+        {busy ? "Sending..." : "Send Message"}
+      &lt;/button&gt;
+      {actionData?.success && &lt;p&gt;Message sent successfully!&lt;/p&gt;}
+    &lt;/Form&gt;
+  );
+}
+                </pre>
+            </div>
+            
+            <div id="formDemo" style="margin-top: 20px;">
+                <h4>Contact Form Demo</h4>
+                <form id="contactForm">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Name</label>
+                        <input type="text" name="name" style="padding: 8px; width: 100%; max-width: 300px;">
+                        <div class="error" id="nameError" style="display: none; color: red; font-size: 14px;"></div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Email</label>
+                        <input type="email" name="email" style="padding: 8px; width: 100%; max-width: 300px;">
+                        <div class="error" id="emailError" style="display: none; color: red; font-size: 14px;"></div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Message</label>
+                        <textarea name="message" style="padding: 8px; width: 100%; max-width: 300px; height: 100px;"></textarea>
+                        <div class="error" id="messageError" style="display: none; color: red; font-size: 14px;"></div>
+                    </div>
+                    <button type="submit" style="background: #0b447b; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+                        Send Message
+                    </button>
+                    <div id="formSuccess" style="display: none; color: green; margin-top: 15px;">
+                        Message sent successfully!
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Feature 4: Error boundaries -->
+        <div class="feature-box">
+            <h3>4. Error Boundaries</h3>
+            <p>Remix provides built-in error handling that prevents your app from crashing.</p>
+            
+            <div class="code">
+                <pre>
+// Error boundary for a specific route
+export function ErrorBoundary() {
+  const error = useRouteError();
+  
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return &lt;div&gt;Notebook not found&lt;/div&gt;;
+  }
+  
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Error!&lt;/h1&gt;
+      &lt;p&gt;Something went wrong while loading this notebook.&lt;/p&gt;
+      &lt;p&gt;{error.message || "Unknown error"}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+                </pre>
+            </div>
+            
+            <div id="errorDemo" style="margin-top: 20px;">
+                <h4>Error Handling Demo</h4>
+                <button id="triggerError" style="background: #c62828; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
+                    Trigger Error
+                </button>
+                <div id="errorResult" style="margin-top: 15px;"></div>
+            </div>
+        </div>
+        
+        <!-- Feature 5: Progressive enhancement -->
+        <div class="feature-box">
+            <h3>5. Progressive Enhancement</h3>
+            <p>Remix apps work without JavaScript, but enhance experiences when JS is available.</p>
+            
+            <div class="code">
+                <pre>
+// This is just HTML and CSS - works without JS
+&lt;Form method="post" action="/search"&gt;
+  &lt;input name="query" /&gt;
+  &lt;button type="submit"&gt;Search&lt;/button&gt;
+&lt;/Form&gt;
+
+// But with JS enabled, Remix enhances it:
+// - Client-side validation
+// - No page reloads
+// - Loading states
+// - Optimistic UI
+                </pre>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <h4>Demo: Progressive Enhancement</h4>
+                <p>1. This search form works without JavaScript (standard HTML form)</p>
+                <p>2. But with JS enabled: no page reload + loading indicators</p>
+                
+                <form id="searchForm" style="display: flex; margin-top: 15px; max-width: 500px;">
+                    <input type="text" name="searchQuery" placeholder="Search notebooks..." style="flex-grow: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px 0 0 4px;">
+                    <button type="submit" style="background: #0b447b; color: white; border: none; padding: 0 15px; border-radius: 0 4px 4px 0;">
+                        Search
+                    </button>
+                </form>
+                
+                <div id="searchResults" style="margin-top: 15px; display: none;">
+                    <div style="margin-bottom: 10px;">Results for: <span id="queryText"></span></div>
+                    <div id="resultsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simple JavaScript to demonstrate Remix-like features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation with progress bar
+            const navLinks = document.querySelectorAll('[data-route]');
+            const progressBar = document.getElementById('progressBar');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const route = this.getAttribute('data-route');
+                    
+                    // Show progress bar
+                    progressBar.style.transform = 'scaleX(0.3)';
+                    
+                    setTimeout(() => {
+                        progressBar.style.transform = 'scaleX(0.7)';
+                        
+                        setTimeout(() => {
+                            progressBar.style.transform = 'scaleX(1)';
+                            
+                            // Update nested demo based on route
+                            updateNestedDemo(route);
+                            
+                            // Reset progress bar
+                            setTimeout(() => {
+                                progressBar.style.transform = 'scaleX(0)';
+                            }, 300);
+                        }, 300);
+                    }, 300);
+                });
+            });
+            
+            // Tab switching for notebook demo
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show content based on tab
+                    const tabId = this.getAttribute('data-tab');
+                    const content = document.getElementById('notebookContent');
+                    content.classList.add('loading');
+                    
+                    // Simulate data loading
+                    setTimeout(() => {
+                        if (tabId === 'notebook1') {
+                            content.innerHTML = `
+                                <h3>Automating Literature Review with LLMs</h3>
+                                <p>This notebook demonstrates how to use AI to streamline literature surveys.</p>
+                                <ul>
+                                    <li><strong>Publication Date:</strong> June 2024</li>
+                                    <li><strong>Category:</strong> Natural Language Processing</li>
+                                    <li><strong>Author:</strong> Aavishkar Team</li>
+                                </ul>
+                            `;
+                        } else if (tabId === 'notebook2') {
+                            content.innerHTML = `
+                                <h3>AI-Powered Data Analysis</h3>
+                                <p>This notebook showcases efficient data processing techniques using machine learning.</p>
+                                <ul>
+                                    <li><strong>Publication Date:</strong> May 2024</li>
+                                    <li><strong>Category:</strong> Data Science</li>
+                                    <li><strong>Author:</strong> Aavishkar Research</li>
+                                </ul>
+                            `;
+                        } else {
+                            content.innerHTML = `
+                                <h3>Building Research Agent Systems</h3>
+                                <p>Learn how to create AI agents that can assist with scientific research.</p>
+                                <ul>
+                                    <li><strong>Publication Date:</strong> July 2024</li>
+                                    <li><strong>Category:</strong> AI Agents</li>
+                                    <li><strong>Author:</strong> Aavishkar Labs</li>
+                                </ul>
+                            `;
+                        }
+                        content.classList.remove('loading');
+                    }, 500);
+                });
+            });
+            
+            // Form handling demo
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Clear previous errors
+                    document.getElementById('nameError').style.display = 'none';
+                    document.getElementById('emailError').style.display = 'none';
+                    document.getElementById('messageError').style.display = 'none';
+                    document.getElementById('formSuccess').style.display = 'none';
+                    
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const message = formData.get('message');
+                    
+                    // Validate
+                    let hasErrors = false;
+                    
+                    if (!name) {
+                        document.getElementById('nameError').textContent = 'Name is required';
+                        document.getElementById('nameError').style.display = 'block';
+                        hasErrors = true;
+                    }
+                    
+                    if (!email) {
+                        document.getElementById('emailError').textContent = 'Email is required';
+                        document.getElementById('emailError').style.display = 'block';
+                        hasErrors = true;
+                    } else if (!email.includes('@')) {
+                        document.getElementById('emailError').textContent = 'Please enter a valid email';
+                        document.getElementById('emailError').style.display = 'block';
+                        hasErrors = true;
+                    }
+                    
+                    if (!message) {
+                        document.getElementById('messageError').textContent = 'Message is required';
+                        document.getElementById('messageError').style.display = 'block';
+                        hasErrors = true;
+                    } else if (message.length < 10) {
+                        document.getElementById('messageError').textContent = 'Message must be at least 10 characters';
+                        document.getElementById('messageError').style.display = 'block';
+                        hasErrors = true;
+                    }
+                    
+                    if (hasErrors) {
+                        return;
+                    }
+                    
+                    // Simulate form submission
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.textContent;
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        document.getElementById('formSuccess').style.display = 'block';
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        contactForm.reset();
+                    }, 1000);
+                });
+            }
+            
+            // Error boundary demo
+            const errorBtn = document.getElementById('triggerError');
+            if (errorBtn) {
+                errorBtn.addEventListener('click', function() {
+                    const errorResult = document.getElementById('errorResult');
+                    errorResult.innerHTML = `
+                        <div class="error" style="background: #ffebee; color: #c62828; padding: 15px; border-radius: 5px;">
+                            <h4 style="margin-top: 0;">Error Boundary Caught:</h4>
+                            <p>Failed to load notebook data: API endpoint unreachable</p>
+                            <p><small>Error ID: 8f4d7c1e</small></p>
+                            <button id="resetError" style="background: #0b447b; color: white; border: none; padding: 5px 10px; border-radius: 4px; margin-top: 10px;">
+                                Retry
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Add event listener to reset button
+                    document.getElementById('resetError').addEventListener('click', function() {
+                        errorResult.innerHTML = '';
+                    });
+                });
+            }
+            
+            // Search form demo (progressive enhancement)
+            const searchForm = document.getElementById('searchForm');
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const searchQuery = this.elements.searchQuery.value;
+                    if (!searchQuery) return;
+                    
+                    // Show progress
+                    progressBar.style.transform = 'scaleX(0.3)';
+                    
+                    // Update UI to show searching state
+                    const submitBtn = searchForm.querySelector('button');
+                    submitBtn.innerHTML = '<span style="display: inline-block; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; border-top-color: transparent; animation: spin 1s linear infinite;"></span>';
+                    submitBtn.disabled = true;
+                    
+                    // Simulate search request
+                    setTimeout(() => {
+                        progressBar.style.transform = 'scaleX(0.7)';
+                        
+                        setTimeout(() => {
+                            // Update search results
+                            document.getElementById('searchResults').style.display = 'block';
+                            document.getElementById('queryText').textContent = searchQuery;
+                            
+                            // Generate mock results
+                            const resultsList = document.getElementById('resultsList');
+                            resultsList.innerHTML = '';
+                            
+                            const numResults = Math.floor(Math.random() * 3) + 2; // 2-4 results
+                            
+                            for (let i = 0; i < numResults; i++) {
+                                const result = document.createElement('div');
+                                result.style.padding = '10px';
+                                result.style.borderBottom = '1px solid #eee';
+                                result.style.marginBottom = '10px';
+                                
+                                const titles = [
+                                    'Advanced ' + searchQuery + ' Techniques',
+                                    'Using LLMs for ' + searchQuery,
+                                    searchQuery + ' in Scientific Research',
+                                    'AI Methods for ' + searchQuery,
+                                    'Automating ' + searchQuery + ' with Agents'
+                                ];
+                                
+                                result.innerHTML = `
+                                    <h4 style="margin-top: 0;">${titles[i % titles.length]}</h4>
+                                    <p>A comprehensive notebook exploring ${searchQuery.toLowerCase()} methods in AI research.</p>
+                                    <div style="font-size: 14px; color: #666;">
+                                        <span>Category: AI Research</span> • 
+                                        <span>Updated: ${new Date().toLocaleDateString()}</span>
+                                    </div>
+                                `;
+                                
+                                resultsList.appendChild(result);
+                            }
+                            
+                            // Reset UI
+                            submitBtn.textContent = 'Search';
+                            submitBtn.disabled = false;
+                            progressBar.style.transform = 'scaleX(1)';
+                            
+                            setTimeout(() => {
+                                progressBar.style.transform = 'scaleX(0)';
+                            }, 300);
+                        }, 500);
+                    }, 700);
+                });
+            }
+            
+            // Update nested demo based on route
+            function updateNestedDemo(route) {
+                const nestedDemo = document.getElementById('nestedDemo');
+                
+                if (route === '/') {
+                    nestedDemo.innerHTML = `
+                        <div class="nested-layout" style="border-color: #0b447b;">
+                            <h4>Root Layout (Header/Footer)</h4>
+                            <div class="nested-layout-inner">
+                                <h5>Home Page Content</h5>
+                                <p>Welcome to Aavishkar.ai - accelerating scientific discovery with AI.</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (route === '/notebooks') {
+                    nestedDemo.innerHTML = `
+                        <div class="nested-layout" style="border-color: #0b447b;">
+                            <h4>Root Layout (Header/Footer)</h4>
+                            <div class="nested-layout-inner" style="border-color: #9e23a3;">
+                                <h5>Notebooks Layout</h5>
+                                <div class="nested-layout-inner" style="border-color: #4a67b1;">
+                                    <h5>Notebooks Index Page</h5>
+                                    <p>Browse all available AI notebooks for scientific research.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (route === '/repository') {
+                    nestedDemo.innerHTML = `
+                        <div class="nested-layout" style="border-color: #0b447b;">
+                            <h4>Root Layout (Header/Footer)</h4>
+                            <div class="nested-layout-inner" style="border-color: #6c3ca8;">
+                                <h5>Repository Layout</h5>
+                                <div class="nested-layout-inner" style="border-color: #4a67b1;">
+                                    <h5>Repository Index Page</h5>
+                                    <p>Explore our collection of AI tools and resources.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (route === '/about') {
+                    nestedDemo.innerHTML = `
+                        <div class="nested-layout" style="border-color: #0b447b;">
+                            <h4>Root Layout (Header/Footer)</h4>
+                            <div class="nested-layout-inner">
+                                <h5>About Page Content</h5>
+                                <p>Learn about Aavishkar.ai's mission and team.</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Initialize with home route
+            updateNestedDemo('/');
+        });
+    </script>
+    
+    <style>
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

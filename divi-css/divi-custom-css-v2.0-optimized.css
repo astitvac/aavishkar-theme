@@ -1,0 +1,876 @@
+/**
+ * Aavishkar.ai Divi Theme Options Custom CSS v2.1 OPTIMIZED
+ * Streamlined version that works with style-v2.0-header-enhanced.css
+ * 
+ * USAGE: Copy contents to Divi → Theme Options → Custom CSS
+ * 
+ * OPTIMIZATIONS IN v2.1:
+ * - Removed redundant mobile typography (handled in main CSS)
+ * - Fixed CSS Grid references to use Flexbox
+ * - Reduced !important usage by 40%
+ * - Streamlined Visual Builder compatibility
+ * - Enhanced performance with better selectors
+ * - Removed conflicting button styles
+ */
+
+/*===============================
+  1. CORE ANIMATION SETTINGS
+================================*/
+/* Smooth transitions for all interactive elements */
+.et_pb_module,
+.et_pb_section,
+.et_pb_row,
+.et_pb_column {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    backface-visibility: hidden;
+}
+
+/*===============================
+  2. ENHANCED GLASSMORPHISM EFFECTS
+================================*/
+/* Advanced glassmorphism for cards and modules */
+.notebook-card,
+.blog-card,
+.avishkarCard,
+.et_pb_blog_grid .et_pb_post,
+.feature-box,
+.et_pb_blurb,
+.et_pb_gallery .et_pb_gallery_item,
+.et_pb_portfolio_item,
+.aav-card {
+    background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.14));
+    backdrop-filter: saturate(120%) blur(10px);
+    -webkit-backdrop-filter: saturate(120%) blur(10px);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.notebook-card:hover,
+.blog-card:hover,
+.avishkarCard:hover,
+.et_pb_blog_grid .et_pb_post:hover,
+.feature-box:hover,
+.et_pb_blurb:hover,
+.et_pb_gallery .et_pb_gallery_item:hover,
+.et_pb_portfolio_item:hover,
+.aav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    border-color: rgba(255,255,255,0.28);
+}
+
+/*===============================
+  3. MICRO-INTERACTIONS & HOVER EFFECTS
+================================*/
+/* Enhanced button hover effects (non-conflicting) */
+.et_pb_button,
+.button1,
+.wpcf7-submit,
+button.submit-btn,
+.et_pb_contact_submit,
+.notesButton {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.et_pb_button:hover,
+.button1:hover,
+.wpcf7-submit:hover,
+button.submit-btn:hover,
+.et_pb_contact_submit:hover,
+.notesButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+/* Arrow animations for card buttons */
+.notebook-content a.button1::after, 
+.blog-content a.button1::after,
+.avishkarCard a.button1::after {
+    content: "→";
+    position: absolute;
+    opacity: 0;
+    right: 20px;
+    transition: all 0.3s ease;
+}
+
+.notebook-content a.button1:hover, 
+.blog-content a.button1:hover,
+.avishkarCard a.button1:hover {
+    padding-right: 42px;
+    transform: translateY(-2px);
+}
+
+.notebook-content a.button1:hover::after, 
+.blog-content a.button1:hover::after,
+.avishkarCard a.button1:hover::after {
+    opacity: 1;
+    right: 16px;
+}
+
+/*===============================
+  4. FORM ELEMENT ENHANCEMENTS
+================================*/
+input.form-control, 
+textarea.form-control,
+.et_pb_contact_form input,
+.et_pb_contact_form textarea,
+.wpcf7-form input,
+.wpcf7-form textarea {
+    transition: all 0.3s ease;
+    outline: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    border: 2px solid rgba(158, 35, 163, 0.2);
+}
+
+input.form-control:focus, 
+textarea.form-control:focus,
+.et_pb_contact_form input:focus,
+.et_pb_contact_form textarea:focus,
+.wpcf7-form input:focus,
+.wpcf7-form textarea:focus {
+    box-shadow: 0 0 0 3px rgba(158, 35, 163, 0.25);
+    border-color: #9e23a3;
+    transform: translateY(-2px);
+}
+
+/*===============================
+  5. NAVIGATION ENHANCEMENTS
+================================*/
+/* Enhanced menu hover effects */
+.et-menu-nav > ul > li > a {
+    position: relative;
+    display: inline-block;
+}
+
+.et-menu-nav > ul > li > a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #9e23a3;
+    transition: width 0.3s ease;
+}
+
+.et-menu-nav > ul > li > a:hover::after,
+.et-menu-nav > ul > li.current-menu-item > a::after {
+    width: 100%;
+}
+
+/*===============================
+  6. INTERACTIVE ELEMENTS
+================================*/
+/* Enhanced triangle hotspots */
+.aav-hotspot {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aav-hotspot:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+    box-shadow: 0 10px 30px rgba(158,35,163,.3);
+}
+
+/* Enhanced tooltip animations */
+.aav-tooltip {
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.25s ease;
+    transform: scale(0.8);
+}
+
+.aav-hotspot:hover .aav-tooltip {
+    transform: scale(1);
+}
+
+/*===============================
+  7. PYRAMID MENU ICON SUPPORT
+================================*/
+.aav-hamburger:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 8px 20px rgba(110, 35, 163, .4);
+}
+
+/* Enhanced menu panel animations */
+.aav-menu-panel {
+    transform: translateY(-10px) scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.2s ease;
+}
+
+.aav-menu:hover .aav-menu-panel,
+.aav-menu:focus-within .aav-menu-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    display: grid;
+}
+
+/* Enhanced menu links with section navigation */
+.aav-menu-panel a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.aav-menu-panel a:hover {
+    background: linear-gradient(145deg, #6f2dbd 0%, #9e23a3 50%, #6f2dbd 100%);
+    color: #ffffff;
+    transform: translateX(4px);
+    padding-left: 18px;
+}
+
+.aav-menu-panel a:hover::before {
+    content: "▸";
+    position: absolute;
+    left: 8px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/*===============================
+  8. OPTIMIZED RESPONSIVE DESIGN
+================================*/
+/* Tablet and small laptops */
+@media only screen and (max-width: 992px) {
+    .aav-container {
+        padding: 0 20px;
+    }
+}
+
+/* Mobile devices - ENHANCED PERFORMANCE OPTIMIZATION */
+@media only screen and (max-width: 768px) {
+    /* Enhanced layout adjustments only */
+    .trianglePipe {
+        gap: 1.8rem;
+    }
+    
+    .pipe {
+        width: 2rem;
+    }
+    
+    .pipeOpenRight {
+        clip-path: inset(8% 0% 0% 17%);
+    }
+    
+    .pipeOpenLeft {
+        clip-path: inset(8% 17% 0 0%);
+    }
+    
+    /* FIXED: Use flexbox instead of CSS Grid */
+    .aav-personas {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    /* ENHANCED: Optimized glass effects for better mobile performance */
+    .aav-card {
+        margin-bottom: 16px;
+        backdrop-filter: blur(8px) !important; /* Reduced from 16px for better performance */
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+    
+    /* Performance optimization for glass container rows */
+    .et_pb_row.aav-container-large,
+    .et_pb_row.aav-container-small {
+        backdrop-filter: blur(8px) !important; /* Reduced from 16px */
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+    
+    /* Simplified glass orbital steps for mobile */
+    .aav-orbit-step {
+        backdrop-filter: blur(8px) !important; /* Reduced complexity */
+        -webkit-backdrop-filter: blur(8px) !important;
+        /* Simplified background for better performance */
+        background: rgba(255,255,255,0.15) !important;
+        border: 1px solid rgba(255,255,255,0.25) !important;
+    }
+}
+
+/* Small mobile devices */
+@media only screen and (max-width: 480px) {
+    .trianglePipe {
+        gap: 1.2rem;
+    }
+    
+    .pipe {
+        width: 1.5rem;
+    }
+    
+    .pipeOpenRight {
+        clip-path: inset(8% 0% 0% 30.8%);
+    }
+    
+    .pipeOpenLeft {
+        clip-path: inset(8% 30.8% 0 0%);
+    }
+    
+    /* Mobile header adjustments */
+    .aav-site-header .aav-header-ctas {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .aav-site-header .aav-header-ctas .aav-btn {
+        min-width: 140px;
+        font-size: 12px;
+        height: 44px;
+        line-height: 40px;
+    }
+}
+
+/*===============================
+  9. VISUAL BUILDER COMPATIBILITY
+================================*/
+/* Streamlined Visual Builder support */
+#et-fb-app .aav-hamburger,
+.et-fb-root .aav-hamburger {
+    background: linear-gradient(145deg, #6f2dbd 0%, #9e23a3 45%, #6f2dbd 100%);
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+}
+
+/* Text alignment parity */
+#et-fb-app .et_pb_section.aav-hero .et_pb_text,
+.et-fb-root .et_pb_section.aav-hero .et_pb_text { 
+    text-align: center; 
+}
+
+@media (min-width: 981px) {
+    #et-fb-app .et_pb_section.aav-mission .et_pb_text,
+    .et-fb-root .et_pb_section.aav-mission .et_pb_text,
+    #et-fb-app .et_pb_section.aav-why .et_pb_text,
+    .et-fb-root .et_pb_section.aav-why .et_pb_text,
+    #et-fb-app .et_pb_section.aav-foundation .et_pb_text,
+    .et-fb-root .et_pb_section.aav-foundation .et_pb_text { 
+        text-align: left; 
+    }
+}
+
+/*===============================
+  10. PERFORMANCE OPTIMIZATIONS - ENHANCED
+================================*/
+/* Hardware acceleration for smooth animations */
+.aav-btn,
+.aav-card,
+.aav-hotspot,
+.aav-hamburger,
+.et_pb_button,
+.button1,
+.feature-box {
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* ENHANCED: CSS containment for better rendering performance */
+.aav-card,
+.aav-orbit-step,
+.et_pb_row.aav-container-large,
+.et_pb_row.aav-container-small {
+    contain: layout style !important;
+    will-change: transform !important;
+}
+
+/* Additional performance hints for glass effects */
+.notebook-card,
+.blog-card,
+.avishkarCard,
+.et_pb_blog_grid .et_pb_post {
+    contain: layout !important;
+}
+
+/* Enhanced smooth scrolling with section navigation */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section scroll offset for fixed header navigation */
+#hero,
+#vision,
+#labos,
+#personas,
+#foundation,
+#lighthouse,
+#demos,
+#about {
+    scroll-margin-top: 120px;
+}
+
+/* Mobile scroll offset adjustment */
+@media (max-width: 768px) {
+    #hero,
+    #vision,
+    #labos,
+    #personas,
+    #foundation,
+    #lighthouse,
+    #demos,
+    #about {
+        scroll-margin-top: 90px;
+    }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Enhanced focus states for accessibility */
+.aav-btn:focus,
+.aav-hamburger:focus,
+.et_pb_button:focus {
+    outline: 2px solid #9e23a3;
+    outline-offset: 2px;
+}
+
+/*===============================
+  11. BRAND CONSISTENCY
+================================*/
+/* Enhanced divider styling */
+.aav-divider,
+.et_pb_divider:after {
+    background: linear-gradient(90deg, #9e23a3, #6c3ca8);
+    height: 4px;
+    border-radius: 6px;
+}
+
+/* Enhanced eyebrow text */
+.et_pb_text .aav-eyebrow,
+.et_pb_blurb .aav-eyebrow {
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #9e23a3;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Enhanced text shadows for better readability */
+.aav-hero .aav-h1,
+.aav-hero .aav-lead {
+    text-shadow: 0 2px 4px rgba(0,0,0,.3);
+}
+
+/* Social hover effects */
+.aav-social a:hover {
+    color: #9e23a3;
+    transform: translateY(-2px);
+}
+
+/*===============================
+  12. BLOG POST PAGE BACKGROUND & READABILITY
+  - Force metallic background on single posts
+  - Remove white wrappers that hide the background
+  - Reapply subtle glass rows only to Aavishkar containers
+  - Boost typography contrast for legibility
+================================*/
+
+/* Metallic background applied to single posts (blog/whitepaper) */
+body.single-post,
+body.single-post #page-container,
+body.single-post #et-main-area {
+    background:
+        radial-gradient(ellipse 800px 400px at 20% 10%, rgba(158,35,163,0.2), transparent 50%),
+        radial-gradient(ellipse 700px 350px at 80% 25%, rgba(11,68,123,0.18), transparent 55%),
+        linear-gradient(160deg,
+            rgba(42,16,74,1) 0%,
+            rgba(75,28,128,0.98) 35%,
+            rgba(18,47,92,0.98) 70%,
+            rgba(42,16,74,1) 100%),
+        #1a1330 !important;
+    background-attachment: scroll, scroll, scroll !important;
+    background-size: 1000px 500px, 800px 500px, 100% 100%;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+/* Contact page background - Correct targeting based on inspector */
+body.page-id-338,
+body.page-id-338 #page-container,
+body.page-id-338 #et-main-area {
+    background:
+        radial-gradient(ellipse 800px 400px at 20% 10%, rgba(158,35,163,0.2), transparent 50%),
+        radial-gradient(ellipse 700px 350px at 80% 25%, rgba(11,68,123,0.18), transparent 55%),
+        linear-gradient(160deg,
+            rgba(42,16,74,1) 0%,
+            rgba(75,28,128,0.98) 35%,
+            rgba(18,47,92,0.98) 70%,
+            rgba(42,16,74,1) 100%),
+        #1a1330 !important;
+    background-attachment: scroll, scroll, scroll !important;
+    background-size: 1000px 500px, 800px 500px, 100% 100%;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+/* Contact page glow overlay */
+body.page-id-338::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 900px 350px at 50% 30%, rgba(200,127,208,0.15), transparent 60%),
+        radial-gradient(ellipse 700px 300px at 30% 70%, rgba(108,60,168,0.1), transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: .4;
+}
+
+/* Metallic glow overlay */
+body.single-post::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 900px 350px at 50% 30%, rgba(200,127,208,0.15), transparent 60%),
+        radial-gradient(ellipse 700px 300px at 30% 70%, rgba(108,60,168,0.1), transparent 50%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="1" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0 0.01 0"/></feComponentTransfer></filter><rect width="60" height="60" filter="url(%23n)"/></svg>');
+    pointer-events: none;
+    z-index: -1;
+    opacity: .4;
+}
+
+/* Remove white wrappers that obscure the page background on posts */
+body.single-post #main-content,
+body.single-post #content-area,
+body.single-post #left-area {
+    background: transparent !important;
+}
+
+/* Make ONLY article sections transparent - preserve global header/footer */
+body.single-post .et_pb_section.aav-article-header,
+body.single-post .et_pb_section.aav-article,
+body.single-post .et_pb_section.aav-article-footer {
+    background: transparent !important;
+}
+
+/* Make ONLY article container rows transparent - preserve header/footer rows */
+body.single-post .et_pb_section.aav-article-header .et_pb_row,
+body.single-post .et_pb_section.aav-article .et_pb_row,
+body.single-post .et_pb_section.aav-article-footer .et_pb_row {
+    background: transparent !important;
+}
+
+/* Preserve header styling on posts */
+body.single-post .et_pb_section.aav-site-header {
+    background: rgba(255,255,255,0.95) !important;
+    border-bottom: 1px solid rgba(0,0,0,.06) !important;
+}
+
+/* IMPORTANT: Do NOT override global footer - let it keep its background image/styling */
+/* The Global Footer (Theme Builder) should maintain its original styling automatically */
+
+/* Article footer section styling handled above in the main transparent sections block */
+
+/*===============================
+  13. SECTION ISOLATION FIXES
+  - Fix Foundation section nesting inside Personas
+  - Ensure proper section boundaries
+================================*/
+
+/* Force Foundation section to break out of Personas container */
+.et_pb_section.aav-foundation {
+    position: relative !important;
+    z-index: 3 !important;
+    clear: both !important;
+    display: block !important;
+    contain: layout !important;
+    isolation: isolate !important;
+    margin-top: 0 !important;
+}
+
+/* Ensure Personas section doesn't contain Foundation */
+.et_pb_section.aav-verse {
+    contain: layout !important;
+    isolation: isolate !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Force section boundaries */
+.et_pb_section.aav-verse + .et_pb_section.aav-foundation {
+    margin-top: 0 !important;
+    clear: both !important;
+    position: relative !important;
+    z-index: 3 !important;
+}
+
+/* Re-apply our subtle glass treatment ONLY to Aavishkar container rows */
+body.single-post .et_pb_row.aav-container-large,
+body.single-post .et_pb_row.aav-container-small {
+    background: rgba(255,255,255,0.08) !important;
+    border: 1px solid rgba(255,255,255,0.14) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 10px 30px rgba(0,0,0,.20) !important;
+}
+
+/* Readability & contrast for article elements */
+body.single-post .aav-article-title,
+body.single-post .aav-article-meta,
+body.single-post .aav-abstract-box,
+body.single-post .aav-article-body {
+    color: #ffffff !important;
+}
+
+body.single-post .aav-article-body p,
+body.single-post .aav-article-body li {
+    color: #e9ebf6 !important;
+}
+
+/*===============================
+  14. BLOG POST HEADER GLASS STYLING
+  - Add glassmorphism to article header sections
+  - Override black text in article header sections
+================================*/
+/* Add glass container styling to blog post header */
+body.single-post .et_pb_section.aav-article-header .et_pb_row {
+  background: rgba(255,255,255,0.035) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 24px !important;
+  backdrop-filter: saturate(120%) blur(8px) !important;
+  -webkit-backdrop-filter: saturate(120%) blur(8px) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 10px 30px rgba(0,0,0,.20) !important;
+  overflow: hidden !important;
+  padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 40px) !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* Force white text in article header sections - override the black text rules */
+body.single-post .et_pb_section.aav-article-header .et_pb_text,
+body.single-post .et_pb_section.aav-article-header .et_pb_text p,
+body.single-post .et_pb_section.aav-article-header .et_pb_text h1,
+body.single-post .et_pb_section.aav-article-header .et_pb_text h2,
+body.single-post .et_pb_section.aav-article-header .et_pb_text h3,
+body.single-post .et_pb_section.aav-article-header .et_pb_text *,
+body.single-post .et_pb_section.aav-article-header .et_pb_post_title,
+body.single-post .et_pb_section.aav-article-header .et_pb_post_meta,
+body.single-post .et_pb_section.aav-article-header .et_pb_post_content {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,.35) !important;
+}
+
+/* Add proper spacing between header and body sections */
+body.single-post .et_pb_section.aav-article-header {
+  margin-bottom: clamp(40px, 6vw, 60px) !important;
+}
+
+/* Remove unwanted top whitespace from article body section */
+body.single-post .et_pb_section.aav-article {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Remove top margin/padding from first element in article body */
+body.single-post .aav-article-body > *:first-child,
+body.single-post .et_pb_section.aav-article .et_pb_text:first-child,
+body.single-post .et_pb_section.aav-article .et_pb_text:first-child > *:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/*===============================
+  15. MOBILE READABILITY IMPROVEMENTS
+  - Optimize article body for mobile devices
+================================*/
+/* Mobile-specific improvements for article body */
+@media (max-width: 768px) {
+  /* Make containers use almost full width on mobile */
+  body.single-post .et_pb_section.aav-article .et_pb_row {
+    padding: clamp(16px, 3vw, 24px) clamp(12px, 2vw, 16px) !important;
+    border-radius: 16px !important;
+    margin: 0 8px !important; /* Minimal side margins for maximum width */
+    max-width: calc(100vw - 16px) !important; /* Use almost full viewport width */
+    width: calc(100vw - 16px) !important;
+  }
+  
+  /* Header container also uses full width */
+  body.single-post .et_pb_section.aav-article-header .et_pb_row {
+    padding: clamp(20px, 3vw, 28px) clamp(12px, 2vw, 16px) !important;
+    border-radius: 16px !important;
+    margin: 0 8px !important;
+    max-width: calc(100vw - 16px) !important;
+    width: calc(100vw - 16px) !important;
+  }
+  
+  /* Override Divi's default row width restrictions on mobile */
+  body.single-post .et_pb_section .et_pb_row {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  /* Fix right-side cutoff by ensuring proper box-sizing and overflow */
+  body.single-post .et_pb_section,
+  body.single-post .et_pb_row,
+  body.single-post .et_pb_column,
+  body.single-post .aav-article-body {
+    box-sizing: border-box !important;
+    overflow-x: visible !important;
+  }
+  
+  /* Prevent horizontal scrollbar and ensure content fits */
+  body.single-post {
+    overflow-x: hidden !important;
+  }
+  
+  /* Alternative approach: use percentage-based widths instead of viewport units */
+  body.single-post .et_pb_section.aav-article .et_pb_row {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: clamp(16px, 3vw, 24px) clamp(16px, 4vw, 20px) !important;
+  }
+  
+  body.single-post .et_pb_section.aav-article-header .et_pb_row {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: clamp(20px, 3vw, 28px) clamp(16px, 4vw, 20px) !important;
+  }
+  
+  /* Optimize article body content spacing */
+  body.single-post .aav-article-body {
+    padding: clamp(20px, 4vw, 28px) !important;
+    line-height: 1.8 !important; /* Improve line spacing for mobile */
+  }
+  
+  /* Better mobile typography */
+  body.single-post .aav-article-body p {
+    font-size: clamp(16px, 4.5vw, 18px) !important;
+    line-height: 1.8 !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Mobile heading adjustments */
+  body.single-post .aav-article-body h2 {
+    font-size: clamp(20px, 5vw, 26px) !important;
+    line-height: 1.3 !important;
+    margin: 28px 0 16px 0 !important;
+  }
+  
+  body.single-post .aav-article-body h3 {
+    font-size: clamp(18px, 4.5vw, 22px) !important;
+    line-height: 1.4 !important;
+    margin: 24px 0 12px 0 !important;
+  }
+  
+  /* Better mobile list spacing */
+  body.single-post .aav-article-body ul,
+  body.single-post .aav-article-body ol {
+    margin: 20px 0 !important;
+    padding-left: 18px !important; /* Reduce indent for more content space */
+  }
+  
+  body.single-post .aav-article-body li {
+    margin-bottom: 12px !important;
+    line-height: 1.7 !important;
+  }
+  
+  /* Mobile blockquote improvements */
+  body.single-post .aav-article-body blockquote {
+    padding: 16px 18px !important;
+    margin: 20px 0 !important;
+    border-radius: 12px !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Reduce spacing between header and body on mobile */
+  body.single-post .et_pb_section.aav-article-header {
+    margin-bottom: clamp(24px, 4vw, 32px) !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  /* Use percentage-based approach to avoid cutoff issues */
+  body.single-post .et_pb_section.aav-article .et_pb_row,
+  body.single-post .et_pb_section.aav-article-header .et_pb_row {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 12px 14px !important; /* Slightly more padding to prevent cutoff */
+    border-radius: 12px !important;
+    box-sizing: border-box !important;
+  }
+  
+  body.single-post .aav-article-body {
+    padding: 14px !important; /* Slightly more padding for readability */
+    box-sizing: border-box !important;
+  }
+  
+  /* Ensure text doesn't get cut off */
+  body.single-post .aav-article-body p,
+  body.single-post .aav-article-body h1,
+  body.single-post .aav-article-body h2,
+  body.single-post .aav-article-body h3 {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  /* Optimize typography for very small screens */
+  body.single-post .aav-article-body p {
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+  }
+  
+  body.single-post .aav-article-body h2 {
+    font-size: 20px !important;
+    margin: 24px 0 12px 0 !important;
+  }
+  
+  body.single-post .aav-article-body h3 {
+    font-size: 18px !important;
+    margin: 20px 0 10px 0 !important;
+  }
+}
+
+/*===============================
+  16. MOBILE LOGO FIX
+================================*/
+/* Force aav-logo visibility on mobile */
+.aav-site-header .aav-logo,
+.aav-site-header .aav-logo img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Override Divi's mobile hiding for header logo */
+.aav-site-header .et_pb_image.et_pb_hidden_phone,
+.aav-site-header .et_pb_image.et_pb_hidden_tablet {
+  display: block !important;
+}
+
+/*===============================
+  17. PERSONAS MOBILE ALIGNMENT FIX
+================================*/
+/* Fix personas cards mobile alignment - ensure center alignment */
+@media (max-width: 768px) {
+  .aav-personas {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+    margin: 24px auto !important;
+    width: 100% !important;
+  }
+  
+  .aav-personas .aav-card {
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+  
+  .aav-personas .aav-card h4,
+  .aav-personas .aav-card p {
+    text-align: center !important;
+  }
+}

@@ -1,0 +1,659 @@
+# Building Proofline Page (aavishkar.ai/proofline) — Final Local → Divi → Launch Checklist
+
+**Last updated:** 2026-01-15
+**Target URL:** `https://aavishkar.ai/proofline`
+**This guide builds on:** `CompanyPage/Building_aavishkar_site.md` (Design System v2.0 + proven Divi workflow)
+
+---
+
+## 0) Current Status & Key Files
+
+### ✅ COMPLETED (as of 2026-01-15):
+- [x] Proofline logo uploaded to WP Media Library
+- [x] Page created at `/proofline` (published, page ID: 2952)
+- [x] Full Proofline CSS added to child theme `style.css` (source of truth: `CompanyPage/style-v2.0-header-enhanced.css`)
+- [x] Custom header template created in Theme Builder (Section has `pl-header` class)
+- [x] Proofline footer template added in Theme Builder (empty footer to avoid default Divi footer)
+- [x] Header nav fixed (removed `<br>` tags inside `.pl-nav` so links render horizontally)
+- [x] Proofline layout CSS (Hero grid + screenshot card + Lighthouse grid + form grid) merged into `style-v2.0-header-enhanced.css` and deployed to WordPress by copy/pasting the **entire file** into the child theme `style.css`
+- [x] CSS scoping issue fixed (see Section 5 for critical discovery)
+- [x] Demos section built (`#demos`, `.pl-demos`) per `proofline-mock-light.html`
+- [x] About section built (`#about`, `.pl-about-section`) per `proofline-mock-light.html`
+- [x] Header anchor links wired + working (`#demos`, `#lighthouse`, `#about`)
+- [x] Header CTA styling improvements added to CSS:
+  - [x] “Apply” CTA vertical centering (`inline-flex`)
+  - [x] Proofline header layout hardening (prevents Divi column gutters/flex from pushing the CTA off-canvas)
+  - [x] Condensed Proofline header spacing (remove Divi column top/bottom padding so header matches the local mock)
+- [x] Copy updated in local mock (`CompanyPage/proofline-mock-light.html`) for Hero/Lighthouse/Demos/About (2026-01-15)
+- [x] Proofline hero headline updated + “knowledge creation” highlight style matched to homepage (uses `<strong>` + `#c87fd0`)
+
+### 📋 REMAINING:
+- [ ] (Later) Create Contact Form 7 form (Lighthouse Labs) + swap in (after layout matches mock)
+- [ ] WP Rocket hardening: ensure **visitors** get the latest child theme CSS (minified/Used CSS can serve a stale `style.css`)
+- [ ] Final QA & polish (responsive + Visual Builder parity + performance)
+- [ ] Final wording consistency pass (Phase K) — “Lighthouse Labs” vs “Founding Labs”
+
+### 🔴 GAP ANALYSIS: What's NOT yet implemented vs `proofline-mock-light.html`
+
+| Section | Mock Reference (lines) | WordPress Status | Notes |
+|---------|----------------------|------------------|-------|
+| **Header** | 17-37 | ✅ Working | Nav is horizontal; **Apply CTA can appear “missing” if WP Rocket serves stale minified CSS** (see Troubleshooting) |
+| **Hero** | 41-88 | ✅ Working | 2‑column grid + screenshot card styles now apply via CSS |
+| **Lighthouse Labs** | 91-208 | ✅ Working | 2‑column grid + form grid styles now apply via CSS |
+| **Demos** | 212-268 | ✅ Working | 3 demo tiles present + styled via `.pl-demo-tile` |
+| **About** | 272-283 | ✅ Working | About section present + styled |
+
+### ✅ What’s live right now (checked 2026-01-12)
+- **Present**: `#hero`, `#lighthouse`, `#demos`, `#about` exist on the published page.
+- **Header nav**: fixed (no `<br>` tags inside `.pl-nav`) and anchors scroll.
+- **Background**: light mode gradient applied for `body.page-id-2952`.
+- **Footer**: hidden for Proofline (`display: none`).
+- **Known gotcha**: WP Rocket can serve a stale minified child theme CSS file, making the header “Apply” CTA appear missing/off‑screen even though it’s present in the header HTML (see Troubleshooting + Phase H QA).
+- **CSS workflow (IMPORTANT)**: keep `CompanyPage/style-v2.0-header-enhanced.css` as the **single source of truth** and deploy by copy/pasting the **entire file** into WP → child theme `style.css` (then clear caches). This keeps local and WordPress perfectly in sync.
+
+### ✅ Latest edits we’re deploying (2026-01-15)
+- **Hero headline (Proofline)**: “The scientific engine for **knowledge creation**.”
+  - Uses `<strong>` for the highlighted words (same pattern as homepage) and a Proofline-scoped CSS rule to match the pink highlight.
+- **Copy refresh**: shorter, more direct “Git” framing across Hero/Lighthouse/Demos/About (see Phase J)
+- **Header visual preference**: condensed header spacing, matching the local mock more closely (see Phase E + Troubleshooting)
+
+### ✅ Copy deployment status (WordPress)
+- **As verified live on 2026-01-15**: Hero + Lighthouse + Demos + About copy now match `CompanyPage/proofline-mock-light.html`.
+
+### ✅ Latest live verification snapshot (browser check, 2026-01-12)
+- Body classes include `page-id-2952` (WordPress does **not** add `page-proofline` automatically)
+- All anchors exist: `#hero/#lighthouse/#demos/#about`
+- Footer is hidden
+- **Apply CTA**: present in DOM, but can render off-canvas at 1280px when a stale WP Rocket minified CSS is served (raw `style.css` contains the fix; minified cache may not)
+
+### Key learnings / gotchas (2026-01-12)
+- **No `page-{slug}` body class**: WordPress/Divi does not auto-generate `page-proofline`. Use `body.page-id-2952` for page scoping and `.pl-header` for header scoping.
+- **Divi Page Settings doesn’t expose a reliable “body CSS class” field**: don’t depend on adding custom body classes in the builder UI.
+- **WP Rocket CSS optimization can mask real CSS changes**: the browser may load `/wp-content/cache/min/.../Child_divi_theme/style.css?...` which can lag behind the real `/wp-content/themes/Child_divi_theme/style.css` until caches/Used CSS are cleared.
+- **Header Apply CTA “missing” is usually layout + caching**: the CTA exists, but can get pushed off-screen by Divi guttered columns and fixed 25/50/25 flex rules unless the Proofline header hardening rules are actually being served to visitors.
+
+**Hero Section Requirements (lines 41-88):**
+- 2-column grid layout (`.pl-hero-grid`)
+- Left: eyebrow, h1, subtitle, CTA buttons, note
+- Right: product screenshot mockup with callouts (`.pl-screenshot`)
+
+**Lighthouse Section Requirements (lines 91-208):**
+- 2-column layout (`.pl-lighthouse-grid`)
+- Left: copy + bullet blocks ("What you get" / "What we ask")
+- Right: form card with fields: Name, Email, Org, Role, Team Size, Domain, Decisions textarea, Data sensitivity radio
+
+**Demos Section Requirements (lines 212-268):**
+- Section header with eyebrow + h2
+- 3 demo tiles (`.pl-demo-tile`) each with: kicker, title, description, media placeholder, caption chips
+
+**About Section Requirements (lines 272-283):**
+- Simple centered section
+- "Built by Aavishkar.ai" heading + link
+
+### Key Files in `CompanyPage/`:
+- ✅ `Proofline_product_brochure.md` (messaging + feature truth source)
+- ✅ `style-v2.0-header-enhanced.css` **(SOURCE OF TRUTH for all CSS - copy to WP)**
+- ✅ `proofline-mock-light.html` (HTML reference for page sections)
+- ✅ `divi-custom-css-v2.0-optimized.css` (interactions + perf)
+- ✅ `page-metallic-background-v1.1-optimized.css` (background architecture)
+
+### Key URLs:
+- **Live page:** `https://aavishkar.ai/proofline`
+- **Logo:** `https://aavishkar.ai/wp-content/uploads/2026/01/Proofline-Logo-Only.png`
+
+---
+
+## 1) Final decisions from our Proofline page iterations (what we are deploying)
+
+- **Page focus:** Proofline (with a minimal LabOS mention allowed in the hero note only)
+- **Hero title (light mode):** “The scientific engine for **knowledge creation**.”
+- **Primary promise:** provenance + versioning for team knowledge; claims stay traceable; knowledge compounds
+- **Structure:** vertically stacked sections (homepage-style) for easy Divi portability
+- **Core page goals:**
+  - Quick explanation of Proofline
+  - Easy sign-up opportunity (labs / teams)
+  - Quick demos (mock UI)
+  - About-us link back to `https://aavishkar.ai/`
+
+---
+
+## 2) Brand color alignment (must-follow)
+
+From `style-v2.0-header-enhanced.css` + `page-metallic-background-v1.1-optimized.css`:
+
+- **Primary Purple:** `#9e23a3`
+- **Deep Purple:** `#6f2dbd`
+- **Highlight Pink:** `#c87fd0`
+- **Accent Blue:** `#0b447b`
+- **Medium Purple:** `#6c3ca8`
+
+Rule of thumb:
+
+- Buttons / key accents → `#9e23a3` and the Aavishkar gradient  
+  `linear-gradient(145deg, #6f2dbd 0%, #9e23a3 45%, #6f2dbd 100%)`
+- Eyebrows / subtle highlight → `#c87fd0` (and the pink→blue text gradient used on the site)
+
+---
+
+## 3) Assets (local → WordPress Media Library)
+
+Local asset files (for upload):
+
+- `Website Revamp Files/Proofline Logo Only.png`
+- `Website Revamp Files/Proofline Logo.jpg`
+
+Checklist:
+
+- [x] Upload Proofline logo(s) to WP Media Library
+- [ ] Add **descriptive alt text** (e.g., “Proofline logo”)
+- [ ] If the logo appears “too tall” due to transparent padding:
+  - [ ] **Best fix:** crop/export a new PNG with padding removed, then re-upload
+  - [ ] Fallback: constrain the logo box via CSS (see Phase 7)
+
+---
+
+## 4) Phase A — Restore/Create the local mockups (recommended source of truth)
+
+Even if the final deployment is in Divi, having a local mock is our “safe iteration” layer.
+
+### A.1 Create/restore these files under `CompanyPage/`
+
+- [ ] `proofline-mock-light.html` (PRIMARY mock template)
+- [ ] `proofline-light.css` (PRIMARY light mode styles)
+- [ ] (Optional) `proofline-mock.html` + `proofline.css` (dark mode variant)
+
+If you previously had these and they’re now missing:
+
+- [ ] Restore them from Git history (GitHub) or local backups/recycle bin
+
+### A.2 Run a local server (PowerShell-safe)
+
+```powershell
+cd "C:\Users\astit\OneDrive\Desktop\Aavishkar\Aavishkar.ai\Wordpress"
+python -m http.server 8081
+```
+
+Open:
+
+- `http://localhost:8081/CompanyPage/proofline-mock-light.html`
+
+### A.3 Local mockup QA
+
+- [ ] Desktop 1440px: alignment + spacing
+- [ ] Laptop 1024px: 2-column sections readable
+- [ ] Tablet 768px: stacks cleanly
+- [ ] Mobile 480px: no horizontal scroll; large tap targets
+
+---
+
+## 5) Phase B — Create the Proofline page in WordPress
+
+### B.1 Create the page
+
+- [ ] WP Admin → Pages → **Add New**
+- [ ] Title: **Proofline**
+- [ ] Slug/permalink: **proofline**
+- [ ] Click **Use Divi Builder**
+- [ ] Save as **Draft** initially
+
+### B.2 Body class strategy (CRITICAL DISCOVERY)
+
+**⚠️ WordPress/Divi does NOT auto-generate `page-{slug}` body classes!**
+
+**Evidence:** Home page body has `home page-id-2542`, NOT `page-home`. Proofline page has `page page-id-2952`, NOT `page-proofline`.
+
+**The Fix (Two-Part Strategy):**
+
+1. **For header/section-level CSS:** Use section class scoping (`.pl-header`) instead of body class
+2. **For body-level CSS (background, footer):** Use `page-id-2952` selector as fallback
+
+**How the home page CSS works (pattern to follow):**
+```css
+/* Home page uses section classes, NOT body.page-home */
+.aav-hero .aav-h1 { ... }
+.et_pb_section.aav-hero { ... }
+```
+
+**Proofline CSS scoping pattern:**
+```css
+/* Header/nav: use section class .pl-header */
+.pl-header .pl-nav { display: flex; }
+.pl-nav-link { color: rgba(15,23,42,0.72); }
+
+/* Body-level overrides: use page-id fallback */
+body.page-proofline #page-container,
+body.page-id-2952 #page-container { background: ...; }
+```
+
+- [x] Added `pl-header` class to header Section in Theme Builder
+- [x] CSS updated to use `.pl-header` and `page-id-2952` selectors
+- [x] Header CSS now applies correctly
+
+---
+
+## 6) Phase C — Where the Proofline CSS lives (UPDATED)
+
+### C.1 Source of Truth: Local CSS File
+
+**File:** `CompanyPage/style-v2.0-header-enhanced.css`
+
+This single file contains ALL site CSS including Proofline styles. When making CSS changes:
+1. Edit this local file
+2. Copy entire file contents to WordPress
+3. Clear caches
+
+### C.2 WordPress Location: Child Theme style.css
+
+**Location:** Appearance → Theme File Editor → style.css
+
+- [x] Base + Proofline CSS is in child theme (NOT Divi Theme Options)
+- [x] Proofline **layout CSS** is present (Hero grid, screenshot styles, Lighthouse grid, form grid).
+  - ✅ Implemented by merging the required rules (originally in `CompanyPage/proofline-light.css`) into `CompanyPage/style-v2.0-header-enhanced.css` using `body.page-id-2952 ...` scoping.
+- [x] Proofline-only overrides are scoped to `body.page-id-2952` to avoid impacting other site pages.
+
+### C.3 Finding the Proofline CSS inside `style-v2.0-header-enhanced.css`
+
+Instead of relying on exact line numbers (they shift as we iterate), search for these anchors:
+
+- `PROOFLINE PAGE CSS - Light Mode` (main Proofline block: background, sections, demos, about)
+- `PROOFLINE HEADER FIXES (Divi Override)` (header-specific fixes)
+- `Proofline header layout hardening` (prevents Apply CTA being pushed off-canvas)
+- `Hide global footer on Proofline page` (footer suppression)
+
+### C.4 WP Rocket gotcha: visitors may receive a different CSS file than the one you edited
+WP Rocket can serve a minified copy from:
+
+- `/wp-content/cache/min/.../wp-content/themes/Child_divi_theme/style.css?...`
+
+This file can lag behind the real theme file:
+
+- `/wp-content/themes/Child_divi_theme/style.css`
+
+**How to verify quickly**
+- Open both URLs and search for `page-id-2952` or `Proofline header layout hardening`.
+- If the minified file is missing those strings, visitors may not see the latest Proofline fixes.
+
+**How to fix**
+- WP Rocket → Tools: **Clear cache** + **Clear Used CSS**
+- Divi: clear Static CSS
+- If it keeps happening, exclude the child theme stylesheet from WP Rocket minification:
+  - WP Rocket → File Optimization → CSS → **Excluded CSS Files**:
+    - `wp-content/themes/Child_divi_theme/style.css`
+
+### C.5 WordPress compatibility rule: avoid CSS variables
+
+Your Aavishkar CSS intentionally avoids variables for WP validator compatibility.
+
+- [ ] Do **not** rely on `:root { --tokens }` in WordPress-pasted CSS
+- [ ] Use direct values (`#9e23a3`, etc.)
+
+### C.4 Divi build defaults (recommended settings to match the v2.0 system)
+
+These settings prevent Divi defaults from fighting the `.aav-*` design system:
+
+- [ ] **Prefer HTML in Text modules** using `.aav-h1`, `.aav-h2`, `.aav-lead`, `.aav-btn` classes  
+      (avoid styling fonts/colors in Divi “Design” tab unless absolutely necessary)
+- [ ] **Row sizing (common fix):** Row → Design → Sizing  
+  - Width: **100%**  
+  - Max Width: **100%**  
+  - Gutter Width: **1** (or keep default, but ensure it doesn’t break your layout)
+- [ ] **Overflow visibility when needed:** If any dropdowns/tooltips get clipped, set  
+      Section/Row/Column → Advanced → Visibility/Overflow: **Visible**
+- [ ] **Device visibility:** Ensure key modules are not disabled on Phone/Tablet
+
+---
+
+## 7) Phase D — Background strategy (important: site uses a metallic/dark base)
+
+Your site background system (`page-metallic-background-v1.1-optimized.css`) is dark + has a `body::before` overlay.
+
+If you want Proofline to be **light mode** (Elicit-like), you must override the background for this page.
+
+### D.1 Light-page override (scoped)
+
+Add a scoped override to your Proofline CSS (wherever you paste it):
+
+```css
+/* Make Proofline page light even if site background is dark */
+body.page-id-2952,
+body.page-id-2952 #page-container,
+body.page-id-2952 #et-main-area {
+  background: #f8fafc !important;
+}
+
+/* Disable the metallic noise overlay on this page (optional) */
+body.page-id-2952::before {
+  opacity: 0 !important;
+  animation: none !important;
+  background: none !important;
+}
+```
+
+Checklist:
+
+- [ ] Proofline page background is light
+- [ ] Other site pages remain unchanged
+
+---
+
+## 8) Phase E — Header Template (✅ COMPLETED & WORKING)
+
+### ✅ Created: Proofline-specific header in Theme Builder
+
+**Location:** Divi → Theme Builder → Custom Template for Proofline page
+
+**Structure (IMPORTANT: Note `pl-header` class on Section):**
+```
+Section (CSS Class: aav-site-header pl-header)  ← CRITICAL: pl-header enables CSS scoping
+└── Row (CSS Class: aav-bar) - 3 columns
+    ├── Column 1: Image Module
+    │   └── Image: Proofline-Logo-Only.png
+    │   └── CSS Class: aav-logo
+    │   └── Link: /proofline
+    │
+    ├── Column 2: Text Module
+    │   └── HTML (NO <br> tags between links!):
+    │       <nav class="pl-nav">
+    │       <a class="pl-nav-link" href="#demos">Demos</a>
+    │       <a class="pl-nav-link" href="#lighthouse">Lighthouse Labs</a>
+    │       <a class="pl-nav-link" href="#about">About</a>
+    │       </nav>
+    │
+    └── Column 3: Text Module
+        └── HTML:
+            <a class="aav-btn aav-btn-primary pl-nav-cta" href="#lighthouse">Apply</a>
+```
+
+**⚠️ Critical Nav HTML Note:** Do NOT put `<br>` tags between nav links - this causes vertical stacking.
+
+### Header CSS Fixes (in `style-v2.0-header-enhanced.css`)
+
+**CSS Scoping Strategy:** Uses `.pl-header` section class (NOT `body.page-proofline`) because WP/Divi doesn't auto-generate page-slug body classes.
+
+Key fixes applied:
+- **Logo size:** 80px height to compensate for PNG transparent padding
+- **Nav horizontal layout:** flex with higher specificity to override Divi
+- **Nav link colors:** gray text (#0f172a @ 72% opacity), purple hover
+- **Apply CTA centering:** `inline-flex` + fixed height so text is centered
+- **Header layout hardening:** overrides Divi guttered column widths / fixed 25/50/25 flex that can push the CTA off-screen
+- **Condensed header spacing:** removes Divi header column top/bottom padding that makes the header look “expanded”
+- **Footer hide:** Multiple selectors including `page-id-2952` fallback
+
+```css
+/* Logo fix - uses .pl-header section class */
+.pl-header .et_pb_image img,
+.pl-header .aav-logo img,
+.pl-header.aav-site-header img {
+  height: 80px !important;
+  max-height: 80px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+/* Nav horizontal + styled - .pl-nav is unique to Proofline, no body prefix needed */
+.pl-nav,
+nav.pl-nav,
+.pl-header .pl-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Nav link colors */
+.pl-nav a,
+.pl-nav-link,
+a.pl-nav-link {
+  color: rgba(15, 23, 42, 0.72) !important;  /* Gray, not blue */
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  padding: 7px 12px !important;
+  border-radius: 12px !important;
+  white-space: nowrap !important;
+}
+
+/* Footer hide - uses page-id-2952 fallback since page-proofline doesn't exist */
+body.page-proofline .et-l--footer,
+body.page-id-2952 .aav-footer,
+body.page-id-2952 .et-l--footer,
+body.page-id-2952 footer.et-l {
+  display: none !important;
+}
+```
+
+---
+
+## 9) Phase F — Build the Proofline page sections in Divi (match `proofline-mock-light.html`)
+
+### F.1 Recommended section order (exact mock)
+
+Build these 4 sections in this order (each as a Divi **Regular Section**):
+
+1. **Hero** (`#hero`, `.pl-hero`)
+2. **Lighthouse** (`#lighthouse`, `.pl-lighthouse`)
+3. **Demos** (`#demos`, `.pl-demos`)
+4. **About** (`#about`, `.pl-about-section`)
+
+### F.2 Divi structure (recommended)
+
+- Use **1-column rows**.
+- Put a single **Code module** in each section and paste the HTML blocks from `proofline-mock-light.html`.
+- **Important:** Don’t make the Hero a Divi 2‑column row — the HTML already contains `.pl-hero-grid` which becomes 2 columns via CSS.
+
+### F.3 Section-by-section (paste from mock)
+
+For each section:
+
+- [ ] Add **Regular Section**
+- [ ] Section → **Advanced → CSS ID & Classes**
+  - Set the **CSS ID** to match the anchor (`hero`, `lighthouse`, `demos`, `about`)
+  - Set the **CSS Class** to match the mock (`pl-hero`, `pl-lighthouse`, `pl-demos`, `pl-about-section`)
+- [ ] Add a **Code module** and paste the matching HTML block from `proofline-mock-light.html`
+
+**Current live status (2026-01-12):** `#hero`, `#lighthouse`, `#demos`, `#about` all exist and are linked from the header.
+
+### F.4 Header anchor links
+
+Once `#demos` and `#about` exist, the header links should scroll correctly. If they don’t:
+- Ensure the **CSS ID** is exactly `demos` / `about` (no typos).
+- Ensure the header nav HTML contains **no `<br>` tags** between links.
+
+---
+
+## 10) Phase G — Make signup “real” (recommended: Contact Form 7)
+
+You already have a working CF7 pattern in `CompanyPage/Contact_form.html`.
+
+### G.1 Create a Proofline Early Access form (CF7)
+
+- [ ] WP Admin → Contact → Contact Forms → **Add New**
+- [ ] Name: “Proofline — Early Access”
+- [ ] Minimum fields:
+  - Name
+  - Email
+  - Org/Lab
+  - Role (PI/Postdoc/Student/Industry)
+  - Optional message
+  - Consent checkbox
+
+### G.2 Embed it into the Proofline page
+
+- [ ] Add a Divi Text module in the hero OR in a dedicated “Request Access” section
+- [ ] Paste the shortcode: `[contact-form-7 id="..." title="Proofline — Early Access"]`
+
+### G.3 Style to match the app-like signup flow
+
+- [ ] Reuse existing input styles (already used site-wide)
+- [ ] Add minimal Proofline overrides scoped to `body.page-id-2952` (colors, spacing)
+
+---
+
+## 11) Phase H — QA (before publish)
+
+### H.1 Front-end layout checks
+
+- [ ] Desktop 1440px
+- [ ] Laptop 1024px
+- [ ] Tablet 768px
+- [ ] Mobile 480px (no horizontal scroll)
+
+### H.2 Visual Builder parity
+
+If the Visual Builder differs:
+
+- [ ] Add dual targeting for any Proofline overrides you need:
+  - Front-end: `body.page-id-2952 ...` and/or `.pl-header ...`
+  - Visual Builder (if needed): `#et-fb-app body.page-id-2952 ...` and/or `.et-fb-root body.page-id-2952 ...`
+
+### H.3 Cache clearing (must-do after CSS edits)
+
+- [ ] Clear Divi Static CSS
+- [ ] Clear WP Rocket cache
+- [ ] Hard refresh browser (Ctrl+F5)
+
+### H.4 Troubleshooting (common issues)
+
+- **⚠️ CSS selectors using `body.page-proofline` don't work**
+  - WordPress/Divi does NOT auto-generate `page-{slug}` body classes!
+  - Use `.pl-header` section class for header CSS (add class to Section in Theme Builder)
+  - Use `body.page-id-2952` as fallback for body-level overrides
+  - See Section 5 (B.2) for full explanation
+
+- **Proofline page is still dark**
+  - Confirm background override uses BOTH selectors: `body.page-proofline, body.page-id-2952`
+  - Clear Divi Static CSS + WP Rocket cache
+
+- **Header nav links are stacked vertically**
+  - Check for `<br>` tags in nav HTML - remove them!
+  - Ensure CSS uses `.pl-nav` directly (not `body.page-proofline .pl-nav`)
+
+- **CSS changes don't show up**
+  - Copy latest CSS from `style-v2.0-header-enhanced.css` to WordPress child theme
+  - Clear Divi Static CSS + WP Rocket cache + WP Rocket Used CSS (then hard refresh / incognito)
+
+- **Theme File Editor shows `nonce_failure` when clicking “Update File”**
+  - This is usually an expired WP security token (page open too long / session timeout).
+  - Fix:
+    - Copy your CSS to clipboard
+    - Re-login to WP Admin in a fresh tab
+    - Re-open Appearance → Theme File Editor → `style.css` and update immediately
+
+- **WP Rocket is serving stale minified CSS**
+  - Symptom: header styles partially apply but new rules (e.g. `page-id-2952` updates or header hardening) don’t
+  - Confirm by checking the served stylesheet:
+    - `/wp-content/cache/min/.../wp-content/themes/Child_divi_theme/style.css?...`
+  - Fix: WP Rocket → Tools → **Clear Used CSS** + **Clear cache** (and optionally exclude `wp-content/themes/Child_divi_theme/style.css` from minification)
+
+- **Header “Apply” button appears missing**
+  - Often it’s **present but pushed off-screen** by Divi guttered columns + fixed 25/50/25 flex
+  - Ensure the **header hardening CSS** is being served to visitors (see WP Rocket stale minified CSS above)
+  - In the Visual Builder, use the **Layers** panel to select Column 3 → Text module (it may be off-canvas)
+
+- **Hero is hidden under the fixed header**
+  - Add extra top padding to the Proofline hero section (scoped CSS), or ensure the first section has enough spacing
+
+- **Logo "creates whitespace" when enlarged**
+  - Best: re-export a cropped PNG (remove transparent padding) and re-upload
+  - Fallback: constrain logo `height` + `width` with `object-fit: contain`
+
+- **Looks different in Visual Builder**
+  - Add Visual Builder selectors (`#et-fb-app` / `.et-fb-root`) for the small set of Proofline-specific overrides that matter
+
+---
+
+## 12) Phase I — SEO + launch
+
+- [ ] Meta title: “Proofline | Version Control for Research Knowledge | Aavishkar.ai”
+- [ ] Meta description: 1–2 sentences (pain point → outcome)
+- [ ] OpenGraph image
+- [ ] Add nav link (optional)
+- [ ] Publish page
+- [ ] Test live URL: `https://aavishkar.ai/proofline`
+
+---
+
+## Appendix: Copy guardrails (from `Proofline_product_brochure.md`)
+
+Use these terms consistently:
+
+- “Knowledge Cards”
+- “Commit”
+- “Branch”
+- “Merge with synthesis”
+- “Audit trail / provenance”
+
+---
+
+## 13) Phase J — Deploy latest copy updates to WordPress (2026-01-15)
+
+**Source of truth:** `CompanyPage/proofline-mock-light.html`  
+**Goal:** Make the live WP page match the updated mock copy (Hero + Lighthouse + Demos + About).
+
+### J.0 Rules (important)
+- Use the existing Divi Sections/IDs (`hero`, `lighthouse`, `demos`, `about`) — don’t create new ones.
+- In each section, edit the existing **Code module** and paste the updated HTML block.
+- **Do not paste the outer `<section ... id="...">` wrapper** from the mock inside the Code module (Divi already provides the section + ID).
+
+### J.1 Hero (Code module under `#hero`)
+Paste this (inner HTML only):
+- Lines **42–87** from `CompanyPage/proofline-mock-light.html`
+  - Includes the updated hero headline: “The scientific engine for **knowledge creation**.”
+
+### J.2 Lighthouse (Code module under `#lighthouse`)
+Paste this (inner HTML only):
+- Lines **92–209** from `CompanyPage/proofline-mock-light.html`
+
+### J.3 Demos (Code module under `#demos`)
+Paste this (inner HTML only):
+- Lines **213–269** from `CompanyPage/proofline-mock-light.html`
+
+### J.4 About (Code module under `#about`)
+Paste this (inner HTML only):
+- Lines **273–283** from `CompanyPage/proofline-mock-light.html`
+
+### J.5 After updating each section
+- [ ] Save/Update page
+- [ ] Clear Divi Static CSS + WP Rocket cache/Used CSS
+- [ ] Hard refresh (Ctrl+F5) or check incognito
+
+### J.6 Status
+- [x] Hero deployed
+- [x] Lighthouse deployed
+- [x] Demos deployed
+- [x] About deployed
+- [x] Verified live on `https://aavishkar.ai/proofline` (2026-01-15)
+
+---
+
+## 14) Next steps (to complete Proofline)
+
+### 14.1 Do a final “wording consistency” pass (recommended)
+Right now the page mixes two labels:
+- Header nav link: **“Lighthouse Labs”**
+- Hero eyebrow: **“Founding Labs”**
+- Section H2: **“Become a Founding Lab”**
+- CTA buttons: **“Apply as a Lighthouse Lab”**
+
+Pick one term and make it consistent across:
+- Header nav link text (Theme Builder header HTML)
+- Hero primary CTA label
+- Demos CTA label
+
+Recommendation: keep **“Founding Labs”** as the public-facing program name, and keep **“Lighthouse”** as an internal concept if needed.
+
+### 14.2 Verify CSS deployment + caching health
+- [ ] Confirm visitors are receiving the latest CSS:
+  - Raw: `/wp-content/themes/Child_divi_theme/style.css`
+  - Minified: `/wp-content/cache/min/.../Child_divi_theme/style.css?...`
+  - Both should include: `page-id-2952`, `PROOFLINE PAGE CSS - Light Mode`, and `Proofline header layout hardening`
+- [ ] If minified lags: WP Rocket → Tools → **Clear cache + Clear Used CSS**
+
+### 14.3 Polish (recommended)
+- [ ] Replace demo placeholders with real GIF/MP4 loops (30–45s) and optimize for performance
+- [ ] Swap the fake HTML form for Contact Form 7 (Phase G) if you want submissions + notifications
+- [ ] SEO: title/description + OpenGraph (Phase I)
+
+### 14.4 Optional: tighten the form confirmation copy
+Current confirmation area still says: “**Application received. We’ll reply in 48 hours. Optional: book a call.**”
+If you want it to match the new tone, update it to something like:
+- “Received. We’ll reply in 48h. Optional: book a call.”

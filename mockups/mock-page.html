@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aavishkar.ai - Accelerating Scientific Discovery with AI</title>
+    <style>
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'gill-sans';
+            src: url('fonts/GillSansMedium.otf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinmedium';
+            src: url('fonts/DINAlternateMedium_0.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinalternate';
+            src: url('fonts/DINBlackAlternate.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'din1451';
+            src: url('fonts/DIN1451-36breit.ttf') format('truetype');
+        }
+
+        /* Root Variables - Updated with typography and component system */
+        :root {
+            /* Layout variables */
+            --border-radius1: 40px;
+            --border-radius2: 20px;
+            --border-radius3: 10px;
+            --border-radius4: 5px;
+
+            /* Margin and padding */
+            --avishkar-margin1: 20px;
+            --avishkar-margin2: 16px;
+            --avishkar-margin3: 12px;
+            --avishkar-margin4: 8px;
+            --avishkar-margin5: 4px;
+            --avishkar-margin51: 2px;
+
+            --avishkar-padding1: 40px;
+            --avishkar-padding2: 30px;
+            --avishkar-padding3: 20px;
+            --avishkar-padding4: 10px;
+            --avishkar-padding5: 4px;
+            --avishkar-padding51: 2px;
+
+            /* Brand colors - preserved as is */
+            --avishkar-borderColor: #4a67b1;
+            --avishkar-ink: #393b9b;
+            --avishkar-green: #1b487e;
+            --avishkar-purple: #9e23a3;
+            --avishkar-brinjal: #6c3ca8;
+            --avishkar-blue: #4a67b1;
+            
+            /* NEW: Animation and transitions */
+            --avishkar-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            
+            /* NEW: Typography scale */
+            --font-size-xs: 0.75rem;     /* 12px */
+            --font-size-sm: 0.875rem;    /* 14px */
+            --font-size-base: 1rem;      /* 16px */
+            --font-size-lg: 1.125rem;    /* 18px */
+            --font-size-xl: 1.25rem;     /* 20px */
+            --font-size-2xl: 1.5rem;     /* 24px */
+            --font-size-3xl: 1.875rem;   /* 30px */
+            --font-size-4xl: 2.25rem;    /* 36px */
+            --font-size-5xl: 3rem;       /* 48px */
+            
+            /* NEW: Line heights */
+            --line-height-tight: 1.1;
+            --line-height-normal: 1.5;
+            --line-height-loose: 1.8;
+            
+            /* NEW: Box shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 5px 15px rgba(0,0,0,0.1); 
+            --shadow-lg: 0 15px 25px rgba(0,0,0,0.1);
+            --shadow-focus: 0 0 0 3px rgba(158, 35, 163, 0.25);
+            
+            /* NEW: Colors (using existing brand colors) */
+            --color-text-primary: #0b447b;
+            --color-text-secondary: #4a67b1;
+            --color-text-white: #ffffff;
+            --color-bg-primary: #ffffff;
+            --color-bg-secondary: #f0f4f8;
+            --color-bg-accent: #bcceda;
+            --color-button-primary: #004A73;
+            --color-button-hover: #013b5c;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'dinmedium', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--color-text-primary);
+            line-height: var(--line-height-normal);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--color-text-primary);
+        }
+
+        /* Typography Styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'dinalternate', sans-serif;
+            color: var(--color-text-primary);
+            margin-top: 0;
+            line-height: var(--line-height-tight);
+        }
+
+        .hero h1 {
+            font-size: var(--font-size-5xl);
+            margin-bottom: var(--avishkar-margin1);
+            line-height: 1.2;
+        }
+
+        .section-title h2 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--avishkar-margin3);
+        }
+
+        p {
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-normal);
+            margin-top: 0;
+            margin-bottom: var(--avishkar-margin2);
+        }
+
+        .hero p {
+            font-size: var(--font-size-lg);
+        }
+
+        /* Utility classes for text */
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .text-purple { color: var(--avishkar-purple); }
+        .text-blue { color: var(--avishkar-blue); }
+        .text-white { color: var(--color-text-white); }
+
+        /* Header Navigation */
+        .main-header {
+            background-color: var(--color-bg-primary);
+            box-shadow: var(--shadow-sm);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'dinalternate';
+            font-size: var(--font-size-2xl);
+            font-weight: bold;
+            color: var(--avishkar-purple);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: var(--color-text-primary);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--avishkar-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu li.current-menu-item a::after {
+            width: 100%;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            font-family: 'dinalternate';
+            background-color: var(--color-bg-secondary);
+            padding: 100px 40px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 0 0 60%;
+        }
+
+        .hero-image {
+            flex: 0 0 40%;
+            text-align: center;
+        }
+
+        .hero_medium {
+            font-family: 'dinmedium';
+        }
+
+        /* Button Component System */
+        .button {
+            border-radius: 70px;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--avishkar-transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin: 10px 10px 10px 0;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background-color: var(--color-button-primary);
+            color: var(--color-text-white);
+            border: none;
+            padding: 16px 34px;
+            font-size: var(--font-size-xl);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background-color: var(--color-button-hover);
+        }
+
+        .button-secondary {
+            background-color: transparent;
+            color: var(--color-button-primary);
+            border: 2px solid var(--color-button-primary);
+            padding: 14px 32px;
+            font-size: var(--font-size-xl);
+        }
+
+        .button-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+            background-color: rgba(0, 74, 115, 0.05);
+        }
+
+        .button-sm {
+            font-size: var(--font-size-base);
+            padding: 8px 20px;
+        }
+
+        /* Arrow animation for buttons */
+        .button-arrow {
+            transition: var(--avishkar-transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-arrow:hover {
+            padding-right: 42px;
+        }
+
+        .button-arrow::after {
+            content: "→";
+            position: absolute;
+            opacity: 0;
+            right: 20px;
+            transition: var(--avishkar-transition);
+        }
+
+        .button-arrow:hover::after {
+            opacity: 1;
+            right: 16px;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-md-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .col-md-5 {
+            flex: 0 0 41.666667%;
+            max-width: 41.666667%;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .col-md-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        /* Card Component System */
+        .card {
+            background-color: var(--color-bg-primary);
+            border-radius: var(--border-radius2);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            margin-bottom: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: var(--avishkar-transition);
+            border: 1px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: var(--shadow-lg);
+            border-color: #e6e6e6;
+        }
+
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--avishkar-transition);
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: var(--avishkar-padding2);
+            flex-grow: 1;
+        }
+
+        .card-title {
+            margin-bottom: 15px;
+            font-size: var(--font-size-xl);
+        }
+
+        .card-text {
+            font-size: var(--font-size-sm);
+            margin-bottom: 20px;
+            color: var(--color-text-primary);
+        }
+
+        /* Form Control Styles */
+        .form-control {
+            font-family: 'dinmedium', sans-serif;
+            border: 1px solid var(--color-text-primary);
+            border-radius: 25px;
+            margin-bottom: 15px;
+            transition: var(--avishkar-transition);
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input.form-control {
+            font-size: var(--font-size-base);
+            padding: 12px 24px;
+            width: 100%;
+            max-width: 550px;
+        }
+
+        textarea.form-control {
+            width: 100%;
+            max-width: 550px;
+            padding: 12px 24px;
+            font-size: var(--font-size-sm);
+            height: 150px;
+        }
+
+        .form-control:focus {
+            box-shadow: var(--shadow-focus);
+            border-color: var(--avishkar-purple);
+        }
+
+        /* Submit button */
+        .submit-btn {
+            background: var(--color-text-primary);
+            border: 1px solid var(--color-text-primary);
+            font-size: var(--font-size-xl);
+            padding: 8px 30px;
+            font-weight: 500;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--avishkar-transition);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(11, 68, 123, 0.3);
+            background-color: #0a3963;
+        }
+
+        /* Feature Section */
+        .feature-section {
+            text-align: center;
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+
+        /* Expert Systems / Notebooks Section */
+        .expert-systems {
+            padding: 80px 0;
+            background-color: var(--color-bg-primary);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* Approach Section */
+        .approach-section {
+            background-color: var(--color-bg-secondary);
+            padding: 80px 0;
+        }
+
+        /* Deep Dive Section Styles */
+        .custom-row, .custom-row1 {
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        .custom-row {
+            border-top: 4px solid var(--avishkar-brinjal);
+        }
+
+        .custom-row1 {
+            border-top: 4px solid var(--color-text-primary);
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .content-wrapper img {
+            width: 140px;
+            height: 140px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 1px solid var(--color-text-primary);
+        }
+
+        .text-content {
+            padding: 0 40px;
+        }
+
+        /* Notebook Section Styles */
+        .backgroundFlower {
+            position: relative;
+            background: none;
+            height: auto;
+            padding-bottom: 40px;
+        }
+
+        .backgroundFlower::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .avishkarNews {
+            padding: var(--avishkar-padding1);
+            background-color: var(--color-bg-primary);
+            border-radius: 3em;
+        }
+
+        .borderRounded {
+            border-radius: 4em;
+            border-right: 2px solid var(--avishkar-purple);
+            border-left: 2px solid var(--avishkar-purple);
+            border-bottom: 2px solid var(--avishkar-purple);
+            padding: var(--avishkar-padding1);
+        }
+
+        .pipe {
+            z-index: 1;
+            height: 100%;
+            width: 3rem;
+        }
+
+        .trianglePipe {
+            display: flex;
+            position: relative;
+            margin-top: -4px;
+            margin-bottom: -1px;
+            justify-content: center;
+            gap: 2.8rem;
+        }
+
+        .pipeOpenRight {
+            border: 2px solid var(--avishkar-purple);
+            border-radius: 0 0 46px 0;
+            height: 3rem;
+            flex-grow: 1;
+            clip-path: inset(8% 0% 0% 9.8%);
+        }
+
+        .pipeOpenLeft {
+            flex-grow: 1;
+            border: 2px solid var(--avishkar-purple);
+            border-radius: 0 0 0 46px;
+            height: 3rem;
+            clip-path: inset(8% 9.8% 0 0%);
+        }
+
+        .tags {
+            display: inline-block;
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: var(--font-size-xs);
+            margin-right: 5px;
+            margin-bottom: 5px;
+            transition: var(--avishkar-transition);
+            border: 1px solid transparent;
+        }
+
+        .tags:hover {
+            background-color: var(--color-bg-primary);
+            border-color: var(--color-text-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--color-text-primary);
+            color: var(--color-text-white);
+            padding: 50px 0;
+        }
+
+        .footer h3 {
+            color: var(--color-text-white);
+            font-size: var(--font-size-2xl);
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer-form input {
+            padding: 14px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        .footer-form button {
+            font-size: var(--font-size-sm);
+            border: 1px solid var(--color-text-white);
+            padding: 10px 18px;
+            border-radius: 18px;
+            background: transparent;
+            color: var(--color-text-white);
+            cursor: pointer;
+            transition: var(--avishkar-transition);
+        }
+
+        .footer-form button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--color-text-white);
+            text-decoration: none;
+            transition: var(--avishkar-transition);
+            position: relative;
+            padding-left: 0;
+        }
+
+        .footer-links a:hover {
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--color-text-white);
+            font-size: var(--font-size-xl);
+            text-decoration: none;
+            transition: var(--avishkar-transition);
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #90c7f5;
+        }
+
+        /* Responsive Styles */
+        @media only screen and (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content, .hero-image {
+                flex: 0 0 100%;
+            }
+
+            .hero-image {
+                margin-top: 30px;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .row {
+                flex-direction: column;
+            }
+
+            .col-md-4, .col-md-5, .col-md-6, .col-md-12 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .text-content {
+                padding: 15px 0;
+            }
+
+            .button {
+                display: block;
+                margin: 10px auto;
+                width: fit-content;
+            }
+
+            .button-primary, .button-secondary {
+                font-size: var(--font-size-base);
+                padding: 12px 24px;
+            }
+
+            .trianglePipe {
+                gap: 1.8rem;
+            }
+
+            .pipe {
+                width: 2rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 17%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 17% 0 0%);
+            }
+
+            .avishkarNews {
+                padding: var(--avishkar-padding3);
+            }
+
+            .borderRounded {
+                padding: var(--avishkar-padding3);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hamburger-line {
+                width: 25px;
+                height: 3px;
+                background-color: var(--color-text-primary);
+                margin: 5px 0;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .hero h1 {
+                font-size: var(--font-size-4xl);
+            }
+
+            .button-primary, .button-secondary {
+                font-size: var(--font-size-sm);
+                padding: 10px 20px;
+            }
+
+            .trianglePipe {
+                gap: 1.2rem;
+            }
+
+            .pipe {
+                width: 1.5rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 30.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 30.8% 0 0%);
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media only screen and (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">Aavishkar.ai</div>
+            <ul class="nav-menu">
+                <li class="current-menu-item"><a href="#">HOME</a></li>
+                <li><a href="#">NOTEBOOKS</a></li>
+                <li><a href="#">REPOSITORY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">NOTEBOOKS</a></li>
+            <li><a href="#">REPOSITORY</a></li>
+            <li><a href="#">ABOUT US</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero">Accelerating<br>Scientific Discovery<br>with<br>AI‑Powered<br>Expert Systems</h1>
+                <p class="hero_medium">Open-source AI Notebooks that put powerful research tools in every scientist's hands</p>
+                <div class="hero-buttons">
+                    <a href="#" class="button button-primary">FOR SCIENTISTS</a>
+                    <a href="#" class="button button-secondary">FOR DEVELOPERS</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/500x400?text=AI+Research" alt="AI Research" style="max-width: 100%; border-radius: 25px; border: 1px solid var(--color-text-primary);">
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Expert Systems Section -->
+    <section class="expert-systems">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Expert Systems</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/400x200?text=Literature+Review" alt="Literature Review">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-purple">Automating Literature Review with LLMs1</h3>
+                            <p class="card-text">Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers. Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers.</p>
+                            <a href="#" class="button button-primary button-sm button-arrow">View Notebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/400x200?text=Literature+Review" alt="Literature Review">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-purple">Automating Literature Review with LLMs2</h3>
+                            <p class="card-text">Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers. Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers.</p>
+                            <a href="#" class="button button-primary button-sm button-arrow">View Notebook</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/400x200?text=Literature+Review" alt="Literature Review">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-purple">Automating Literature Review with LLMs3</h3>
+                            <p class="card-text">Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers. Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers.</p>
+                            <a href="#" class="button button-primary button-sm button-arrow">View Notebook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all text-center">
+                <a href="#" class="button button-primary">VIEW ALL NOTEBOOKS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach Section -->
+    <section class="approach-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Approach to AI for Science</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/400x200?text=Data+Science" alt="Data Science">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-blue">Building LLM Agents for Data Science</h3>
+                            <p class="card-text">A Wolfram Summer School 2024 Project For this edition of the 'AI for Science' Newsletter, I share...</p>
+                            <a href="#" class="button button-primary button-sm button-arrow">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/400x200?text=Data" alt="Data">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-blue">Where is the Data?</h3>
+                            <p class="card-text">A lot of the current advancement in applied AI is a result of work done over the last decade to...</p>
+                            <a href="#" class="button button-primary button-sm button-arrow">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/400x200?text=JARVIS" alt="JARVIS">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-blue">Harnessing LLMs as Science assistants: A J.A.R.V.I.S for every researcher</h3>
+                            <p class="card-text">While various AI technologies could enhance discrete stages of the scientific research workflow...</p>
+                            <a href="#" class="button button-primary button-sm button-arrow">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all text-center">
+                <a href="#" class="button button-primary">LEARN MORE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notebook Section (Styled with the special styling) -->
+    <div style="background-color: var(--color-bg-accent); padding: 60px 0;">
+        <div class="container">
+            <h2 class="text-purple text-center" style="font-size: var(--font-size-4xl); margin-bottom: 40px; font-family: 'dinalternate';">Aavishkar Notebooks</h2>
+            
+            <div class="backgroundFlower">
+                <div class="avishkarNews">
+                    <h3 class="text-purple text-center" style="font-size: var(--font-size-2xl);">Latest Expert Systems</h3>
+                    <div class="trianglePipe">
+                        <div class="pipeOpenLeft"></div>
+                        <div class="pipe"></div>
+                        <div class="pipeOpenRight"></div>
+                    </div>
+                    <div class="borderRounded">
+                        <div class="row">
+                            <div class="col-md-6 relativeCard1">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://via.placeholder.com/500x300?text=AI+Expert+System" alt="AI Expert System">
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-title text-purple">Automating Literature Review with LLMs</h3>
+                                        <p class="card-text">Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers...</p>
+                                        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                                            <span class="tags">AI</span>
+                                            <span class="tags">Literature Review</span>
+                                            <span class="tags">LLMs</span>
+                                        </div>
+                                        <div style="margin-top: 20px;">
+                                            <a href="#" class="button button-primary button-sm button-arrow">Explore Notebook</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 relativeCard2">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="https://via.placeholder.com/500x300?text=Data+Science" alt="Data Science">
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-title text-blue">Data Analysis with LLM Agents</h3>
+                                        <p class="card-text">Leverage AI agents for efficient data analysis and visualization in scientific research...</p>
+                                        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                                            <span class="tags">Data Science</span>
+                                            <span class="tags">AI Agents</span>
+                                            <span class="tags">Visualization</span>
+                                        </div>
+                                        <div style="margin-top: 20px;">
+                                            <a href="#" class="button button-primary button-sm button-arrow">Explore Notebook</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 style="color: var(--color-text-primary); font-size: var(--font-size-4xl); font-family: 'dinalternate';">Contact Us</h2>
+                <p>Have questions about our AI Expert Systems or want to discuss a scientific project? Reach out to us and we'll get back to you soon.</p>
+                <p>We're always looking for new collaborations and exciting research challenges.</p>
+            </div>
+            <div class="col-md-6">
+                <div class="formmain">
+                    <form>
+                        <div style="margin-bottom: 20px;">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="button button-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Aavishkar.ai</h3>
+                    <p>Accelerating Scientific Discovery with AI-Powered Expert Systems</p>
+                    <div class="social-icons">
+                        <a href="#">FB</a>
+                        <a href="#">TW</a>
+                        <a href="#">LI</a>
+                        <a href="#">GH</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Notebooks</a></li>
+                        <li><a href="#">Repository</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Stay Connected</h3>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <div class="footer-form">
+                        <input type="email" placeholder="Your Email" class="youremail">
+                        <button class="button button-secondary" style="font-size: var(--font-size-sm); background: transparent; color: var(--color-text-white);">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p>© 2024 Aavishkar.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script>
+        // Simple JavaScript to simulate interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event to buttons - Updated to use new class names
+            const buttons = document.querySelectorAll('.button, .submit-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Button clicked! In a real WordPress site, this would perform an action.');
+                });
+            });
+
+            // Form submission simulation
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Form submitted! In a real WordPress site, this would send your message.');
+                    form.reset();
+                });
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            hamburger.addEventListener('click', function() {
+                mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+</body>
+</html> 

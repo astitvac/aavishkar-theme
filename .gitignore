@@ -1,0 +1,42 @@
+# Temporary files
+tmpclaude-*
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+.claude/
+.cursor/
+*.log
+.vscode/
+.idea/
+*.sublime-*
+
+# WordPress uploads (managed separately via WP Media Library)
+uploads/
+
+# Backup files
+*copy.css
+*copy.php
+*.bak
+*.backup
+*~
+
+# Node modules (if added later)
+node_modules/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compiled files (if build step added later)
+*.min.css
+*.min.js
+dist/
+build/

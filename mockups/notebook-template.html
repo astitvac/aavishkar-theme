@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aavishkar.ai - Notebooks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-P9GI9TwhUxA+dRsClwsiJiMtBvR5CwQXPTNOqwQYBlhDVOjxl7cD6KPBGyqxeCvvYxlGIIE7XM9Hz97LUqNkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'gill-sans';
+            src: url('fonts/GillSansMedium.otf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinmedium';
+            src: url('fonts/DINAlternateMedium_0.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinalternate';
+            src: url('fonts/DINBlackAlternate.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'din1451';
+            src: url('fonts/DIN1451-36breit.ttf') format('truetype');
+        }
+
+        /* Root Variables */
+        :root {
+            --border-radius1: 40px;
+            --border-radius2: 20px;
+            --border-radius3: 10px;
+            --border-radius4: 5px;
+
+            --avishkar-header1: 20px;
+            --avishkar-header2: 16px;
+            --avishkar-header3: 12px;
+
+            --avishkar-margin1: 20px;
+            --avishkar-margin2: 16px;
+            --avishkar-margin3: 12px;
+            --avishkar-margin4: 8px;
+            --avishkar-margin5: 4px;
+            --avishkar-margin51: 2px;
+
+            --avishkar-padding1: 40px;
+            --avishkar-padding2: 30px;
+            --avishkar-padding3: 20px;
+            --avishkar-padding4: 10px;
+            --avishkar-padding5: 4px;
+            --avishkar-padding51: 2px;
+
+            --avishkar-borderColor: #4A67B1;
+            --avishkar-ink: #393B9B;
+            --avishkar-green: #1B487E;
+            --avishkar-purple: #9E23A3;
+            --avishkar-brinjal: #6C3CA8;
+            --avishkar-blue: #4A67B1;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'dinmedium', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0b447b;
+            line-height: 1.6;
+            background-color: #f0f4f8;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0b447b;
+        }
+
+        /* Header Navigation */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'dinalternate';
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--avishkar-purple);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: #0b447b;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--avishkar-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu li.current-menu-item a::after {
+            width: 100%;
+        }
+
+        /* Flower Header Section */
+        .flower-header {
+            background-color: #e9eff5;
+            position: relative;
+            padding: 40px 0 20px;
+            text-align: center;
+            overflow: visible;
+            z-index: 10;
+        }
+
+        .page-title {
+            font-size: 40px;
+            font-weight: 500;
+            color: var(--avishkar-green);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .divider {
+            height: 3px;
+            border-radius: 20px;
+            background-color: var(--avishkar-purple);
+            width: 200px;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .page-description {
+            font-size: 18px;
+            line-height: 1.5;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            color: var(--avishkar-green);
+            position: relative;
+            z-index: 10;
+        }
+
+        .flower-image {
+            position: relative;
+            height: 300px;
+            width: 300px;
+            margin: 0 auto;
+            z-index: 10;
+            background-image: url('https://via.placeholder.com/500x500?text=Flower');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Main Stem and Featured Notebooks Section */
+        .stem-container {
+            position: relative;
+            margin-top: -50px;
+            padding-bottom: 50px;
+            overflow: visible;
+            z-index: 5;
+        }
+
+        .main-stem {
+            width: 12px;
+            background: linear-gradient(to bottom, rgba(158, 35, 163, 0.6), rgba(74, 103, 177, 0.6));
+            height: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 6;
+        }
+
+        .featured-notebooks {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 10;
+            height: calc(100% - 100px);
+        }
+
+        /* Featured notebook cards alternating left and right of stem */
+        .featured-card {
+            position: absolute;
+            width: 360px;
+            background-color: white;
+            border-radius: var(--border-radius1);
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 10;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Position each featured card */
+        .featured-card:nth-child(1) {
+            top: 50px;
+            left: 50%;
+            margin-left: 130px;
+        }
+
+        .featured-card:nth-child(2) {
+            top: 250px;
+            right: 50%;
+            margin-right: 130px;
+        }
+
+        .featured-card:nth-child(3) {
+            top: 450px;
+            left: 50%;
+            margin-left: 130px;
+        }
+
+        .featured-card:nth-child(4) {
+            top: 650px;
+            right: 50%;
+            margin-right: 130px;
+        }
+
+        .card-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .featured-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: var(--avishkar-padding3);
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--avishkar-green);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-title i {
+            font-size: 18px;
+            color: var(--avishkar-purple);
+            transition: transform 0.3s ease;
+        }
+
+        .card-title i:hover {
+            transform: scale(1.2);
+        }
+
+        .audience-section {
+            margin-bottom: 20px;
+        }
+
+        .audience-title {
+            font-weight: 500;
+            color: var(--avishkar-green);
+            margin-bottom: 5px;
+        }
+
+        .audience-description {
+            font-size: 15px;
+            color: var(--avishkar-green);
+        }
+
+        .tags-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 12px;
+            color: var(--avishkar-green);
+        }
+
+        .tags-title {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .tag {
+            border: 1px solid var(--avishkar-borderColor);
+            border-radius: var(--border-radius4);
+            padding: 2px 8px;
+            margin: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: rgba(74, 103, 177, 0.1);
+        }
+
+        /* Root Layer and Regular Notebooks */
+        .root-layer {
+            background-color: #e0e9f5;
+            padding: 50px;
+            position: relative;
+            margin-top: -100px;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            border-radius: var(--border-radius1);
+            border: 2px solid var(--avishkar-purple);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 1;
+        }
+
+        .root-title {
+            font-size: 28px;
+            color: var(--avishkar-green);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .root-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background-color: var(--avishkar-purple);
+        }
+
+        /* Filter/Category navigation */
+        .notebook-filters {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            background-color: white;
+            border: 1px solid var(--avishkar-borderColor);
+            border-radius: var(--border-radius4);
+            color: var(--avishkar-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover, .filter-button.active {
+            background-color: var(--avishkar-purple);
+            color: white;
+            border-color: var(--avishkar-purple);
+        }
+
+        /* Root notebooks grid */
+        .root-notebooks {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .notebook-card {
+            background-color: white;
+            border-radius: var(--border-radius1);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .notebook-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .notebook-card .card-image {
+            height: 160px;
+        }
+        
+        .notebook-card .card-title {
+            font-size: 18px;
+        }
+
+        /* Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0 20px;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination li a, .pagination li span {
+            display: block;
+            padding: 8px 15px;
+            border-radius: var(--border-radius4);
+            background-color: white;
+            color: var(--avishkar-green);
+            border: 1px solid rgba(74, 103, 177, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .pagination li a:hover {
+            background-color: rgba(74, 103, 177, 0.1);
+        }
+
+        .pagination li.active span {
+            background-color: var(--avishkar-purple);
+            color: white;
+            border-color: var(--avishkar-purple);
+        }
+
+        /* View toggle */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .view-button {
+            background-color: transparent;
+            border: none;
+            color: var(--avishkar-green);
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .view-button:hover, .view-button.active {
+            color: var(--avishkar-purple);
+        }
+
+        /* Responsive adjustments */
+        @media screen and (max-width: 1200px) {
+            .featured-card {
+                width: 320px;
+            }
+            
+            .featured-card:nth-child(1) {
+                margin-left: 90px;
+            }
+            
+            .featured-card:nth-child(2) {
+                margin-right: 90px;
+            }
+            
+            .featured-card:nth-child(3) {
+                margin-left: 90px;
+            }
+            
+            .featured-card:nth-child(4) {
+                margin-right: 90px;
+            }
+            
+            .card-connector {
+                width: 90px !important;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-stem {
+                width: 6px; /* Thinner stem */
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
+                height: auto; /* Full height */
+                top: 0;
+                bottom: 0;
+            }
+            
+            .featured-notebooks {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                padding: 20px 20px 20px 50%; /* Push content to right of stem */
+            }
+            
+            .featured-card {
+                position: relative;
+                width: 100%;
+                max-width: 500px;
+                margin: 0 !important;
+                opacity: 0;
+                transform: translateX(30px);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+            
+            .featured-card.in-view {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            .card-connector {
+                display: block;
+                position: absolute;
+                height: 4px;
+                width: 30px;
+                left: -30px;
+                top: 50%;
+                background-color: rgba(158, 35, 163, 0.6);
+            }
+
+            .root-notebooks {
+                grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+            
+            .searchBox {
+                width: 90%;
+            }
+
+            .root-layer {
+                margin: 30px 20px;
+                padding: 30px 20px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .flower-image {
+                height: 200px;
+                width: 200px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .root-notebooks {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+            }
+            
+            .audience-section {
+                margin-bottom: 15px;
+            }
+            
+            .card-content {
+                padding: 15px;
+            }
+
+            .root-layer {
+                margin: 30px 10px;
+                padding: 20px 10px;
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: #0b447b;
+            font-weight: 500;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #0b447b;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+
+        @media only screen and (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        /* Simplify the root layer connection */
+        .root-layer::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(158, 35, 163, 0.7), rgba(74, 103, 177, 0.7));
+            border-radius: 50%;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 7;
+        }
+
+        /* Remove the extra connector dot since we're using a single continuous stem */
+        .root-layer::after {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">Aavishkar.ai</div>
+            <ul class="nav-menu">
+                <li><a href="#">HOME</a></li>
+                <li class="current-menu-item"><a href="#">NOTEBOOKS</a></li>
+                <li><a href="#">REPOSITORY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">NOTEBOOKS</a></li>
+            <li><a href="#">REPOSITORY</a></li>
+            <li><a href="#">ABOUT US</a></li>
+        </ul>
+    </div>
+
+    <!-- Flower Header Section -->
+    <section class="flower-header">
+        <h1 class="page-title">The Notebook</h1>
+        <div class="divider"></div>
+        <p class="page-description">
+            Discover practical AI tools and resources designed to support and
+            enhance your work, whether you're conducting cutting‑edge research or
+            developing innovative solutions.
+        </p>
+        <div class="flower-image"></div>
+    </section>
+
+    <!-- Stem and Featured Notebooks -->
+    <section class="stem-container">
+        <div class="main-stem"></div>
+        
+        <div class="featured-notebooks">
+            <!-- Featured Card 1 -->
+            <article class="featured-card">
+                <div class="card-connector"></div>
+                <header class="card-image">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                         data-src="https://via.placeholder.com/600x400?text=Literature+Review" 
+                         alt="Literature Review" 
+                         class="lazy-image">
+                </header>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <span>Automating Literature Review with LLMs</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </h3>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Streamline your literature surveys using AI to summarize and synthesize vast amount of academic papers.</div>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">TECHNOLOGISTS</div>
+                        <div class="audience-description">Implement LLMs to process and analyze academic texts, enhancing research efficiency.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Literature Review</a></div>
+                        <div class="tag"><a href="#">LLMs</a></div>
+                        <div class="tag"><a href="#">Research Efficiency</a></div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Featured Card 2 -->
+            <article class="featured-card">
+                <div class="card-connector"></div>
+                <header class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Data+Analysis" alt="Data Analysis">
+                </header>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <span>Data Analysis with LLM Agents</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </h3>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Leverage AI agents for efficient data analysis and visualization in scientific research.</div>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">TECHNOLOGISTS</div>
+                        <div class="audience-description">Build interactive AI agents that can understand natural language requests for data processing.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Data Science</a></div>
+                        <div class="tag"><a href="#">AI Agents</a></div>
+                        <div class="tag"><a href="#">Visualization</a></div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Featured Card 3 -->
+            <article class="featured-card">
+                <div class="card-connector"></div>
+                <header class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Genomics" alt="Genomics">
+                </header>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <span>Genomic Data Analysis</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </h3>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Analyze genomic sequences and identify patterns in large datasets with the help of machine learning models.</div>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">TECHNOLOGISTS</div>
+                        <div class="audience-description">Apply cutting-edge ML techniques to genomic data processing and visualization challenges.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Genomics</a></div>
+                        <div class="tag"><a href="#">Machine Learning</a></div>
+                        <div class="tag"><a href="#">Bioinformatics</a></div>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Featured Card 4 -->
+            <article class="featured-card">
+                <div class="card-connector"></div>
+                <header class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Chemistry" alt="Chemistry">
+                </header>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <span>Chemistry Research Assistant</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </h3>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Accelerate your chemistry research with AI tools for molecular structure analysis and reaction prediction.</div>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">TECHNOLOGISTS</div>
+                        <div class="audience-description">Integrate chemical databases with ML models to create predictive tools for novel compound discovery.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Chemistry</a></div>
+                        <div class="tag"><a href="#">Molecular Modeling</a></div>
+                        <div class="tag"><a href="#">Reaction Prediction</a></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Root Layer with Regular Notebooks -->
+    <section class="root-layer">
+        <h2 class="root-title">Explore All Notebooks</h2>
+        
+        <!-- Filter buttons -->
+        <div class="notebook-filters">
+            <button class="filter-button" data-tag="all">All</button>
+            <button class="filter-button" data-tag="machine-learning">Machine Learning</button>
+            <button class="filter-button">Data Analysis</button>
+            <button class="filter-button">Genomics</button>
+            <button class="filter-button">Chemistry</button>
+            <button class="filter-button">Material Science</button>
+        </div>
+        
+        <!-- View options toggle -->
+        <div class="view-toggle">
+            <button class="view-button active"><i class="fas fa-th"></i></button>
+            <button class="view-button"><i class="fas fa-list"></i></button>
+        </div>
+        
+        <!-- Root notebooks grid -->
+        <div class="root-notebooks">
+            <!-- Regular Notebook Card 1 -->
+            <div class="notebook-card" data-tags="material-science,machine-learning">
+                <div class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Materials+Science" alt="Materials Science">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <span>Material Properties Prediction</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Predict properties of materials using machine learning models.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Material Science</a></div>
+                        <div class="tag"><a href="#">ML</a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regular Notebook Card 2 -->
+            <div class="notebook-card" data-tags="statistics,visualization">
+                <div class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Statistics" alt="Statistics">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <span>Statistical Analysis Assistant</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Perform complex statistical analyses using natural language commands.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Statistics</a></div>
+                        <div class="tag"><a href="#">Visualization</a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regular Notebook Card 3 -->
+            <div class="notebook-card" data-tags="protein-science,deep-learning">
+                <div class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Protein" alt="Protein">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <span>Protein Structure Prediction</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Use AI to predict protein structures from amino acid sequences.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Protein Science</a></div>
+                        <div class="tag"><a href="#">Deep Learning</a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regular Notebook Card 4 -->
+            <div class="notebook-card" data-tags="nlp,text-mining">
+                <div class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=NLP" alt="NLP">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <span>Scientific NLP Tools</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Process scientific text and extract structured information.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">NLP</a></div>
+                        <div class="tag"><a href="#">Text Mining</a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regular Notebook Card 5 -->
+            <div class="notebook-card" data-tags="image-analysis,computer-vision">
+                <div class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Image+Analysis" alt="Image Analysis">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <span>Scientific Image Analysis</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Analyze microscopy and other scientific imagery.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Computer Vision</a></div>
+                        <div class="tag"><a href="#">Image Analysis</a></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Regular Notebook Card 6 -->
+            <div class="notebook-card" data-tags="physics,simulation">
+                <div class="card-image">
+                    <img src="https://via.placeholder.com/600x400?text=Physics" alt="Physics">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        <span>Physics Simulation Tools</span>
+                        <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+                    </div>
+                    <div class="audience-section">
+                        <div class="audience-title">SCIENTISTS</div>
+                        <div class="audience-description">Run physics simulations with powerful ML-accelerated tools.</div>
+                    </div>
+                    <div class="tags-section">
+                        <div class="tags-title">TAGS</div>
+                        <div class="tag"><a href="#">Physics</a></div>
+                        <div class="tag"><a href="#">Simulation</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #0b447b; color: white; padding: 50px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Aavishkar.ai</h3>
+                    <p>Accelerating Scientific Discovery with AI-Powered Expert Systems</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Notebooks</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Repository</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Stay Connected</h3>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; border-radius: 20px; border: none; margin-bottom: 10px;">
+                    <button type="submit" style="background: transparent; color: white; border: 1px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Sign Up</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p>© 2024 Aavishkar.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function() {
+                    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // Card hover effects
+            const cards = document.querySelectorAll('.notebook-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                    this.style.boxShadow = '0 12px 20px rgba(0,0,0,0.15)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                });
+            });
+            
+            // Search box functionality (simulated)
+            const searchBox = document.querySelector('.searchBox');
+            if (searchBox) {
+                searchBox.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        alert('In a real WordPress site, this would search for notebooks containing: ' + this.value);
+                    }
+                });
+            }
+
+            // Update the filter button functionality
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const notebookCards = document.querySelectorAll('.notebook-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const selectedTag = this.getAttribute('data-tag');
+                    
+                    // Filter the cards
+                    notebookCards.forEach(card => {
+                        if (selectedTag === 'all') {
+                            // Show all cards if "All" is selected
+                            card.classList.remove('filtered-out');
+                        } else {
+                            // Check if card has the selected tag
+                            const cardTags = card.getAttribute('data-tags');
+                            if (cardTags && cardTags.includes(selectedTag)) {
+                                card.classList.remove('filtered-out');
+                            } else {
+                                card.classList.add('filtered-out');
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Add scroll animation for mobile
+            if (window.innerWidth <= 768) {
+                handleScrollAnimation();
+            }
+
+            lazyLoadImages();
+        });
+
+        function handleScrollAnimation() {
+            const cards = document.querySelectorAll('.featured-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            cards.forEach(card => observer.observe(card));
+        }
+
+        function lazyLoadImages() {
+            const lazyImages = document.querySelectorAll("img.lazy-image");
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove("lazy-image");
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => imageObserver.observe(img));
+        }
+    </script>
+</body>
+</html> 

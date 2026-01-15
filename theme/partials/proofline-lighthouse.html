@@ -1,0 +1,122 @@
+<!--
+  Proofline Lighthouse Labs Partial
+  Usage in Divi Code module: <?php aav_partial('proofline-lighthouse'); ?>
+  Or shortcode: [aav_partial name="proofline-lighthouse"]
+-->
+<div class="aav-container-large pl-lighthouse-grid">
+  <div class="pl-lighthouse-copy">
+    <div class="pl-eyebrow">Lighthouse Labs</div>
+    <h2 class="pl-h2">Become a Founding Lab</h2>
+    <p class="pl-copy">
+      Map one real workflow with us. Free access in exchange for feedback—built for compliance-heavy,
+      reproducibility-sensitive work.
+    </p>
+
+    <div class="pl-bullets">
+      <div class="pl-bullet-block">
+        <h3 class="pl-bullet-title">What you get</h3>
+        <ul>
+          <li>LabOS + Proofline access</li>
+          <li>Hands-on onboarding</li>
+          <li>Full audit trail + provenance</li>
+          <li>Roadmap influence</li>
+        </ul>
+      </div>
+
+      <div class="pl-bullet-block">
+        <h3 class="pl-bullet-title">What we ask</h3>
+        <ul>
+          <li>2–4 feedback sessions over 6 weeks</li>
+          <li>One representative project</li>
+          <li>Optional: shareable case study</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="pl-microcopy">Reply in 48h. Short call, then onboarding.</p>
+  </div>
+
+  <div class="pl-lighthouse-form-card" aria-label="Apply form">
+    <form class="pl-apply-form" action="#applied" method="get">
+      <div class="pl-form-grid">
+        <div class="pl-field">
+          <label for="pl-name">Name</label>
+          <input id="pl-name" name="name" type="text" placeholder="Your full name" required />
+        </div>
+
+        <div class="pl-field">
+          <label for="pl-email">Email</label>
+          <input id="pl-email" name="email" type="email" placeholder="you@org.com" required />
+        </div>
+
+        <div class="pl-field">
+          <label for="pl-org">Org</label>
+          <input id="pl-org" name="org" type="text" placeholder="Lab / company / institution" required />
+        </div>
+
+        <div class="pl-field">
+          <label for="pl-role">Role</label>
+          <select id="pl-role" name="role" required>
+            <option value="" selected disabled>Select…</option>
+            <option>PI / Group Lead</option>
+            <option>Postdoc / Senior Researcher</option>
+            <option>Graduate Student / RA</option>
+            <option>R&amp;D / Product</option>
+            <option>Founder / Exec</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="pl-field">
+          <label for="pl-size">Team size</label>
+          <select id="pl-size" name="team_size" required>
+            <option value="" selected disabled>Select…</option>
+            <option>1–3</option>
+            <option>4–10</option>
+            <option>11–30</option>
+          </select>
+        </div>
+
+        <div class="pl-field">
+          <label for="pl-domain">Domain</label>
+          <select id="pl-domain" name="domain" required>
+            <option value="" selected disabled>Select…</option>
+            <option>Academic lab</option>
+            <option>Deep tech</option>
+            <option>Enterprise R&amp;D</option>
+            <option>Research startup</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="pl-field pl-field-wide">
+          <label for="pl-decisions">What decisions do you keep redoing?</label>
+          <textarea
+            id="pl-decisions"
+            name="decisions"
+            rows="3"
+            placeholder="e.g., experiment direction, go/no-go bets, grant claims… and the rework you want to eliminate"
+          ></textarea>
+        </div>
+
+        <fieldset class="pl-field pl-field-wide pl-fieldset">
+          <legend>Data sensitivity</legend>
+          <label><input type="radio" name="data_sensitivity" value="public" required /> Public</label>
+          <label><input type="radio" name="data_sensitivity" value="internal" required /> Internal</label>
+          <label><input type="radio" name="data_sensitivity" value="regulated" required /> Regulated</label>
+        </fieldset>
+      </div>
+
+      <button class="aav-btn aav-btn-primary pl-apply-btn" type="submit">Apply (2 minutes)</button>
+
+      <p class="pl-form-after">
+        48h reply. Optional: <a href="#" class="pl-inline-link">book a call</a>.
+      </p>
+    </form>
+
+    <div id="applied" class="pl-apply-confirm" role="status" aria-live="polite">
+      <strong>Application received.</strong> We'll reply in 48 hours. Optional:
+      <a href="#" class="pl-inline-link">book a call</a>.
+    </div>
+  </div>
+</div>

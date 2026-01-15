@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Aavishkar.ai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-P9GI9TwhUxA+dRsClwsiJiMtBvR5CwQXPTNOqwQYBlhDVOjxl7cD6KPBGyqxeCvvYxlGIIE7XM9Hz97LUqNkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'gill-sans';
+            src: url('fonts/GillSansMedium.otf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinmedium';
+            src: url('fonts/DINAlternateMedium_0.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinalternate';
+            src: url('fonts/DINBlackAlternate.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'din1451';
+            src: url('fonts/DIN1451-36breit.ttf') format('truetype');
+        }
+
+        /* Root Variables */
+        :root {
+            --border-radius1: 40px;
+            --border-radius2: 20px;
+            --border-radius3: 10px;
+            --border-radius4: 5px;
+
+            --avishkar-header1: 20px;
+            --avishkar-header2: 16px;
+            --avishkar-header3: 12px;
+
+            --avishkar-margin1: 20px;
+            --avishkar-margin2: 16px;
+            --avishkar-margin3: 12px;
+            --avishkar-margin4: 8px;
+            --avishkar-margin5: 4px;
+            --avishkar-margin51: 2px;
+
+            --avishkar-padding1: 40px;
+            --avishkar-padding2: 30px;
+            --avishkar-padding3: 20px;
+            --avishkar-padding4: 10px;
+            --avishkar-padding5: 4px;
+            --avishkar-padding51: 2px;
+
+            --avishkar-borderColor: #4A67B1;
+            --avishkar-ink: #393B9B;
+            --avishkar-green: #1B487E;
+            --avishkar-purple: #9E23A3;
+            --avishkar-brinjal: #6C3CA8;
+            --avishkar-blue: #4A67B1;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'dinmedium', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--avishkar-green);
+            line-height: 1.6;
+            background-color: #f5f8fa;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0b447b;
+        }
+
+        /* Header Navigation */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'dinalternate';
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--avishkar-purple);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: #0b447b;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--avishkar-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu li.current-menu-item a::after {
+            width: 100%;
+        }
+        
+        /* About Us Page Specific Styles */
+        .page-title {
+            font-family: 'dinalternate';
+            font-size: 45px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 20px;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .page-description {
+            font-size: 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+            color: var(--avishkar-green);
+        }
+
+        /* Section Styling */
+        .about-section {
+            padding: 70px 0;
+            background-color: white;
+        }
+
+        .about-section:nth-child(even) {
+            background-color: #f7f9fc;
+        }
+
+        .section-header {
+            font-family: 'dinalternate';
+            font-size: 45px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .section-divider {
+            height: 3px;
+            border-radius: 20px;
+            background-color: var(--avishkar-purple);
+            width: 34%;
+            margin: 0 auto 30px;
+        }
+        
+        /* What is Aavishkar Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .about-content h2 {
+            font-family: 'dinalternate';
+            font-size: 36px;
+            color: var(--avishkar-purple);
+            margin-bottom: 25px;
+        }
+        
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--avishkar-green);
+        }
+        
+        .about-image {
+            position: relative;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: var(--border-radius2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        /* Team Section */
+        .team-card {
+            background-color: white;
+            border-radius: var(--border-radius2);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 30px;
+            height: 100%;
+            border-top: 4px solid var(--avishkar-purple);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        
+        .team-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid var(--avishkar-purple);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-name {
+            font-family: 'dinalternate';
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 10px;
+        }
+        
+        .team-position {
+            color: var(--avishkar-purple);
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+        
+        .team-bio {
+            color: #0b447b;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .team-social {
+            margin-top: 15px;
+        }
+        
+        .team-social a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color: #f5f8fa;
+            border-radius: 50%;
+            color: var(--avishkar-green);
+            margin: 0 5px;
+            line-height: 35px;
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background-color: var(--avishkar-green);
+            color: white;
+        }
+        
+        /* Articles/Deep Dive Section */
+        .article-card {
+            background-color: white;
+            border-radius: var(--border-radius2);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--avishkar-purple);
+        }
+        
+        .article-card:nth-child(even) {
+            border-top: 4px solid var(--avishkar-green);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        
+        .article-content {
+            padding: var(--avishkar-padding3);
+        }
+        
+        .article-title {
+            font-family: 'dinalternate';
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 15px;
+        }
+        
+        .article-text {
+            font-size: 16px;
+            color: var(--avishkar-green);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .article-link {
+            display: inline-block;
+            color: var(--avishkar-purple);
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .article-link::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--avishkar-purple);
+            transition: width 0.3s ease;
+        }
+        
+        .article-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Contact Form Section */
+        .contact-form-section {
+            background-color: #f7f9fc;
+            padding: 70px 0;
+        }
+        
+        .contact-form-container {
+            background-color: white;
+            border-radius: var(--border-radius2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: var(--avishkar-padding1);
+        }
+        
+        .form-row {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            font-family: 'dinmedium', sans-serif;
+            font-size: 16px;
+            padding: 12px 24px;
+            border: 1px solid var(--avishkar-blue);
+            border-radius: 25px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(158, 35, 163, 0.25);
+            border-color: var(--avishkar-purple);
+        }
+        
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--avishkar-green);
+            border: 1px solid var(--avishkar-green);
+            font-size: 22px;
+            padding: 8px 30px;
+            font-weight: 500;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--avishkar-purple);
+            border-color: var(--avishkar-purple);
+        }
+        
+        .contact-info {
+            padding: 0 20px;
+        }
+        
+        .contact-info-title {
+            font-family: 'dinalternate';
+            font-size: 28px;
+            color: var(--avishkar-purple);
+            margin-bottom: 20px;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f5f8fa;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--avishkar-purple);
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-info-text {
+            line-height: 1.5;
+        }
+        
+        .contact-info-text strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        /* Triangle Pipe Divider */
+        .trianglePipe {
+            display: flex;
+            position: relative;
+            margin: 40px 0;
+            justify-content: center;
+            gap: 3.4rem;
+        }
+
+        .pipe {
+            z-index: 1;
+            height: 100%;
+            width: 3.5rem;
+            border-left: 1px solid var(--avishkar-purple);
+            border-right: 1px solid var(--avishkar-purple);
+        }
+
+        .pipeOpenRight {
+            border: 1px solid var(--avishkar-purple);
+            border-radius: 0 0 46px 0;
+            height: 3rem;
+            flex-grow: 1;
+            clip-path: inset(8% 0% 0% 9.8%);
+        }
+
+        .pipeOpenLeft {
+            flex-grow: 1;
+            border: 1px solid var(--avishkar-purple);
+            border-radius: 0 0 0 46px;
+            height: 3rem;
+            clip-path: inset(8% 9.8% 0 0%);
+        }
+        
+        /* Radio group styling */
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--avishkar-purple);
+        }
+        
+        /* Expert system fields */
+        .expert-system-fields {
+            display: none;
+            padding: 20px;
+            background-color: #f0f4f8;
+            border-radius: var(--border-radius3);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--avishkar-purple);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-menu a {
+            color: #0b447b;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #0b447b;
+            margin: 5px 0;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 1024px) {
+            .section-header {
+                font-size: 38px;
+            }
+
+            .about-content h2 {
+                font-size: 32px;
+            }
+
+            .pipe {
+                width: 2.5rem;
+            }
+
+            .trianglePipe {
+                gap: 2.4rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 13.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 13.8% 0 0%);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .section-header {
+                font-size: 32px;
+            }
+
+            .about-content h2 {
+                font-size: 28px;
+            }
+
+            .about-image {
+                margin-top: 30px;
+            }
+
+            .pipe {
+                width: 2rem;
+            }
+
+            .trianglePipe {
+                gap: 1.9rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 17%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 17% 0 0%);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 426px) {
+            .section-header {
+                font-size: 28px;
+            }
+
+            .about-content h2 {
+                font-size: 24px;
+            }
+
+            .about-section {
+                padding: 50px 0;
+            }
+
+            .trianglePipe {
+                gap: 1.2rem;
+            }
+
+            .pipe {
+                width: 1.5rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 30.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 30.8% 0 0%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">Aavishkar.ai</div>
+            <ul class="nav-menu">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">NOTEBOOKS</a></li>
+                <li><a href="#">REPOSITORY</a></li>
+                <li class="current-menu-item"><a href="#">ABOUT US</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">NOTEBOOKS</a></li>
+            <li><a href="#">REPOSITORY</a></li>
+            <li><a href="#">ABOUT US</a></li>
+        </ul>
+    </div>
+
+    <!-- Section 1: What is Aavishkar (2 columns, 1 text, 1 image) -->
+    <section class="about-section">
+        <div class="container">
+            <h1 class="section-header">What is Aavishkar</h1>
+            <div class="section-divider"></div>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2>Accelerating Scientific Discovery with AI</h2>
+                        <p>
+                            At the intersection of artificial intelligence and scientific inquiry lies a profound opportunity 
+                            ‑ not to replace human insight, but to amplify our collective ability to understand the universe. 
+                        </p>
+                        <p>
+                            Aavishkar, meaning "discovery/invention" in Sanskrit, represents our contribution to this emerging 
+                            paradigm of human‑AI collaboration in science. We build AI-powered expert systems that put powerful 
+                            research tools in every scientist's hands.
+                        </p>
+                        <p>
+                            Our mission is to create intelligent systems that assist scientists in literature review, 
+                            data analysis, experimental design, and hypothesis generation - enabling faster breakthroughs and 
+                            deeper insights across scientific disciplines.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AI and Science Collaboration">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triangle Pipe Divider -->
+    <div class="container">
+        <div class="trianglePipe">
+            <div class="pipeOpenLeft"></div>
+            <div class="pipe"></div>
+            <div class="pipeOpenRight"></div>
+        </div>
+    </div>
+
+    <!-- Section 2: People who are working on this - 3 cards with photos and bios -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-header">People Working On This</h2>
+            <div class="section-divider"></div>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://via.placeholder.com/180x180?text=AC" alt="Astitva Chopra">
+                        </div>
+                        <h3 class="team-name">Astitva Chopra</h3>
+                        <div class="team-position">AI for Science Program Manager</div>
+                        <p class="team-bio">
+                            With over fifteen years of experience in the technology industry, Astitva has developed core 
+                            competencies in product management, research computing, and AI/ML. His mission is to support academic 
+                            researchers with their scientific computing needs in cloud computing and AI/ML for Science.
+                        </p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://via.placeholder.com/180x180?text=SP" alt="Sarah Peterson">
+                        </div>
+                        <h3 class="team-name">Sarah Peterson</h3>
+                        <div class="team-position">Lead Scientific Advisor</div>
+                        <p class="team-bio">
+                            Sarah is a computational biologist with extensive experience in applying machine learning to genomics 
+                            research. She specializes in developing AI models that can identify patterns in biological data and 
+                            provide insights that accelerate experimental design and hypothesis generation.
+                        </p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="https://via.placeholder.com/180x180?text=RK" alt="Raj Kumar">
+                        </div>
+                        <h3 class="team-name">Raj Kumar</h3>
+                        <div class="team-position">AI Engineer & Developer</div>
+                        <p class="team-bio">
+                            Raj is an AI engineer with expertise in large language models and their applications in scientific 
+                            domains. He leads the development of our expert system architectures, focusing on creating intuitive 
+                            interfaces that make AI tools accessible to scientists of all technical backgrounds.
+                        </p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triangle Pipe Divider -->
+    <div class="container">
+        <div class="trianglePipe">
+            <div class="pipeOpenLeft"></div>
+            <div class="pipe"></div>
+            <div class="pipeOpenRight"></div>
+        </div>
+    </div>
+
+    <!-- Section 3: Deep-dive articles - 2 rows of posts -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-header">Deep Dive Into AI4Science</h2>
+            <div class="section-divider"></div>
+            <div class="row">
+                <!-- Row 1 -->
+                <div class="col-lg-4 mb-4">
+                    <div class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">What is an Expert System</h3>
+                            <p class="article-text">
+                                Welcome to Aavishkar.ai Expert Systems: Accelerating Scientific Discovery through AI. Scientific 
+                                research today faces unprecedented complexity. Traditional research methods are becoming 
+                                increasingly insufficient...
+                            </p>
+                            <a href="#" class="article-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">Building LLM Agents for Data Science</h3>
+                            <p class="article-text">
+                                A Wolfram Summer School 2024 Project. For this edition of the 'AI for Science' Newsletter, I share 
+                                with you my experience developing LLM-powered agents that can assist with complex data science tasks...
+                            </p>
+                            <a href="#" class="article-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">Where is the Data?</h3>
+                            <p class="article-text">
+                                A lot of the current advancement in applied AI is a result of work done over the last decade to 
+                                organize and make accessible massive datasets. However, in scientific research, data remains fragmented...
+                            </p>
+                            <a href="#" class="article-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="col-lg-4 mb-4">
+                    <div class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">Harnessing LLMs as Science Assistants</h3>
+                            <p class="article-text">
+                                While various AI technologies could enhance discrete stages of the scientific research workflow, large language 
+                                models offer a unique opportunity to create a J.A.R.V.I.S for every researcher...
+                            </p>
+                            <a href="#" class="article-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">The Unsung Heroes of Academic Science – RCD Staff</h3>
+                            <p class="article-text">
+                                There is a small but diverse community of professionals that work at the intersection of academic research 
+                                and Campus IT. These Research Computing and Data professionals are crucial...
+                            </p>
+                            <a href="#" class="article-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="article-card">
+                        <div class="article-content">
+                            <h3 class="article-title">The Science Stack</h3>
+                            <p class="article-text">
+                                There have been a number of well-written pieces in recent days about emerging tech-stacks for AI 
+                                (especially Gen AI). This got me thinking about what a modern "Science Stack" might look like...
+                            </p>
+                            <a href="#" class="article-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Triangle Pipe Divider -->
+    <div class="container">
+        <div class="trianglePipe">
+            <div class="pipeOpenLeft"></div>
+            <div class="pipe"></div>
+            <div class="pipeOpenRight"></div>
+        </div>
+    </div>
+
+    <!-- Section 4: Get in touch with us (leveraging mock-contactus.html) -->
+    <section class="contact-form-section">
+        <div class="container">
+            <h2 class="section-header">Get In Touch</h2>
+            <div class="section-divider"></div>
+            <div class="contact-form-container">
+                <div class="row">
+                    <div class="col-lg-5 mb-4">
+                        <div class="contact-info">
+                            <h3 class="contact-info-title">Why Connect With Us?</h3>
+                            <p>
+                                At Aavishkar.ai, we're building AI-powered Expert Systems that accelerate scientific discovery. 
+                                Our community brings together scientists and technologists to create powerful research tools.
+                            </p>
+                            
+                            <h4>Looking to:</h4>
+                            <ul>
+                                <li>Learn more about our existing expert systems</li>
+                                <li>Collaborate on scientific research</li>
+                                <li>Suggest a new expert system idea</li>
+                                <li>Join our community of researchers</li>
+                            </ul>
+                            
+                            <p>
+                                We're open to exploring new ideas and collaborations that align with our mission 
+                                to put powerful research tools in every scientist's hands.
+                            </p>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-info-text">
+                                    <strong>Email:</strong>
+                                    info@aavishkar.ai
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="contact-info-text">
+                                    <strong>Website:</strong>
+                                    www.aavishkar.ai
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-7 mb-4">
+                        <form id="contactForm" action="#" method="POST">
+                            <div class="form-row">
+                                <label>What brings you here today?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="contact-purpose" value="general" checked> General Inquiry
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="contact-purpose" value="expert-system"> Expert System Idea
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-row">
+                                        <label for="name">Name *</label>
+                                        <input type="text" id="name" name="your-name" class="form-control" placeholder="Your name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-row">
+                                        <label for="email">Email *</label>
+                                        <input type="email" id="email" name="your-email" class="form-control" placeholder="Your email address" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="What's this about?" required>
+                            </div>
+
+                            <!-- Conditional fields for Expert System Idea -->
+                            <div id="expertSystemFields" class="expert-system-fields">
+                                <div class="form-row">
+                                    <label for="domain">Scientific Domain</label>
+                                    <input type="text" id="domain" name="scientific-domain" class="form-control" placeholder="e.g., Biology, Chemistry, Physics">
+                                </div>
+                                
+                                <div class="form-row">
+                                    <label for="problem">Problem to Solve</label>
+                                    <textarea id="problem" name="problem-description" class="form-control" placeholder="Describe the scientific problem your expert system would address"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="your-message" class="form-control" placeholder="Your message" required></textarea>
+                            </div>
+
+                            <div class="form-row text-end">
+                                <button type="submit" class="submit-btn">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #0b447b; color: white; padding: 50px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Aavishkar.ai</h3>
+                    <p>Accelerating Scientific Discovery with AI-Powered Expert Systems</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Notebooks</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Repository</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Stay Connected</h3>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; border-radius: 20px; border: none; margin-bottom: 10px;">
+                    <button type="submit" style="background: transparent; color: white; border: 1px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Sign Up</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p>© 2024 Aavishkar.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function() {
+                    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // Contact form conditional fields
+            const radioBtns = document.querySelectorAll('input[name="contact-purpose"]');
+            const expertSystemFields = document.getElementById('expertSystemFields');
+            
+            // Function to toggle expert system fields
+            function toggleExpertFields() {
+                const selectedValue = document.querySelector('input[name="contact-purpose"]:checked').value;
+                if (selectedValue === 'expert-system') {
+                    expertSystemFields.style.display = 'block';
+                } else {
+                    expertSystemFields.style.display = 'none';
+                }
+            }
+            
+            // Add event listeners to radio buttons
+            radioBtns.forEach(radio => {
+                radio.addEventListener('change', toggleExpertFields);
+            });
+            
+            // Initial toggle based on default selection
+            toggleExpertFields();
+            
+            // Form submission handler
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! In a live environment, this would be sent to the server.');
+            });
+        });
+    </script>
+</body>
+</html> 

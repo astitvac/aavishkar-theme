@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building LLM Agents for Data Science | Aavishkar.ai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-P9GI9TwhUxA+dRsClwsiJiMtBvR5CwQXPTNOqwQYBlhDVOjxl7cD6KPBGyqxeCvvYxlGIIE7XM9Hz97LUqNkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom Fonts */
+        @font-face {
+            font-family: 'gill-sans';
+            src: url('fonts/GillSansMedium.otf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinmedium';
+            src: url('fonts/DINAlternateMedium_0.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'dinalternate';
+            src: url('fonts/DINBlackAlternate.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'din1451';
+            src: url('fonts/DIN1451-36breit.ttf') format('truetype');
+        }
+
+        /* Root Variables */
+        :root {
+            --border-radius1: 40px;
+            --border-radius2: 20px;
+            --border-radius3: 10px;
+            --border-radius4: 5px;
+
+            --avishkar-header1: 20px;
+            --avishkar-header2: 16px;
+            --avishkar-header3: 12px;
+
+            --avishkar-margin1: 20px;
+            --avishkar-margin2: 16px;
+            --avishkar-margin3: 12px;
+            --avishkar-margin4: 8px;
+            --avishkar-margin5: 4px;
+            --avishkar-margin51: 2px;
+
+            --avishkar-padding1: 40px;
+            --avishkar-padding2: 30px;
+            --avishkar-padding3: 20px;
+            --avishkar-padding4: 10px;
+            --avishkar-padding5: 4px;
+            --avishkar-padding51: 2px;
+
+            --avishkar-borderColor: #4A67B1;
+            --avishkar-ink: #393B9B;
+            --avishkar-green: #1B487E;
+            --avishkar-purple: #9E23A3;
+            --avishkar-brinjal: #6C3CA8;
+            --avishkar-blue: #4A67B1;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'dinmedium', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0b447b;
+            line-height: 1.6;
+            background-color: #f5f8fa;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0b447b;
+        }
+
+        /* Header Navigation */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'dinalternate';
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--avishkar-purple);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: #0b447b;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu li a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--avishkar-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu li.current-menu-item a::after {
+            width: 100%;
+        }
+
+        /* Blog Post Specific Styles */
+        .blog-header {
+            background-color: white;
+            padding: 60px 0 40px;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .blog-title {
+            font-family: 'dinalternate';
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .blog-date {
+            display: inline-block;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .blog-author {
+            display: inline-block;
+            color: var(--avishkar-purple);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            background-color: white;
+            padding: 50px 0;
+        }
+
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .blog-section {
+            margin-bottom: 40px;
+        }
+
+        .blog-section-title {
+            font-family: 'dinalternate';
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 20px;
+        }
+
+        .blog-paragraph {
+            margin-bottom: 20px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .blog-image {
+            width: 100%;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid #ddd;
+        }
+
+        .blog-blockquote {
+            border-left: 4px solid var(--avishkar-purple);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .blog-code {
+            background-color: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #e1e4e8;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            background-color: #f0f4f8;
+            color: var(--avishkar-green);
+            border: 1px solid var(--avishkar-borderColor);
+            border-radius: 20px;
+            padding: 5px 12px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .blog-tag:hover {
+            background-color: #e6eaf0;
+        }
+
+        .blog-share {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        .blog-share-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--avishkar-green);
+        }
+
+        .blog-share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .blog-share-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f4f8;
+            color: var(--avishkar-green);
+            transition: all 0.3s ease;
+        }
+
+        .blog-share-button:hover {
+            background-color: var(--avishkar-green);
+            color: white;
+        }
+
+        .blog-related {
+            background-color: #f7f9fc;
+            padding: 60px 0;
+        }
+
+        .blog-related-title {
+            text-align: center;
+            font-family: 'dinalternate';
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 40px;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card-title {
+            font-family: 'dinalternate';
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--avishkar-green);
+            margin-bottom: 10px;
+        }
+
+        .blog-card-excerpt {
+            margin-bottom: 20px;
+            font-size: 15px;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .blog-card-link {
+            align-self: flex-start;
+            color: var(--avishkar-purple);
+            font-weight: 600;
+        }
+
+        /* Pipe Design Elements */
+        .trianglePipe {
+            display: flex;
+            position: relative;
+            margin: 40px 0;
+            justify-content: center;
+            gap: 3.4rem;
+        }
+
+        .pipe {
+            z-index: 1;
+            height: 100%;
+            width: 3.5rem;
+            border-left: 1px solid var(--avishkar-purple);
+            border-right: 1px solid var(--avishkar-purple);
+        }
+
+        .pipeOpenRight {
+            border: 1px solid var(--avishkar-purple);
+            border-radius: 0 0 46px 0;
+            height: 3rem;
+            flex-grow: 1;
+            clip-path: inset(8% 0% 0% 9.8%);
+        }
+
+        .pipeOpenLeft {
+            flex-grow: 1;
+            border: 1px solid var(--avishkar-purple);
+            border-radius: 0 0 0 46px;
+            height: 3rem;
+            clip-path: inset(8% 9.8% 0 0%);
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 1024px) {
+            .blog-title {
+                font-size: 36px;
+            }
+
+            .blog-section-title {
+                font-size: 26px;
+            }
+
+            .pipe {
+                width: 2.5rem;
+            }
+
+            .trianglePipe {
+                gap: 2.4rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 13.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 13.8% 0 0%);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .blog-title {
+                font-size: 32px;
+            }
+
+            .blog-section-title {
+                font-size: 24px;
+            }
+
+            .blog-paragraph {
+                font-size: 16px;
+            }
+
+            .pipe {
+                width: 2rem;
+            }
+
+            .trianglePipe {
+                gap: 1.9rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 17%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 17% 0 0%);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            .hamburger-line {
+                width: 25px;
+                height: 3px;
+                background-color: #0b447b;
+                margin: 5px 0;
+            }
+        }
+
+        @media screen and (max-width: 426px) {
+            .blog-header {
+                padding: 40px 0 30px;
+            }
+
+            .blog-title {
+                font-size: 28px;
+            }
+
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .blog-section-title {
+                font-size: 22px;
+            }
+
+            .blog-content {
+                padding: 30px 0;
+            }
+
+            .trianglePipe {
+                gap: 1.2rem;
+            }
+
+            .pipe {
+                width: 1.5rem;
+            }
+
+            .pipeOpenRight {
+                clip-path: inset(8% 0% 0% 30.8%);
+            }
+
+            .pipeOpenLeft {
+                clip-path: inset(8% 30.8% 0 0%);
+            }
+        }
+
+        .mobile-menu {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-menu a {
+            color: #0b447b;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        @media only screen and (min-width: 769px) {
+            .hamburger {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="logo">Aavishkar.ai</div>
+            <ul class="nav-menu">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">NOTEBOOKS</a></li>
+                <li><a href="#">REPOSITORY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">NOTEBOOKS</a></li>
+            <li><a href="#">REPOSITORY</a></li>
+            <li><a href="#">ABOUT US</a></li>
+        </ul>
+    </div>
+
+    <!-- Blog Post Header -->
+    <section class="blog-header">
+        <div class="container">
+            <div class="blog-container">
+                <h1 class="blog-title">Building LLM Agents for Data Science</h1>
+                <div class="blog-meta">
+                    <span class="blog-date">Date of Publishing: 22nd of January, 2025</span>
+                    <span class="blog-author">Author: meenu</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Post Content -->
+    <section class="blog-content">
+        <div class="blog-container">
+            <div class="blog-section">
+                <h2 class="blog-section-title">A Wolfram Summer School 2024 Project</h2>
+                <p class="blog-paragraph">For this edition of the 'AI for Science' Newsletter, I share with you my work done under the guidance of the Wolfram Summer School, exploring how the wolfram language can be used to build semi autonomous LLM agents for assisting Scientists in preparing their data for AI and ML applications.</p>
+                <p class="blog-paragraph">In the previous edition – "Where is the Data?", I talked about the various sources and modalities of data that will be needed to build sophisticated AI model in Science, but one common challenge that prevails across the research data ecosystem is the preparation of this data to make it readily computable for machine learning. In my project, I explored how the combination of LLMs with Wolfram Language, can be a powerful tool in getting across this data hurdle. Here is the abstract for my project:</p>
+                <div class="blog-blockquote">
+                    This project explores the integration of Large Language Models (LLMs) with the Wolfram Language stack to build semi-autonomous agents capable of performing diverse data science tasks. Leveraging Wolfram Language's well-curated and computable knowledge base and functional development approach, this project demonstrates the use of LLMFunction and LLMTool as potential building blocks of agent like architectures.
+                </div>
+                <p class="blog-paragraph">You can find the full project note-book (in a 'computational essay' form) over here: <a href="https://community.wolfram.com/groups/-/m/t/3209668" target="_blank">https://community.wolfram.com/groups/-/m/t/3209668</a></p>
+            </div>
+
+            <div class="blog-section">
+                <h2 class="blog-section-title">Key Components of LLM Agents</h2>
+                <p class="blog-paragraph">When building LLM agents for data science tasks, several key components need to work together:</p>
+                <ul>
+                    <li>Natural language understanding for interpreting data science requests</li>
+                    <li>Task decomposition to break complex problems into manageable steps</li>
+                    <li>Domain-specific tools for data manipulation and analysis</li>
+                    <li>Feedback mechanisms to refine results based on intermediate outputs</li>
+                </ul>
+                <div class="blog-code">
+# Example Wolfram Language code for a simple LLM data analysis agent
+agent = LLMFunction[
+  "You are a data science assistant that helps analyze datasets.",
+  Function[request,
+    Module[{plan, code, result},
+      plan = GeneratePlan[request];
+      code = TranslateToProgrammaticCode[plan];
+      result = EvaluateCode[code];
+      FormatResults[result]
+    ]
+  ]
+]
+                </div>
+                <p class="blog-paragraph">This approach allows for flexible, natural language-driven data analysis that can adapt to different research contexts and user skill levels.</p>
+            </div>
+
+            <div class="blog-section">
+                <h2 class="blog-section-title">Future Explorations</h2>
+                <p class="blog-paragraph">Wolfram language provides a computational approach to build complex agent-like tools that could lift the data science burden off the scientists and allow them to easily prepare their data for downstream applications of AI and ML. I intend to explore the application of these and other tools to a broad range of scientific data and application areas and as always will share my findings and learnings in the coming editions.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://via.placeholder.com/400x300?text=LLM+Agents" alt="LLM Agents Diagram" class="blog-image">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://via.placeholder.com/400x300?text=Data+Science+Workflow" alt="Data Science Workflow" class="blog-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-section">
+                <h2 class="blog-section-title">About the Wolfram Summer School</h2>
+                <p class="blog-paragraph">Attending the Wolfram Summer School was an exceptional experience, filled with invaluable learning and mentorship. The school's rigorous and innovative environment pushed me to expand my understanding of AI and data science, particularly through the practical application of Wolfram Language.</p>
+                <p class="blog-paragraph">The guidance from the expert instructors and collaboration with fellow researchers were instrumental in advancing my project. I highly recommend this program to anyone eager to delve into the forefront of computational research. Moreover, I encourage everyone to explore the diverse and groundbreaking projects completed by my peers, which showcase the incredible potential of Wolfram technologies in various scientific domains.</p>
+            </div>
+
+            <div class="blog-share">
+                <div class="blog-share-title">Share this article</div>
+                <div class="blog-share-buttons">
+                    <a href="#" class="blog-share-button"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="blog-share-button"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="blog-share-button"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="blog-share-button"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="trianglePipe">
+                <div class="pipeOpenLeft"></div>
+                <div class="pipe"></div>
+                <div class="pipeOpenRight"></div>
+            </div>
+
+            <div class="blog-section">
+                <h2 class="blog-section-title">Related Topics</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="blog-tag">AI for Science</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="blog-tag">Data Science</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="blog-tag">LLM Agents</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="blog-tag">Wolfram Language</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="blog-tag">Machine Learning</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="#" class="blog-tag">Research Computing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="blog-related">
+        <div class="container">
+            <h2 class="blog-related-title">Related Articles</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="blog-card">
+                        <img src="https://via.placeholder.com/400x200?text=Where+is+the+Data" alt="Where is the Data" class="blog-card-image">
+                        <div class="blog-card-content">
+                            <h3 class="blog-card-title">Where is the Data?</h3>
+                            <p class="blog-card-excerpt">A lot of the current advancement in applied AI is a result of work done over the last decade to ensure data availability and accessibility...</p>
+                            <a href="#" class="blog-card-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="blog-card">
+                        <img src="https://via.placeholder.com/400x200?text=Harnessing+LLMs" alt="Harnessing LLMs" class="blog-card-image">
+                        <div class="blog-card-content">
+                            <h3 class="blog-card-title">Harnessing LLMs as Science Assistants</h3>
+                            <p class="blog-card-excerpt">While various AI technologies could enhance discrete stages of the scientific research workflow, large language models...</p>
+                            <a href="#" class="blog-card-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="blog-card">
+                        <img src="https://via.placeholder.com/400x200?text=The+Science+Stack" alt="The Science Stack" class="blog-card-image">
+                        <div class="blog-card-content">
+                            <h3 class="blog-card-title">The Science Stack</h3>
+                            <p class="blog-card-excerpt">There have been a number of well written pieces in recent days about emerging tech-stacks for AI (specially Gen AI)...</p>
+                            <a href="#" class="blog-card-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #0b447b; color: white; padding: 50px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Aavishkar.ai</h3>
+                    <p>Accelerating Scientific Discovery with AI-Powered Expert Systems</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="color: white;"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Home</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Notebooks</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">Repository</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none;">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>Stay Connected</h3>
+                    <p>Subscribe to our newsletter for updates</p>
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 10px; border-radius: 20px; border: none; margin-bottom: 10px;">
+                    <button type="submit" style="background: transparent; color: white; border: 1px solid white; padding: 8px 20px; border-radius: 20px; cursor: pointer;">Sign Up</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p>© 2024 Aavishkar.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener('click', function() {
+                    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // Share buttons simulation
+            const shareButtons = document.querySelectorAll('.blog-share-button');
+            shareButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('This would share the article on social media in a real WordPress site.');
+                });
+            });
+            
+            // Related article links simulation
+            const blogCardLinks = document.querySelectorAll('.blog-card-link');
+            blogCardLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('This would navigate to the related article in a real WordPress site.');
+                });
+            });
+            
+            // Tag links simulation
+            const blogTags = document.querySelectorAll('.blog-tag');
+            blogTags.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('This would show all articles with this tag in a real WordPress site.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

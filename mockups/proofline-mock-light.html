@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proofline | Git for Human + AI Insights (Light Mode)</title>
+
+    <!-- Base Aavishkar design system (typography, buttons, containers, header primitives) -->
+    <link rel="stylesheet" href="style-v2.0-header-enhanced.css" />
+
+    <!-- Proofline page-specific overrides -->
+    <link rel="stylesheet" href="proofline-light.css" />
+  </head>
+
+  <body class="proofline-page-light">
+    <!-- Fixed header -->
+    <header class="aav-site-header">
+      <div class="aav-bar aav-container">
+        <div class="pl-brand">
+          <a class="aav-logo" href="#" aria-label="Proofline home">
+            <img
+              class="pl-logo-img"
+              src="proofline-logo-only-cropped.png"
+              alt="Proofline"
+              loading="eager"
+            />
+          </a>
+        </div>
+
+        <nav class="pl-nav" aria-label="Proofline navigation">
+          <a class="pl-nav-link" href="#demos">Demos</a>
+          <a class="pl-nav-link" href="#lighthouse">Lighthouse Labs</a>
+          <a class="pl-nav-link" href="#about">About</a>
+          <a class="aav-btn aav-btn-primary pl-nav-cta" href="#lighthouse">Apply</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="pl-hero" id="hero">
+        <div class="aav-container pl-hero-grid">
+          <div class="pl-hero-copy">
+            <div class="pl-eyebrow">Founding Labs · Invite-only</div>
+            <h1 class="pl-h1">The scientific engine for <strong>knowledge creation</strong>.</h1>
+            <p class="pl-subtitle">
+              Capture hypotheses, evidence, decisions, and AI actions—so knowledge compounds and every claim stays traceable.
+            </p>
+
+            <div class="pl-hero-ctas" role="group" aria-label="Primary actions">
+              <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Lighthouse Lab</a>
+              <a class="aav-btn aav-btn-ghost" href="#demos">See it work →</a>
+            </div>
+
+            <p class="pl-hero-note">
+              AI forgets everything between sessions. Proofline is the provenance engine behind <strong>LabOS</strong>—so
+              context persists and compounds. Free for Founding Labs.
+            </p>
+          </div>
+
+          <div class="pl-hero-visual" aria-label="Product preview (placeholder)">
+            <div class="pl-screenshot" role="img" aria-label="Product screenshot placeholder">
+              <div class="pl-screenshot-topbar">LabOS — Proofline Engine</div>
+              <div class="pl-screenshot-body">
+                <div class="pl-screenshot-row">
+                  <span class="pl-pill">Connect</span>
+                  <span class="pl-pill">Proofline</span>
+                  <span class="pl-pill">Discover</span>
+                </div>
+                <div class="pl-screenshot-row">
+                  <span class="pl-line"></span>
+                  <span class="pl-line"></span>
+                  <span class="pl-line"></span>
+                </div>
+                <div class="pl-screenshot-row">
+                  <span class="pl-pill pl-pill-alt">Branch</span>
+                  <span class="pl-line"></span>
+                  <span class="pl-line"></span>
+                </div>
+              </div>
+
+              <div class="pl-callout pl-callout-evidence">Provenance</div>
+              <div class="pl-callout pl-callout-decision">Confidence</div>
+              <div class="pl-callout pl-callout-track">Decision trail</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LIGHTHOUSE LABS SIGN-UP -->
+      <section class="pl-lighthouse" id="lighthouse" aria-label="Lighthouse Lab program">
+        <div class="aav-container-large pl-lighthouse-grid">
+          <div class="pl-lighthouse-copy">
+            <div class="pl-eyebrow">Lighthouse Labs</div>
+            <h2 class="pl-h2">Become a Founding Lab</h2>
+            <p class="pl-copy">
+              Map one real workflow with us. Free access in exchange for feedback—built for compliance-heavy,
+              reproducibility-sensitive work.
+            </p>
+
+            <div class="pl-bullets">
+              <div class="pl-bullet-block">
+                <h3 class="pl-bullet-title">What you get</h3>
+                <ul>
+                  <li>LabOS + Proofline access</li>
+                  <li>Hands-on onboarding</li>
+                  <li>Full audit trail + provenance</li>
+                  <li>Roadmap influence</li>
+                </ul>
+              </div>
+
+              <div class="pl-bullet-block">
+                <h3 class="pl-bullet-title">What we ask</h3>
+                <ul>
+                  <li>2–4 feedback sessions over 6 weeks</li>
+                  <li>One representative project</li>
+                  <li>Optional: shareable case study</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="pl-microcopy">Reply in 48h. Short call, then onboarding.</p>
+          </div>
+
+          <div class="pl-lighthouse-form-card" aria-label="Apply form">
+            <form class="pl-apply-form" action="#applied" method="get">
+              <div class="pl-form-grid">
+                <div class="pl-field">
+                  <label for="pl-name">Name</label>
+                  <input id="pl-name" name="name" type="text" placeholder="Your full name" required />
+                </div>
+
+                <div class="pl-field">
+                  <label for="pl-email">Email</label>
+                  <input id="pl-email" name="email" type="email" placeholder="you@org.com" required />
+                </div>
+
+                <div class="pl-field">
+                  <label for="pl-org">Org</label>
+                  <input id="pl-org" name="org" type="text" placeholder="Lab / company / institution" required />
+                </div>
+
+                <div class="pl-field">
+                  <label for="pl-role">Role</label>
+                  <select id="pl-role" name="role" required>
+                    <option value="" selected disabled>Select…</option>
+                    <option>PI / Group Lead</option>
+                    <option>Postdoc / Senior Researcher</option>
+                    <option>Graduate Student / RA</option>
+                    <option>R&amp;D / Product</option>
+                    <option>Founder / Exec</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="pl-field">
+                  <label for="pl-size">Team size</label>
+                  <select id="pl-size" name="team_size" required>
+                    <option value="" selected disabled>Select…</option>
+                    <option>1–3</option>
+                    <option>4–10</option>
+                    <option>11–30</option>
+                  </select>
+                </div>
+
+                <div class="pl-field">
+                  <label for="pl-domain">Domain</label>
+                  <select id="pl-domain" name="domain" required>
+                    <option value="" selected disabled>Select…</option>
+                    <option>Academic lab</option>
+                    <option>Deep tech</option>
+                    <option>Enterprise R&amp;D</option>
+                    <option>Research startup</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="pl-field pl-field-wide">
+                  <label for="pl-decisions">What decisions do you keep redoing?</label>
+                  <textarea
+                    id="pl-decisions"
+                    name="decisions"
+                    rows="3"
+                    placeholder="e.g., experiment direction, go/no-go bets, grant claims… and the rework you want to eliminate"
+                  ></textarea>
+                </div>
+
+                <fieldset class="pl-field pl-field-wide pl-fieldset">
+                  <legend>Data sensitivity</legend>
+                  <label><input type="radio" name="data_sensitivity" value="public" required /> Public</label>
+                  <label><input type="radio" name="data_sensitivity" value="internal" required /> Internal</label>
+                  <label><input type="radio" name="data_sensitivity" value="regulated" required /> Regulated</label>
+                </fieldset>
+              </div>
+
+              <button class="aav-btn aav-btn-primary pl-apply-btn" type="submit">Apply (2 minutes)</button>
+
+              <p class="pl-form-after">
+                48h reply. Optional: <a href="#" class="pl-inline-link">book a call</a>.
+              </p>
+            </form>
+
+            <div id="applied" class="pl-apply-confirm" role="status" aria-live="polite">
+              <strong>Application received.</strong> We’ll reply in 48 hours. Optional:
+              <a href="#" class="pl-inline-link">book a call</a>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEMOS -->
+      <section class="pl-demos" id="demos" aria-label="Proofline demos">
+        <div class="aav-container-large">
+          <div class="pl-section-header">
+            <div class="pl-eyebrow">Demos</div>
+                <h2 class="pl-h2">Three moves</h2>
+                <p class="pl-copy pl-center">From scattered artifacts to living project state.</p>
+          </div>
+
+          <div class="pl-demo-tiles">
+            <article class="pl-demo-tile">
+              <div class="pl-demo-kicker">Demo 01</div>
+              <h3 class="pl-demo-title">Connect</h3>
+              <p class="pl-demo-one">Link papers, protocols, and notes into persistent team memory.</p>
+              <div class="pl-demo-media" role="img" aria-label="Demo 01 placeholder (add 30–45s looping video/GIF)">
+                Drop demo GIF/MP4 here (30–45s)
+              </div>
+              <div class="pl-demo-captions" aria-label="On-screen captions">
+                <span class="pl-caption-chip">Linked</span>
+                <span class="pl-caption-chip">Persistent</span>
+                <span class="pl-caption-chip">No re-prompting</span>
+              </div>
+            </article>
+
+            <article class="pl-demo-tile">
+              <div class="pl-demo-kicker">Demo 02</div>
+              <h3 class="pl-demo-title">Commit</h3>
+              <p class="pl-demo-one">Record evidence and confidence. Branch to explore.</p>
+              <div class="pl-demo-media" role="img" aria-label="Demo 02 placeholder (add 30–45s looping video/GIF)">
+                Drop demo GIF/MP4 here (30–45s)
+              </div>
+              <div class="pl-demo-captions" aria-label="On-screen captions">
+                <span class="pl-caption-chip">Provenance</span>
+                <span class="pl-caption-chip">Confidence</span>
+                <span class="pl-caption-chip">Branching</span>
+              </div>
+            </article>
+
+            <article class="pl-demo-tile">
+              <div class="pl-demo-kicker">Demo 03</div>
+              <h3 class="pl-demo-title">Discover</h3>
+              <p class="pl-demo-one">Search past work to accelerate new hypotheses.</p>
+              <div class="pl-demo-media" role="img" aria-label="Demo 03 placeholder (add 30–45s looping video/GIF)">
+                Drop demo GIF/MP4 here (30–45s)
+              </div>
+              <div class="pl-demo-captions" aria-label="On-screen captions">
+                <span class="pl-caption-chip">Searchable</span>
+                <span class="pl-caption-chip">Evidenced</span>
+                <span class="pl-caption-chip">Reproducible</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="pl-demo-cta-row">
+            <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Lighthouse Lab</a>
+            <a class="aav-btn aav-btn-ghost" href="#hero">Back to top</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="pl-about-section" id="about">
+        <div class="aav-container-small">
+          <div class="pl-section-header">
+            <div class="pl-eyebrow">About</div>
+            <h2 class="pl-h2">Built by Aavishkar.ai</h2>
+          </div>
+          <p class="pl-copy">
+            Aavishkar.ai builds LabOS and Proofline—provenance and versioning for knowledge work.
+            <a class="pl-inline-link" href="https://aavishkar.ai/">Learn more →</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+  </body>
+</html>
+
+
