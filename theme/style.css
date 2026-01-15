@@ -3142,10 +3142,16 @@ body.page-id-2952 .aav-bar {
 /* Proofline header row: allow full-width so the right CTA never clips */
 /* NOTE: Do NOT force max-width:100% here — it can push the CTA off-canvas on 1280px screens. */
 
+/* Proofline header height - accommodate larger logo */
+body.page-proofline .aav-site-header .aav-bar,
+body.page-id-2952 .aav-site-header .aav-bar {
+  height: 140px !important;
+}
+
 body.page-proofline .aav-logo img,
 body.page-id-2952 .aav-logo img {
-  height: 80px !important;
-  max-height: 80px !important;
+  height: 120px !important;
+  max-height: 120px !important;
   width: auto !important;
 }
 
@@ -3905,8 +3911,8 @@ body.page-id-2952 .pl-header.aav-site-header .et_pb_column:nth-child(2),
 .pl-header .aav-logo img,
 .pl-header.aav-site-header img,
 .et_pb_section.pl-header img {
-  height: 80px !important;
-  max-height: 80px !important;
+  height: 120px !important;
+  max-height: 120px !important;
   width: auto !important;
   object-fit: contain !important;
 }
