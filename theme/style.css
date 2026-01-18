@@ -3124,13 +3124,14 @@ body.page-id-2952::before {
 body.page-proofline .aav-site-header,
 body.page-id-2952 .aav-site-header,
 .pl-header.aav-site-header {
-  background: rgba(255,255,255,0.90) !important;
+  background: rgba(255,255,255,0.95) !important;
   border-bottom: 1px solid rgba(158, 35, 163, 0.10) !important;
   backdrop-filter: saturate(140%) blur(8px) !important;
   -webkit-backdrop-filter: saturate(140%) blur(8px) !important;
   box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06) !important;
-  min-height: 68px !important;
-  height: 68px !important;
+  min-height: 80px !important;
+  height: auto !important; /* Allow header to grow to contain content */
+  padding: 12px 0 !important; /* Add vertical padding */
 }
 
 body.page-proofline .aav-bar,
@@ -3142,16 +3143,18 @@ body.page-id-2952 .aav-bar {
 /* Proofline header row: allow full-width so the right CTA never clips */
 /* NOTE: Do NOT force max-width:100% here — it can push the CTA off-canvas on 1280px screens. */
 
-/* Proofline header height - accommodate larger logo */
+/* Proofline header height - balanced for logo + nav */
 body.page-proofline .aav-site-header .aav-bar,
 body.page-id-2952 .aav-site-header .aav-bar {
-  height: 140px !important;
+  height: auto !important;
+  min-height: 56px !important;
+  padding: 8px 24px !important;
 }
 
 body.page-proofline .aav-logo img,
 body.page-id-2952 .aav-logo img {
-  height: 120px !important;
-  max-height: 120px !important;
+  height: 70px !important;
+  max-height: 70px !important;
   width: auto !important;
 }
 
@@ -3774,14 +3777,15 @@ body.page-id-2952 #about {
 @media (max-width: 520px) {
   body.page-proofline .aav-bar,
   body.page-id-2952 .aav-bar {
-    height: 60px !important;
-    padding: 0 14px !important;
+    height: auto !important;
+    min-height: 56px !important;
+    padding: 8px 14px !important;
   }
 
   body.page-proofline .aav-logo img,
   body.page-id-2952 .aav-logo img {
-    height: 48px !important;
-    max-height: 48px !important;
+    height: 50px !important;
+    max-height: 50px !important;
   }
 
   body.page-proofline .pl-hero,
@@ -3818,9 +3822,10 @@ body.page-id-2952 #about {
 
 #et-fb-app body.page-proofline .aav-site-header,
 .et-fb-root body.page-proofline .aav-site-header {
-  background: rgba(255,255,255,0.90) !important;
-  min-height: 68px !important;
-  height: 68px !important;
+  background: rgba(255,255,255,0.95) !important;
+  min-height: 80px !important;
+  height: auto !important;
+  padding: 12px 0 !important;
 }
 
 #et-fb-app body.page-proofline .pl-h1,
@@ -3905,14 +3910,14 @@ body.page-id-2952 .pl-header.aav-site-header .et_pb_column:nth-child(2),
   min-width: 0 !important;
 }
 
-/* Force larger logo display - compensate for PNG transparent padding */
+/* Proofline logo sizing - compensates for PNG padding */
 /* Scoped to .pl-header section class */
 .pl-header .et_pb_image img,
 .pl-header .aav-logo img,
 .pl-header.aav-site-header img,
 .et_pb_section.pl-header img {
-  height: 120px !important;
-  max-height: 120px !important;
+  height: 70px !important;
+  max-height: 70px !important;
   width: auto !important;
   object-fit: contain !important;
 }
