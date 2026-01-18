@@ -4084,3 +4084,360 @@ body.page-id-2952 .pl-demo-media {
     min-height: 52px;
   }
 }
+
+/* ============================================================
+   PROOFLINE BROCHURE-ALIGNED STYLES (January 2026)
+   Demo tile mockup visuals from LabOS brochure
+   ============================================================ */
+
+/* Override the default demo-media placeholder */
+body.page-proofline .pl-demo-media.has-mockup,
+body.page-id-2952 .pl-demo-media.has-mockup {
+  border: none;
+  background: rgba(255,255,255,0.50);
+  height: auto;
+  min-height: 160px;
+  padding: 14px;
+  display: block;
+  font-size: 14px;
+  color: inherit;
+}
+
+body.page-proofline .pl-demo-media.has-mockup::after,
+body.page-id-2952 .pl-demo-media.has-mockup::after {
+  display: none;
+}
+
+/* Document upload mockup (Demo 01) */
+body.page-proofline .pl-mockup-upload,
+body.page-id-2952 .pl-mockup-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body.page-proofline .pl-mockup-file,
+body.page-id-2952 .pl-mockup-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+}
+
+body.page-proofline .pl-mockup-file svg,
+body.page-id-2952 .pl-mockup-file svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+body.page-proofline .pl-mockup-file.pdf svg,
+body.page-id-2952 .pl-mockup-file.pdf svg {
+  stroke: #dc2626;
+}
+
+body.page-proofline .pl-mockup-file.docx svg,
+body.page-id-2952 .pl-mockup-file.docx svg {
+  stroke: #2563eb;
+}
+
+body.page-proofline .pl-mockup-filename,
+body.page-id-2952 .pl-mockup-filename {
+  font-size: 12px;
+  font-weight: 500;
+  color: #0f172a;
+  flex: 1;
+}
+
+body.page-proofline .pl-mockup-status,
+body.page-id-2952 .pl-mockup-status {
+  font-size: 10px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+body.page-proofline .pl-mockup-pipeline,
+body.page-id-2952 .pl-mockup-pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px dashed rgba(59, 130, 246, 0.25);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(15, 23, 42, 0.55);
+}
+
+body.page-proofline .pl-mockup-pipeline .arrow,
+body.page-id-2952 .pl-mockup-pipeline .arrow {
+  color: #3b82f6;
+}
+
+body.page-proofline .pl-mockup-pipeline .result,
+body.page-id-2952 .pl-mockup-pipeline .result {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Knowledge Card mockup (Demo 02) */
+body.page-proofline .pl-mockup-kc,
+body.page-id-2952 .pl-mockup-kc {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body.page-proofline .pl-mockup-kc-card,
+body.page-id-2952 .pl-mockup-kc-card {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  overflow: hidden;
+}
+
+body.page-proofline .pl-mockup-kc-header,
+body.page-id-2952 .pl-mockup-kc-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(139, 92, 246, 0.03));
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+body.page-proofline .pl-mockup-stage-badge,
+body.page-id-2952 .pl-mockup-stage-badge {
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+body.page-proofline .pl-mockup-stage-badge.lit,
+body.page-id-2952 .pl-mockup-stage-badge.lit {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+}
+
+body.page-proofline .pl-mockup-stage-badge.hyp,
+body.page-id-2952 .pl-mockup-stage-badge.hyp {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+body.page-proofline .pl-mockup-stage-badge.data,
+body.page-id-2952 .pl-mockup-stage-badge.data {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+body.page-proofline .pl-mockup-kc-title,
+body.page-id-2952 .pl-mockup-kc-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+  flex: 1;
+}
+
+body.page-proofline .pl-mockup-kc-body,
+body.page-id-2952 .pl-mockup-kc-body {
+  padding: 10px 12px;
+  font-size: 11px;
+  color: rgba(15, 23, 42, 0.68);
+  line-height: 1.5;
+}
+
+body.page-proofline .pl-mockup-kc-body strong,
+body.page-id-2952 .pl-mockup-kc-body strong {
+  color: rgba(15, 23, 42, 0.85);
+  font-weight: 600;
+}
+
+body.page-proofline .pl-mockup-source-tag,
+body.page-id-2952 .pl-mockup-source-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  background: rgba(59, 130, 246, 0.10);
+  border-radius: 4px;
+  font-size: 9px;
+  color: #3b82f6;
+}
+
+body.page-proofline .pl-mockup-kc-flow,
+body.page-id-2952 .pl-mockup-kc-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px;
+  font-size: 11px;
+}
+
+body.page-proofline .pl-mockup-kc-flow .draft,
+body.page-id-2952 .pl-mockup-kc-flow .draft {
+  color: rgba(15, 23, 42, 0.50);
+}
+
+body.page-proofline .pl-mockup-kc-flow .save-btn,
+body.page-id-2952 .pl-mockup-kc-flow .save-btn {
+  padding: 5px 12px;
+  background: #8b5cf6;
+  color: #ffffff;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+body.page-proofline .pl-mockup-kc-flow .saved,
+body.page-id-2952 .pl-mockup-kc-flow .saved {
+  color: #10b981;
+  font-weight: 500;
+}
+
+/* Proofline DAG mockup (Demo 03) */
+body.page-proofline .pl-mockup-dag,
+body.page-id-2952 .pl-mockup-dag {
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+  background-image: radial-gradient(rgba(139, 92, 246, 0.12) 1px, transparent 1px);
+  background-size: 10px 10px;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 140px;
+}
+
+body.page-proofline .pl-mockup-dag-line,
+body.page-id-2952 .pl-mockup-dag-line {
+  position: absolute;
+  left: 24px;
+  top: 16px;
+  bottom: 16px;
+  width: 2px;
+  background: rgba(16, 185, 129, 0.35);
+  border-radius: 1px;
+}
+
+body.page-proofline .pl-mockup-dag-commits,
+body.page-id-2952 .pl-mockup-dag-commits {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+body.page-proofline .pl-mockup-dag-commit,
+body.page-id-2952 .pl-mockup-dag-commit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body.page-proofline .pl-mockup-dag-dot,
+body.page-id-2952 .pl-mockup-dag-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+body.page-proofline .pl-mockup-dag-dot.seed,
+body.page-id-2952 .pl-mockup-dag-dot.seed {
+  background: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25);
+}
+
+body.page-proofline .pl-mockup-dag-node,
+body.page-id-2952 .pl-mockup-dag-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+body.page-proofline .pl-mockup-dag-node .badge,
+body.page-id-2952 .pl-mockup-dag-node .badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+body.page-proofline .pl-mockup-dag-node .badge.seed,
+body.page-id-2952 .pl-mockup-dag-node .badge.seed {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+}
+
+body.page-proofline .pl-mockup-dag-node .badge.lit,
+body.page-id-2952 .pl-mockup-dag-node .badge.lit {
+  background: rgba(139, 92, 246, 0.12);
+  color: #8b5cf6;
+}
+
+body.page-proofline .pl-mockup-dag-node .badge.hyp,
+body.page-id-2952 .pl-mockup-dag-node .badge.hyp {
+  background: rgba(139, 92, 246, 0.12);
+  color: #8b5cf6;
+}
+
+body.page-proofline .pl-mockup-dag-node .badge.data,
+body.page-id-2952 .pl-mockup-dag-node .badge.data {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+body.page-proofline .pl-mockup-dag-node .title,
+body.page-id-2952 .pl-mockup-dag-node .title {
+  font-size: 10px;
+  font-weight: 500;
+  color: #0f172a;
+  flex: 1;
+}
+
+body.page-proofline .pl-mockup-dag-node .check,
+body.page-id-2952 .pl-mockup-dag-node .check {
+  font-size: 10px;
+  color: #10b981;
+}
+
+body.page-proofline .pl-mockup-dag-node .ai-tag,
+body.page-id-2952 .pl-mockup-dag-node .ai-tag {
+  padding: 2px 5px;
+  background: rgba(16, 185, 129, 0.10);
+  border-radius: 3px;
+  font-size: 8px;
+  color: #10b981;
+  font-weight: 500;
+}
+
+body.page-proofline .pl-mockup-dag-derives,
+body.page-id-2952 .pl-mockup-dag-derives {
+  font-size: 9px;
+  color: rgba(15, 23, 42, 0.50);
+  margin-top: 3px;
+  padding-left: 20px;
+}
+
+body.page-proofline .pl-mockup-dag-derives span,
+body.page-id-2952 .pl-mockup-dag-derives span {
+  color: #3b82f6;
+}
+

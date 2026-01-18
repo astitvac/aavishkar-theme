@@ -11,35 +11,125 @@
   </div>
 
   <div class="pl-demo-tiles">
+    <!-- Demo 01: Connect - Document Upload Visual -->
     <article class="pl-demo-tile">
       <div class="pl-demo-kicker">Demo 01</div>
       <h3 class="pl-demo-title">Connect</h3>
-      <p class="pl-demo-one">Link papers, protocols, and notes into persistent team memory.</p>
-      <div class="pl-demo-media" role="img" aria-label="Demo video coming soon"></div>
+      <p class="pl-demo-one">Link papers, protocols, and notes into persistent team memory. Upload PDFs, DOCX, or connect Google Drive—LabOS makes everything searchable.</p>
+      <div class="pl-demo-media has-mockup" role="img" aria-label="Document upload mockup">
+        <div class="pl-mockup-upload">
+          <!-- File 1: PDF -->
+          <div class="pl-mockup-file pdf">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span class="pl-mockup-filename">transformer_paper.pdf</span>
+            <span class="pl-mockup-status">&#10003; Processed</span>
+          </div>
+          <!-- File 2: DOCX -->
+          <div class="pl-mockup-file docx">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+            <span class="pl-mockup-filename">research_notes.docx</span>
+            <span class="pl-mockup-status">&#10003; Processed</span>
+          </div>
+          <!-- Pipeline -->
+          <div class="pl-mockup-pipeline">
+            <span>Extract</span>
+            <span class="arrow">&#8594;</span>
+            <span>Chunk</span>
+            <span class="arrow">&#8594;</span>
+            <span>Embed</span>
+            <span class="arrow">&#8594;</span>
+            <span class="result">Searchable!</span>
+          </div>
+        </div>
+      </div>
       <div class="pl-demo-captions" aria-label="On-screen captions">
-        <span class="pl-caption-chip">Linked</span>
-        <span class="pl-caption-chip">Persistent</span>
-        <span class="pl-caption-chip">No re-prompting</span>
+        <span class="pl-caption-chip">PDF</span>
+        <span class="pl-caption-chip">DOCX</span>
+        <span class="pl-caption-chip">Drive</span>
       </div>
     </article>
 
+    <!-- Demo 02: Commit - Knowledge Card Visual -->
     <article class="pl-demo-tile">
       <div class="pl-demo-kicker">Demo 02</div>
       <h3 class="pl-demo-title">Commit</h3>
-      <p class="pl-demo-one">Record evidence and confidence. Branch to explore.</p>
-      <div class="pl-demo-media" role="img" aria-label="Demo video coming soon"></div>
+      <p class="pl-demo-one">Record evidence and confidence as Knowledge Cards. Each card captures findings, sources, and stage—then saves to your timeline.</p>
+      <div class="pl-demo-media has-mockup" role="img" aria-label="Knowledge Card mockup">
+        <div class="pl-mockup-kc">
+          <!-- KC Card -->
+          <div class="pl-mockup-kc-card">
+            <div class="pl-mockup-kc-header">
+              <span class="pl-mockup-stage-badge lit">LIT</span>
+              <span class="pl-mockup-kc-title">Attention mechanisms enable parallelization</span>
+            </div>
+            <div class="pl-mockup-kc-body">
+              <div><strong>Findings:</strong> Self-attention allows the model to attend to all positions in a single step, unlike RNNs.</div>
+              <div style="margin-top: 6px;"><strong>Sources:</strong> <span class="pl-mockup-source-tag">[transformer_paper.pdf, p.3]</span></div>
+            </div>
+          </div>
+          <!-- Save flow -->
+          <div class="pl-mockup-kc-flow">
+            <span class="draft">Draft</span>
+            <span class="save-btn">&#8595; Save</span>
+            <span class="saved">&#10003; On Timeline</span>
+          </div>
+        </div>
+      </div>
       <div class="pl-demo-captions" aria-label="On-screen captions">
-        <span class="pl-caption-chip">Provenance</span>
+        <span class="pl-caption-chip">Evidence</span>
         <span class="pl-caption-chip">Confidence</span>
-        <span class="pl-caption-chip">Branching</span>
+        <span class="pl-caption-chip">Traceable</span>
       </div>
     </article>
 
+    <!-- Demo 03: Discover - Proofline DAG Visual -->
     <article class="pl-demo-tile">
       <div class="pl-demo-kicker">Demo 03</div>
       <h3 class="pl-demo-title">Discover</h3>
-      <p class="pl-demo-one">Search past work to accelerate new hypotheses.</p>
-      <div class="pl-demo-media" role="img" aria-label="Demo video coming soon"></div>
+      <p class="pl-demo-one">Search past work to accelerate new hypotheses. AI builds on your saved cards—so knowledge compounds.</p>
+      <div class="pl-demo-media has-mockup" role="img" aria-label="Proofline DAG mockup">
+        <div class="pl-mockup-dag">
+          <div class="pl-mockup-dag-line"></div>
+          <div class="pl-mockup-dag-commits">
+            <!-- Commit 1: Seed -->
+            <div class="pl-mockup-dag-commit">
+              <div class="pl-mockup-dag-dot seed"></div>
+              <div class="pl-mockup-dag-node">
+                <span class="badge seed">SEED</span>
+                <span class="title">Research goal</span>
+              </div>
+            </div>
+            <!-- Commit 2: Literature -->
+            <div class="pl-mockup-dag-commit">
+              <div class="pl-mockup-dag-dot"></div>
+              <div class="pl-mockup-dag-node">
+                <span class="badge lit">LIT</span>
+                <span class="title">Attention mechanisms</span>
+                <span class="check">&#10003;</span>
+              </div>
+            </div>
+            <!-- Commit 3: Hypothesis with AI -->
+            <div class="pl-mockup-dag-commit">
+              <div class="pl-mockup-dag-dot"></div>
+              <div class="pl-mockup-dag-node">
+                <span class="badge hyp">HYP</span>
+                <span class="title">Parallelization gains</span>
+                <span class="ai-tag">AI</span>
+              </div>
+            </div>
+            <div class="pl-mockup-dag-derives">derives from: <span>[KC-1] [KC-2]</span></div>
+            <!-- Commit 4: Data -->
+            <div class="pl-mockup-dag-commit">
+              <div class="pl-mockup-dag-dot"></div>
+              <div class="pl-mockup-dag-node">
+                <span class="badge data">DATA</span>
+                <span class="title">Benchmark results</span>
+                <span class="check">&#10003;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="pl-demo-captions" aria-label="On-screen captions">
         <span class="pl-caption-chip">Searchable</span>
         <span class="pl-caption-chip">Evidenced</span>
