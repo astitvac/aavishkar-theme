@@ -586,8 +586,35 @@ Use these terms consistently:
 
 ## 13) Phase J — Deploy latest copy updates to WordPress (2026-01-15)
 
-**Source of truth:** `CompanyPage/proofline-mock-light.html`  
-**Goal:** Make the live WP page match the updated mock copy (Hero + Lighthouse + Demos + About).
+**Source of truth for HTML content:** `theme/partials/proofline-*.html` files
+**Goal:** Make the live WP page match the updated partial files.
+
+### J.0a HTML Partials Workflow (CRITICAL)
+
+**⚠️ Divi Visual Builder does NOT render shortcodes in Code modules!**
+
+Using `[aav_partial name="proofline-hero"]` in a Divi Code module will display the shortcode as literal text and can cause site errors.
+
+**Recommended Workflow:**
+
+1. **Edit the partial file** in `theme/partials/` (e.g., `proofline-hero.html`)
+2. **Commit and push** to Git (for version control)
+3. **Copy the HTML** from the partial file
+4. **Paste into Divi** Code module
+5. **Clear caches** (Divi Static CSS + WP Rocket)
+
+**Why this approach?**
+- Partial files are version-controlled (can track changes, revert, etc.)
+- Easy to iterate locally before deploying
+- Single source of truth for each section
+- No shortcode rendering issues
+
+**Partial Files for Proofline:**
+| Partial File | Divi Section |
+|--------------|--------------|
+| `theme/partials/proofline-hero.html` | `#hero` Code module |
+| `theme/partials/proofline-demos.html` | `#demos` Code module |
+| `theme/partials/proofline-lighthouse.html` | `#lighthouse` Code module |
 
 ### J.0 Rules (important)
 - Use the existing Divi Sections/IDs (`hero`, `lighthouse`, `demos`, `about`) — don’t create new ones.

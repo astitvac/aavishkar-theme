@@ -99,15 +99,40 @@ Local Edit → Git Push → WP Pusher Webhook → WordPress Updated
 
 The partials system allows HTML content to be version-controlled and auto-deployed.
 
-**In Divi Code Module (PHP execution):**
-```php
-<?php aav_partial('proofline-hero'); ?>
+**⚠️ IMPORTANT: Divi Visual Builder Limitation**
+
+Shortcodes (`[aav_partial name="..."]`) do NOT render in Divi Visual Builder Code modules. They will display as literal text and can cause site errors.
+
+**Recommended Workflow for Divi Pages:**
+
+1. **Source of Truth**: Edit the HTML in `theme/partials/*.html` files
+2. **Deploy to Git**: Commit and push changes (auto-syncs to WordPress)
+3. **Copy to Divi**: Manually copy the HTML from the partial file and paste into the Divi Code module
+4. **Clear Caches**: Clear Divi Static CSS + WP Rocket cache
+
+This workflow ensures:
+- Version control for all HTML content
+- Easy future modifications (edit partial → copy to Divi)
+- No shortcode rendering issues in Visual Builder
+
+**Example Workflow:**
+```bash
+# 1. Edit the partial
+code theme/partials/proofline-hero.html
+
+# 2. Commit and push (for version control)
+git add theme/partials/proofline-hero.html
+git commit -m "Update: hero section copy"
+git push origin main
+
+# 3. Copy HTML from partial file → paste into Divi Code module
+# 4. Clear caches in WordPress Admin
 ```
 
-**In Divi Text Module (Shortcode):**
-```
-[aav_partial name="proofline-hero"]
-```
+**Where Shortcodes DO Work:**
+- WordPress Text widgets
+- Regular post/page content (not Divi Builder)
+- Divi Text modules (with limited success)
 
 **List Available Partials (admin only):**
 ```

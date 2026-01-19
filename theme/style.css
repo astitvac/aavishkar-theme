@@ -4441,3 +4441,99 @@ body.page-id-2952 .pl-mockup-dag-derives span {
   color: #3b82f6;
 }
 
+/* ===========================================
+   PROOFLINE UI ALIGNMENT - Product Colors
+   Aligned with labos-mvp/src/styles/knowledge-card.css
+=========================================== */
+
+/* Stage colors from product */
+.pl-stage-idea { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+.pl-stage-evidence { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.pl-stage-hypothesis { background: rgba(14, 165, 233, 0.1); color: #0ea5e9; }
+.pl-stage-validated { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+
+/* Status badges */
+.pl-status-draft { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.pl-status-committed { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+
+/* KC Card styling (matches product KCCard compact variant) */
+.pl-kc-card {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.pl-kc-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pl-kc-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* DAG Node styling (matches product CommitNode) */
+.pl-dag-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pl-dag-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px currentColor, 0 2px 6px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+.pl-dag-card {
+  flex: 1;
+  padding: 10px 14px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+/* Upload area styling (matches product DocumentUpload) */
+.pl-upload-area {
+  border: 1.5px dashed rgba(100, 116, 139, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.pl-file-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.06);
+  font-size: 11px;
+  color: #475569;
+}
+
+.pl-file-icon {
+  width: 6px;
+  height: 8px;
+  border-radius: 1px;
+}
+
+.pl-file-icon.pdf { background: #ef4444; }
+.pl-file-icon.docx { background: #3b82f6; }
+.pl-file-icon.drive { background: #f59e0b; }
+

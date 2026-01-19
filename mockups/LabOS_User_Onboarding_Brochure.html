@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to LabOS - User Onboarding Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ================================================
+       LabOS User Onboarding Brochure
+       LIGHT THEME - Aligned with aavishkar.ai/proofline
+       ================================================ */
+
+    :root {
+      /* Light theme - matching Proofline landing page */
+      --bg-base: #fafafa;
+      --bg-surface: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --bg-card: #ffffff;
+      
+      /* Text colors - dark on light */
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      
+      /* Accent colors from platform (kept from LabOS UI) */
+      --purple-primary: #7c3aed;
+      --purple-secondary: #6d28d9;
+      --purple-light: #ede9fe;
+      --magenta-primary: #ec4899;
+      --magenta-secondary: #be185d;
+      --blue-accent: #3b82f6;
+      --green-accent: #10b981;
+      --green-light: #d1fae5;
+      --amber-accent: #f59e0b;
+      --amber-light: #fef3c7;
+      
+      /* Stage colors (from ProofsTab KC cards) */
+      --stage-ideation: #8b5cf6;
+      --stage-lit-review: #3b82f6;
+      --stage-hypothesis: #f59e0b;
+      --stage-analysis: #10b981;
+      --stage-writeup: #ec4899;
+      
+      /* Status colors (from KCCard) */
+      --status-draft: #f59e0b;
+      --status-committed: #10b981;
+      
+      /* Gradients */
+      --gradient-purple: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      --gradient-magenta: linear-gradient(135deg, #ec4899, #db2777);
+      --gradient-brand: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+      
+      /* Borders - light theme */
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --border-visible: rgba(0, 0, 0, 0.12);
+      --border-card: rgba(0, 0, 0, 0.08);
+      
+      /* Shadows - light theme */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+      
+      /* Spacing */
+      --page-padding: 48px;
+      --section-gap: 32px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ================================================
+       Print Styles - A4/Letter two-page layout
+       ================================================ */
+    @page {
+      size: A4;
+      margin: 8mm;
+    }
+
+    @media print {
+      body {
+        background: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      
+      .brochure {
+        max-width: 100%;
+        padding: 0;
+      }
+      
+      .page {
+        page-break-after: always;
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: none;
+        border-radius: 0;
+        padding: 16px 20px;
+        margin: 0;
+        min-height: auto;
+        height: auto;
+        max-height: 277mm; /* A4 height minus margins */
+        overflow: hidden;
+      }
+      
+      .page::before {
+        display: none;
+      }
+      
+      .page-number {
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+      }
+      
+      /* Reduce sizes for print - fit on 2 A4 pages */
+      .hero { margin-bottom: 8px; }
+      .hero h1 { font-size: 20px; line-height: 1.15; margin-bottom: 4px; }
+      .hero-subtitle { font-size: 10px; margin-bottom: 6px; line-height: 1.4; }
+      .section-label { font-size: 8px; margin-bottom: 6px; padding: 2px 8px; }
+      
+      /* Page 1: Three Steps - CRITICAL for fit */
+      .three-moves { margin-bottom: 6px; }
+      .moves-grid { gap: 5px; }
+      .move-card { 
+        padding: 6px 8px; 
+        gap: 8px; 
+        grid-template-columns: 1fr 1fr;
+      }
+      .move-card-content { gap: 3px; }
+      .move-title { font-size: 11px; margin-bottom: 2px; }
+      .move-description { font-size: 8px; line-height: 1.3; }
+      .move-visual { 
+        padding: 4px; 
+        font-size: 8px;
+        max-height: 100px;
+        overflow: hidden;
+      }
+      .move-visual * { font-size: 7px !important; }
+      .move-visual > div { transform: scale(0.85); transform-origin: top left; }
+      .move-icon { width: 24px; height: 24px; margin-bottom: 3px; }
+      .move-icon svg { width: 12px; height: 12px; }
+      .move-number { width: 18px; height: 18px; font-size: 8px; top: 4px; right: 4px; }
+      .move-tags { gap: 2px; margin-top: 2px; }
+      .tag { font-size: 7px; padding: 1px 4px; }
+      
+      .getting-started-compact { padding: 4px 8px; font-size: 9px; margin-top: 4px; }
+      
+      /* Page 2 */
+      .concepts-section { margin-bottom: 6px; }
+      .concepts-grid { gap: 5px; }
+      .concept-card { padding: 6px; }
+      .concept-card h4 { font-size: 10px; }
+      .concept-card p { font-size: 8px; line-height: 1.3; }
+      .concept-icon { width: 24px; height: 24px; }
+      .concept-icon svg { width: 12px; height: 12px; }
+      
+      .quick-ref { padding: 6px; margin-bottom: 6px; }
+      .quick-ref h4 { font-size: 10px; margin-bottom: 4px; }
+      .quick-ref table { font-size: 8px; }
+      .quick-ref td, .quick-ref th { padding: 2px 4px; }
+      
+      .personas { margin-bottom: 6px; }
+      .persona-grid { gap: 4px; }
+      .persona-card { padding: 6px; }
+      .persona-role { font-size: 8px; }
+      .persona-headline { font-size: 9px; }
+      .persona-description { font-size: 8px; display: none; }
+      
+      .collaboration { margin-bottom: 6px; }
+      .collaboration > p { font-size: 9px; margin-bottom: 6px; }
+      .collab-features { display: none; } /* Hide for print - too big */
+      .dag-preview { padding: 6px; margin-top: 6px; font-size: 8px; }
+      .dag-preview * { font-size: 7px !important; }
+      
+      .footer { padding: 8px; margin-top: 6px; }
+      .footer-promise p { font-size: 10px; }
+      .footer-tagline { font-size: 9px; }
+      .footer-meta { font-size: 8px; }
+    }
+
+    /* ================================================
+       Page Container
+       ================================================ */
+    .brochure {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .page {
+      background: var(--bg-surface);
+      border-radius: 16px;
+      padding: var(--page-padding);
+      margin-bottom: 24px;
+      min-height: 1100px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-brand);
+    }
+
+    /* ================================================
+       PAGE 1: Welcome & Core Concepts
+       ================================================ */
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-brand);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: white;
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+    }
+
+    .brand-name span {
+      color: var(--purple-primary);
+    }
+
+    .url-badge {
+      background: var(--bg-elevated);
+      padding: 10px 20px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-visible);
+    }
+
+    .url-badge strong {
+      color: var(--purple-primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+    }
+
+    .hero-title .highlight {
+      color: var(--purple-primary);
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .hero-subtitle strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Three Moves Section */
+    .three-moves {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple-primary);
+      margin-bottom: 16px;
+    }
+
+    .moves-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .move-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: minmax(200px, 1fr) minmax(280px, 1.3fr);
+      gap: 16px;
+      border: 1px solid var(--border-card);
+      position: relative;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      min-width: 0;
+      align-items: start;
+    }
+
+    .move-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .move-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .move-number {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 24px;
+      height: 24px;
+      background: var(--bg-elevated);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .move-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .move-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .move-card:nth-child(1) .move-icon {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+    }
+    .move-card:nth-child(1) .move-icon svg {
+      color: #3b82f6;
+      stroke: #3b82f6;
+    }
+
+    .move-card:nth-child(2) .move-icon {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05));
+    }
+    .move-card:nth-child(2) .move-icon svg {
+      color: #8b5cf6;
+      stroke: #8b5cf6;
+    }
+
+    .move-card:nth-child(3) .move-icon {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+    }
+    .move-card:nth-child(3) .move-icon svg {
+      color: #10b981;
+      stroke: #10b981;
+    }
+
+    .move-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .move-description {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .move-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+    }
+
+    /* Tags styled like ProofsTab KC chips */
+    .tag {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+
+    .tag.blue { 
+      color: var(--blue-accent); 
+      background: rgba(59, 130, 246, 0.1); 
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+    .tag.purple { 
+      color: var(--purple-primary); 
+      background: rgba(139, 92, 246, 0.1); 
+      border-color: rgba(139, 92, 246, 0.2);
+    }
+    .tag.green { 
+      color: var(--green-accent); 
+      background: rgba(16, 185, 129, 0.1); 
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    /* ================================================
+       Move Visual Previews (inline UI mockups)
+       ================================================ */
+    .move-visual {
+      padding: 14px;
+      background: var(--bg-elevated);
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Upload Visual (Move 1) - from DocumentUploadModal */
+    .upload-visual .upload-sources {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .upload-source {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid var(--border-visible);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .upload-source.active {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--blue-accent);
+      color: var(--blue-accent);
+    }
+
+    .upload-source svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .upload-pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .pipeline-stage {
+      padding: 3px 8px;
+      background: white;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .pipeline-arrow {
+      color: var(--blue-accent);
+    }
+
+    /* KC Visual (Move 2) - from KCCard.jsx */
+    .kc-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mini-kc {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid var(--border-visible);
+      font-size: 10px;
+    }
+
+    .mini-kc.draft {
+      border-left: 3px solid var(--status-draft);
+    }
+
+    .mini-kc.committed {
+      border-left: 3px solid var(--status-committed);
+      background: rgba(16, 185, 129, 0.03);
+    }
+
+    .mini-kc-stage {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--blue-accent);
+    }
+
+    .mini-kc-title {
+      flex: 1;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mini-kc-status {
+      font-size: 9px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .mini-kc.committed .mini-kc-status {
+      color: var(--status-committed);
+    }
+
+    .kc-commit-arrow {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--purple-primary);
+      padding: 2px 8px;
+      background: var(--purple-light);
+      border-radius: 4px;
+    }
+
+    /* DAG Visual (Move 3) - from ProoflineDAG.jsx */
+    .dag-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mini-dag {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      position: relative;
+    }
+
+    .mini-dag-node {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: white;
+      border: 2px solid var(--status-committed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--status-committed);
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-dag-node.seed {
+      background: var(--purple-light);
+      border-color: var(--purple-primary);
+      color: var(--purple-primary);
+    }
+
+    .mini-dag-node.branch {
+      border-color: var(--amber-accent);
+      color: var(--amber-accent);
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .mini-dag-line {
+      width: 20px;
+      height: 2px;
+      background: var(--status-committed);
+    }
+
+    .mini-dag-branch {
+      position: relative;
+    }
+
+    .mini-dag-line.branch {
+      position: absolute;
+      width: 2px;
+      height: 16px;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber-accent);
+    }
+
+    .dag-label {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text-muted);
+      font-family: 'SF Mono', Monaco, monospace;
+    }
+
+    /* Getting Started - styled like ProjectModal */
+    .getting-started-compact {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 14px 20px;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-sm);
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .getting-started-compact code {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--purple-primary);
+    }
+
+    /* Legacy getting-started styles (kept for reference) */
+    .getting-started {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .getting-started h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-primary);
+    }
+
+    .steps {
+      display: flex;
+      gap: 24px;
+    }
+
+    .step {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--gradient-brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .step-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .step-content p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .step-content code {
+      background: var(--purple-light);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: 'SF Mono', Monaco, monospace;
+      color: var(--purple-primary);
+      font-weight: 500;
+    }
+
+    /* Arrow connectors */
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    .step {
+      position: relative;
+    }
+
+    /* Seed KC Explainer */
+    .seed-explainer {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--purple-light);
+      border-radius: 12px;
+      border: 1px solid rgba(124, 58, 237, 0.15);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .seed-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+
+    .seed-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--purple-primary);
+    }
+
+    .seed-content {
+      flex: 1;
+    }
+
+    .seed-content strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--purple-primary);
+      margin-bottom: 4px;
+    }
+
+    .seed-content p {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ================================================
+       PAGE 2: Features & Quick Reference
+       ================================================ */
+
+    /* Concepts Grid - styled like KCCard components */
+    .concepts-section {
+      margin-bottom: 40px;
+    }
+
+    .concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .concept-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .concept-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .concept-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .concept-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .concept-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .concept-icon.purple { background: var(--purple-light); }
+    .concept-icon.purple svg { stroke: var(--purple-primary); }
+    .concept-icon.magenta { background: rgba(236, 72, 153, 0.1); }
+    .concept-icon.magenta svg { stroke: #ec4899; }
+    .concept-icon.blue { background: rgba(59, 130, 246, 0.1); }
+    .concept-icon.blue svg { stroke: #3b82f6; }
+    .concept-icon.green { background: var(--green-light); }
+    .concept-icon.green svg { stroke: #10b981; }
+
+    .concept-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .concept-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .concept-card p strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .concept-card p code {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 10px;
+      background: var(--bg-elevated);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--purple-primary);
+    }
+
+    /* Quick Actions Table - styled like ProofsTab sections */
+    .quick-actions {
+      margin-bottom: 40px;
+    }
+
+    .actions-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-card);
+    }
+
+    .actions-table th,
+    .actions-table td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .actions-table th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+    }
+
+    .actions-table td:first-child {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .actions-table td:last-child {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .actions-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Action key styled like ProofsTab KC stage badges */
+    .action-key {
+      display: inline-block;
+      background: var(--purple-light);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-family: 'SF Mono', Monaco, monospace;
+      color: var(--purple-primary);
+      font-weight: 500;
+      margin-right: 4px;
+    }
+
+    /* Move badges for Quick Actions table */
+    .move-badge {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 20px;
+      text-align: center;
+      margin-right: 6px;
+      color: white;
+    }
+
+    .move-badge.connect {
+      background: var(--blue-accent);
+    }
+
+    .move-badge.build {
+      background: var(--purple-primary);
+    }
+
+    .move-badge.accelerate {
+      background: var(--green-accent);
+    }
+
+    /* Personas Section */
+    .personas {
+      margin-bottom: 40px;
+    }
+
+    .personas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .persona-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .persona-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .persona-role {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-primary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .persona-headline {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      color: var(--text-primary);
+    }
+
+    .persona-description {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Collaboration Section */
+    .collaboration {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border-card);
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .collab-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .collab-feature {
+      text-align: center;
+    }
+
+    .collab-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .collab-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--purple-primary);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .collab-feature h5 {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .collab-feature p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Footer - styled like ProductModal footer */
+    .footer {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .footer-promise {
+      max-width: 400px;
+    }
+
+    .footer-promise p {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .footer-promise p strong {
+      color: var(--purple-primary);
+      font-weight: 600;
+    }
+
+    .footer-promise p code {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      background: var(--purple-light);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--purple-primary);
+    }
+
+    .footer-tagline {
+      font-size: 12px !important;
+      font-style: normal !important;
+      margin-top: 8px;
+      color: var(--text-muted) !important;
+    }
+
+    .footer-meta {
+      text-align: right;
+    }
+
+    .footer-meta p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta a {
+      color: var(--purple-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-meta a:hover {
+      text-decoration: underline;
+    }
+
+    /* Keyboard Shortcuts Box */
+    .shortcuts-box {
+      background: var(--bg-elevated);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .shortcuts-box h5 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .shortcuts-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .shortcut {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .shortcut kbd {
+      background: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-family: 'SF Mono', Monaco, monospace;
+      border: 1px solid var(--border-visible);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      color: var(--text-primary);
+    }
+
+    .shortcut span {
+      color: var(--text-muted);
+    }
+
+    /* Page Number */
+    .page-number {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Placeholder indicator for designers */
+    .placeholder {
+      border: 2px dashed var(--border-visible);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      background: var(--purple-light);
+    }
+
+    .placeholder::before {
+      content: '📝 ';
+    }
+
+    /* ================================================
+       Real UI Element: KC Card Preview (from KCCard.jsx)
+       ================================================ */
+    .kc-preview {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--status-draft);
+      border-left-width: 3px;
+      margin-top: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .kc-preview-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .kc-stage-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kc-stage-badge.lit {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--stage-lit-review);
+    }
+
+    .kc-stage-badge.hyp {
+      background: var(--amber-light);
+      color: var(--stage-hypothesis);
+    }
+
+    .kc-status-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: auto;
+    }
+
+    .kc-status-badge.draft {
+      background: var(--amber-light);
+      color: var(--status-draft);
+    }
+
+    .kc-status-badge.committed {
+      background: var(--green-light);
+      color: var(--status-committed);
+    }
+
+    .kc-preview-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .kc-preview-findings {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .kc-preview-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .kc-confidence {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--green-accent);
+      font-weight: 500;
+    }
+
+    .kc-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .kc-action-btn {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .kc-action-btn.commit {
+      background: var(--green-accent);
+      color: white;
+    }
+
+    .kc-action-btn.edit {
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-visible);
+    }
+
+    /* ================================================
+       Real UI Element: Proofline DAG Branch (from ProoflineDAG.jsx)
+       ================================================ */
+    .dag-preview {
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .dag-preview-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dag-branch {
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+    }
+
+    .dag-main-line {
+      width: 3px;
+      background: linear-gradient(180deg, var(--green-accent) 0%, var(--green-accent) 100%);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .dag-commits {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dag-commit {
+      background: var(--bg-card);
+      border-radius: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dag-commit-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green-accent);
+      flex-shrink: 0;
+    }
+
+    .dag-commit-title {
+      flex: 1;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .dag-commit-badge {
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--green-light);
+      color: var(--green-accent);
+      font-weight: 600;
+    }
+
+    .dag-branch-fork {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 20px;
+      padding-left: 20px;
+      border-left: 2px dashed var(--amber-accent);
+    }
+
+    .dag-branch-label {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--amber-light);
+      color: var(--amber-accent);
+      font-weight: 600;
+    }
+
+    /* Seed KC styling */
+    .dag-commit.seed {
+      background: var(--purple-light);
+      border-color: rgba(124, 58, 237, 0.2);
+    }
+
+    .dag-commit-dot.seed {
+      background: var(--purple-primary) !important;
+    }
+
+    .dag-commit-badge.seed {
+      background: var(--purple-light);
+      color: var(--purple-primary);
+    }
+
+    /* Content-addressable hash (Git-like) */
+    .dag-commit-hash {
+      font-size: 9px;
+      font-family: 'SF Mono', Monaco, monospace;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* DAG Legend */
+    .dag-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .dag-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dag-legend-item code {
+      font-size: 9px;
+      background: var(--bg-elevated);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'SF Mono', Monaco, monospace;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-dot.seed {
+      background: var(--purple-primary);
+    }
+
+    .legend-dot.committed {
+      background: var(--green-accent);
+    }
+
+    .legend-dot.branch {
+      background: var(--amber-accent);
+    }
+
+    /* Print optimization */
+    @media print {
+      .brochure {
+        padding: 0;
+      }
+      
+      .page {
+        box-shadow: none;
+        border-radius: 0;
+        margin-bottom: 0;
+        min-height: auto;
+        padding: 40px;
+      }
+
+      .page::before {
+        display: none;
+      }
+
+      .kc-preview, .dag-preview {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="brochure">
+    
+    <!-- ================================================
+         PAGE 1: Welcome & Core Concepts
+         ================================================ -->
+    <div class="page" id="page-1">
+      
+      <!-- Header -->
+      <div class="header">
+        <div class="logo-section">
+          <div class="logo">L</div>
+          <div class="brand-name"><span>LabOS</span></div>
+        </div>
+        <div class="url-badge">
+          <strong>labos.aavishkar.ai</strong>
+        </div>
+      </div>
+
+      <!-- Hero Section - User-Friendly Messaging -->
+      <div class="hero">
+        <h1 class="hero-title">
+          The scientific engine for<br>
+          <span class="highlight">knowledge creation</span>.
+        </h1>
+        <p class="hero-subtitle">
+          Capture hypotheses, evidence, and decisions as <strong>Knowledge Cards</strong>. 
+          Connect them into a <strong>Proofline</strong>—so knowledge compounds 
+          and every claim stays traceable.
+        </p>
+      </div>
+
+      <!-- Three Steps - Vertical Layout with Expanded Examples -->
+      <div class="three-moves">
+        <div class="section-label">Three Moves</div>
+        <div class="moves-grid">
+          
+          <!-- STEP 1: Connect Your Knowledge -->
+          <div class="move-card">
+            <div class="move-number">01</div>
+            <div class="move-card-content">
+              <div class="move-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+              </div>
+              <h3 class="move-title">Connect</h3>
+              <p class="move-description">
+                Link papers, protocols, and notes into <strong>persistent team memory</strong>. Upload PDFs, DOCX, or connect Google Drive—LabOS makes everything searchable.
+              </p>
+              <div class="move-tags">
+                <span class="tag blue">PDF</span>
+                <span class="tag blue">DOCX</span>
+                <span class="tag blue">Drive</span>
+              </div>
+            </div>
+            <!-- Expanded Document Upload Visual -->
+            <div class="move-visual">
+              <div style="font-size: 10px; font-weight: 600; color: var(--blue-accent); margin-bottom: 8px;">📄 Your Documents</div>
+              <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px;">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: white; border-radius: 6px; border: 1px solid var(--border-card);">
+                  <svg style="width: 16px; height: 16px; stroke: #dc2626; fill: none;" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  <span style="font-size: 11px; font-weight: 500;">transformer_paper.pdf</span>
+                  <span style="margin-left: auto; font-size: 9px; color: var(--green-accent);">✓ Processed</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: white; border-radius: 6px; border: 1px solid var(--border-card);">
+                  <svg style="width: 16px; height: 16px; stroke: #2563eb; fill: none;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                  <span style="font-size: 11px; font-weight: 500;">research_notes.docx</span>
+                  <span style="margin-left: auto; font-size: 9px; color: var(--green-accent);">✓ Processed</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; padding: 8px 10px; background: rgba(59, 130, 246, 0.05); border-radius: 6px; border: 1px dashed rgba(59, 130, 246, 0.3);">
+                <span style="font-size: 10px; color: var(--text-muted);">Extract</span>
+                <span style="color: var(--blue-accent);">→</span>
+                <span style="font-size: 10px; color: var(--text-muted);">Chunk</span>
+                <span style="color: var(--blue-accent);">→</span>
+                <span style="font-size: 10px; color: var(--text-muted);">Embed</span>
+                <span style="color: var(--blue-accent);">→</span>
+                <span style="font-size: 10px; font-weight: 500; color: var(--blue-accent);">Searchable!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 2: Capture Insights as Knowledge Cards -->
+          <div class="move-card">
+            <div class="move-number">02</div>
+            <div class="move-card-content">
+              <div class="move-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <path d="M3 10h18"></path>
+                </svg>
+              </div>
+              <h3 class="move-title">Commit</h3>
+              <p class="move-description">
+                Record evidence and confidence as <strong>Knowledge Cards</strong>. Each card captures findings, sources, and stage—then saves to your timeline where every claim stays traceable.
+              </p>
+              <div class="move-tags">
+                <span class="tag purple">Evidence</span>
+                <span class="tag purple">Confidence</span>
+                <span class="tag purple">Traceable</span>
+              </div>
+            </div>
+            <!-- Expanded KC Visual -->
+            <div class="move-visual">
+              <div style="font-size: 10px; font-weight: 600; color: var(--purple-primary); margin-bottom: 8px;">📝 Knowledge Card</div>
+              <div style="background: white; border-radius: 8px; border: 1px solid var(--border-card); overflow: hidden;">
+                <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%); border-bottom: 1px solid var(--border-subtle);">
+                  <span style="padding: 2px 6px; background: var(--purple-primary); color: white; border-radius: 4px; font-size: 9px; font-weight: 600;">LIT</span>
+                  <span style="font-size: 11px; font-weight: 600; color: var(--text-primary);">Attention mechanisms enable parallelization</span>
+                </div>
+                <div style="padding: 10px; font-size: 10px; color: var(--text-secondary); line-height: 1.5;">
+                  <div style="margin-bottom: 6px;"><strong>Findings:</strong> Self-attention allows the model to attend to all positions in a single step, unlike RNNs which process sequentially.</div>
+                  <div style="margin-bottom: 6px;"><strong>Sources:</strong> <span style="background: rgba(59, 130, 246, 0.1); padding: 1px 4px; border-radius: 3px; font-size: 9px; color: var(--blue-accent);">[transformer_paper.pdf, p.3]</span></div>
+                  <div><strong>Stage:</strong> Literature Review</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px;">
+                <span style="font-size: 10px; color: var(--text-muted);">Draft</span>
+                <span style="padding: 4px 10px; background: var(--purple-primary); color: white; border-radius: 4px; font-size: 10px; font-weight: 500;">↓ Save</span>
+                <span style="font-size: 10px; color: var(--green-accent); font-weight: 500;">✓ On Timeline</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Accelerate with Proofline -->
+          <div class="move-card">
+            <div class="move-number">03</div>
+            <div class="move-card-content">
+              <div class="move-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="move-title">Discover</h3>
+              <p class="move-description">
+                Search past work to accelerate new hypotheses. AI builds on your saved cards—so knowledge compounds and nothing gets lost.
+              </p>
+              <div class="move-tags">
+                <span class="tag green">Searchable</span>
+                <span class="tag green">Evidenced</span>
+                <span class="tag green">Reproducible</span>
+              </div>
+            </div>
+            <!-- ProoflineDAG-style Visual -->
+            <div class="move-visual" style="padding: 10px; background: #fafafa;">
+              <!-- DAG Container - mirrors ProoflineDAG.jsx styling -->
+              <div style="position: relative; min-height: 180px; background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 70%);">
+                <!-- Dot grid background like ReactFlow -->
+                <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(139, 92, 246, 0.15) 1px, transparent 1px); background-size: 12px 12px;"></div>
+                
+                <!-- Vertical connection line (main branch) -->
+                <div style="position: absolute; left: 24px; top: 10px; bottom: 10px; width: 2px; background: rgba(16, 185, 129, 0.4);"></div>
+                
+                <!-- Commit nodes - styled like CommitNode.jsx -->
+                <div style="position: relative; display: flex; flex-direction: column; gap: 6px; padding: 8px 0;">
+                  
+                  <!-- Commit 1: Seed KC -->
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--green-accent); border: 2px solid white; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3); z-index: 1;"></div>
+                    <div style="flex: 1; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="padding: 2px 6px; background: rgba(16, 185, 129, 0.1); color: var(--green-accent); border-radius: 4px; font-size: 8px; font-weight: 600;">SEED</span>
+                        <span style="font-size: 10px; font-weight: 500; color: var(--text-primary);">Research goal</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Commit 2: Literature -->
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--purple-primary); border: 2px solid white; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3); z-index: 1;"></div>
+                    <div style="flex: 1; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.15); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="padding: 2px 6px; background: var(--purple-light); color: var(--purple-primary); border-radius: 4px; font-size: 8px; font-weight: 600;">LIT</span>
+                        <span style="font-size: 10px; font-weight: 500; color: var(--text-primary);">Attention mechanisms</span>
+                        <span style="margin-left: auto; font-size: 8px; color: var(--green-accent);">✓</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Commit 3: Hypothesis with AI badge -->
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--purple-primary); border: 2px solid white; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3); z-index: 1;"></div>
+                    <div style="flex: 1; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.15); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="padding: 2px 6px; background: var(--purple-light); color: var(--purple-primary); border-radius: 4px; font-size: 8px; font-weight: 600;">HYP</span>
+                        <span style="font-size: 10px; font-weight: 500; color: var(--text-primary);">Parallelization gains</span>
+                        <span style="margin-left: auto; padding: 1px 4px; background: rgba(16, 185, 129, 0.1); border-radius: 3px; font-size: 7px; color: var(--green-accent);">AI</span>
+                      </div>
+                      <div style="font-size: 8px; color: var(--text-muted); margin-top: 3px;">derives from: <span style="color: var(--blue-accent);">[KC-1] [KC-2]</span></div>
+                    </div>
+                  </div>
+                  
+                  <!-- Commit 4: Analysis -->
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--purple-primary); border: 2px solid white; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3); z-index: 1;"></div>
+                    <div style="flex: 1; padding: 8px 10px; background: white; border-radius: 8px; border: 1px solid rgba(139, 92, 246, 0.15); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <span style="padding: 2px 6px; background: rgba(245, 158, 11, 0.1); color: var(--amber-accent); border-radius: 4px; font-size: 8px; font-weight: 600;">DATA</span>
+                        <span style="font-size: 10px; font-weight: 500; color: var(--text-primary);">Benchmark results</span>
+                        <span style="margin-left: auto; font-size: 8px; color: var(--green-accent);">✓</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <!-- Controls hint (like ReactFlow) -->
+                <div style="position: absolute; bottom: 4px; right: 4px; display: flex; gap: 2px;">
+                  <div style="width: 16px; height: 16px; background: white; border: 1px solid var(--border-card); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-muted);">+</div>
+                  <div style="width: 16px; height: 16px; background: white; border: 1px solid var(--border-card); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-muted);">−</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Getting Started - Single Line CTA -->
+      <div class="getting-started-compact">
+        <svg style="width: 18px; height: 18px; stroke: var(--purple-primary); fill: none; stroke-width: 2; flex-shrink: 0;" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span><strong>Start now:</strong> Visit <code style="background: var(--bg-elevated); padding: 2px 6px; border-radius: 4px; font-size: 12px;">labos.aavishkar.ai</code> → Sign in with Google → Create your first project</span>
+      </div>
+
+      <div class="page-number">1 / 2</div>
+    </div>
+
+    <!-- ================================================
+         PAGE 2: Features & Quick Reference
+         ================================================ -->
+    <div class="page" id="page-2">
+      
+      <!-- Core Concepts -->
+      <div class="concepts-section">
+        <div class="section-label">Key Concepts</div>
+        <div class="concepts-grid">
+          
+          <div class="concept-card">
+            <div class="concept-header">
+              <div class="concept-icon purple">
+                <!-- Card/Rectangle Icon -->
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                  <path d="M3 10h18"></path>
+                </svg>
+              </div>
+              <h4>Knowledge Card</h4>
+            </div>
+            <p>A single insight, finding, or note—captured in a structured format. Draft freely, then <strong>save</strong> to make it permanent and part of your timeline.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-header">
+              <div class="concept-icon magenta">
+                <!-- Timeline Icon -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3v18"></path>
+                  <circle cx="12" cy="6" r="2"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <circle cx="12" cy="18" r="2"></circle>
+                </svg>
+              </div>
+              <h4>Proofline</h4>
+            </div>
+            <p>Your visual research timeline. See how ideas connect and build on each other. Every card links to its sources—creating a traceable history of your thinking.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-header">
+              <div class="concept-icon blue">
+                <!-- Search/Explore Icon -->
+                <svg viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="M21 21l-4.35-4.35"></path>
+                </svg>
+              </div>
+              <h4>AI-Powered Search</h4>
+            </div>
+            <p>Ask questions about your documents in plain English. AI finds relevant sections and cites its sources—so you can verify every answer.</p>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-header">
+              <div class="concept-icon green">
+                <!-- Link/Chain Icon -->
+                <svg viewBox="0 0 24 24">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+              </div>
+              <h4>Citations & Sources</h4>
+            </div>
+            <p>Every Knowledge Card links to its source—whether that's a document you uploaded or another card. See where any idea came from with one click.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Actions - Simple Guide -->
+      <div class="quick-actions">
+        <div class="section-label">Common Tasks</div>
+        <table class="actions-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>How To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="move-badge connect">1</span> Upload documents</td>
+              <td>Click <span class="action-key">+ Upload</span> → Drag PDFs or Word docs</td>
+            </tr>
+            <tr>
+              <td><span class="move-badge build">2</span> Create a project</td>
+              <td>Click <span class="action-key">+ New Project</span> → Enter your research goal</td>
+            </tr>
+            <tr>
+              <td><span class="move-badge build">2</span> Save a Knowledge Card</td>
+              <td>Edit your draft → Click <span class="action-key">Save</span></td>
+            </tr>
+            <tr>
+              <td><span class="move-badge accelerate">3</span> Ask AI</td>
+              <td>Type in the chat → AI responds with citations → Review the answer</td>
+            </tr>
+            <tr>
+              <td>Share a session</td>
+              <td>Click <span class="action-key">Share</span> → Select teammates → Send invite</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Keyboard Shortcuts -->
+        <div class="shortcuts-box">
+          <h5>Keyboard Shortcuts (Optional)</h5>
+          <div class="shortcuts-list">
+            <div class="shortcut"><kbd>⌘/Ctrl+B</kbd> <span>Toggle panel</span></div>
+            <div class="shortcut"><kbd>⌘/Ctrl+K</kbd> <span>Command palette</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Who It's For -->
+      <div class="personas">
+        <div class="section-label">Built For</div>
+        <div class="personas-grid">
+          
+          <div class="persona-card">
+            <div class="persona-role">Principal Investigator</div>
+            <p class="persona-headline">Get grant-ready insights in minutes, not weeks.</p>
+            <p class="persona-description">Surface knowledge gaps. Draft sections backed by comprehensive evidence.</p>
+          </div>
+
+          <div class="persona-card">
+            <div class="persona-role">Post-doc / Senior Researcher</div>
+            <p class="persona-headline">Stop hunting threads; build on every prior protocol.</p>
+            <p class="persona-description">Instantly retrieve related work with complete context.</p>
+          </div>
+
+          <div class="persona-card">
+            <div class="persona-role">Graduate Student / RA</div>
+            <p class="persona-headline">Learn your field's landscape before coffee's cold.</p>
+            <p class="persona-description">Transform papers into guided concept maps.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Human + Human + AI Coordination -->
+      <div class="collaboration">
+        <div class="section-label">Human + Human + AI</div>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
+          LabOS coordinates <strong>your team</strong> and <strong>AI tools</strong> in one workspace. 
+          Share sessions with colleagues. Let AI search, synthesize, and draft. Review together.
+        </p>
+        
+        <!-- Three pillars: Human, AI, Tools -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+          <!-- Human Collaboration -->
+          <div style="background: var(--purple-light); border-radius: 10px; padding: 14px; border: 1px solid rgba(124, 58, 237, 0.15);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <svg style="width: 18px; height: 18px; stroke: var(--purple-primary); fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span style="font-size: 12px; font-weight: 600; color: var(--purple-primary);">Team</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-secondary); margin: 0; line-height: 1.5;">Share sessions, review together, build shared knowledge.</p>
+          </div>
+          
+          <!-- AI Assistant -->
+          <div style="background: rgba(16, 185, 129, 0.1); border-radius: 10px; padding: 14px; border: 1px solid rgba(16, 185, 129, 0.15);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <svg style="width: 18px; height: 18px; stroke: var(--green-accent); fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+                <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"></path>
+                <path d="M19 14l1 3 1-3 3-1-3-1-1-3-1 3-3 1z"></path>
+              </svg>
+              <span style="font-size: 12px; font-weight: 600; color: var(--green-accent);">AI</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-secondary); margin: 0; line-height: 1.5;">Search your docs, draft cards, cite sources automatically.</p>
+          </div>
+          
+          <!-- Extensible Tools -->
+          <div style="background: rgba(59, 130, 246, 0.1); border-radius: 10px; padding: 14px; border: 1px solid rgba(59, 130, 246, 0.15);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <svg style="width: 18px; height: 18px; stroke: var(--blue-accent); fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span style="font-size: 12px; font-weight: 600; color: var(--blue-accent);">Tools</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-secondary); margin: 0; line-height: 1.5;">Web search, academic papers, synthesis—extensible by design.</p>
+          </div>
+        </div>
+
+        <!-- AI Tools Preview -->
+        <div class="dag-preview" style="margin-top: 0;">
+          <div class="dag-preview-title" style="margin-bottom: 12px;">
+            <svg style="width: 16px; height: 16px; stroke: var(--green-accent); fill: none; stroke-width: 2; vertical-align: middle;" viewBox="0 0 24 24"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/></svg>
+            AI Tools at Your Fingertips
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <!-- Tool chips -->
+            <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border-radius: 20px; border: 1px solid var(--border-card); font-size: 11px;">
+              <svg style="width: 14px; height: 14px; stroke: var(--blue-accent); fill: none; stroke-width: 2;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <span style="font-weight: 500;">Document Search</span>
+              <span style="color: var(--text-muted); font-size: 9px;">your KB</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border-radius: 20px; border: 1px solid var(--border-card); font-size: 11px;">
+              <svg style="width: 14px; height: 14px; stroke: var(--purple-primary); fill: none; stroke-width: 2;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span style="font-weight: 500;">Web Search</span>
+              <span style="color: var(--text-muted); font-size: 9px;">real-time</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border-radius: 20px; border: 1px solid var(--border-card); font-size: 11px;">
+              <svg style="width: 14px; height: 14px; stroke: var(--green-accent); fill: none; stroke-width: 2;" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <span style="font-weight: 500;">Academic Papers</span>
+              <span style="color: var(--text-muted); font-size: 9px;">200M+</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: white; border-radius: 20px; border: 1px solid var(--border-card); font-size: 11px;">
+              <svg style="width: 14px; height: 14px; stroke: var(--amber-accent); fill: none; stroke-width: 2;" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg>
+              <span style="font-weight: 500;">+ More Tools</span>
+              <span style="color: var(--text-muted); font-size: 9px;">extensible</span>
+            </div>
+          </div>
+          
+          <!-- Status indicator mockup -->
+          <div style="margin-top: 12px; padding: 10px 14px; background: white; border-radius: 8px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--green-accent); animation: pulse 2s infinite;"></div>
+            <span style="font-size: 11px; color: var(--text-secondary);">AI is <strong style="color: var(--green-accent);">searching academic papers</strong>...</span>
+            <span style="margin-left: auto; font-size: 9px; color: var(--text-muted);">Semantic Scholar</span>
+          </div>
+        </div>
+
+        <!-- Session Sharing (simplified) -->
+        <div style="margin-top: 16px; padding: 14px; background: var(--purple-light); border-radius: 10px; border: 1px solid rgba(124, 58, 237, 0.15);">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+            <svg style="width: 18px; height: 18px; stroke: var(--purple-primary); fill: none; stroke-width: 2;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            <span style="font-size: 13px; font-weight: 600; color: var(--purple-primary);">Share Sessions</span>
+          </div>
+          <p style="font-size: 11px; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+            Click <strong>Share</strong> → Select teammates → They see your session, AI responses, and can collaborate in real-time. Everyone works from the same context.
+          </p>
+        </div>
+      </div>
+      
+      <style>
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      </style>
+
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-promise">
+          <p>
+            Context persists. Knowledge compounds. Every claim stays traceable.
+          </p>
+          <p class="footer-tagline">The scientific engine for knowledge creation—built by Aavishkar.ai</p>
+        </div>
+        <div class="footer-meta">
+          <p class="placeholder">Designer: Add support email / feedback channel here</p>
+          <p>Built by <a href="https://aavishkar.ai" target="_blank">Aavishkar.ai</a></p>
+        </div>
+      </div>
+
+      <div class="page-number">2 / 2</div>
+    </div>
+
+  </div>
+
+  <!-- Designer Notes (hidden in print) -->
+  <style>
+    @media print {
+      .designer-notes { display: none; }
+    }
+  </style>
+  <div class="designer-notes" style="max-width: 850px; margin: 40px auto; padding: 24px; background: #f8f9fa; border-radius: 12px; border: 2px dashed rgba(124, 58, 237, 0.3);">
+    <h3 style="color: #7c3aed; margin-bottom: 16px; font-size: 14px;">📝 Designer Notes (Remove Before Final)</h3>
+    <ul style="color: #4a5568; font-size: 13px; line-height: 1.8; padding-left: 20px;">
+      <li><strong>Logo:</strong> Replace the "L" placeholder with actual Proofline arrow logo from aavishkar.ai/proofline</li>
+      <li><strong>Footer:</strong> Add support email, feedback link, or QR code to documentation</li>
+      <li><strong>Print test:</strong> Test with actual A4/Letter printing — adjust padding if needed</li>
+      <li><strong>Theme:</strong> LIGHT mode aligned with aavishkar.ai/proofline landing page</li>
+      <li><strong>Missing:</strong> Team/workspace name personalization, version number, last updated date</li>
+    </ul>
+    
+    <h4 style="color: #7c3aed; margin: 20px 0 12px; font-size: 13px;">🎯 Simplified Three Steps</h4>
+    <ul style="color: #4a5568; font-size: 13px; line-height: 1.8; padding-left: 20px;">
+      <li><strong>Step 1 - Connect:</strong> Upload documents (PDF, DOCX) — simple upload visual</li>
+      <li><strong>Step 2 - Capture:</strong> Save findings as Knowledge Cards — draft → save workflow</li>
+      <li><strong>Step 3 - AI:</strong> Ask questions, get cited answers — chat visual</li>
+    </ul>
+    
+    <h4 style="color: #7c3aed; margin: 20px 0 12px; font-size: 13px;">⚡ Key Feature: Session Sharing</h4>
+    <ul style="color: #4a5568; font-size: 13px; line-height: 1.8; padding-left: 20px;">
+      <li>Primary collaboration feature right now — emphasized in the Collaboration section</li>
+      <li>Share button → Select teammates → Send invite → They see it in their inbox</li>
+      <li>Based on <code>SessionShareDropdown.jsx</code> component</li>
+    </ul>
+    
+    <h4 style="color: #7c3aed; margin: 20px 0 12px; font-size: 13px;">⚠️ Features De-emphasized (Not Fully Implemented)</h4>
+    <ul style="color: #4a5568; font-size: 13px; line-height: 1.8; padding-left: 20px;">
+      <li><strong>Branching:</strong> Exists but not polished — removed from main messaging</li>
+      <li><strong>Real-time presence:</strong> Not fully working — simplified to "team workspace"</li>
+      <li><strong>Technical jargon:</strong> KC0, DAG, DERIVED_FROM, kc_hash — removed from user-facing content</li>
+    </ul>
+
+    <h4 style="color: #7c3aed; margin: 20px 0 12px; font-size: 13px;">🎨 Color Reference (from codebase)</h4>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+      <span style="background: #3b82f6; color: white; padding: 4px 12px; border-radius: 6px; font-size: 11px;">Step 1 #3b82f6</span>
+      <span style="background: #7c3aed; color: white; padding: 4px 12px; border-radius: 6px; font-size: 11px;">Step 2 #7c3aed</span>
+      <span style="background: #10b981; color: white; padding: 4px 12px; border-radius: 6px; font-size: 11px;">Step 3 #10b981</span>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!--
   Proofline Hero Partial
-  Usage in Divi Code module: <?php aav_partial('proofline-hero'); ?>
-  Or shortcode: [aav_partial name="proofline-hero"]
+  Usage: Copy this HTML into a Divi Code module (shortcodes don't work in Divi Visual Builder)
+  Source of truth for the hero section - edit here, then copy to Divi
 -->
 <div class="aav-container pl-hero-grid">
   <div class="pl-hero-copy">
@@ -22,30 +22,77 @@
     </p>
   </div>
 
-  <div class="pl-hero-visual" aria-label="Product preview (placeholder)">
-    <div class="pl-screenshot" role="img" aria-label="Product screenshot placeholder">
-      <div class="pl-screenshot-topbar">LabOS — Proofline Engine</div>
-      <div class="pl-screenshot-body">
-        <div class="pl-screenshot-row">
-          <span class="pl-pill">Connect</span>
-          <span class="pl-pill">Proofline</span>
-          <span class="pl-pill">Discover</span>
-        </div>
-        <div class="pl-screenshot-row">
-          <span class="pl-line"></span>
-          <span class="pl-line"></span>
-          <span class="pl-line"></span>
-        </div>
-        <div class="pl-screenshot-row">
-          <span class="pl-pill pl-pill-alt">Branch</span>
-          <span class="pl-line"></span>
-          <span class="pl-line"></span>
+  <div class="pl-hero-visual" aria-label="Proofline visualization">
+    <div class="pl-screenshot" role="img" aria-label="Proofline preview">
+      <div class="pl-screenshot-topbar">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+          Proofline
+        </span>
+      </div>
+
+      <!-- Clean Proofline DAG -->
+      <div style="padding: 20px 16px; background: linear-gradient(180deg, #fafbfc 0%, #f5f7fa 100%); min-height: 280px; position: relative; overflow: hidden;">
+        <!-- Subtle dot grid -->
+        <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px); background-size: 14px 14px;"></div>
+
+        <!-- Glowing connection line (shows compounding) -->
+        <div style="position: absolute; left: 26px; top: 28px; bottom: 28px; width: 3px; background: linear-gradient(180deg, #a855f7 0%, #3b82f6 35%, #0ea5e9 65%, #10b981 100%); border-radius: 2px; box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);"></div>
+
+        <!-- Nodes -->
+        <div style="position: relative; display: flex; flex-direction: column; gap: 14px;">
+
+          <!-- Node 1: Idea -->
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 16px; height: 16px; border-radius: 50%; background: #a855f7; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(168, 85, 247, 0.2); z-index: 2;"></div>
+            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="padding: 4px 10px; background: rgba(168, 85, 247, 0.1); color: #a855f7; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">IDEA</span>
+                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Research question</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 2: Evidence -->
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25), 0 2px 8px rgba(59, 130, 246, 0.2); z-index: 2;"></div>
+            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.12); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="padding: 4px 10px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">EVIDENCE</span>
+                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Literature reviewed</span>
+                <span style="margin-left: auto; color: #10b981; font-size: 14px;">✓</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 3: Hypothesis -->
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 16px; height: 16px; border-radius: 50%; background: #0ea5e9; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25), 0 2px 8px rgba(14, 165, 233, 0.2); z-index: 2;"></div>
+            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(14, 165, 233, 0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="padding: 4px 10px; background: rgba(14, 165, 233, 0.1); color: #0ea5e9; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">HYPOTHESIS</span>
+                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Theory formed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Node 4: Validated -->
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 16px; height: 16px; border-radius: 50%; background: #10b981; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25), 0 2px 8px rgba(16, 185, 129, 0.2); z-index: 2;"></div>
+            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="padding: 4px 10px; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">VALIDATED</span>
+                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Experiment confirmed</span>
+                <span style="margin-left: auto; color: #10b981; font-size: 14px;">✓</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="pl-callout pl-callout-evidence">Provenance</div>
-      <div class="pl-callout pl-callout-decision">Confidence</div>
-      <div class="pl-callout pl-callout-track">Decision trail</div>
+      <!-- Single callout - positioned clearly -->
+      <div class="pl-callout pl-callout-track" style="bottom: 20px; right: 16px; left: auto; top: auto;">Every step traceable</div>
     </div>
   </div>
 </div>
