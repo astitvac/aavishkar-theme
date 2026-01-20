@@ -1,6 +1,6 @@
 # Building Proofline Page (aavishkar.ai/proofline) — Final Local → Divi → Launch Checklist
 
-**Last updated:** 2026-01-15
+**Last updated:** 2026-01-20
 **Target URL:** `https://aavishkar.ai/proofline`
 **This guide builds on:** `CompanyPage/Building_aavishkar_site.md` (Design System v2.0 + proven Divi workflow)
 
@@ -27,11 +27,20 @@
 - [x] Copy updated in local mock (`CompanyPage/proofline-mock-light.html`) for Hero/Lighthouse/Demos/About (2026-01-15)
 - [x] Proofline hero headline updated + “knowledge creation” highlight style matched to homepage (uses `<strong>` + `#c87fd0`)
 
+### ✅ COMPLETED (2026-01-20):
+- [x] **Wording consistency pass completed** — standardized on "Founding Labs" terminology:
+  - Updated `proofline-hero.html`: CTA now reads "Apply as a Founding Lab"
+  - Updated `proofline-lighthouse.html`: eyebrow now reads "Founding Labs"
+  - Updated `proofline-demos.html`: CTA now reads "Apply as a Founding Lab"
+  - Note: Divi Theme Builder header nav link needs manual update ("Lighthouse Labs" → "Founding Labs")
+- [x] New high-quality logo deployed: `Proofline_Logo_web_large.png`
+- [x] Logo sizing CSS (80px height)
+
 ### 📋 REMAINING:
-- [ ] (Later) Create Contact Form 7 form (Lighthouse Labs) + swap in (after layout matches mock)
+- [ ] (Later) Create Contact Form 7 form (Founding Labs) + swap in (after layout matches mock)
 - [ ] WP Rocket hardening: ensure **visitors** get the latest child theme CSS (minified/Used CSS can serve a stale `style.css`)
 - [ ] Final QA & polish (responsive + Visual Builder parity + performance)
-- [ ] Final wording consistency pass (Phase K) — “Lighthouse Labs” vs “Founding Labs”
+- [ ] **Divi Theme Builder**: Update header nav link text from "Lighthouse Labs" to "Founding Labs"
 
 ### 🔴 GAP ANALYSIS: What's NOT yet implemented vs `proofline-mock-light.html`
 
@@ -99,7 +108,7 @@
 
 ### Key URLs:
 - **Live page:** `https://aavishkar.ai/proofline`
-- **Logo:** `https://aavishkar.ai/wp-content/uploads/2026/01/Proofline-Logo-Only.png`
+- **Logo:** `https://aavishkar.ai/wp-content/uploads/2026/01/Proofline_Logo_web_large.png`
 
 ---
 
@@ -355,7 +364,7 @@ Section (CSS Class: aav-site-header pl-header)  ← CRITICAL: pl-header enables 
     │   └── HTML (NO <br> tags between links!):
     │       <nav class="pl-nav">
     │       <a class="pl-nav-link" href="#demos">Demos</a>
-    │       <a class="pl-nav-link" href="#lighthouse">Lighthouse Labs</a>
+    │       <a class="pl-nav-link" href="#lighthouse">Founding Labs</a>
     │       <a class="pl-nav-link" href="#about">About</a>
     │       </nav>
     │
@@ -654,19 +663,17 @@ Paste this (inner HTML only):
 
 ## 14) Next steps (to complete Proofline)
 
-### 14.1 Do a final “wording consistency” pass (recommended)
-Right now the page mixes two labels:
-- Header nav link: **“Lighthouse Labs”**
-- Hero eyebrow: **“Founding Labs”**
-- Section H2: **“Become a Founding Lab”**
-- CTA buttons: **“Apply as a Lighthouse Lab”**
+### 14.1 Wording consistency ✅ COMPLETED (2026-01-20)
+All instances now use "Founding Labs" terminology consistently:
+- ✅ Hero eyebrow: "Founding Labs · Invite-only"
+- ✅ Hero CTA: "Apply as a Founding Lab"
+- ✅ Lighthouse section eyebrow: "Founding Labs"
+- ✅ Lighthouse section H2: "Become a Founding Lab"
+- ✅ Demos CTA: "Apply as a Founding Lab"
 
-Pick one term and make it consistent across:
-- Header nav link text (Theme Builder header HTML)
-- Hero primary CTA label
-- Demos CTA label
-
-Recommendation: keep **“Founding Labs”** as the public-facing program name, and keep **“Lighthouse”** as an internal concept if needed.
+**⚠️ Manual Divi update required:**
+- Divi Theme Builder → Proofline header → nav link text
+- Change: "Lighthouse Labs" → "Founding Labs"
 
 ### 14.2 Verify CSS deployment + caching health
 - [ ] Confirm visitors are receiving the latest CSS:
