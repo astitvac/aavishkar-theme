@@ -1,0 +1,115 @@
+<!--
+  Proofline Hero Visual - Standalone SVG component
+  DAG branching design showing knowledge flow with validated/invalidated paths
+  Source of truth: edit here, then copy to Divi Code module
+  Updated: 2026-01-22 - Larger DAG visual with equal card spacing (viewBox 360x300, max-width 440px)
+-->
+<div class="pl-screenshot" aria-label="Proofline knowledge graph visualization" style="max-width: 440px;">
+  <svg viewBox="0 0 360 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proofline timeline with branching">
+    <defs>
+      <!-- Card shadow filter -->
+      <filter id="pl-card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(15,23,42,0.06)"/>
+      </filter>
+
+      <!-- Node glow filter -->
+      <filter id="pl-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Header: Proofline title -->
+    <g>
+      <circle cx="32" cy="20" r="5" fill="#9e23a3"/>
+      <text x="44" y="25" fill="#0f172a" font-family="dinmedium, Arial, sans-serif" font-size="14" font-weight="600">Proofline</text>
+    </g>
+
+    <!-- ========== MAIN SPINE (x=32) ========== -->
+    <!-- Segment: IDEA to EVIDENCE -->
+    <line x1="32" y1="60" x2="32" y2="88" stroke="#9e23a3" stroke-width="3" stroke-linecap="round"/>
+    <!-- Segment: EVIDENCE to HYPOTHESIS -->
+    <line x1="32" y1="108" x2="32" y2="148" stroke="#8a32a8" stroke-width="3" stroke-linecap="round"/>
+    <!-- Segment: HYPOTHESIS to INSIGHT -->
+    <line x1="32" y1="168" x2="32" y2="208" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- ========== RIGHT BRANCH (ALT HYPOTHESIS) ========== -->
+    <!-- Horizontal from EVIDENCE going RIGHT -->
+    <line x1="40" y1="98" x2="210" y2="98" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+    <!-- Vertical down to ALT HYPOTHESIS node -->
+    <line x1="210" y1="98" x2="210" y2="148" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+    <!-- Vertical from ALT HYPOTHESIS down to INSIGHT (dotted = learnings merge) -->
+    <line x1="210" y1="168" x2="210" y2="218" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+    <!-- Horizontal from right back to INSIGHT (dotted) -->
+    <line x1="210" y1="218" x2="42" y2="218" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+
+    <!-- ========== ROW 1: IDEA (y=40) ========== -->
+    <g transform="translate(0, 40)">
+      <circle cx="32" cy="14" r="7" fill="#fff" stroke="#9e23a3" stroke-width="2.5"/>
+      <circle cx="32" cy="14" r="2.5" fill="#9e23a3"/>
+      <g filter="url(#pl-card-shadow)">
+        <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+      </g>
+      <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(158, 35, 163, 0.12)"/>
+      <text x="90" y="20" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">IDEA</text>
+    </g>
+
+    <!-- ========== ROW 2: EVIDENCE (y=100) - equal spacing of 60 ========== -->
+    <g transform="translate(0, 84)">
+      <circle cx="32" cy="14" r="7" fill="#fff" stroke="#7c3aad" stroke-width="2.5"/>
+      <circle cx="32" cy="14" r="2.5" fill="#7c3aad"/>
+      <g filter="url(#pl-card-shadow)">
+        <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+      </g>
+      <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(124, 58, 173, 0.12)"/>
+      <text x="90" y="20" fill="#7c3aad" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">EVIDENCE</text>
+    </g>
+
+    <!-- ========== ROW 3: BOTH HYPOTHESES (y=154) - equal spacing of 60 ========== -->
+    <g transform="translate(0, 140)">
+      <!-- MAIN HYPOTHESIS on LEFT (main spine) -->
+      <circle cx="32" cy="14" r="7" fill="#fff" stroke="#6f2dbd" stroke-width="2.5"/>
+      <circle cx="32" cy="14" r="2.5" fill="#6f2dbd"/>
+      <g filter="url(#pl-card-shadow)">
+        <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+      </g>
+      <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(111, 45, 189, 0.12)"/>
+      <text x="90" y="20" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle">HYPOTHESIS</text>
+
+      <!-- ALT HYPOTHESIS on RIGHT (branch, invalidated) -->
+      <circle cx="210" cy="14" r="7" fill="#fff" stroke="#6f2dbd" stroke-width="2.5"/>
+      <circle cx="210" cy="14" r="2.5" fill="#6f2dbd"/>
+      <!-- X mark in circle - LEFT of card -->
+      <circle cx="228" cy="14" r="9" fill="rgba(239, 68, 68, 0.1)"/>
+      <path d="M224 10 L232 18 M232 10 L224 18" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+      <!-- ALT card -->
+      <g filter="url(#pl-card-shadow)">
+        <rect x="245" y="0" width="80" height="32" rx="7" fill="#fff"/>
+      </g>
+      <rect x="253" y="7" width="44" height="18" rx="4" fill="rgba(111, 45, 189, 0.08)"/>
+      <text x="275" y="20" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">ALT</text>
+    </g>
+
+    <!-- ========== ROW 4: INSIGHT (y=204) - equal spacing of 60 ========== -->
+    <g transform="translate(0, 196)">
+      <!-- Glowing node -->
+      <g filter="url(#pl-glow)">
+        <circle cx="32" cy="14" r="10" fill="#c87fd0"/>
+      </g>
+      <circle cx="32" cy="14" r="5" fill="#fff"/>
+      <g filter="url(#pl-card-shadow)">
+        <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+      </g>
+      <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(200, 127, 208, 0.18)"/>
+      <text x="90" y="20" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">INSIGHT</text>
+      <!-- Checkmark -->
+      <circle cx="145" cy="16" r="10" fill="#fff"/>
+      <circle cx="145" cy="16" r="9" fill="rgba(200, 127, 208, 0.15)"/>
+      <path d="M140 16 L144 20 L151 12" stroke="#9e23a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </g>
+
+  </svg>
+</div>

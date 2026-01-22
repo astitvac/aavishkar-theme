@@ -2,97 +2,137 @@
   Proofline Hero Partial
   Usage: Copy this HTML into a Divi Code module (shortcodes don't work in Divi Visual Builder)
   Source of truth for the hero section - edit here, then copy to Divi
+  Updated: 2026-01-22 - Larger DAG visual with equal card spacing (viewBox 360x300, max-width 440px)
 -->
 <div class="aav-container pl-hero-grid">
+  <!-- Left: Hero Copy -->
   <div class="pl-hero-copy">
     <div class="pl-eyebrow">Founding Labs · Invite-only</div>
     <h1 class="pl-h1">Supercharge <strong>knowledge creation</strong> in teams</h1>
     <p class="pl-subtitle">
-      Capture hypotheses, evidence, and decisions as <strong>Knowledge Cards</strong>. Connect them into a <strong>Proofline</strong>—so knowledge compounds and every claim stays traceable.
+      Capture hypotheses, evidence, and decisions. Connect them into a <strong>Proofline</strong>™, a scientific engine for knowledge creation.
     </p>
 
     <div class="pl-hero-ctas" role="group" aria-label="Primary actions">
       <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Founding Lab</a>
-      <a class="aav-btn aav-btn-ghost" href="https://www.youtube.com/watch?v=KT6eyadQfIg" target="_blank" rel="noopener">See it in action →</a>
+      <a class="aav-btn aav-btn-ghost" href="#demos">See it in action →</a>
     </div>
 
     <p class="pl-hero-note">
-      AI forgets everything between sessions. Proofline is the provenance engine behind <strong>LabOS</strong>—so
-      context persists and compounds. Free for Founding Labs.
+      Proofline helps you ask better questions of AI and collaborate with your team to create verifiable new knowledge together.
     </p>
   </div>
 
-  <div class="pl-hero-visual" aria-label="Proofline visualization">
-    <div class="pl-screenshot" role="img" aria-label="Proofline preview">
-      <div class="pl-screenshot-topbar">
-        <span style="display: flex; align-items: center; gap: 8px;">
-          <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
-          Proofline
-        </span>
-      </div>
+  <!-- Right: Hero Visual - DAG Branching -->
+  <div class="pl-hero-visual">
+    <div class="pl-screenshot" aria-label="Proofline knowledge graph visualization" style="max-width: 440px;">
+      <svg viewBox="0 0 360 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proofline timeline with branching">
+        <defs>
+          <!-- Card shadow filter -->
+          <filter id="pl-card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(15,23,42,0.06)"/>
+          </filter>
 
-      <!-- Clean Proofline DAG -->
-      <div style="padding: 20px 16px; background: linear-gradient(180deg, #fafbfc 0%, #f5f7fa 100%); min-height: 280px; position: relative; overflow: hidden;">
-        <!-- Subtle dot grid -->
-        <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px); background-size: 14px 14px;"></div>
+          <!-- Node glow filter -->
+          <filter id="pl-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
 
-        <!-- Glowing connection line (shows compounding) -->
-        <div style="position: absolute; left: 26px; top: 28px; bottom: 28px; width: 3px; background: linear-gradient(180deg, #a855f7 0%, #3b82f6 35%, #0ea5e9 65%, #10b981 100%); border-radius: 2px; box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);"></div>
+        <!-- Header: Proofline title -->
+        <g>
+          <circle cx="32" cy="20" r="5" fill="#9e23a3"/>
+          <text x="44" y="25" fill="#0f172a" font-family="dinmedium, Arial, sans-serif" font-size="14" font-weight="600">Proofline</text>
+        </g>
 
-        <!-- Nodes -->
-        <div style="position: relative; display: flex; flex-direction: column; gap: 14px;">
+        <!-- ========== MAIN SPINE (x=32) ========== -->
+        <!-- Segment: IDEA to EVIDENCE -->
+        <line x1="32" y1="60" x2="32" y2="88" stroke="#9e23a3" stroke-width="3" stroke-linecap="round"/>
+        <!-- Segment: EVIDENCE to HYPOTHESIS -->
+        <line x1="32" y1="108" x2="32" y2="148" stroke="#8a32a8" stroke-width="3" stroke-linecap="round"/>
+        <!-- Segment: HYPOTHESIS to INSIGHT -->
+        <line x1="32" y1="168" x2="32" y2="208" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
 
-          <!-- Node 1: Idea -->
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 16px; height: 16px; border-radius: 50%; background: #a855f7; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(168, 85, 247, 0.2); z-index: 2;"></div>
-            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(168, 85, 247, 0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="padding: 4px 10px; background: rgba(168, 85, 247, 0.1); color: #a855f7; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">IDEA</span>
-                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Research question</span>
-              </div>
-            </div>
-          </div>
+        <!-- ========== RIGHT BRANCH (ALT HYPOTHESIS) ========== -->
+        <!-- Horizontal from EVIDENCE going RIGHT -->
+        <line x1="40" y1="98" x2="210" y2="98" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+        <!-- Vertical down to ALT HYPOTHESIS node -->
+        <line x1="210" y1="98" x2="210" y2="148" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+        <!-- Vertical from ALT HYPOTHESIS down to INSIGHT (dotted = learnings merge) -->
+        <line x1="210" y1="168" x2="210" y2="218" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+        <!-- Horizontal from right back to INSIGHT (dotted) -->
+        <line x1="210" y1="218" x2="42" y2="218" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
 
-          <!-- Node 2: Evidence -->
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 16px; height: 16px; border-radius: 50%; background: #3b82f6; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25), 0 2px 8px rgba(59, 130, 246, 0.2); z-index: 2;"></div>
-            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.12); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="padding: 4px 10px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">EVIDENCE</span>
-                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Literature reviewed</span>
-                <span style="margin-left: auto; color: #10b981; font-size: 14px;">✓</span>
-              </div>
-            </div>
-          </div>
+        <!-- ========== ROW 1: IDEA (y=40) ========== -->
+        <g transform="translate(0, 40)">
+          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#9e23a3" stroke-width="2.5"/>
+          <circle cx="32" cy="14" r="2.5" fill="#9e23a3"/>
+          <g filter="url(#pl-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(158, 35, 163, 0.12)"/>
+          <text x="90" y="20" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">IDEA</text>
+        </g>
 
-          <!-- Node 3: Hypothesis -->
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 16px; height: 16px; border-radius: 50%; background: #0ea5e9; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25), 0 2px 8px rgba(14, 165, 233, 0.2); z-index: 2;"></div>
-            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(14, 165, 233, 0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="padding: 4px 10px; background: rgba(14, 165, 233, 0.1); color: #0ea5e9; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">HYPOTHESIS</span>
-                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Theory formed</span>
-              </div>
-            </div>
-          </div>
+        <!-- ========== ROW 2: EVIDENCE (y=100) - equal spacing of 60 ========== -->
+        <g transform="translate(0, 84)">
+          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#7c3aad" stroke-width="2.5"/>
+          <circle cx="32" cy="14" r="2.5" fill="#7c3aad"/>
+          <g filter="url(#pl-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(124, 58, 173, 0.12)"/>
+          <text x="90" y="20" fill="#7c3aad" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">EVIDENCE</text>
+        </g>
 
-          <!-- Node 4: Validated -->
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 16px; height: 16px; border-radius: 50%; background: #10b981; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25), 0 2px 8px rgba(16, 185, 129, 0.2); z-index: 2;"></div>
-            <div style="flex: 1; padding: 12px 16px; background: #fff; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.15); box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="padding: 4px 10px; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.02em;">VALIDATED</span>
-                <span style="font-size: 14px; font-weight: 600; color: #1a1a2e;">Experiment confirmed</span>
-                <span style="margin-left: auto; color: #10b981; font-size: 14px;">✓</span>
-              </div>
-            </div>
-          </div>
+        <!-- ========== ROW 3: BOTH HYPOTHESES (y=154) - equal spacing of 60 ========== -->
+        <g transform="translate(0, 140)">
+          <!-- MAIN HYPOTHESIS on LEFT (main spine) -->
+          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#6f2dbd" stroke-width="2.5"/>
+          <circle cx="32" cy="14" r="2.5" fill="#6f2dbd"/>
+          <g filter="url(#pl-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(111, 45, 189, 0.12)"/>
+          <text x="90" y="20" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle">HYPOTHESIS</text>
 
-        </div>
-      </div>
+          <!-- ALT HYPOTHESIS on RIGHT (branch, invalidated) -->
+          <circle cx="210" cy="14" r="7" fill="#fff" stroke="#6f2dbd" stroke-width="2.5"/>
+          <circle cx="210" cy="14" r="2.5" fill="#6f2dbd"/>
+          <!-- X mark in circle - LEFT of card -->
+          <circle cx="228" cy="14" r="9" fill="rgba(239, 68, 68, 0.1)"/>
+          <path d="M224 10 L232 18 M232 10 L224 18" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+          <!-- ALT card -->
+          <g filter="url(#pl-card-shadow)">
+            <rect x="245" y="0" width="80" height="32" rx="7" fill="#fff"/>
+          </g>
+          <rect x="253" y="7" width="44" height="18" rx="4" fill="rgba(111, 45, 189, 0.08)"/>
+          <text x="275" y="20" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">ALT</text>
+        </g>
 
-      <!-- Single callout - positioned clearly -->
-      <div class="pl-callout pl-callout-track" style="bottom: 20px; right: 16px; left: auto; top: auto;">Every step traceable</div>
+        <!-- ========== ROW 4: INSIGHT (y=204) - equal spacing of 60 ========== -->
+        <g transform="translate(0, 196)">
+          <!-- Glowing node -->
+          <g filter="url(#pl-glow)">
+            <circle cx="32" cy="14" r="10" fill="#c87fd0"/>
+          </g>
+          <circle cx="32" cy="14" r="5" fill="#fff"/>
+          <g filter="url(#pl-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(200, 127, 208, 0.18)"/>
+          <text x="90" y="20" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">INSIGHT</text>
+          <!-- Checkmark -->
+          <circle cx="145" cy="16" r="10" fill="#fff"/>
+          <circle cx="145" cy="16" r="9" fill="rgba(200, 127, 208, 0.15)"/>
+          <path d="M140 16 L144 20 L151 12" stroke="#9e23a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+
+      </svg>
     </div>
   </div>
 </div>
