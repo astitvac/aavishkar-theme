@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proofline Hero - Full Preview</title>
+  <style>
+    @font-face {
+      font-family: 'dinmedium';
+      src: url('../theme/fonts/DIN Alternate Medium_0.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: dinmedium, Arial, sans-serif;
+      background:
+        radial-gradient(ellipse 800px 400px at 20% 10%, rgba(200, 127, 208, 0.10), transparent 50%),
+        radial-gradient(ellipse 700px 350px at 80% 25%, rgba(158, 35, 163, 0.08), transparent 55%),
+        radial-gradient(ellipse 600px 300px at 30% 80%, rgba(11, 68, 123, 0.05), transparent 50%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 55%, #f3f6fb 100%),
+        #f8fafc;
+      min-height: 100vh;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .pl-hero {
+      padding: 80px 24px 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pl-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    /* Hero Copy */
+    .pl-hero-copy {
+      max-width: 540px;
+    }
+
+    .pl-eyebrow {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(158, 35, 163, 0.08);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #9e23a3;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
+    }
+
+    .pl-h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .pl-h1 strong {
+      background: linear-gradient(135deg, #9e23a3 0%, #6f2dbd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pl-subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #475569;
+      margin-bottom: 32px;
+    }
+
+    .pl-subtitle strong {
+      color: #334155;
+      font-weight: 600;
+    }
+
+    /* CTAs */
+    .pl-hero-ctas {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .aav-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .aav-btn-primary {
+      background: linear-gradient(145deg, #6f2dbd 0%, #9e23a3 45%, #6f2dbd 100%);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(158, 35, 163, 0.3);
+    }
+
+    .aav-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(158, 35, 163, 0.4);
+    }
+
+    .aav-btn-ghost {
+      background: transparent;
+      color: #6f2dbd;
+      border: 2px solid rgba(111, 45, 189, 0.2);
+    }
+
+    .aav-btn-ghost:hover {
+      background: rgba(111, 45, 189, 0.05);
+      border-color: rgba(111, 45, 189, 0.3);
+    }
+
+    /* Hero Note */
+    .pl-hero-note {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #64748b;
+      padding: 16px 20px;
+      background: rgba(158, 35, 163, 0.04);
+      border-left: 3px solid rgba(158, 35, 163, 0.3);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pl-hero-note strong {
+      color: #9e23a3;
+    }
+
+    /* Hero Visual */
+    .pl-hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pl-screenshot {
+      width: 100%;
+      max-width: 380px;
+      padding: 16px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 20px;
+      border: 1px solid rgba(158, 35, 163, 0.08);
+      box-shadow:
+        0 25px 60px rgba(2, 6, 23, 0.12),
+        0 0 0 1px rgba(158, 35, 163, 0.04);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .pl-screenshot svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .pl-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .pl-hero-copy {
+        max-width: 100%;
+        text-align: center;
+      }
+
+      .pl-h1 {
+        font-size: 36px;
+      }
+
+      .pl-hero-ctas {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .pl-hero-note {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="pl-hero">
+    <div class="pl-hero-grid">
+      <!-- Left: Hero Copy -->
+      <div class="pl-hero-copy">
+        <div class="pl-eyebrow">Founding Labs · Invite-only</div>
+        <h1 class="pl-h1">Supercharge <strong>knowledge creation</strong> in teams</h1>
+        <p class="pl-subtitle">
+          Capture hypotheses, evidence, and decisions as <strong>Knowledge Cards</strong>. Connect them into a <strong>Proofline</strong>—so knowledge compounds and every claim stays traceable.
+        </p>
+
+        <div class="pl-hero-ctas">
+          <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Founding Lab</a>
+          <a class="aav-btn aav-btn-ghost" href="#">See it in action →</a>
+        </div>
+
+        <p class="pl-hero-note">
+          AI forgets everything between sessions. Proofline is the provenance engine behind <strong>LabOS</strong>—so context persists and compounds. Free for Founding Labs.
+        </p>
+      </div>
+
+      <!-- Right: Hero Visual -->
+      <div class="pl-hero-visual">
+        <div class="pl-screenshot" aria-label="Proofline knowledge graph visualization">
+          <svg viewBox="0 0 340 250" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proofline timeline with branching">
+            <defs>
+              <!-- Card shadow filter -->
+              <filter id="pl-card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+                <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(15,23,42,0.06)"/>
+              </filter>
+
+              <!-- Node glow filter -->
+              <filter id="pl-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Header: Proofline title -->
+            <g>
+              <circle cx="30" cy="16" r="4" fill="#9e23a3"/>
+              <text x="40" y="20" fill="#0f172a" font-family="dinmedium, Arial, sans-serif" font-size="12" font-weight="600">Proofline</text>
+            </g>
+
+            <!-- ========== MAIN SPINE (x=30) ========== -->
+            <!-- Segment: IDEA to EVIDENCE -->
+            <line x1="30" y1="50" x2="30" y2="73" stroke="#9e23a3" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Segment: EVIDENCE to HYPOTHESIS -->
+            <line x1="30" y1="85" x2="30" y2="123" stroke="#8a32a8" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Segment: HYPOTHESIS to INSIGHT -->
+            <line x1="30" y1="135" x2="30" y2="173" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round"/>
+
+            <!-- ========== RIGHT BRANCH (ALT HYPOTHESIS) ========== -->
+            <!-- Horizontal from EVIDENCE going RIGHT -->
+            <line x1="36" y1="79" x2="200" y2="79" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Vertical down to ALT HYPOTHESIS node -->
+            <line x1="200" y1="79" x2="200" y2="123" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Vertical from ALT HYPOTHESIS down to INSIGHT (dotted = learnings merge) -->
+            <line x1="200" y1="135" x2="200" y2="179" stroke="#7c3aad" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/>
+            <!-- Horizontal from right back to INSIGHT (dotted) -->
+            <line x1="200" y1="179" x2="38" y2="179" stroke="#7c3aad" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/>
+
+            <!-- ========== ROW 1: IDEA (y=30) ========== -->
+            <g transform="translate(0, 30)">
+              <circle cx="30" cy="14" r="6" fill="#fff" stroke="#9e23a3" stroke-width="2"/>
+              <circle cx="30" cy="14" r="2" fill="#9e23a3"/>
+              <g filter="url(#pl-card-shadow)">
+                <rect x="45" y="0" width="70" height="28" rx="6" fill="#fff"/>
+              </g>
+              <rect x="52" y="6" width="56" height="16" rx="3" fill="rgba(158, 35, 163, 0.12)"/>
+              <text x="80" y="17" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="8" font-weight="600" text-anchor="middle">IDEA</text>
+            </g>
+
+            <!-- ========== ROW 2: EVIDENCE (y=65) ========== -->
+            <g transform="translate(0, 65)">
+              <circle cx="30" cy="14" r="6" fill="#fff" stroke="#7c3aad" stroke-width="2"/>
+              <circle cx="30" cy="14" r="2" fill="#7c3aad"/>
+              <g filter="url(#pl-card-shadow)">
+                <rect x="45" y="0" width="70" height="28" rx="6" fill="#fff"/>
+              </g>
+              <rect x="52" y="6" width="56" height="16" rx="3" fill="rgba(124, 58, 173, 0.12)"/>
+              <text x="80" y="17" fill="#7c3aad" font-family="dinmedium, Arial, sans-serif" font-size="8" font-weight="600" text-anchor="middle">EVIDENCE</text>
+            </g>
+
+            <!-- ========== ROW 3: BOTH HYPOTHESES AT SAME LEVEL (y=115) ========== -->
+            <g transform="translate(0, 115)">
+              <!-- MAIN HYPOTHESIS on LEFT (main spine) -->
+              <circle cx="30" cy="14" r="6" fill="#fff" stroke="#6f2dbd" stroke-width="2"/>
+              <circle cx="30" cy="14" r="2" fill="#6f2dbd"/>
+              <g filter="url(#pl-card-shadow)">
+                <rect x="45" y="0" width="70" height="28" rx="6" fill="#fff"/>
+              </g>
+              <rect x="52" y="6" width="56" height="16" rx="3" fill="rgba(111, 45, 189, 0.12)"/>
+              <text x="80" y="17" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="7" font-weight="600" text-anchor="middle">HYPOTHESIS</text>
+
+              <!-- ALT HYPOTHESIS on RIGHT (branch, invalidated) -->
+              <circle cx="200" cy="14" r="6" fill="#fff" stroke="#6f2dbd" stroke-width="2"/>
+              <circle cx="200" cy="14" r="2" fill="#6f2dbd"/>
+              <!-- X mark in circle - LEFT of card -->
+              <circle cx="215" cy="14" r="7" fill="rgba(239, 68, 68, 0.1)"/>
+              <path d="M212 11 L218 17 M218 11 L212 17" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- ALT card -->
+              <g filter="url(#pl-card-shadow)">
+                <rect x="230" y="0" width="70" height="28" rx="6" fill="#fff"/>
+              </g>
+              <rect x="237" y="6" width="36" height="16" rx="3" fill="rgba(111, 45, 189, 0.08)"/>
+              <text x="255" y="17" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="8" font-weight="600" text-anchor="middle">ALT</text>
+            </g>
+
+            <!-- ========== ROW 4: INSIGHT (y=165) ========== -->
+            <g transform="translate(0, 165)">
+              <!-- Glowing node -->
+              <g filter="url(#pl-glow)">
+                <circle cx="30" cy="14" r="8" fill="#c87fd0"/>
+              </g>
+              <circle cx="30" cy="14" r="4" fill="#fff"/>
+              <g filter="url(#pl-card-shadow)">
+                <rect x="45" y="0" width="70" height="28" rx="6" fill="#fff"/>
+              </g>
+              <rect x="52" y="6" width="56" height="16" rx="3" fill="rgba(200, 127, 208, 0.18)"/>
+              <text x="80" y="17" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="8" font-weight="600" text-anchor="middle">INSIGHT</text>
+              <!-- Checkmark -->
+              <circle cx="128" cy="14" r="8" fill="#fff"/>
+              <circle cx="128" cy="14" r="7" fill="rgba(200, 127, 208, 0.15)"/>
+              <path d="M124 14 L127 17 L132 11" stroke="#9e23a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </g>
+
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

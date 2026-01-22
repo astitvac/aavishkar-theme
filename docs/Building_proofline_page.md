@@ -688,6 +688,108 @@ All instances now use "Founding Labs" terminology consistently:
 - [ ] SEO: title/description + OpenGraph (Phase I)
 
 ### 14.4 Optional: tighten the form confirmation copy
-Current confirmation area still says: “**Application received. We’ll reply in 48 hours. Optional: book a call.**”
+Current confirmation area still says: "**Application received. We'll reply in 48 hours. Optional: book a call.**"
 If you want it to match the new tone, update it to something like:
-- “Received. We’ll reply in 48h. Optional: book a call.”
+- "Received. We'll reply in 48h. Optional: book a call."
+
+---
+
+## 15) Hero Visual - DAG Branching Design
+
+**Updated: 2026-01-22**
+
+The Proofline hero now features a branching DAG (Directed Acyclic Graph) visual that shows knowledge flow with validated/invalidated paths.
+
+### 15.1 Visual Structure
+
+```
+●───── IDEA
+│
+●───────────────────────────● X ─── ALT
+│                           │
+●───── HYPOTHESIS           │
+│                           │ (dotted - learnings merge)
+│                           │
+◎───── INSIGHT ✓ ←..........┘
+```
+
+### 15.2 Color Palette
+
+| Element | Color | Hex |
+|---------|-------|-----|
+| Primary Purple | Main spine top | `#9e23a3` |
+| Medium Purple | Mid spine / branch | `#8a32a8`, `#7c3aad` |
+| Deep Purple | Hypothesis nodes | `#6f2dbd` |
+| Pink Highlight | Insight glow | `#c87fd0` |
+| Validation Red | X mark (invalidated) | `#ef4444` |
+
+### 15.3 Key Visual Elements
+
+1. **Main Spine (x=30)**: Vertical purple line with gradient from `#9e23a3` → `#7c3aad`
+2. **Branch**: Horizontal line from EVIDENCE node to ALT HYPOTHESIS (right side)
+3. **Nodes**: 6px radius circles with white fill and colored stroke
+4. **Cards**: 70px × 28px white cards with colored badge labels
+5. **X Mark**: Red circle with crossed lines (invalidated path)
+6. **Checkmark**: Purple circle with check (validated insight)
+7. **Dotted Lines**: Purple dashed lines (`stroke-dasharray="4 3"`) showing learnings merge back
+
+### 15.4 SVG Specifications
+
+- ViewBox: `0 0 340 250`
+- Filter IDs: `pl-card-shadow`, `pl-glow`
+- Font: `dinmedium, Arial, sans-serif`
+- Node positions (y): IDEA=44, EVIDENCE=79, HYPOTHESIS=129, INSIGHT=179
+
+### 15.5 Two-Column Hero Layout
+
+- **Left (copy)**: Eyebrow, H1, subtitle, CTAs, note
+- **Right (visual)**: Glass-effect container with SVG DAG
+- Grid: `1fr 1fr`, gap: 60px, centered alignment
+
+### 15.6 CSS Classes for DAG Visual
+
+```css
+/* Glass container */
+.pl-screenshot {
+  max-width: 380px;
+  padding: 16px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 20px;
+  border: 1px solid rgba(158, 35, 163, 0.08);
+  box-shadow: 0 25px 60px rgba(2, 6, 23, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+/* Hero grid */
+.pl-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+```
+
+### 15.7 Responsive Behavior
+
+- **< 980px**: Grid stacks to single column, copy text centers
+- **< 520px**: H1 reduces to 36px, CTAs stack vertically
+
+### 15.8 Source Files
+
+| File | Purpose |
+|------|---------|
+| `mockups/proofline-dag-visual-test.html` | Reference mockup for testing |
+| `theme/partials/proofline-hero.html` | Complete hero with visual |
+| `theme/partials/proofline-hero-visual.html` | Standalone SVG component |
+
+### 15.9 Finalized Hero Copy
+
+**Eyebrow:** Founding Labs · Invite-only
+
+**Headline:** Supercharge **knowledge creation** in teams
+
+**Subtitle:** Capture hypotheses, evidence, and decisions. Connect them into a **Proofline**™, a scientific engine for knowledge creation.
+
+**CTAs:** "Apply as a Founding Lab" (primary) | "See it in action →" (ghost)
+
+**Note:** Proofline helps you ask better questions of AI and collaborate with your team to create verifiable new knowledge together.

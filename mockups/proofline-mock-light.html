@@ -3,13 +3,575 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Proofline | Git for Human + AI Insights (Light Mode)</title>
+    <title>Proofline | Scientific Engine for Knowledge Creation (Light Mode)</title>
 
-    <!-- Base Aavishkar design system (typography, buttons, containers, header primitives) -->
-    <link rel="stylesheet" href="style-v2.0-header-enhanced.css" />
+    <style>
+      @font-face {
+        font-family: 'dinmedium';
+        src: url('../theme/fonts/DIN Alternate Medium_0.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
 
-    <!-- Proofline page-specific overrides -->
-    <link rel="stylesheet" href="proofline-light.css" />
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: dinmedium, Arial, sans-serif;
+        background:
+          radial-gradient(ellipse 800px 400px at 20% 10%, rgba(200, 127, 208, 0.10), transparent 50%),
+          radial-gradient(ellipse 700px 350px at 80% 25%, rgba(158, 35, 163, 0.08), transparent 55%),
+          radial-gradient(ellipse 600px 300px at 30% 80%, rgba(11, 68, 123, 0.05), transparent 50%),
+          linear-gradient(180deg, #ffffff 0%, #f8fafc 55%, #f3f6fb 100%),
+          #f8fafc;
+        min-height: 100vh;
+        color: #0f172a;
+      }
+
+      /* ========== CONTAINERS ========== */
+      .aav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+      .aav-container-large { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+      .aav-container-small { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+      /* ========== HEADER ========== */
+      .aav-site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+      }
+
+      .aav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+      }
+
+      .pl-logo-img {
+        height: 44px;
+        width: auto;
+      }
+
+      .pl-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pl-nav-link {
+        color: rgba(15, 23, 42, 0.72);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+
+      .pl-nav-link:hover {
+        color: #9e23a3;
+        background: rgba(158, 35, 163, 0.08);
+      }
+
+      /* ========== BUTTONS ========== */
+      .aav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border: none;
+      }
+
+      .aav-btn-primary {
+        background: linear-gradient(145deg, #6f2dbd 0%, #9e23a3 45%, #6f2dbd 100%);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(158, 35, 163, 0.3);
+      }
+
+      .aav-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(158, 35, 163, 0.4);
+      }
+
+      .aav-btn-ghost {
+        background: transparent;
+        color: #6f2dbd;
+        border: 2px solid rgba(111, 45, 189, 0.2);
+      }
+
+      .aav-btn-ghost:hover {
+        background: rgba(111, 45, 189, 0.05);
+        border-color: rgba(111, 45, 189, 0.3);
+      }
+
+      .pl-nav-cta {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 999px;
+      }
+
+      /* ========== HERO SECTION ========== */
+      .pl-hero {
+        padding: 140px 24px 80px;
+        min-height: calc(100vh - 68px);
+        display: flex;
+        align-items: center;
+      }
+
+      .pl-hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .pl-hero-copy {
+        max-width: 540px;
+      }
+
+      .pl-eyebrow {
+        display: inline-block;
+        padding: 6px 14px;
+        background: rgba(158, 35, 163, 0.08);
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #9e23a3;
+        letter-spacing: 0.02em;
+        margin-bottom: 24px;
+      }
+
+      .pl-h1 {
+        font-size: 48px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+      }
+
+      .pl-h1 strong {
+        background: linear-gradient(135deg, #9e23a3 0%, #6f2dbd 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .pl-subtitle {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #475569;
+        margin-bottom: 32px;
+      }
+
+      .pl-subtitle strong {
+        color: #334155;
+        font-weight: 600;
+      }
+
+      .pl-hero-ctas {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .pl-hero-note {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #64748b;
+        padding: 16px 20px;
+        background: rgba(158, 35, 163, 0.04);
+        border-left: 3px solid rgba(158, 35, 163, 0.3);
+        border-radius: 0 8px 8px 0;
+      }
+
+      .pl-hero-note strong {
+        color: #9e23a3;
+      }
+
+      .pl-hero-visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .pl-screenshot {
+        width: 100%;
+        max-width: 380px;
+        padding: 16px;
+        background: rgba(255,255,255,0.85);
+        border-radius: 20px;
+        border: 1px solid rgba(158, 35, 163, 0.08);
+        box-shadow:
+          0 25px 60px rgba(2, 6, 23, 0.12),
+          0 0 0 1px rgba(158, 35, 163, 0.04);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .pl-screenshot svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* ========== SECTION HEADERS ========== */
+      .pl-section-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .pl-h2 {
+        margin: 0;
+        font-size: clamp(28px, 3.6vw, 40px);
+        line-height: 1.2;
+        color: #0f172a;
+      }
+
+      .pl-copy {
+        margin: 14px 0 0;
+        color: rgba(15, 23, 42, 0.72);
+        line-height: 1.7;
+        font-size: 16px;
+      }
+
+      .pl-center { text-align: center; }
+
+      /* ========== LIGHTHOUSE SECTION ========== */
+      .pl-lighthouse {
+        padding: 80px 24px;
+        background: transparent;
+      }
+
+      .pl-lighthouse-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .pl-bullets {
+        margin-top: 24px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .pl-bullet-block {
+        background: rgba(255,255,255,0.70);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+      }
+
+      .pl-bullet-title {
+        margin: 0 0 12px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .pl-bullet-block ul {
+        margin: 0 0 0 20px;
+        padding: 0;
+        color: rgba(15, 23, 42, 0.72);
+        line-height: 1.7;
+      }
+
+      .pl-microcopy {
+        margin: 16px 0 0;
+        color: rgba(15, 23, 42, 0.55);
+        font-size: 13px;
+      }
+
+      .pl-lighthouse-form-card {
+        background: rgba(255,255,255,0.85);
+        border: 1px solid rgba(15, 23, 42, 0.10);
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 16px 44px rgba(2, 6, 23, 0.10);
+        position: relative;
+      }
+
+      .pl-lighthouse-form-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(135deg, rgba(200, 127, 208, 0.10), rgba(11, 68, 123, 0.06));
+        opacity: 0.55;
+        border-radius: 22px;
+      }
+
+      .pl-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .pl-field { display: grid; gap: 8px; }
+      .pl-field-wide { grid-column: 1 / -1; }
+
+      .pl-field label {
+        font-weight: 700;
+        font-size: 13px;
+        color: rgba(15, 23, 42, 0.78);
+      }
+
+      .pl-field input,
+      .pl-field select,
+      .pl-field textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: rgba(255,255,255,0.90);
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .pl-field input:focus,
+      .pl-field select:focus,
+      .pl-field textarea:focus {
+        border-color: rgba(158, 35, 163, 0.45);
+        box-shadow: 0 0 0 4px rgba(158, 35, 163, 0.15);
+      }
+
+      .pl-field textarea {
+        resize: vertical;
+        min-height: 80px;
+        line-height: 1.5;
+      }
+
+      .pl-fieldset {
+        border: 1px solid rgba(15, 23, 42, 0.10);
+        border-radius: 12px;
+        padding: 12px 16px;
+        background: rgba(255,255,255,0.80);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px 20px;
+      }
+
+      .pl-fieldset legend {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 8px;
+        font-weight: 700;
+        font-size: 13px;
+        color: rgba(15, 23, 42, 0.78);
+      }
+
+      .pl-fieldset label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        font-size: 13px;
+        color: rgba(15, 23, 42, 0.70);
+        cursor: pointer;
+      }
+
+      .pl-apply-btn {
+        width: 100%;
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .pl-form-after {
+        margin: 16px 0 0;
+        text-align: center;
+        color: rgba(15, 23, 42, 0.62);
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .pl-inline-link {
+        color: #9e23a3;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .pl-inline-link:hover {
+        text-decoration: underline;
+      }
+
+      .pl-apply-confirm {
+        display: none;
+        padding: 20px;
+        text-align: center;
+        color: #0f172a;
+      }
+
+      .pl-apply-confirm:target {
+        display: block;
+      }
+
+      /* ========== DEMOS SECTION ========== */
+      .pl-demos {
+        padding: 80px 24px;
+        background: transparent;
+      }
+
+      .pl-demo-tiles {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .pl-demo-tile {
+        background: rgba(255,255,255,0.82);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: 0 12px 32px rgba(2, 6, 23, 0.08);
+      }
+
+      .pl-demo-kicker {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.55);
+        margin-bottom: 8px;
+      }
+
+      .pl-demo-title {
+        margin: 0 0 8px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+
+      .pl-demo-one {
+        margin: 0;
+        color: rgba(15, 23, 42, 0.72);
+        line-height: 1.6;
+      }
+
+      .pl-demo-media {
+        margin-top: 16px;
+        border-radius: 16px;
+        border: 1px dashed rgba(15, 23, 42, 0.18);
+        background: linear-gradient(135deg, rgba(200, 127, 208, 0.12), rgba(11, 68, 123, 0.06));
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 16px;
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.50);
+        font-size: 14px;
+      }
+
+      .pl-demo-captions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .pl-caption-chip {
+        font-size: 12px;
+        font-weight: 700;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: rgba(255,255,255,0.70);
+        color: rgba(15, 23, 42, 0.74);
+      }
+
+      .pl-demo-cta-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+
+      /* ========== ABOUT SECTION ========== */
+      .pl-about-section {
+        padding: 60px 24px 100px;
+        text-align: center;
+        background: transparent;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 900px) {
+        .pl-hero-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+
+        .pl-hero-copy {
+          max-width: 100%;
+          text-align: center;
+        }
+
+        .pl-h1 {
+          font-size: 36px;
+        }
+
+        .pl-hero-ctas {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .pl-hero-note {
+          text-align: left;
+        }
+
+        .pl-lighthouse-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pl-nav {
+          display: none;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .pl-hero {
+          padding: 120px 16px 60px;
+        }
+
+        .pl-hero-ctas {
+          flex-direction: column;
+        }
+
+        .pl-hero-ctas .aav-btn {
+          width: 100%;
+        }
+
+        .pl-form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
 
   <body class="proofline-page-light">
@@ -29,7 +591,7 @@
 
         <nav class="pl-nav" aria-label="Proofline navigation">
           <a class="pl-nav-link" href="#demos">Demos</a>
-          <a class="pl-nav-link" href="#lighthouse">Lighthouse Labs</a>
+          <a class="pl-nav-link" href="#lighthouse">Founding Labs</a>
           <a class="pl-nav-link" href="#about">About</a>
           <a class="aav-btn aav-btn-primary pl-nav-cta" href="#lighthouse">Apply</a>
         </nav>
@@ -40,69 +602,154 @@
       <!-- HERO -->
       <section class="pl-hero" id="hero">
         <div class="aav-container pl-hero-grid">
+          <!-- Left: Hero Copy -->
           <div class="pl-hero-copy">
             <div class="pl-eyebrow">Founding Labs · Invite-only</div>
-            <h1 class="pl-h1">The scientific engine for <strong>knowledge creation</strong>.</h1>
+            <h1 class="pl-h1">Supercharge <strong>knowledge creation</strong> in teams</h1>
             <p class="pl-subtitle">
-              Capture hypotheses, evidence, decisions, and AI actions—so knowledge compounds and every claim stays traceable.
+              Capture hypotheses, evidence, and decisions. Connect them into a <strong>Proofline</strong>™, a scientific engine for knowledge creation.
             </p>
 
             <div class="pl-hero-ctas" role="group" aria-label="Primary actions">
-              <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Lighthouse Lab</a>
-              <a class="aav-btn aav-btn-ghost" href="#demos">See it work →</a>
+              <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Founding Lab</a>
+              <a class="aav-btn aav-btn-ghost" href="#demos">See it in action →</a>
             </div>
 
             <p class="pl-hero-note">
-              AI forgets everything between sessions. Proofline is the provenance engine behind <strong>LabOS</strong>—so
-              context persists and compounds. Free for Founding Labs.
+              Proofline helps you ask better questions of AI and collaborate with your team to create verifiable new knowledge together.
             </p>
           </div>
 
-          <div class="pl-hero-visual" aria-label="Product preview (placeholder)">
-            <div class="pl-screenshot" role="img" aria-label="Product screenshot placeholder">
-              <div class="pl-screenshot-topbar">LabOS — Proofline Engine</div>
-              <div class="pl-screenshot-body">
-                <div class="pl-screenshot-row">
-                  <span class="pl-pill">Connect</span>
-                  <span class="pl-pill">Proofline</span>
-                  <span class="pl-pill">Discover</span>
-                </div>
-                <div class="pl-screenshot-row">
-                  <span class="pl-line"></span>
-                  <span class="pl-line"></span>
-                  <span class="pl-line"></span>
-                </div>
-                <div class="pl-screenshot-row">
-                  <span class="pl-pill pl-pill-alt">Branch</span>
-                  <span class="pl-line"></span>
-                  <span class="pl-line"></span>
-                </div>
-              </div>
+          <!-- Right: Hero Visual - DAG Branching -->
+          <div class="pl-hero-visual">
+            <div class="pl-screenshot" aria-label="Proofline knowledge graph visualization" style="max-width: 440px;">
+              <svg viewBox="0 0 360 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proofline timeline with branching">
+                <defs>
+                  <!-- Card shadow filter -->
+                  <filter id="pl-card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(15,23,42,0.06)"/>
+                  </filter>
 
-              <div class="pl-callout pl-callout-evidence">Provenance</div>
-              <div class="pl-callout pl-callout-decision">Confidence</div>
-              <div class="pl-callout pl-callout-track">Decision trail</div>
+                  <!-- Node glow filter -->
+                  <filter id="pl-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                <!-- Header: Proofline title -->
+                <g>
+                  <circle cx="32" cy="20" r="5" fill="#9e23a3"/>
+                  <text x="44" y="25" fill="#0f172a" font-family="dinmedium, Arial, sans-serif" font-size="14" font-weight="600">Proofline</text>
+                </g>
+
+                <!-- ========== MAIN SPINE (x=32) ========== -->
+                <!-- Segment: IDEA to EVIDENCE -->
+                <line x1="32" y1="60" x2="32" y2="88" stroke="#9e23a3" stroke-width="3" stroke-linecap="round"/>
+                <!-- Segment: EVIDENCE to HYPOTHESIS -->
+                <line x1="32" y1="108" x2="32" y2="148" stroke="#8a32a8" stroke-width="3" stroke-linecap="round"/>
+                <!-- Segment: HYPOTHESIS to INSIGHT -->
+                <line x1="32" y1="168" x2="32" y2="208" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+
+                <!-- ========== RIGHT BRANCH (ALT HYPOTHESIS) ========== -->
+                <!-- Horizontal from EVIDENCE going RIGHT -->
+                <line x1="40" y1="98" x2="210" y2="98" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+                <!-- Vertical down to ALT HYPOTHESIS node -->
+                <line x1="210" y1="98" x2="210" y2="148" stroke="#7c3aad" stroke-width="3" stroke-linecap="round"/>
+                <!-- Vertical from ALT HYPOTHESIS down to INSIGHT (dotted = learnings merge) -->
+                <line x1="210" y1="168" x2="210" y2="218" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+                <!-- Horizontal from right back to INSIGHT (dotted) -->
+                <line x1="210" y1="218" x2="42" y2="218" stroke="#7c3aad" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+
+                <!-- ========== ROW 1: IDEA (y=40) ========== -->
+                <g transform="translate(0, 40)">
+                  <circle cx="32" cy="14" r="7" fill="#fff" stroke="#9e23a3" stroke-width="2.5"/>
+                  <circle cx="32" cy="14" r="2.5" fill="#9e23a3"/>
+                  <g filter="url(#pl-card-shadow)">
+                    <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+                  </g>
+                  <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(158, 35, 163, 0.12)"/>
+                  <text x="90" y="20" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">IDEA</text>
+                </g>
+
+                <!-- ========== ROW 2: EVIDENCE (y=100) - equal spacing of 60 ========== -->
+                <g transform="translate(0, 84)">
+                  <circle cx="32" cy="14" r="7" fill="#fff" stroke="#7c3aad" stroke-width="2.5"/>
+                  <circle cx="32" cy="14" r="2.5" fill="#7c3aad"/>
+                  <g filter="url(#pl-card-shadow)">
+                    <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+                  </g>
+                  <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(124, 58, 173, 0.12)"/>
+                  <text x="90" y="20" fill="#7c3aad" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">EVIDENCE</text>
+                </g>
+
+                <!-- ========== ROW 3: BOTH HYPOTHESES (y=154) - equal spacing of 60 ========== -->
+                <g transform="translate(0, 140)">
+                  <!-- MAIN HYPOTHESIS on LEFT (main spine) -->
+                  <circle cx="32" cy="14" r="7" fill="#fff" stroke="#6f2dbd" stroke-width="2.5"/>
+                  <circle cx="32" cy="14" r="2.5" fill="#6f2dbd"/>
+                  <g filter="url(#pl-card-shadow)">
+                    <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+                  </g>
+                  <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(111, 45, 189, 0.12)"/>
+                  <text x="90" y="20" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle">HYPOTHESIS</text>
+
+                  <!-- ALT HYPOTHESIS on RIGHT (branch, invalidated) -->
+                  <circle cx="210" cy="14" r="7" fill="#fff" stroke="#6f2dbd" stroke-width="2.5"/>
+                  <circle cx="210" cy="14" r="2.5" fill="#6f2dbd"/>
+                  <!-- X mark in circle - LEFT of card -->
+                  <circle cx="228" cy="14" r="9" fill="rgba(239, 68, 68, 0.1)"/>
+                  <path d="M224 10 L232 18 M232 10 L224 18" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+                  <!-- ALT card -->
+                  <g filter="url(#pl-card-shadow)">
+                    <rect x="245" y="0" width="80" height="32" rx="7" fill="#fff"/>
+                  </g>
+                  <rect x="253" y="7" width="44" height="18" rx="4" fill="rgba(111, 45, 189, 0.08)"/>
+                  <text x="275" y="20" fill="#6f2dbd" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">ALT</text>
+                </g>
+
+                <!-- ========== ROW 4: INSIGHT (y=204) - equal spacing of 60 ========== -->
+                <g transform="translate(0, 196)">
+                  <!-- Glowing node -->
+                  <g filter="url(#pl-glow)">
+                    <circle cx="32" cy="14" r="10" fill="#c87fd0"/>
+                  </g>
+                  <circle cx="32" cy="14" r="5" fill="#fff"/>
+                  <g filter="url(#pl-card-shadow)">
+                    <rect x="50" y="0" width="80" height="32" rx="7" fill="#fff"/>
+                  </g>
+                  <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(200, 127, 208, 0.18)"/>
+                  <text x="90" y="20" fill="#9e23a3" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">INSIGHT</text>
+                  <!-- Checkmark -->
+                  <circle cx="145" cy="16" r="10" fill="#fff"/>
+                  <circle cx="145" cy="16" r="9" fill="rgba(200, 127, 208, 0.15)"/>
+                  <path d="M140 16 L144 20 L151 12" stroke="#9e23a3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </g>
+
+              </svg>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- LIGHTHOUSE LABS SIGN-UP -->
-      <section class="pl-lighthouse" id="lighthouse" aria-label="Lighthouse Lab program">
+      <!-- FOUNDING LABS SIGN-UP -->
+      <section class="pl-lighthouse" id="lighthouse" aria-label="Founding Lab program">
         <div class="aav-container-large pl-lighthouse-grid">
           <div class="pl-lighthouse-copy">
-            <div class="pl-eyebrow">Lighthouse Labs</div>
+            <div class="pl-eyebrow">Founding Labs</div>
             <h2 class="pl-h2">Become a Founding Lab</h2>
             <p class="pl-copy">
-              Map one real workflow with us. Free access in exchange for feedback—built for compliance-heavy,
-              reproducibility-sensitive work.
+              Collaborate on building a Proofline™ together for a R&D project that your team is working on. Free access in exchange for feedback.
             </p>
 
             <div class="pl-bullets">
               <div class="pl-bullet-block">
                 <h3 class="pl-bullet-title">What you get</h3>
                 <ul>
-                  <li>LabOS + Proofline access</li>
+                  <li>Proofline access</li>
                   <li>Hands-on onboarding</li>
                   <li>Full audit trail + provenance</li>
                   <li>Roadmap influence</li>
@@ -119,7 +766,7 @@
               </div>
             </div>
 
-            <p class="pl-microcopy">Reply in 48h. Short call, then onboarding.</p>
+            <p class="pl-microcopy">Short call, then onboarding.</p>
           </div>
 
           <div class="pl-lighthouse-form-card" aria-label="Apply form">
@@ -194,15 +841,10 @@
               </div>
 
               <button class="aav-btn aav-btn-primary pl-apply-btn" type="submit">Apply (2 minutes)</button>
-
-              <p class="pl-form-after">
-                48h reply. Optional: <a href="#" class="pl-inline-link">book a call</a>.
-              </p>
             </form>
 
             <div id="applied" class="pl-apply-confirm" role="status" aria-live="polite">
-              <strong>Application received.</strong> We’ll reply in 48 hours. Optional:
-              <a href="#" class="pl-inline-link">book a call</a>.
+              <strong>Application received.</strong> We'll be in touch soon.
             </div>
           </div>
         </div>
@@ -212,57 +854,180 @@
       <section class="pl-demos" id="demos" aria-label="Proofline demos">
         <div class="aav-container-large">
           <div class="pl-section-header">
-            <div class="pl-eyebrow">Demos</div>
-                <h2 class="pl-h2">Three moves</h2>
-                <p class="pl-copy pl-center">From scattered artifacts to living project state.</p>
+            <div class="pl-eyebrow">Three Moves</div>
+            <h2 class="pl-h2">From scattered artifacts to living knowledge</h2>
+            <p class="pl-copy pl-center">Connect your sources. Commit your insights. Discover what compounds.</p>
           </div>
 
           <div class="pl-demo-tiles">
+
+            <!-- Demo 01: Connect -->
             <article class="pl-demo-tile">
-              <div class="pl-demo-kicker">Demo 01</div>
+              <div class="pl-demo-kicker">01</div>
               <h3 class="pl-demo-title">Connect</h3>
-              <p class="pl-demo-one">Link papers, protocols, and notes into persistent team memory.</p>
-              <div class="pl-demo-media" role="img" aria-label="Demo 01 placeholder (add 30–45s looping video/GIF)">
-                Drop demo GIF/MP4 here (30–45s)
+              <p class="pl-demo-one">Link papers, protocols, and notes into persistent memory.</p>
+
+              <div class="pl-demo-media has-mockup" role="img" aria-label="Document upload flow" style="background: #f8f9fb; padding: 16px; border: none; border-radius: 14px; height: auto; min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
+
+                <!-- Upload area -->
+                <div style="border: 1.5px dashed rgba(100, 116, 139, 0.25); border-radius: 10px; padding: 16px 14px; margin-bottom: 12px;">
+                  <div style="text-align: center; margin-bottom: 10px;">
+                    <div style="color: #64748b; font-size: 16px; margin-bottom: 2px;">↑</div>
+                    <div style="color: #64748b; font-size: 11px; font-weight: 400;">Drop files here</div>
+                  </div>
+
+                  <!-- File type indicators -->
+                  <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: #fff; border-radius: 5px; border: 1px solid rgba(0,0,0,0.06);">
+                      <div style="width: 5px; height: 7px; background: #ef4444; border-radius: 1px;"></div>
+                      <span style="font-size: 10px; font-weight: 400; color: #475569;">PDF</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: #fff; border-radius: 5px; border: 1px solid rgba(0,0,0,0.06);">
+                      <div style="width: 5px; height: 7px; background: #3b82f6; border-radius: 1px;"></div>
+                      <span style="font-size: 10px; font-weight: 400; color: #475569;">DOCX</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px; padding: 5px 10px; background: #fff; border-radius: 5px; border: 1px solid rgba(0,0,0,0.06);">
+                      <div style="width: 5px; height: 7px; background: #f59e0b; border-radius: 1px;"></div>
+                      <span style="font-size: 10px; font-weight: 400; color: #475569;">Drive</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Status bar -->
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 8px 12px; background: #fff; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.12);">
+                  <span style="font-size: 10px; color: #94a3b8; font-weight: 400;">Upload</span>
+                  <span style="color: #cbd5e1; font-size: 9px;">→</span>
+                  <span style="font-size: 10px; color: #94a3b8; font-weight: 400;">Index</span>
+                  <span style="color: #cbd5e1; font-size: 9px;">→</span>
+                  <span style="font-size: 10px; color: #10b981; font-weight: 500;">Ready</span>
+                </div>
+
               </div>
-              <div class="pl-demo-captions" aria-label="On-screen captions">
-                <span class="pl-caption-chip">Linked</span>
-                <span class="pl-caption-chip">Persistent</span>
-                <span class="pl-caption-chip">No re-prompting</span>
+
+              <div class="pl-demo-captions">
+                <span class="pl-caption-chip">Instant indexing</span>
+                <span class="pl-caption-chip">AI-ready</span>
               </div>
             </article>
 
+            <!-- Demo 02: Commit -->
             <article class="pl-demo-tile">
-              <div class="pl-demo-kicker">Demo 02</div>
+              <div class="pl-demo-kicker">02</div>
               <h3 class="pl-demo-title">Commit</h3>
-              <p class="pl-demo-one">Record evidence and confidence. Branch to explore.</p>
-              <div class="pl-demo-media" role="img" aria-label="Demo 02 placeholder (add 30–45s looping video/GIF)">
-                Drop demo GIF/MP4 here (30–45s)
+              <p class="pl-demo-one">Capture insights as Knowledge Cards. Save to make them permanent.</p>
+
+              <div class="pl-demo-media has-mockup" role="img" aria-label="Knowledge Card" style="background: #f8f9fb; padding: 16px; border: none; border-radius: 14px; height: auto; min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
+
+                <!-- Knowledge Card -->
+                <div style="background: #fff; border-radius: 8px; border: 1px solid rgba(0,0,0,0.06); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+
+                  <!-- Card header -->
+                  <div style="padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.04); display: flex; align-items: center; gap: 8px;">
+                    <span style="padding: 2px 6px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; border-radius: 3px; font-size: 9px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase;">EVIDENCE</span>
+                    <span style="font-size: 11px; font-weight: 500; color: #1e293b;">Finding A</span>
+                  </div>
+
+                  <!-- Card body -->
+                  <div style="padding: 12px;">
+                    <!-- Abstract content lines -->
+                    <div style="margin-bottom: 10px;">
+                      <div style="height: 6px; background: #f1f5f9; border-radius: 3px; width: 100%; margin-bottom: 5px;"></div>
+                      <div style="height: 6px; background: #f1f5f9; border-radius: 3px; width: 85%;"></div>
+                    </div>
+
+                    <!-- Source reference -->
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: #f8fafc; border-radius: 5px; margin-bottom: 10px;">
+                      <span style="font-size: 9px; color: #94a3b8; font-weight: 400;">Source</span>
+                      <span style="width: 3px; height: 3px; background: #cbd5e1; border-radius: 50%;"></span>
+                      <span style="font-size: 9px; color: #64748b; font-weight: 400;">Document, p.12</span>
+                    </div>
+
+                    <!-- Save button -->
+                    <div style="text-align: center;">
+                      <button style="padding: 6px 20px; background: #8b5cf6; color: #fff; border: none; border-radius: 5px; font-size: 10px; font-weight: 500; cursor: pointer;">Save</button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Confirmation -->
+                <div style="text-align: center; margin-top: 10px; font-size: 9px; color: #10b981; font-weight: 400;">
+                  ✓ Added to Proofline
+                </div>
+
               </div>
-              <div class="pl-demo-captions" aria-label="On-screen captions">
-                <span class="pl-caption-chip">Provenance</span>
-                <span class="pl-caption-chip">Confidence</span>
-                <span class="pl-caption-chip">Branching</span>
+
+              <div class="pl-demo-captions">
+                <span class="pl-caption-chip">Structured</span>
+                <span class="pl-caption-chip">Traceable</span>
               </div>
             </article>
 
+            <!-- Demo 03: Discover -->
             <article class="pl-demo-tile">
-              <div class="pl-demo-kicker">Demo 03</div>
+              <div class="pl-demo-kicker">03</div>
               <h3 class="pl-demo-title">Discover</h3>
-              <p class="pl-demo-one">Search past work to accelerate new hypotheses.</p>
-              <div class="pl-demo-media" role="img" aria-label="Demo 03 placeholder (add 30–45s looping video/GIF)">
-                Drop demo GIF/MP4 here (30–45s)
+              <p class="pl-demo-one">Search your knowledge. AI builds on what you've saved.</p>
+
+              <div class="pl-demo-media has-mockup" role="img" aria-label="Proofline DAG" style="background: #f8f9fb; padding: 14px; border: none; border-radius: 14px; height: auto; min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
+
+                <!-- Mini Proofline DAG -->
+                <div style="position: relative;">
+                  <!-- Vertical connection line with gradient -->
+                  <div style="position: absolute; left: 16px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(180deg, #a855f7 0%, #3b82f6 50%, #10b981 100%); border-radius: 1px;"></div>
+
+                  <!-- DAG nodes -->
+                  <div style="display: flex; flex-direction: column; gap: 6px; position: relative;">
+
+                    <!-- Node 1: Idea -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 10px; height: 10px; border-radius: 50%; background: #a855f7; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25); z-index: 2; flex-shrink: 0;"></div>
+                      <div style="flex: 1; padding: 6px 8px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 5px;">
+                        <span style="padding: 2px 5px; background: rgba(168, 85, 247, 0.1); color: #a855f7; border-radius: 3px; font-size: 8px; font-weight: 600;">IDEA</span>
+                        <span style="font-size: 9px; color: #1e293b;">Research Q</span>
+                      </div>
+                    </div>
+
+                    <!-- Node 2: Evidence -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25); z-index: 2; flex-shrink: 0;"></div>
+                      <div style="flex: 1; padding: 6px 8px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 5px;">
+                        <span style="padding: 2px 5px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; border-radius: 3px; font-size: 8px; font-weight: 600;">EVIDENCE</span>
+                        <span style="font-size: 9px; color: #1e293b;">Finding A</span>
+                        <span style="margin-left: auto; padding: 2px 4px; background: rgba(16, 185, 129, 0.08); border-radius: 2px; font-size: 7px; color: #10b981; font-weight: 500;">AI</span>
+                      </div>
+                    </div>
+
+                    <!-- Node 3: Validated -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25); z-index: 2; flex-shrink: 0;"></div>
+                      <div style="flex: 1; padding: 6px 8px; background: #fff; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); display: flex; align-items: center; gap: 5px;">
+                        <span style="padding: 2px 5px; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 3px; font-size: 8px; font-weight: 600;">VALIDATED</span>
+                        <span style="font-size: 9px; color: #1e293b;">Conclusion</span>
+                        <span style="margin-left: auto; color: #10b981; font-size: 9px;">✓</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- Citation reference -->
+                <div style="margin-top: 10px; padding: 6px 8px; background: rgba(168, 85, 247, 0.03); border-radius: 5px; border-left: 2px solid #a855f7; font-size: 8px; color: #64748b;">
+                  Cited from <span style="color: #3b82f6; font-weight: 500;">Finding A</span> → <span style="color: #10b981; font-weight: 500;">Conclusion</span>
+                </div>
+
               </div>
-              <div class="pl-demo-captions" aria-label="On-screen captions">
-                <span class="pl-caption-chip">Searchable</span>
-                <span class="pl-caption-chip">Evidenced</span>
-                <span class="pl-caption-chip">Reproducible</span>
+
+              <div class="pl-demo-captions">
+                <span class="pl-caption-chip">AI-powered</span>
+                <span class="pl-caption-chip">Cited</span>
               </div>
             </article>
+
           </div>
 
           <div class="pl-demo-cta-row">
-            <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Lighthouse Lab</a>
+            <a class="aav-btn aav-btn-primary" href="#lighthouse">Apply as a Founding Lab</a>
             <a class="aav-btn aav-btn-ghost" href="#hero">Back to top</a>
           </div>
         </div>
@@ -276,8 +1041,7 @@
             <h2 class="pl-h2">Built by Aavishkar.ai</h2>
           </div>
           <p class="pl-copy">
-            Aavishkar.ai builds LabOS and Proofline—provenance and versioning for knowledge work.
-            <a class="pl-inline-link" href="https://aavishkar.ai/">Learn more →</a>
+            Proofline was built by <a class="pl-inline-link" href="https://aavishkar.ai/">Aavishkar.ai</a>. Please visit to learn more about why.
           </p>
         </div>
       </section>
@@ -285,5 +1049,3 @@
 
   </body>
 </html>
-
-
