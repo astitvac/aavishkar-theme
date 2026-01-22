@@ -793,3 +793,186 @@ The Proofline hero now features a branching DAG (Directed Acyclic Graph) visual 
 **CTAs:** "Apply as a Founding Lab" (primary) | "See it in action →" (ghost)
 
 **Note:** Proofline helps you ask better questions of AI and collaborate with your team to create verifiable new knowledge together.
+
+---
+
+## 16) Session Update (2026-01-22) — Demo CTAs & CSS Alignment Fixes
+
+### 16.1 CTA Updates
+
+Updated call-to-action buttons to link to the YouTube demo video.
+
+**Hero Section (`proofline-hero.html`):**
+- Changed: "See it in action →" to "Watch 3 min Demo →"
+- Added link: `https://www.youtube.com/watch?v=KT6eyadQfIg`
+- Added attributes: `target="_blank" rel="noopener"` for external link
+
+**Demos Section (`proofline-demos.html`):**
+- Replaced "Back to top" with "Watch 3 min Demo →"
+- Same YouTube link with external link attributes
+
+### 16.2 CSS Alignment Fixes
+
+**Logo Fix:**
+```css
+/* Before: 80px height caused visual issues */
+/* After: 56px with object-fit */
+.pl-header .aav-logo img {
+  height: 56px !important;
+  max-height: 56px !important;
+  object-fit: contain !important;
+}
+```
+
+**Header/Hero Alignment:**
+The hero container now uses the same 32px side padding as the header bar for visual alignment:
+```css
+body.page-id-2952 .pl-hero .aav-container-large {
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+}
+```
+
+**Responsive Updates:**
+- Tablet (≤980px): Hero padding matches header
+- Mobile (≤520px): Reduced to 16px for tighter mobile layout
+
+### 16.3 Files Modified
+| File | Change |
+|------|--------|
+| `theme/partials/proofline-hero.html` | CTA text + YouTube link |
+| `theme/partials/proofline-demos.html` | CTA replacement + YouTube link |
+| `theme/style.css` | Logo height + alignment fixes |
+
+---
+
+## 17) Contact Form 7 Implementation — Founding Labs Form
+
+### 17.1 Overview
+
+Replace the static HTML form in `proofline-lighthouse.html` with Contact Form 7 for:
+- Email notifications on submission
+- Proper form validation
+- WordPress admin tracking
+
+### 17.2 WordPress Admin Setup
+
+#### Step 1: Install Contact Form 7
+- WP Admin → Plugins → Add New
+- Search "Contact Form 7" → Install → Activate
+
+#### Step 2: Create the Form
+- WP Admin → Contact → Add New
+- Title: **Proofline — Founding Labs Application**
+
+#### Step 3: Form Template
+```
+<div class="pl-form-grid">
+  <div class="pl-field">
+    <label for="pl-name">Name</label>
+    [text* your-name id:pl-name placeholder "Your full name"]
+  </div>
+
+  <div class="pl-field">
+    <label for="pl-email">Email</label>
+    [email* your-email id:pl-email placeholder "you@org.com"]
+  </div>
+
+  <div class="pl-field">
+    <label for="pl-org">Org</label>
+    [text* your-org id:pl-org placeholder "Lab / company / institution"]
+  </div>
+
+  <div class="pl-field">
+    <label for="pl-role">Role</label>
+    [select* your-role id:pl-role include_blank "PI / Group Lead" "Postdoc / Senior Researcher" "Graduate Student / RA" "R&D / Product" "Founder / Exec" "Other"]
+  </div>
+
+  <div class="pl-field">
+    <label for="pl-size">Team size</label>
+    [select* team-size id:pl-size include_blank "1–3" "4–10" "11–30"]
+  </div>
+
+  <div class="pl-field">
+    <label for="pl-domain">Domain</label>
+    [select* your-domain id:pl-domain include_blank "Academic lab" "Deep tech" "Enterprise R&D" "Research startup" "Other"]
+  </div>
+
+  <div class="pl-field pl-field-wide">
+    <label for="pl-decisions">What decisions do you keep redoing?</label>
+    [textarea your-decisions id:pl-decisions placeholder "e.g., experiment direction, go/no-go bets, grant claims… and the rework you want to eliminate"]
+  </div>
+
+  <fieldset class="pl-field pl-field-wide pl-fieldset">
+    <legend>Data sensitivity</legend>
+    [radio data-sensitivity id:pl-sensitivity use_label_element default:1 "Public" "Internal" "Regulated"]
+  </fieldset>
+</div>
+
+[submit class:aav-btn class:aav-btn-primary class:pl-apply-btn "Apply (2 minutes)"]
+```
+
+#### Step 4: Mail Tab Configuration
+- **To:** `founding-labs@aavishkar.ai` (or your preferred email)
+- **From:** `[your-email]`
+- **Subject:** `New Founding Labs Application: [your-name] from [your-org]`
+- **Message Body:**
+```
+New Proofline Founding Labs Application
+
+Name: [your-name]
+Email: [your-email]
+Organization: [your-org]
+Role: [your-role]
+Team Size: [team-size]
+Domain: [your-domain]
+
+Data Sensitivity: [data-sensitivity]
+
+What decisions do you keep redoing?
+[your-decisions]
+
+---
+Submitted from: https://aavishkar.ai/proofline
+```
+
+#### Step 5: Messages Tab
+- **Success message:** `Application received. We'll be in touch soon.`
+
+### 17.3 Partial Update
+
+Replace the form HTML in `theme/partials/proofline-lighthouse.html`:
+
+**Before (static form):**
+```html
+<div class="pl-lighthouse-form-card" aria-label="Apply form">
+  <form class="pl-apply-form" action="#applied" method="get">
+    ...
+  </form>
+</div>
+```
+
+**After (CF7 shortcode):**
+```html
+<div class="pl-lighthouse-form-card" aria-label="Apply form">
+  [contact-form-7 id="XXXX" title="Proofline — Founding Labs Application"]
+</div>
+```
+
+### 17.4 CSS Styling (already in style.css)
+
+CF7 form styling for Proofline is located around lines 3623-3669 in `theme/style.css`.
+
+Additional styles for radio buttons, validation, and success messages have been added to ensure visual consistency with the original form design.
+
+### 17.5 Deployment Checklist
+
+- [ ] CF7 plugin installed and active
+- [ ] Form created with all 8 fields
+- [ ] Email notification configured
+- [ ] Success message customized
+- [ ] Partial updated with CF7 shortcode (replace XXXX with actual form ID)
+- [ ] Content copied to Divi Code module
+- [ ] Caches cleared (Divi Static CSS + WP Rocket)
+- [ ] Form submission tested
+- [ ] Email receipt verified
