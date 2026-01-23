@@ -674,6 +674,120 @@ box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 12px 32px rgba(0,0,0,.3);
 
 ---
 
+## 📝 Blog Post System & Best Practices
+
+### Overview
+
+Aavishkar.ai uses a sophisticated blog system built on Divi Theme Builder with professional academic styling and glassmorphism design. The system features **automatic content integration** with the "OUR THINKING" section on the homepage.
+
+**Key Features:**
+- **Purple metallic background** for all blog posts
+- **Glassmorphism containers** with backdrop blur
+- **Responsive typography** with clamp() scaling
+- **Rich HTML formatting** (code, blockquotes, callouts, dividers)
+- **Mobile-optimized** with enhanced readability
+- **Auto-syncing homepage display** - Published posts appear automatically on homepage
+
+### Published Blog Post Examples
+- [Why a Knowledge IDE?](https://aavishkar.ai/why-a-knowledge-ide/)
+- [Knowledge IDE Whitepaper](https://aavishkar.ai/knowledge-ide/)
+- [Re-coding the Scientific Method](https://aavishkar.ai/re-coding-the-scientific-method/)
+
+### "OUR THINKING" Section - Automatic Content Hub
+
+**Location:** Homepage → Company Page → Personas Section (now "OUR THINKING")
+
+**How It Works:**
+The `[thinking_hub]` shortcode automatically displays the 6 most recent **published** posts from:
+- **Featured** category (purple badge)
+- **Deep Dive** category (deep purple badge)
+- **Insights** category (blue badge)
+
+**What Gets Auto-Pulled:**
+- ✅ **Featured images** - From post's featured image
+- ✅ **Title** - Post title
+- ✅ **Excerpt** - Custom excerpt or auto-generated from content
+- ✅ **Category** - Primary category determines badge color
+- ✅ **Publication date** - Formatted as "Month Year"
+- ✅ **Reading time** - Auto-calculated from word count (200 words/min)
+- ✅ **Permalink** - Direct link to full post
+
+**Content Requirements for Homepage Display:**
+1. **Post Status:** Must be "Published" (drafts/private posts won't appear)
+2. **Category:** Assign to "Featured", "Deep Dive", or "Insights"
+3. **Featured Image:** Required (1200×675px, 16:9 ratio recommended, <200KB)
+4. **Excerpt:** Optional but recommended (80-100 words for best card fit)
+
+**Shortcode Implementation:**
+```php
+// In theme/functions.php
+function render_thinking_hub() { ... }
+add_shortcode('thinking_hub', 'render_thinking_hub');
+```
+
+**HTML Usage in Divi Code Module:**
+```html
+<div class="aav-eyebrow">INSIGHTS & RESEARCH</div>
+<h2 class="aav-h2">Our Thinking</h2>
+<p class="aav-lead">Exploring the frontier of AI-powered scientific discovery—one breakthrough at a time</p>
+
+[thinking_hub]
+
+<div class="aav-thinking-cta">
+  <a href="/blog/" class="aav-btn">Explore All Insights →</a>
+</div>
+```
+
+### Content Structure Pattern
+
+**Every blog post follows this structure:**
+1. **Executive Summary** (`.aav-abstract-box`) - 2-3 sentences
+2. **Introduction** (H2) - Context and setup
+3. **Main Sections** (H2) - 4-8 major sections
+4. **Blockquotes** - Key insights throughout
+5. **Section Dividers** (`.aav-divider`) - Visual breaks
+6. **Next Steps/CTA** (H2) - Call to action with links
+
+### Quick Start Guide
+
+**To create a new blog post that auto-appears on homepage:**
+1. WordPress → Posts → Add New
+2. Set title and excerpt (80-100 words recommended)
+3. **Upload featured image** (1200×675px, <200KB) - **REQUIRED for homepage**
+4. Add "Custom HTML" block in editor
+5. Paste HTML content using template (`theme/partials/blog-post-html-template.html`)
+6. **Assign category**: Featured, Deep Dive, or Insights
+7. Assign additional tags for organization
+8. Preview and **publish** (drafts won't appear on homepage)
+9. **Homepage updates automatically** - no manual steps needed!
+
+**For detailed implementation guide, see:** [Blog Post Template Structure](./blog-post-template-structure.md)
+
+### CSS Classes Reference
+
+| Class | Purpose |
+|-------|---------|
+| `.aav-abstract-box` | Executive summary with glass styling |
+| `.aav-divider` | Section separator (horizontal line) |
+| `.aav-code` | Inline or block code styling |
+| `.aav-callout` | Info/warning callout boxes |
+| `.aav-toc` | Table of contents (optional) |
+| `.aav-thinking-card` | Homepage article card (auto-applied by shortcode) |
+| `.aav-thinking-grid` | Homepage cards grid (auto-applied by shortcode) |
+
+### Design System Integration
+
+Blog posts automatically inherit:
+- ✅ Purple metallic gradient background
+- ✅ White text with shadows for readability
+- ✅ Glassmorphism content containers
+- ✅ Responsive typography (desktop, tablet, mobile)
+- ✅ DIN font family consistency
+- ✅ Professional academic styling
+- ✅ Automatic homepage integration with category-based styling
+
+---
+
 ## 📝 **Blog Post Template Enhancements v2.0 (Latest Session)**
 
 ### **🎯 Key Improvements Made:**
