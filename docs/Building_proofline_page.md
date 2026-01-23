@@ -967,12 +967,113 @@ Additional styles for radio buttons, validation, and success messages have been 
 
 ### 17.5 Deployment Checklist
 
-- [ ] CF7 plugin installed and active
-- [ ] Form created with all 8 fields
-- [ ] Email notification configured
-- [ ] Success message customized
-- [ ] Partial updated with CF7 shortcode (replace XXXX with actual form ID)
-- [ ] Content copied to Divi Code module
-- [ ] Caches cleared (Divi Static CSS + WP Rocket)
-- [ ] Form submission tested
-- [ ] Email receipt verified
+- [x] CF7 plugin installed and active
+- [x] Form created with all 8 fields
+- [x] Email notification configured (ac@aavishkar.ai)
+- [x] Success message customized
+- [x] Partial updated with CF7 shortcode (form ID: a6ab583)
+- [x] Content copied to Divi Code module
+- [x] Caches cleared (Divi Static CSS + WP Rocket)
+- [x] WP Mail SMTP configured with Gmail OAuth
+- [x] Form submission tested
+- [x] Email receipt verified
+
+### 17.6 Learnings from CF7 Implementation (2026-01-23)
+
+#### What Worked
+
+**One-Click Gmail OAuth Setup:**
+- WP Mail SMTP's one-click OAuth setup eliminated manual Google Cloud Console configuration
+- Authentication completed in seconds vs. 30+ minutes for manual OAuth
+- No need to create Client ID/Secret manually
+
+**Git + WP Pusher Deployment:**
+- Changes to `style.css` and partials auto-deployed via git push
+- No need to manually update CSS in WordPress admin
+- Version control for both code and form configuration
+
+**CF7 Form Structure:**
+- Using `<div class="pl-form-grid">` wrapper maintains existing grid layout
+- Individual `<div class="pl-field">` wrappers preserve label/input pairing
+- CF7's `[text*]`, `[email*]`, `[select*]` syntax for required fields
+
+#### Key Challenges & Solutions
+
+**1. Form Input Borders Not Visible**
+- **Problem:** CF7 form controls had no visible borders until clicked
+- **Cause:** CSS rules targeting `.wpcf7 input` were too generic
+- **Solution:** Added explicit class-based selectors with `!important`:
+```css
+body.page-id-2952 .wpcf7-form-control.wpcf7-text,
+body.page-id-2952 .wpcf7-form-control.wpcf7-email,
+body.page-id-2952 .wpcf7-form-control.wpcf7-select {
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+}
+```
+
+**2. Button Text UX Issue**
+- **Problem:** Submit button said "Apply (2 minutes)" - confusing after form is filled
+- **Lesson:** Time estimates belong in form description, not submit button
+- **Solution:** Changed button text to just "Apply"
+
+**3. WP Mail SMTP Domain Warnings**
+- **Observation:** SPF/DKIM/DMARC warnings appeared after setup
+- **Decision:** Deferred DNS configuration (emails still send via Gmail)
+- **Future:** Consider adding SPF/DKIM records for better deliverability
+
+#### Email Configuration Details
+
+**WP Mail SMTP Settings:**
+- Mailer: Google / Gmail (OAuth)
+- From Email: ac@aavishkar.ai
+- From Name: aavishkar.ai
+- One-Click Setup: Enabled
+
+**CF7 Mail Template:**
+```
+To: ac@aavishkar.ai
+From: [_site_title] <wordpress@aavishkar.ai>
+Subject: New Founding Labs Application: [your-name] from [your-org]
+Reply-To: [your-email]
+```
+
+#### CSS Styling Strategy
+
+**Grid Layout Preservation:**
+- Wrapped entire form in `.pl-form-grid` to maintain 2-column responsive layout
+- Each field wrapped in `.pl-field` for consistent spacing
+- Wide fields use `.pl-field-wide` class
+
+**CF7-Specific Overrides:**
+```css
+/* Target CF7 classes explicitly */
+.wpcf7-form-control.wpcf7-text { ... }
+.wpcf7-form-control.wpcf7-email { ... }
+.wpcf7-radio { display: flex !important; }
+.wpcf7-not-valid-tip { color: #ef4444 !important; }
+```
+
+#### Workflow Best Practices
+
+**1. Test Email Delivery First**
+- Configure WP Mail SMTP before creating CF7 form
+- Send test email to verify Gmail OAuth connection
+- Check spam folder if test email doesn't arrive
+
+**2. Edit in Git, Deploy via Code Module**
+- Update `theme/partials/proofline-lighthouse.html` in Git
+- Copy HTML to Divi Code module (shortcodes work in Code modules, not Text modules)
+- Push CSS changes to Git for auto-deployment
+
+**3. Always Clear All Caches**
+- Divi Static CSS
+- WP Rocket cache + Used CSS
+- Browser hard refresh (Ctrl+F5)
+
+#### Time Investment
+
+- **Initial Setup:** ~20 minutes (CF7 form creation, WP Mail SMTP OAuth, email template)
+- **CSS Debugging:** ~10 minutes (border visibility issue)
+- **Total:** ~30 minutes from start to working form
+
+**vs. Estimated Manual OAuth Setup:** 45-60 minutes (Google Cloud Console, credentials, etc.)
