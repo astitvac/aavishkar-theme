@@ -158,3 +158,84 @@ function aav_list_partials_shortcode() {
 }
 add_shortcode('aav_list_partials', 'aav_list_partials_shortcode');
 
+/**
+ * OUR THINKING - Dynamic article cards from published posts
+ * Usage: [thinking_hub]
+ * Displays 6 most recent published posts from Featured, Deep Dive, or Insights categories
+ */
+function render_thinking_hub() {
+    // Query only published posts from relevant categories
+    $args = array(
+        'post_type'      => 'post',
+        'post_status'    => 'publish', // Only published posts
+        'posts_per_page' => 6,
+        'category_name'  => 'featured,deep-dive,insights', // Multiple categories
+        'orderby'        => 'date',
+        'order'          => 'DESC'
+    );
+
+    $query = new WP_Query($args);
+
+    // If no posts found, show placeholder
+    if (!$query->have_posts()) {
+        return '<div class="aav-thinking-placeholder"><p>Our research insights are coming soon. Check back weekly for new discoveries.</p></div>';
+    }
+
+    ob_start();
+    ?>
+    <div class="aav-thinking-grid">
+        <?php
+        $index = 0;
+        while ($query->have_posts()) : $query->the_post();
+            // Get primary category
+            $categories = get_the_category();
+            $primary_category = !empty($categories) ? esc_html($categories[0]->name) : 'Insights';
+            $category_slug = !empty($categories) ? esc_attr($categories[0]->slug) : 'insights';
+
+            // Calculate reading time (200 words per minute)
+            $content = get_post_field('post_content', get_the_ID());
+            $word_count = str_word_count(strip_tags($content));
+            $reading_time = max(1, ceil($word_count / 200)); // Minimum 1 minute
+        ?>
+        <article class="aav-thinking-card">
+            <div class="aav-thinking-card-image">
+                <?php if (has_post_thumbnail()) : ?>
+                    <?php the_post_thumbnail('large', array('alt' => get_the_title())); ?>
+                <?php else : ?>
+                    <!-- Fallback gradient if no featured image -->
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(158,35,163,0.4),rgba(11,68,123,0.4));"></div>
+                <?php endif; ?>
+                <div class="aav-thinking-card-category" data-category="<?php echo $category_slug; ?>">
+                    <?php echo $primary_category; ?>
+                </div>
+            </div>
+            <div class="aav-thinking-card-content">
+                <h3 class="aav-thinking-card-title"><?php the_title(); ?></h3>
+                <p class="aav-thinking-card-excerpt">
+                    <?php
+                    $excerpt = get_the_excerpt();
+                    if (empty($excerpt)) {
+                        // Generate excerpt from content if none set
+                        $excerpt = wp_trim_words(strip_tags($content), 20, '...');
+                    }
+                    echo esc_html($excerpt);
+                    ?>
+                </p>
+                <div class="aav-thinking-card-meta">
+                    <span class="aav-thinking-date"><?php echo get_the_date('F Y'); ?></span>
+                    <span class="aav-thinking-readtime"><?php echo $reading_time; ?> min read</span>
+                </div>
+                <a href="<?php the_permalink(); ?>" class="aav-thinking-card-link">Read Insight</a>
+            </div>
+        </article>
+        <?php
+        $index++;
+        endwhile;
+        wp_reset_postdata();
+        ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('thinking_hub', 'render_thinking_hub');
+
