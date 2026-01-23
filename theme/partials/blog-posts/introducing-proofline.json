@@ -1,0 +1,10 @@
+{
+  "title": "Introducing Proofline: The scientific engine for Knowledge Creation",
+  "slug": "introducing-proofline",
+  "excerpt": "The Knowledge IDE unified the workspace—but how do AI agents stay coordinated? Proofline™ serves as the 'brain' of the system, a Dynamic State Engine that captures every hypothesis, decision, and insight. Like Git for code, Proofline brings version control to ideas, transforming fragmented tools into an orchestrated intelligence platform. This is the technical deep-dive into the engine powering the future of knowledge work.",
+  "category": "Featured",
+  "tags": ["Proofline", "Knowledge IDE", "Dynamic State Engine", "AI Agents", "Version Control", "Productivity"],
+  "featured_image": "proofline_whitepaper.png",
+  "status": "publish",
+  "author": "aavishkar"
+}
