@@ -1,7 +1,12 @@
 # Aavishkar.ai Blog Post System Implementation Guide
 
-**Status:** ✅ **COMPLETE** - Fully functional blog post template with glass aesthetic  
+**Status:** ✅ **COMPLETE** - Fully functional blog post template with glass aesthetic
 **Last Updated:** January 2025
+
+> **📝 Quick Publishing:** For step-by-step instructions to publish a new blog post, see:
+> - [`BLOG-POST-QUICK-START.md`](./BLOG-POST-QUICK-START.md) - 30-minute checklist
+> - [`../PROOFLINE-BLOG-POST-DEPLOYMENT.md`](../PROOFLINE-BLOG-POST-DEPLOYMENT.md) - Full deployment guide
+> - [`../CLAUDE.md`](../CLAUDE.md) - Blog Post Publishing Workflow section
 
 ## 🎯 **ACHIEVED**: One-click blog post system with automatic Aavishkar branding
 
