@@ -588,6 +588,16 @@ text-wrap: balance;
 margin-bottom: 24px;
 }
 
+/* Lead text for OUR THINKING section */
+.aav-verse .aav-lead {
+color: #e8e9f5;
+text-shadow: 0 1px 2px rgba(0,0,0,.25);
+max-width: 800px;
+margin: 0 auto 40px auto;
+font-size: 18px;
+line-height: 1.6;
+}
+
 /* Personas container with animated connections - ISOLATED */
 .aav-personas-container {
 position: relative;
@@ -606,7 +616,8 @@ margin: 0 auto 40px auto;
 filter: drop-shadow(0 8px 20px rgba(0,0,0,.25));
 }
 
-/* Animated connection lines */
+/* Animated connection lines - COMMENTED OUT (not needed for OUR THINKING section) */
+/*
 .aav-connection {
 position: absolute;
 z-index: 1;
@@ -616,16 +627,15 @@ pointer-events: none;
 .aav-connection::before {
 content: "";
 position: absolute;
-background: linear-gradient(90deg, 
-  rgba(200,127,208,0.8) 0%, 
-  rgba(158,35,163,0.6) 50%, 
+background: linear-gradient(90deg,
+  rgba(200,127,208,0.8) 0%,
+  rgba(158,35,163,0.6) 50%,
   rgba(200,127,208,0.8) 100%);
 border-radius: 2px;
 animation: connectionPulse 3s ease-in-out infinite;
 box-shadow: 0 0 8px rgba(158,35,163,0.5);
 }
 
-/* Connection to PI card (left) */
 .aav-connection.to-pi::before {
 top: 50%;
 left: -60px;
@@ -636,7 +646,6 @@ transform-origin: right center;
 animation-delay: 0s;
 }
 
-/* Connection to Senior Researcher card (center) */
 .aav-connection.to-senior::before {
 bottom: -40px;
 left: 50%;
@@ -646,7 +655,6 @@ transform: translateX(-50%);
 animation-delay: 1s;
 }
 
-/* Connection to Grad Student card (right) */
 .aav-connection.to-grad::before {
 top: 50%;
 right: -60px;
@@ -657,20 +665,18 @@ transform-origin: left center;
 animation-delay: 2s;
 }
 
-/* Pulsing animation for connections */
 @keyframes connectionPulse {
-0%, 100% { 
+0%, 100% {
   opacity: 0.4;
   box-shadow: 0 0 8px rgba(158,35,163,0.5);
 }
-50% { 
+50% {
   opacity: 0.9;
   box-shadow: 0 0 16px rgba(158,35,163,0.8), 0 0 24px rgba(200,127,208,0.4);
   transform: scale(1.05);
 }
 }
 
-/* Connection dots at avatar positions */
 .aav-connection-dot {
 position: absolute;
 width: 8px;
@@ -681,29 +687,30 @@ box-shadow: 0 0 12px rgba(158,35,163,0.7);
 animation: dotPulse 3s ease-in-out infinite;
 }
 
-.aav-connection-dot.dot-pi { 
-top: 45%; left: 35%; 
+.aav-connection-dot.dot-pi {
+top: 45%; left: 35%;
 animation-delay: 0s;
 }
-.aav-connection-dot.dot-senior { 
-bottom: 30%; left: 50%; transform: translateX(-50%); 
+.aav-connection-dot.dot-senior {
+bottom: 30%; left: 50%; transform: translateX(-50%);
 animation-delay: 1s;
 }
-.aav-connection-dot.dot-grad { 
-top: 45%; right: 35%; 
+.aav-connection-dot.dot-grad {
+top: 45%; right: 35%;
 animation-delay: 2s;
 }
 
 @keyframes dotPulse {
-0%, 100% { 
+0%, 100% {
   transform: scale(1);
   box-shadow: 0 0 12px rgba(158,35,163,0.7);
 }
-50% { 
+50% {
   transform: scale(1.3);
   box-shadow: 0 0 20px rgba(158,35,163,1), 0 0 30px rgba(200,127,208,0.6);
 }
 }
+*/
 
 /* Enhanced persona cards grid */
 .aav-personas {
@@ -720,6 +727,38 @@ justify-content: center;
 .aav-personas .aav-card {
 flex: 1 1 300px;
 max-width: 300px;
+}
+
+/* OUR THINKING - Article Cards Grid */
+.aav-thinking-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: clamp(20px, 3vw, 28px);
+max-width: 1200px;
+margin: 0 auto;
+}
+
+/* First card featured (larger) */
+.aav-thinking-card:first-child {
+grid-column: span 2;
+}
+
+@media (max-width: 980px) {
+.aav-thinking-card:first-child {
+  grid-column: span 1;
+}
+
+.aav-thinking-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+}
+
+@media (max-width: 768px) {
+.aav-thinking-grid {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
 }
 
 /* Community CTA section below personas */
@@ -825,6 +864,215 @@ font-size: 14px;
 color: #e8e9f7;
 line-height: 1.5;
 opacity: 0.95;
+}
+
+/* OUR THINKING - Article Card Styling */
+.aav-thinking-card {
+background: linear-gradient(135deg,
+  rgba(255,255,255,0.15) 0%,
+  rgba(255,255,255,0.08) 50%,
+  rgba(255,255,255,0.12) 100%);
+border: 1px solid rgba(255,255,255,0.25);
+border-radius: 20px;
+backdrop-filter: saturate(130%) blur(16px);
+-webkit-backdrop-filter: saturate(130%) blur(16px);
+box-shadow:
+  inset 0 1px 0 rgba(255,255,255,.4),
+  inset 0 -1px 0 rgba(255,255,255,.15),
+  0 12px 32px rgba(0,0,0,.2);
+overflow: hidden;
+transition: all 0.3s ease;
+display: flex;
+flex-direction: column;
+text-align: left;
+}
+
+.aav-thinking-card:hover {
+transform: translateY(-4px);
+box-shadow:
+  inset 0 1px 0 rgba(255,255,255,.5),
+  inset 0 -1px 0 rgba(255,255,255,.2),
+  0 20px 48px rgba(0,0,0,.3),
+  0 8px 24px rgba(158,35,163,.2);
+}
+
+/* Image container with 16:9 aspect ratio */
+.aav-thinking-card-image {
+position: relative;
+width: 100%;
+padding-top: 56.25%; /* 16:9 aspect ratio */
+overflow: hidden;
+background: linear-gradient(135deg, rgba(158,35,163,0.3), rgba(11,68,123,0.3));
+}
+
+.aav-thinking-card-image img {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.3s ease;
+}
+
+.aav-thinking-card:hover .aav-thinking-card-image img {
+transform: scale(1.05);
+}
+
+/* Gradient overlay for better text contrast */
+.aav-thinking-card-image::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 40%;
+background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+pointer-events: none;
+}
+
+/* Category badge */
+.aav-thinking-card-category {
+position: absolute;
+top: 12px;
+left: 12px;
+padding: 6px 12px;
+font-size: 11px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+border-radius: 999px;
+background: rgba(158,35,163,0.9);
+color: #fff;
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+border: 1px solid rgba(255,255,255,0.3);
+z-index: 2;
+}
+
+/* Category color variants */
+.aav-thinking-card-category[data-category="deep-dive"] {
+background: rgba(111,45,189,0.9);
+}
+
+.aav-thinking-card-category[data-category="insights"] {
+background: rgba(11,68,123,0.9);
+}
+
+.aav-thinking-card-category[data-category="featured"] {
+background: rgba(158,35,163,0.9);
+}
+
+/* Content container */
+.aav-thinking-card-content {
+padding: 20px;
+flex: 1;
+display: flex;
+flex-direction: column;
+}
+
+/* Title */
+.aav-thinking-card-title {
+font-family: dinmedium, Arial, sans-serif;
+font-size: 20px;
+line-height: 1.3;
+margin: 0 0 12px 0;
+color: #fff;
+text-shadow: 0 1px 2px rgba(0,0,0,.3);
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* Excerpt */
+.aav-thinking-card-excerpt {
+font-size: 14px;
+line-height: 1.6;
+color: #e8e9f5;
+margin: 0 0 16px 0;
+opacity: 0.9;
+flex: 1;
+display: -webkit-box;
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+/* Meta row */
+.aav-thinking-card-meta {
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 12px;
+color: #b8b9c4;
+margin-bottom: 16px;
+padding-bottom: 16px;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.aav-thinking-date,
+.aav-thinking-readtime {
+opacity: 0.7;
+}
+
+/* CTA Link */
+.aav-thinking-card-link {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+font-size: 14px;
+font-weight: 600;
+color: #c87fd0;
+text-decoration: none;
+transition: all 0.2s ease;
+font-family: dinmedium, Arial, sans-serif;
+letter-spacing: 0.02em;
+}
+
+.aav-thinking-card-link::after {
+content: "→";
+transition: transform 0.2s ease;
+}
+
+.aav-thinking-card-link:hover {
+color: #fff;
+transform: translateX(2px);
+}
+
+.aav-thinking-card-link:hover::after {
+transform: translateX(4px);
+}
+
+/* Bottom CTA Section */
+.aav-thinking-cta {
+text-align: center;
+margin-top: 40px;
+}
+
+.aav-thinking-cta .aav-btn {
+min-width: 200px;
+height: 48px;
+line-height: 44px;
+padding: 0 24px;
+font-size: 16px;
+background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+color: #ffffff;
+border: 1px solid rgba(255,255,255,0.3);
+backdrop-filter: blur(8px);
+border-radius: 999px;
+text-decoration: none;
+display: inline-block;
+transition: all 0.3s ease;
+font-weight: 600;
+}
+
+.aav-thinking-cta .aav-btn:hover {
+background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 100%);
+border-color: rgba(255,255,255,0.5);
+transform: translateY(-2px);
 }
 
 /* LabOS (Transparent with enhanced styling) */
@@ -1108,6 +1356,28 @@ box-shadow:
 
 .aav-card {
   padding: 16px !important;
+}
+
+/* OUR THINKING - Mobile adjustments */
+.aav-thinking-card-image {
+  padding-top: 50% !important; /* Reduce height on mobile */
+}
+
+.aav-thinking-card-content {
+  padding: 16px !important;
+}
+
+.aav-thinking-card-title {
+  font-size: 18px !important;
+}
+
+.aav-thinking-card-excerpt {
+  -webkit-line-clamp: 3 !important; /* Reduce to 3 lines on mobile */
+}
+
+.aav-verse .aav-lead {
+  font-size: 16px !important;
+  margin-bottom: 28px !important;
 }
 
 /* Proofline Preview - Mobile */
