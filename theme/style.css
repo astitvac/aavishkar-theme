@@ -925,9 +925,93 @@ box-shadow:
 .aav-labos .aav-btn-ghost:hover {
 background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 100%);
 border-color: rgba(255,255,255,0.5);
-box-shadow: 
+box-shadow:
   inset 0 1px 0 rgba(255,255,255,.3),
   0 12px 32px rgba(0,0,0,.2);
+}
+
+/* ========== PROOFLINE PREVIEW SECTION ========== */
+/* Split layout with content + simplified DAG visual */
+.aav-proofline-preview {
+  color: #fff;
+  background: transparent;
+  text-align: left;
+}
+
+.aav-proofline-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(40px, 6vw, 60px);
+  align-items: center;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.aav-proofline-content {
+  flex: 1 1 480px;
+  max-width: 540px;
+}
+
+.aav-proofline-visual {
+  flex: 1 1 320px;
+  max-width: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Enhanced eyebrow with gradient */
+.aav-proofline-preview .aav-eyebrow {
+  display: inline-block;
+  background: linear-gradient(90deg, #c87fd0 0%, #6c8ae4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.aav-proofline-preview .aav-h2 {
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,.35);
+  margin-bottom: 16px;
+}
+
+.aav-proofline-preview .aav-lead {
+  color: #e8e9f5;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  max-width: 520px;
+  margin-bottom: 28px;
+  line-height: 1.65;
+}
+
+.aav-proofline-preview .aav-cta-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+/* Visual card with glassmorphism */
+.aav-proofline-visual-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+  backdrop-filter: saturate(120%) blur(12px);
+  -webkit-backdrop-filter: saturate(120%) blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.3),
+    0 12px 32px rgba(0,0,0,.18);
+}
+
+.aav-proofline-visual-card svg {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Edge (Transparent) */
@@ -956,6 +1040,26 @@ box-shadow:
 }
 .et_pb_row.aav-container-small {
   padding: clamp(16px, 2vw, 24px) clamp(16px, 2vw, 24px) !important;
+}
+
+/* Proofline Preview - Responsive */
+.aav-proofline-grid {
+  flex-direction: column;
+  gap: clamp(28px, 4vw, 36px);
+}
+
+.aav-proofline-content {
+  text-align: center !important;
+  max-width: 100%;
+}
+
+.aav-proofline-preview .aav-cta-row {
+  justify-content: center;
+}
+
+.aav-proofline-preview .aav-eyebrow {
+  display: block;
+  text-align: center;
 }
 }
 
@@ -1004,6 +1108,16 @@ box-shadow:
 
 .aav-card {
   padding: 16px !important;
+}
+
+/* Proofline Preview - Mobile */
+.aav-proofline-preview .aav-cta-row {
+  flex-direction: column;
+  align-items: center;
+}
+
+.aav-proofline-preview .aav-btn {
+  min-width: 240px;
 }
 
 /* Mobile container adjustments - FURTHER OPTIMIZED */
@@ -1429,6 +1543,37 @@ color: #ffffff !important;
 padding: clamp(30px, 4vw, 50px) 0 !important;
 margin-bottom: 0 !important;
 text-align: center !important;
+}
+
+/* Proofline Preview section - Divi overrides */
+.et_pb_section.aav-proofline-preview,
+#et-fb-app .et_pb_section.aav-proofline-preview,
+.et-fb-root .et_pb_section.aav-proofline-preview {
+  background: transparent !important;
+  color: #ffffff !important;
+  padding: clamp(40px, 5vw, 70px) 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.et_pb_section.aav-proofline-preview .et_pb_text,
+.et_pb_section.aav-proofline-preview h1,
+.et_pb_section.aav-proofline-preview h2,
+.et_pb_section.aav-proofline-preview p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,.3) !important;
+}
+
+.et_pb_section.aav-proofline-preview .aav-proofline-content {
+  text-align: left !important;
+}
+
+/* Visual Builder compatibility */
+#et-fb-app .et_pb_section.aav-proofline-preview .aav-eyebrow,
+.et-fb-root .et_pb_section.aav-proofline-preview .aav-eyebrow {
+  background: linear-gradient(90deg, #c87fd0 0%, #6c8ae4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Foundation section - OPTIMIZED spacing */
