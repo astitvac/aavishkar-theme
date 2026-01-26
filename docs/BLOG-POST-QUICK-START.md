@@ -17,7 +17,7 @@
 ### 2. Create Post
 - [ ] WordPress → Posts → Add New
 - [ ] Add title
-- [ ] Click "Use Default Editor" (NOT Divi Builder)
+- [ ] Click "Use Default Editor" first
 
 ### 3. Add Content
 - [ ] Click "+" → "Custom HTML"
@@ -30,21 +30,29 @@
 - [ ] Excerpt: Add 80-100 word summary
 - [ ] Tags: Add relevant tags
 
-### 5. Preview & Publish
-- [ ] Click "Preview" → Review
+### 5. **CRITICAL: Convert to Divi Builder**
+- [ ] Click purple **"Use The Divi Builder"** button
+- [ ] Select **"Use Existing Content"**
+- [ ] Click **"Start Building"**
+- [ ] Click **"Save"** or **"Update"** to save post
+- [ ] **WHY:** Theme Builder requires Divi format for white background
+
+### 6. Preview & Publish
+- [ ] Click "Preview" → Review (should show white background)
 - [ ] Click "Publish" → Confirm
 
-### 6. Clear Caches
+### 7. Clear Caches
 - [ ] Divi: Theme Options → Builder → Static CSS → Clear
 - [ ] WP Rocket: Clear cache + Clear Used CSS
 - [ ] Browser: Ctrl+F5
 
-### 7. Verify Homepage
+### 8. Verify Homepage
 - [ ] Visit https://aavishkar.ai
 - [ ] Check "OUR THINKING" section
 - [ ] Confirm post displays correctly
+- [ ] Check post page has white background
 
-### 8. Git Commit
+### 9. Git Commit
 ```bash
 git add theme/partials/blog-posts/
 git commit -m "Add: [Post Title] blog post"
@@ -86,6 +94,17 @@ git push origin main
 
 ## Common Issues
 
+**Post has PURPLE background instead of WHITE? (MOST COMMON)**
+- **Cause:** Post is still in Default Editor format, not Divi Builder
+- **Fix:**
+  1. Edit post in WordPress admin
+  2. Click purple "Use The Divi Builder" button
+  3. Select "Use Existing Content" → "Start Building"
+  4. Click "Save/Update"
+  5. Clear all caches
+- **Why:** Theme Builder requires Divi format for `.aav-article-body` white background
+- **Visual Builder won't save?** You must convert in backend admin first, not Visual Builder
+
 **Post not on homepage?**
 - Check category is "Featured", "Deep Dive", or "Insights"
 - Verify post status is "Published" (not draft)
@@ -95,6 +114,7 @@ git push origin main
 - Clear Divi static CSS cache
 - Clear WP Rocket cache
 - Hard refresh browser (Ctrl+F5)
+- Check post is in Divi Builder format (not Default Editor)
 
 **Featured image not showing?**
 - Check image was uploaded to Media Library first
@@ -129,7 +149,7 @@ PROOFLINE-BLOG-POST-DEPLOYMENT.md
 
 ## Example: Proofline Post
 
-**Published:** 2026-01-23
+**Published:** 2026-01-23 (fixed 2026-01-26)
 **URL:** https://aavishkar.ai/introducing-proofline/
 **Files:**
 - `theme/partials/blog-posts/introducing-proofline.html`
@@ -137,3 +157,8 @@ PROOFLINE-BLOG-POST-DEPLOYMENT.md
 - Featured image: `proofline_whitepaper.png` (uploaded to WP)
 
 **Time taken:** 30 minutes from HTML creation to live publication
+
+**Key Learning:**
+- Initially published with Default Editor → Purple background (incorrect)
+- Fixed by converting to Divi Builder format → White background (correct)
+- Lesson: Always convert to Divi Builder after pasting HTML content
