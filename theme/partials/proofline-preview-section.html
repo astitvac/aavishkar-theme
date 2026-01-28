@@ -1,57 +1,131 @@
+<!--
+  Proofline Preview Section for Homepage
+  Usage: Copy this HTML into a Divi Code module
+  Updated: 2026-01-28 - Unified DAG visual matching Proofline page structure
+  Adapted for dark purple background with lighter pink colors for visibility
+-->
 <div class="aav-proofline-grid">
   <!-- Left: Content -->
   <div class="aav-proofline-content">
-    <div class="aav-eyebrow">First Product</div>
+    <div class="aav-eyebrow">We are building</div>
     <h2 class="aav-h2">Proofline</h2>
     <p class="aav-lead">Our first realization of the Knowledge IDE vision. Proofline helps R&D teams capture hypotheses, evidence, and decisions—connecting them into a scientific engine that turns scattered work into verifiable knowledge.</p>
 
     <div class="aav-cta-row">
       <a class="aav-btn aav-btn-primary" href="/proofline/">Explore Proofline →</a>
-      <a class="aav-btn aav-btn-ghost" href="https://www.youtube.com/watch?v=j9GWXisJPEk" target="_blank" rel="noopener">See Demo ▸</a>
+      <a class="aav-btn aav-btn-ghost" href="https://www.youtube.com/watch?v=KT6eyadQfIg" target="_blank" rel="noopener">See Demo ▸</a>
     </div>
   </div>
 
   <!-- Right: Visual -->
   <div class="aav-proofline-visual">
     <div class="aav-proofline-visual-card">
-      <svg viewBox="0 0 280 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Gradient definition -->
+      <svg viewBox="0 0 360 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proofline knowledge graph visualization">
         <defs>
-          <linearGradient id="pl-preview-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#9e23a3"/>
-            <stop offset="100%" stop-color="#7c3aad"/>
-          </linearGradient>
+          <!-- Card shadow filter (dark background optimized) -->
+          <filter id="homepage-dag-card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="rgba(255,255,255,0.12)"/>
+          </filter>
+
+          <!-- Node glow filter (dark background optimized) -->
+          <filter id="homepage-dag-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
 
-        <!-- Main spine line -->
-        <line x1="32" y1="44" x2="32" y2="210" stroke="url(#pl-preview-gradient)" stroke-width="3" stroke-linecap="round"/>
-
-        <!-- Node 1: IDEA -->
-        <g transform="translate(0, 30)">
-          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#9e23a3" stroke-width="2.5"/>
-          <circle cx="32" cy="14" r="2.5" fill="#9e23a3"/>
-          <rect x="50" y="0" width="70" height="28" rx="7" fill="rgba(255,255,255,0.12)"/>
-          <text x="85" y="18" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">IDEA</text>
+        <!-- Header: Proofline title -->
+        <g>
+          <circle cx="32" cy="20" r="5" fill="#d89fe0"/>
+          <text x="44" y="25" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="14" font-weight="600">Proofline</text>
         </g>
 
-        <!-- Node 2: EVIDENCE -->
-        <g transform="translate(0, 110)">
-          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#7c3aad" stroke-width="2.5"/>
-          <circle cx="32" cy="14" r="2.5" fill="#7c3aad"/>
-          <rect x="50" y="0" width="80" height="28" rx="7" fill="rgba(255,255,255,0.12)"/>
-          <text x="90" y="18" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">EVIDENCE</text>
+        <!-- ========== MAIN SPINE (x=32) ========== -->
+        <!-- Segment: IDEA to EVIDENCE -->
+        <line x1="32" y1="60" x2="32" y2="88" stroke="#d89fe0" stroke-width="3" stroke-linecap="round"/>
+        <!-- Segment: EVIDENCE to HYPOTHESIS -->
+        <line x1="32" y1="108" x2="32" y2="148" stroke="#d89fe0" stroke-width="3" stroke-linecap="round"/>
+        <!-- Segment: HYPOTHESIS to INSIGHT -->
+        <line x1="32" y1="168" x2="32" y2="208" stroke="#d89fe0" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- ========== RIGHT BRANCH (ALT HYPOTHESIS) ========== -->
+        <!-- Horizontal from EVIDENCE going RIGHT -->
+        <line x1="40" y1="98" x2="210" y2="98" stroke="#d89fe0" stroke-width="3" stroke-linecap="round"/>
+        <!-- Vertical down to ALT HYPOTHESIS node -->
+        <line x1="210" y1="98" x2="210" y2="148" stroke="#d89fe0" stroke-width="3" stroke-linecap="round"/>
+        <!-- Vertical from ALT HYPOTHESIS down to INSIGHT (dotted = learnings merge) -->
+        <line x1="210" y1="168" x2="210" y2="218" stroke="#d89fe0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+        <!-- Horizontal from right back to INSIGHT (dotted) -->
+        <line x1="210" y1="218" x2="42" y2="218" stroke="#d89fe0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+
+        <!-- ========== ROW 1: IDEA (y=40) ========== -->
+        <g transform="translate(0, 40)">
+          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#d89fe0" stroke-width="2.5"/>
+          <circle cx="32" cy="14" r="2.5" fill="#d89fe0"/>
+          <g filter="url(#homepage-dag-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="rgba(255,255,255,0.18)"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(216, 159, 224, 0.25)"/>
+          <text x="90" y="20" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">IDEA</text>
         </g>
 
-        <!-- Node 3: INSIGHT (glowing) -->
+        <!-- ========== ROW 2: EVIDENCE (y=84) ========== -->
+        <g transform="translate(0, 84)">
+          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#c89fd8" stroke-width="2.5"/>
+          <circle cx="32" cy="14" r="2.5" fill="#c89fd8"/>
+          <g filter="url(#homepage-dag-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="rgba(255,255,255,0.18)"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(200, 159, 216, 0.25)"/>
+          <text x="90" y="20" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">EVIDENCE</text>
+        </g>
+
+        <!-- ========== ROW 3: BOTH HYPOTHESES (y=140) ========== -->
+        <g transform="translate(0, 140)">
+          <!-- MAIN HYPOTHESIS on LEFT (main spine) -->
+          <circle cx="32" cy="14" r="7" fill="#fff" stroke="#b88fd0" stroke-width="2.5"/>
+          <circle cx="32" cy="14" r="2.5" fill="#b88fd0"/>
+          <g filter="url(#homepage-dag-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="rgba(255,255,255,0.18)"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(184, 143, 208, 0.25)"/>
+          <text x="90" y="20" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="9" font-weight="600" text-anchor="middle">HYPOTHESIS</text>
+
+          <!-- ALT HYPOTHESIS on RIGHT (branch, invalidated) -->
+          <circle cx="210" cy="14" r="7" fill="#fff" stroke="#b88fd0" stroke-width="2.5"/>
+          <circle cx="210" cy="14" r="2.5" fill="#b88fd0"/>
+          <!-- X mark in circle - LEFT of card -->
+          <circle cx="228" cy="14" r="9" fill="rgba(239, 68, 68, 0.2)"/>
+          <path d="M224 10 L232 18 M232 10 L224 18" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+          <!-- ALT card -->
+          <g filter="url(#homepage-dag-card-shadow)">
+            <rect x="245" y="0" width="80" height="32" rx="7" fill="rgba(255,255,255,0.18)"/>
+          </g>
+          <rect x="253" y="7" width="44" height="18" rx="4" fill="rgba(184, 143, 208, 0.2)"/>
+          <text x="275" y="20" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">ALT</text>
+        </g>
+
+        <!-- ========== ROW 4: INSIGHT (y=196) ========== -->
         <g transform="translate(0, 196)">
-          <circle cx="32" cy="14" r="10" fill="#c87fd0" opacity="0.5"/>
+          <!-- Glowing node -->
+          <g filter="url(#homepage-dag-glow)">
+            <circle cx="32" cy="14" r="10" fill="#d89fe0"/>
+          </g>
           <circle cx="32" cy="14" r="5" fill="#fff"/>
-          <rect x="50" y="0" width="70" height="28" rx="7" fill="rgba(200,127,208,0.2)"/>
-          <text x="85" y="18" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">INSIGHT</text>
+          <g filter="url(#homepage-dag-card-shadow)">
+            <rect x="50" y="0" width="80" height="32" rx="7" fill="rgba(255,255,255,0.18)"/>
+          </g>
+          <rect x="58" y="7" width="64" height="18" rx="4" fill="rgba(216, 159, 224, 0.3)"/>
+          <text x="90" y="20" fill="#fff" font-family="dinmedium, Arial, sans-serif" font-size="10" font-weight="600" text-anchor="middle">INSIGHT</text>
           <!-- Checkmark -->
-          <circle cx="135" cy="16" r="8" fill="rgba(200,127,208,0.2)"/>
-          <path d="M131 16 L134 19 L140 12" stroke="#c87fd0" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="145" cy="16" r="10" fill="rgba(255,255,255,0.15)"/>
+          <circle cx="145" cy="16" r="9" fill="rgba(216, 159, 224, 0.2)"/>
+          <path d="M140 16 L144 20 L151 12" stroke="#d89fe0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </g>
+
       </svg>
     </div>
   </div>
