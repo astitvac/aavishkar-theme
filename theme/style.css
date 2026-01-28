@@ -5146,3 +5146,227 @@ body.page-id-2952 .pl-mockup-dag-derives span {
 .pl-file-icon.docx { background: #3b82f6; }
 .pl-file-icon.drive { background: #f59e0b; }
 
+
+/* ========================================================================
+   PROOFLINE PAGE ENHANCEMENTS - Header & Hero Refinements
+   Added: 2026-01-28 - Enhanced header-hero flow, logo sizing, CTA prominence
+   ======================================================================== */
+
+/* 1. REFINED HEADER - Floating glass effect with purple accent */
+body.page-id-2952 .et_pb_section.aav-site-header {
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.95) 100%) !important;
+  border-bottom: 1px solid rgba(158, 35, 163, 0.08) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 4px 20px rgba(158, 35, 163, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: blur(12px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(120%) !important;
+}
+
+/* 2. LARGER LOGO - 70px for better presence and proportion */
+body.page-id-2952 .aav-site-header .aav-logo img,
+body.page-id-2952 .aav-site-header .et_pb_image img {
+  height: 70px !important;
+  max-height: 70px !important;
+  width: auto !important;
+  filter: drop-shadow(0 2px 4px rgba(111, 45, 189, 0.12)) !important;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+body.page-id-2952 .aav-site-header .aav-logo img:hover,
+body.page-id-2952 .aav-site-header .et_pb_image img:hover {
+  transform: scale(1.02) !important;
+}
+
+/* 3. ENHANCED HERO - Breathing room with subtle gradient intro */
+body.page-id-2952 .et_pb_section.pl-hero {
+  padding-top: 140px !important; /* 100px header + 40px breathing room */
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(247, 240, 252, 0.2) 15%,
+    transparent 35%
+  ) !important;
+  position: relative !important;
+}
+
+/* Subtle separator between header and hero */
+body.page-id-2952 .et_pb_section.pl-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(158, 35, 163, 0.12) 50%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+/* 4. SOPHISTICATED EYEBROW - Glassmorphic badge style */
+body.page-id-2952 .pl-hero .pl-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(247, 240, 252, 0.85) 100%
+  ) !important;
+  border: 1px solid rgba(158, 35, 163, 0.15) !important;
+  border-radius: 100px !important;
+  box-shadow:
+    0 2px 8px rgba(158, 35, 163, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  color: #6f2dbd !important;
+  margin-bottom: 24px !important;
+}
+
+/* 5. ENHANCED PRIMARY CTA - Animated gradient with depth */
+body.page-id-2952 .pl-hero .aav-btn.aav-btn-primary {
+  background: linear-gradient(145deg, #6f2dbd 0%, #9e23a3 45%, #6f2dbd 100%) !important;
+  background-size: 200% 100% !important;
+  box-shadow:
+    0 4px 16px rgba(158, 35, 163, 0.3),
+    0 2px 8px rgba(111, 45, 189, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.3) inset !important;
+  transform: translateY(0) !important;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+body.page-id-2952 .pl-hero .aav-btn.aav-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s ease;
+}
+
+body.page-id-2952 .pl-hero .aav-btn.aav-btn-primary:hover {
+  background-position: 100% 0 !important;
+  box-shadow:
+    0 6px 24px rgba(158, 35, 163, 0.4),
+    0 4px 12px rgba(111, 45, 189, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.4) inset !important;
+  transform: translateY(-2px) !important;
+}
+
+body.page-id-2952 .pl-hero .aav-btn.aav-btn-primary:hover::before {
+  left: 100%;
+}
+
+/* 6. ENHANCED GHOST CTA - Refined border and hover state */
+body.page-id-2952 .pl-hero .aav-btn.aav-btn-ghost {
+  background: transparent !important;
+  border: 1.5px solid rgba(111, 45, 189, 0.3) !important;
+  color: #6f2dbd !important;
+  box-shadow:
+    0 2px 8px rgba(158, 35, 163, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+body.page-id-2952 .pl-hero .aav-btn.aav-btn-ghost:hover {
+  background: rgba(247, 240, 252, 0.6) !important;
+  border-color: rgba(111, 45, 189, 0.5) !important;
+  box-shadow:
+    0 4px 16px rgba(158, 35, 163, 0.12),
+    0 2px 0 rgba(255, 255, 255, 0.8) inset !important;
+  transform: translateY(-1px) !important;
+}
+
+/* 7. DAG VISUAL CONTAINER - Enhanced glassmorphism */
+body.page-id-2952 .pl-hero-visual-card {
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(247, 240, 252, 0.9) 100%
+  ) !important;
+  border: 1px solid rgba(158, 35, 163, 0.12) !important;
+  border-radius: 20px !important;
+  padding: 32px !important;
+  box-shadow:
+    0 8px 32px rgba(158, 35, 163, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset !important;
+  backdrop-filter: blur(16px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(120%) !important;
+}
+
+/* 8. RESPONSIVE REFINEMENTS */
+
+/* Tablet adjustments */
+@media (max-width: 980px) {
+  body.page-id-2952 .aav-site-header .aav-logo img,
+  body.page-id-2952 .aav-site-header .et_pb_image img {
+    height: 60px !important;
+    max-height: 60px !important;
+  }
+
+  body.page-id-2952 .et_pb_section.pl-hero {
+    padding-top: 120px !important; /* 80px header + 40px breathing room */
+  }
+
+  body.page-id-2952 .pl-hero-visual-card {
+    padding: 24px !important;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  body.page-id-2952 .aav-site-header .aav-logo img,
+  body.page-id-2952 .aav-site-header .et_pb_image img {
+    height: 50px !important;
+    max-height: 50px !important;
+  }
+
+  body.page-id-2952 .et_pb_section.pl-hero {
+    padding-top: 100px !important; /* 70px header + 30px breathing room */
+  }
+
+  body.page-id-2952 .pl-hero .pl-eyebrow {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+  }
+
+  body.page-id-2952 .pl-hero-visual-card {
+    padding: 20px !important;
+    border-radius: 16px !important;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  body.page-id-2952 .et_pb_section.pl-hero {
+    padding-top: 90px !important; /* 60px header + 30px breathing room */
+  }
+
+  body.page-id-2952 .pl-hero .aav-btn.aav-btn-primary,
+  body.page-id-2952 .pl-hero .aav-btn.aav-btn-ghost {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* END PROOFLINE PAGE ENHANCEMENTS */
+
