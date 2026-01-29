@@ -239,3 +239,22 @@ function render_thinking_hub() {
 }
 add_shortcode('thinking_hub', 'render_thinking_hub');
 
+/**
+ * Add noindex meta tag to unlisted pages
+ * Prevents search engine indexing for privacy policy and other sensitive pages
+ *
+ * IMPORTANT: Replace XXXX with actual page ID after WordPress page creation
+ * Example: If Privacy Policy page ID is 3125, change array(XXXX) to array(3125)
+ */
+function aav_add_noindex_to_unlisted_pages() {
+    // List of page IDs that should not be indexed
+    $unlisted_page_ids = array(
+        XXXX  // Replace with actual Privacy Policy page ID
+    );
+
+    if (is_page($unlisted_page_ids)) {
+        echo '<meta name="robots" content="noindex, nofollow">' . "\n";
+    }
+}
+add_action('wp_head', 'aav_add_noindex_to_unlisted_pages', 1);
+
