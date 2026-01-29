@@ -1,6 +1,6 @@
 # Building Aavishkar.ai Website: Local-to-WordPress Workflow
 
-**Last Updated:** December 2025  
+**Last Updated:** January 2026
 **Status:** ✅ COMPANY PAGE COMPLETE | ✅ ENHANCED CONTACT FORM (multi-path) | ✅ WHITEPAPER PUBLISHED | ✅ MOBILE OPTIMIZATION COMPLETE | ✅ NAVIGATION SYSTEM ENHANCED | Glass Aesthetic Perfected | Proven Workflow Established
 
 ## Overview
@@ -13,10 +13,11 @@ This document captures our proven workflow for implementing Aavishkar.ai's desig
 
 ### **Proven "Test Local → Deploy to WordPress" Process**
 
-1. **Design & Test Locally** → Perfect mockups in `CompanyPage/` folder
-2. **Implement in Divi** → Add CSS classes to Divi modules  
-3. **Override When Needed** → Use Divi Theme Options → Custom CSS for specificity
-4. **Maintain Design System** → Keep `.aav-*` classes as single source of truth
+1. **Design & Test Locally** → Perfect mockups in `mockups/` folder
+2. **Edit Version-Controlled Files** → Update `theme/style.css` and `theme/partials/*.html`
+3. **Deploy via Git** → Push to `main` branch (auto-deploys via WP Pusher)
+4. **Clear Caches** → Divi Static CSS + WP Rocket cache
+5. **Maintain Design System** → Keep `.aav-*` classes in `theme/style.css` as single source of truth
 
 
 ---
@@ -42,7 +43,7 @@ This document captures our proven workflow for implementing Aavishkar.ai's desig
 
 ### **1. Enhanced Design System v2.0 in WordPress**
 
-**Location:** WordPress Child Theme `style.css` (using `style-v2.0-header-enhanced.css`)
+**Location:** WordPress Child Theme `theme/style.css` (deployed via Git + WP Pusher)
 
 - ✅ **DIN Fonts:** Fully loaded and optimized (`dinmedium`, `dinalternate`, `din1451`)
 - ✅ **Design Tokens:** All CSS variables replaced with direct values for WordPress compatibility
@@ -53,19 +54,20 @@ This document captures our proven workflow for implementing Aavishkar.ai's desig
 
 **Key Learning:** WordPress CSS validator requires direct values instead of CSS variables. Enhanced specificity with `et_pb_section.aav-*` selectors ensures Divi compatibility.
 
-### **2. Dual-File CSS Strategy (✅ OPTIMIZED)**
+### **2. CSS Deployment Strategy (✅ OPTIMIZED)**
 
-**File 1:** `style-v2.0-header-enhanced.css` → WordPress `style.css`
+**Primary CSS File:** `theme/style.css` (auto-deployed via Git)
 - Core design system and section backgrounds
 - Header implementation with enhanced sizing
 - Typography and layout foundations
 - Divi-specific overrides with high specificity
+- Proofline page styles
+- Blog post styling
+- All site-wide CSS (~4,500 lines, organized by section)
 
-**File 2:** `divi-custom-css-v2.0.css` → Divi Theme Options → Custom CSS  
-- Interactive hover effects and animations
-- Enhanced Visual Builder compatibility
-- Performance optimizations
-- Streamlined without conflicts
+**Optional Enhancement CSS:** Divi Theme Options → Custom CSS (manual deployment only if needed)
+- Use only for quick testing/overrides that don't belong in version control
+- Production CSS should always be in `theme/style.css`
 
 **Why This Works:**
 - ✅ **No conflicts** between files - clear separation of concerns
@@ -372,19 +374,32 @@ body.page-id-XXXX,
 
 ### **Local Development:**
 ```
-CompanyPage/
-├── company-page.html          # Main mockup
-├── company-page.css           # Complete design system
-├── article-template.html      # Article/blog template
-├── article-template.css       # Article-specific styles
-└── Building_aavishkar_site.md # This guide
+mockups/
+├── company-page.html          # Main homepage mockup
+├── company-page.css           # Homepage design styles
+├── proofline-mock-light.html  # Proofline page mockup
+└── article-template.html      # Article/blog template
 ```
 
-### **WordPress Implementation:**
+### **WordPress Theme (Git-Deployed):**
 ```
-WordPress/
-├── style.css                  # Child theme (base design system)
-└── Divi → Theme Options → Custom CSS  # Divi-specific overrides
+theme/
+├── style.css                  # Main CSS file (~4,500 lines) - auto-deploys via Git
+├── functions.php              # Custom shortcodes and PHP functions
+├── partials/                  # Version-controlled HTML content blocks
+│   ├── proofline-hero.html
+│   ├── proofline-lighthouse.html
+│   ├── proofline-demos.html
+│   └── blog-posts/           # Blog post HTML content
+└── fonts/                     # DIN font family files
+```
+
+### **Documentation:**
+```
+docs/
+├── Building_aavishkar_site.md    # This guide
+├── Building_proofline_page.md    # Proofline implementation
+└── blog-post-implementation-guide.md
 ```
 
 ---
@@ -565,13 +580,14 @@ WordPress/
 .et-fb-root .et_pb_section.aav-hero { }
 ```
 
-### **Enhanced File Structure v2.1:**
-- **Main CSS:** `style-v2.0-header-enhanced.css` (2,234 lines) → WordPress `style.css`
-- **Enhancement CSS:** `divi-custom-css-v2.0-optimized.css` → Divi Theme Options → Custom CSS
-- **Page Backgrounds:** `page-metallic-background-v1.1-optimized.css` → Page Settings → Custom CSS
-- **Blog Content:** `whitepaper-html-block.html` → Ready-to-paste WordPress content
-- **Font Files:** `/wp-content/themes/Child_divi_theme/fonts/`
-- **Documentation:** `Building_aavishkar_site.md` (this guide)
+### **File Structure (Current):**
+- **Main CSS:** `theme/style.css` (~4,500 lines) - Auto-deploys via Git
+- **HTML Partials:** `theme/partials/*.html` - Version-controlled content blocks
+- **Blog Posts:** `theme/partials/blog-posts/*.html` - Blog post HTML content
+- **Font Files:** `theme/fonts/` (DIN family)
+- **Functions:** `theme/functions.php` - Custom shortcodes and PHP
+- **Documentation:** `docs/Building_aavishkar_site.md` (this guide)
+- **Mockups:** `mockups/*.html` - Local testing references
 
 ### **Design System Classes (Enhanced v2.1):**
 - **Layout:** `.aav-hero`, `.aav-mission`, `.aav-verse`, `.aav-why`, `.aav-labos`, `.aav-foundation`
@@ -639,11 +655,12 @@ This session established a **revolutionary glass aesthetic** that transforms the
 5. **Enhanced Persona Cards**: Glassmorphism with hover lift and glow effects
 
 #### **Technical Implementation:**
-- **File Structure**: `style-v2.0-header-enhanced.css` + `page-metallic-background-v1.0.css` + `divi-custom-css-v2.0.css`
+- **File Structure**: All CSS consolidated in `theme/style.css` (~4,500 lines, organized by section)
 - **Performance**: CSS-only animations with hardware acceleration
 - **Compatibility**: Full Visual Builder support with dual CSS targeting
 - **Responsiveness**: Adaptive glass effects across all breakpoints
 - **Accessibility**: Maintained contrast ratios and focus states
+- **Deployment**: Auto-deploys via Git push (WP Pusher integration)
 
 #### **Key CSS Innovations:**
 ```css
@@ -755,13 +772,15 @@ add_shortcode('thinking_hub', 'render_thinking_hub');
 2. Set title and excerpt (80-100 words recommended)
 3. **Upload featured image** (1200×675px, <200KB) - **REQUIRED for homepage**
 4. Add "Custom HTML" block in editor
-5. Paste HTML content using template (`theme/partials/blog-post-html-template.html`)
+5. Paste HTML content using template (see `theme/partials/blog-posts/` for examples)
 6. **Assign category**: Featured, Deep Dive, or Insights
 7. Assign additional tags for organization
-8. Preview and **publish** (drafts won't appear on homepage)
-9. **Homepage updates automatically** - no manual steps needed!
+8. **CRITICAL:** Convert to Divi Builder format (click "Use The Divi Builder" → "Use Existing Content")
+9. Preview and **publish** (drafts won't appear on homepage)
+10. Clear caches (Divi Static CSS + WP Rocket)
+11. **Homepage updates automatically** - no manual steps needed!
 
-**For detailed implementation guide, see:** [Blog Post Template Structure](./blog-post-template-structure.md)
+**For complete step-by-step workflow with critical gotchas, see:** `CLAUDE.md` → "Blog Post Publishing Workflow" section (includes Divi Builder conversion requirement and troubleshooting)
 
 ### CSS Classes Reference
 
