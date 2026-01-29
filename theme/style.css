@@ -5383,20 +5383,20 @@ body.page-id-2952 .pl-hero-visual-card {
    HERO SECTION
    ================================================================ */
 
-body.page-id-XXXX .pl-privacy-hero {
+body.page-id-3085 .pl-privacy-hero {
   background: inherit; /* Inherits 3-layer radial gradient from Proofline */
   padding: 120px 0 60px;
   text-align: center;
 }
 
 /* Visual Builder compatibility */
-#et-fb-app body.page-id-XXXX .pl-privacy-hero,
-.et-fb-root body.page-id-XXXX .pl-privacy-hero {
+#et-fb-app body.page-id-3085 .pl-privacy-hero,
+.et-fb-root body.page-id-3085 .pl-privacy-hero {
   background: inherit;
   padding: 120px 0 60px;
 }
 
-body.page-id-XXXX .pl-privacy-title {
+body.page-id-3085 .pl-privacy-title {
   font-family: dinmedium, gill-sans, sans-serif;
   font-size: clamp(40px, 6vw, 66px);
   font-weight: 500;
@@ -5406,7 +5406,7 @@ body.page-id-XXXX .pl-privacy-title {
   margin: 0 0 16px;
 }
 
-body.page-id-XXXX .pl-privacy-meta {
+body.page-id-3085 .pl-privacy-meta {
   font-family: din1451, gill-sans, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -5418,7 +5418,7 @@ body.page-id-XXXX .pl-privacy-meta {
    CONTAINER SYSTEM
    ================================================================ */
 
-body.page-id-XXXX .pl-privacy-container {
+body.page-id-3085 .pl-privacy-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px 80px;
@@ -5429,8 +5429,8 @@ body.page-id-XXXX .pl-privacy-container {
 }
 
 /* Visual Builder compatibility */
-#et-fb-app body.page-id-XXXX .pl-privacy-container,
-.et-fb-root body.page-id-XXXX .pl-privacy-container {
+#et-fb-app body.page-id-3085 .pl-privacy-container,
+.et-fb-root body.page-id-3085 .pl-privacy-container {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 60px;
@@ -5440,13 +5440,13 @@ body.page-id-XXXX .pl-privacy-container {
    SECTION NAVIGATION (STICKY TOC)
    ================================================================ */
 
-body.page-id-XXXX .pl-privacy-nav {
+body.page-id-3085 .pl-privacy-nav {
   position: sticky;
   top: 100px;
   align-self: flex-start;
 }
 
-body.page-id-XXXX .pl-privacy-nav-title {
+body.page-id-3085 .pl-privacy-nav-title {
   font-family: dinmedium, gill-sans, sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -5456,17 +5456,17 @@ body.page-id-XXXX .pl-privacy-nav-title {
   margin: 0 0 16px;
 }
 
-body.page-id-XXXX .pl-privacy-nav-list {
+body.page-id-3085 .pl-privacy-nav-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-body.page-id-XXXX .pl-privacy-nav-list li {
+body.page-id-3085 .pl-privacy-nav-list li {
   margin: 0 0 8px;
 }
 
-body.page-id-XXXX .pl-privacy-nav-link {
+body.page-id-3085 .pl-privacy-nav-link {
   font-family: din1451, gill-sans, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -5480,13 +5480,13 @@ body.page-id-XXXX .pl-privacy-nav-link {
   margin-left: -12px;
 }
 
-body.page-id-XXXX .pl-privacy-nav-link:hover {
+body.page-id-3085 .pl-privacy-nav-link:hover {
   color: #9e23a3;
   border-left-color: #9e23a3;
 }
 
-body.page-id-XXXX .pl-privacy-nav-link:active,
-body.page-id-XXXX .pl-privacy-nav-link:focus {
+body.page-id-3085 .pl-privacy-nav-link:active,
+body.page-id-3085 .pl-privacy-nav-link:focus {
   color: #6f2dbd;
   border-left-color: #6f2dbd;
 }
@@ -5495,11 +5495,11 @@ body.page-id-XXXX .pl-privacy-nav-link:focus {
    CONTENT AREA
    ================================================================ */
 
-body.page-id-XXXX .pl-privacy-content {
+body.page-id-3085 .pl-privacy-content {
   max-width: 800px;
 }
 
-body.page-id-XXXX .pl-privacy-section {
+body.page-id-3085 .pl-privacy-section {
   margin: 0 0 48px;
   scroll-margin-top: 100px; /* Offset for sticky nav */
 }
@@ -5508,7 +5508,7 @@ body.page-id-XXXX .pl-privacy-section {
    TYPOGRAPHY
    ================================================================ */
 
-body.page-id-XXXX .pl-privacy-heading {
+body.page-id-3085 .pl-privacy-heading {
   font-family: dinmedium, gill-sans, sans-serif;
   font-size: clamp(28px, 4vw, 36px);
   font-weight: 500;
@@ -5518,7 +5518,7 @@ body.page-id-XXXX .pl-privacy-heading {
   margin: 0 0 24px;
 }
 
-body.page-id-XXXX .pl-privacy-subheading {
+body.page-id-3085 .pl-privacy-subheading {
   font-family: dinmedium, gill-sans, sans-serif;
   font-size: clamp(20px, 3vw, 24px);
   font-weight: 500;
@@ -5528,7 +5528,7 @@ body.page-id-XXXX .pl-privacy-subheading {
   margin: 32px 0 16px;
 }
 
-body.page-id-XXXX .pl-privacy-content p {
+body.page-id-3085 .pl-privacy-content p {
   font-family: din1451, gill-sans, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -5537,8 +5537,8 @@ body.page-id-XXXX .pl-privacy-content p {
   margin: 0 0 16px;
 }
 
-body.page-id-XXXX .pl-privacy-content ul,
-body.page-id-XXXX .pl-privacy-content ol {
+body.page-id-3085 .pl-privacy-content ul,
+body.page-id-3085 .pl-privacy-content ol {
   font-family: din1451, gill-sans, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -5548,27 +5548,27 @@ body.page-id-XXXX .pl-privacy-content ol {
   padding-left: 24px;
 }
 
-body.page-id-XXXX .pl-privacy-content li {
+body.page-id-3085 .pl-privacy-content li {
   margin: 0 0 8px;
 }
 
-body.page-id-XXXX .pl-privacy-content li:last-child {
+body.page-id-3085 .pl-privacy-content li:last-child {
   margin-bottom: 0;
 }
 
-body.page-id-XXXX .pl-privacy-content strong {
+body.page-id-3085 .pl-privacy-content strong {
   font-weight: 600;
   color: #0f172a;
 }
 
-body.page-id-XXXX .pl-privacy-content a {
+body.page-id-3085 .pl-privacy-content a {
   color: #9e23a3;
   text-decoration: none;
   border-bottom: 1px solid rgba(158, 35, 163, 0.3);
   transition: all 0.2s ease;
 }
 
-body.page-id-XXXX .pl-privacy-content a:hover {
+body.page-id-3085 .pl-privacy-content a:hover {
   color: #6f2dbd;
   border-bottom-color: #6f2dbd;
 }
@@ -5578,7 +5578,7 @@ body.page-id-XXXX .pl-privacy-content a:hover {
    ================================================================ */
 
 /* Summary box (at-a-glance section) */
-body.page-id-XXXX .pl-privacy-summary-box {
+body.page-id-3085 .pl-privacy-summary-box {
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(158, 35, 163, 0.15);
   border-radius: 12px;
@@ -5586,23 +5586,23 @@ body.page-id-XXXX .pl-privacy-summary-box {
   margin: 0 0 24px;
 }
 
-body.page-id-XXXX .pl-privacy-summary-box p {
+body.page-id-3085 .pl-privacy-summary-box p {
   margin: 0 0 16px;
 }
 
-body.page-id-XXXX .pl-privacy-summary-list {
+body.page-id-3085 .pl-privacy-summary-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-body.page-id-XXXX .pl-privacy-summary-list li {
+body.page-id-3085 .pl-privacy-summary-list li {
   padding-left: 24px;
   position: relative;
   margin: 0 0 12px;
 }
 
-body.page-id-XXXX .pl-privacy-summary-list li:before {
+body.page-id-3085 .pl-privacy-summary-list li:before {
   content: "✓";
   position: absolute;
   left: 0;
@@ -5611,7 +5611,7 @@ body.page-id-XXXX .pl-privacy-summary-list li:before {
 }
 
 /* Contact box */
-body.page-id-XXXX .pl-privacy-contact-box {
+body.page-id-3085 .pl-privacy-contact-box {
   background: rgba(158, 35, 163, 0.05);
   border-left: 3px solid #9e23a3;
   border-radius: 8px;
@@ -5619,16 +5619,16 @@ body.page-id-XXXX .pl-privacy-contact-box {
   margin: 24px 0;
 }
 
-body.page-id-XXXX .pl-privacy-contact-box p {
+body.page-id-3085 .pl-privacy-contact-box p {
   margin: 0 0 12px;
 }
 
-body.page-id-XXXX .pl-privacy-contact-box p:last-child {
+body.page-id-3085 .pl-privacy-contact-box p:last-child {
   margin-bottom: 0;
 }
 
 /* Address block */
-body.page-id-XXXX .pl-privacy-address {
+body.page-id-3085 .pl-privacy-address {
   background: rgba(255, 255, 255, 0.4);
   border: 1px solid rgba(15, 23, 42, 0.1);
   border-radius: 8px;
@@ -5641,7 +5641,7 @@ body.page-id-XXXX .pl-privacy-address {
 }
 
 /* Note and warning callouts */
-body.page-id-XXXX .pl-privacy-note {
+body.page-id-3085 .pl-privacy-note {
   background: rgba(14, 165, 233, 0.08);
   border-left: 3px solid #0ea5e9;
   border-radius: 8px;
@@ -5650,7 +5650,7 @@ body.page-id-XXXX .pl-privacy-note {
   font-size: 15px;
 }
 
-body.page-id-XXXX .pl-privacy-warning {
+body.page-id-3085 .pl-privacy-warning {
   background: rgba(234, 88, 12, 0.08);
   border-left: 3px solid #ea580c;
   border-radius: 8px;
@@ -5659,7 +5659,7 @@ body.page-id-XXXX .pl-privacy-warning {
   font-size: 15px;
 }
 
-body.page-id-XXXX .pl-privacy-footer-note {
+body.page-id-3085 .pl-privacy-footer-note {
   font-size: 14px;
   color: #64748b;
   font-style: italic;
@@ -5667,14 +5667,14 @@ body.page-id-XXXX .pl-privacy-footer-note {
 }
 
 /* Document footer */
-body.page-id-XXXX .pl-privacy-document-footer {
+body.page-id-3085 .pl-privacy-document-footer {
   border-top: 1px solid rgba(15, 23, 42, 0.1);
   padding-top: 32px;
   margin-top: 64px;
   text-align: center;
 }
 
-body.page-id-XXXX .pl-privacy-document-footer p {
+body.page-id-3085 .pl-privacy-document-footer p {
   font-size: 14px;
   color: #64748b;
   margin: 0 0 8px;
@@ -5684,18 +5684,18 @@ body.page-id-XXXX .pl-privacy-document-footer p {
    VISUAL BUILDER COMPATIBILITY
    ================================================================ */
 
-#et-fb-app body.page-id-XXXX .pl-privacy-content,
-.et-fb-root body.page-id-XXXX .pl-privacy-content {
+#et-fb-app body.page-id-3085 .pl-privacy-content,
+.et-fb-root body.page-id-3085 .pl-privacy-content {
   max-width: 800px;
 }
 
-#et-fb-app body.page-id-XXXX .pl-privacy-section,
-.et-fb-root body.page-id-XXXX .pl-privacy-section {
+#et-fb-app body.page-id-3085 .pl-privacy-section,
+.et-fb-root body.page-id-3085 .pl-privacy-section {
   margin: 0 0 48px;
 }
 
-#et-fb-app body.page-id-XXXX .pl-privacy-heading,
-.et-fb-root body.page-id-XXXX .pl-privacy-heading {
+#et-fb-app body.page-id-3085 .pl-privacy-heading,
+.et-fb-root body.page-id-3085 .pl-privacy-heading {
   font-family: dinmedium, gill-sans, sans-serif;
   color: #0f172a;
 }
@@ -5706,83 +5706,83 @@ body.page-id-XXXX .pl-privacy-document-footer p {
 
 /* Tablet (768px and below) */
 @media (max-width: 768px) {
-  body.page-id-XXXX .pl-privacy-hero {
+  body.page-id-3085 .pl-privacy-hero {
     padding: 80px 0 40px;
   }
 
-  body.page-id-XXXX .pl-privacy-container {
+  body.page-id-3085 .pl-privacy-container {
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 0 20px 60px;
   }
 
-  body.page-id-XXXX .pl-privacy-nav {
+  body.page-id-3085 .pl-privacy-nav {
     position: static; /* Disable sticky on mobile */
     border-bottom: 1px solid rgba(15, 23, 42, 0.1);
     padding-bottom: 24px;
     margin-bottom: 8px;
   }
 
-  body.page-id-XXXX .pl-privacy-nav-list {
+  body.page-id-3085 .pl-privacy-nav-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px 16px;
   }
 
-  body.page-id-XXXX .pl-privacy-nav-link {
+  body.page-id-3085 .pl-privacy-nav-link {
     font-size: 13px;
   }
 
-  body.page-id-XXXX .pl-privacy-title {
+  body.page-id-3085 .pl-privacy-title {
     font-size: clamp(32px, 8vw, 48px);
   }
 
-  body.page-id-XXXX .pl-privacy-heading {
+  body.page-id-3085 .pl-privacy-heading {
     font-size: clamp(24px, 6vw, 32px);
     margin-bottom: 20px;
   }
 
-  body.page-id-XXXX .pl-privacy-subheading {
+  body.page-id-3085 .pl-privacy-subheading {
     font-size: clamp(18px, 5vw, 22px);
     margin: 24px 0 12px;
   }
 
-  body.page-id-XXXX .pl-privacy-section {
+  body.page-id-3085 .pl-privacy-section {
     margin: 0 0 36px;
   }
 }
 
 /* Mobile (480px and below) */
 @media (max-width: 480px) {
-  body.page-id-XXXX .pl-privacy-hero {
+  body.page-id-3085 .pl-privacy-hero {
     padding: 60px 0 32px;
   }
 
-  body.page-id-XXXX .pl-privacy-container {
+  body.page-id-3085 .pl-privacy-container {
     padding: 0 16px 40px;
   }
 
-  body.page-id-XXXX .pl-privacy-nav-list {
+  body.page-id-3085 .pl-privacy-nav-list {
     grid-template-columns: 1fr;
   }
 
-  body.page-id-XXXX .pl-privacy-title {
+  body.page-id-3085 .pl-privacy-title {
     font-size: clamp(28px, 10vw, 40px);
     margin-bottom: 12px;
   }
 
-  body.page-id-XXXX .pl-privacy-meta {
+  body.page-id-3085 .pl-privacy-meta {
     font-size: 14px;
   }
 
-  body.page-id-XXXX .pl-privacy-content p,
-  body.page-id-XXXX .pl-privacy-content ul,
-  body.page-id-XXXX .pl-privacy-content ol {
+  body.page-id-3085 .pl-privacy-content p,
+  body.page-id-3085 .pl-privacy-content ul,
+  body.page-id-3085 .pl-privacy-content ol {
     font-size: 15px;
   }
 
-  body.page-id-XXXX .pl-privacy-summary-box,
-  body.page-id-XXXX .pl-privacy-contact-box {
+  body.page-id-3085 .pl-privacy-summary-box,
+  body.page-id-3085 .pl-privacy-contact-box {
     padding: 16px;
   }
 }

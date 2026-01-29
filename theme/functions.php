@@ -249,7 +249,7 @@ add_shortcode('thinking_hub', 'render_thinking_hub');
 function aav_add_noindex_to_unlisted_pages() {
     // List of page IDs that should not be indexed
     $unlisted_page_ids = array(
-        XXXX  // Replace with actual Privacy Policy page ID
+        3085  // Privacy Policy page (/proofline/privacy)
     );
 
     if (is_page($unlisted_page_ids)) {
