@@ -4203,6 +4203,9 @@ body.page-id-2952 .wpcf7-submit {
   box-shadow: 0 4px 16px rgba(158, 35, 163, 0.25) !important;
   letter-spacing: 0.02em !important;
   -webkit-font-smoothing: antialiased !important;
+  text-align: center !important;
+  display: block !important;
+  line-height: 1.4 !important;
 }
 
 body.page-id-2952 .wpcf7-submit:hover {
