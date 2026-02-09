@@ -3976,6 +3976,11 @@ body.page-id-2952 .pl-microcopy {
 }
 
 /* Form card styling */
+@keyframes pl-form-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 body.page-id-2952 .pl-lighthouse-form-card {
   background: rgba(255,255,255,0.88);
   border: 1px solid rgba(15, 23, 42, 0.08);
@@ -3985,6 +3990,7 @@ body.page-id-2952 .pl-lighthouse-form-card {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   position: relative;
+  animation: pl-form-fade-in 0.4s ease both;
 }
 
 /* CF7 wrapper inherits form card styling */
@@ -4188,11 +4194,15 @@ body.page-id-2952 .wpcf7-submit {
   border-radius: 999px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
+  font-style: normal !important;
   font-family: dinmedium, Arial, sans-serif !important;
+  text-transform: none !important;
+  text-decoration: none !important;
   cursor: pointer !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease !important;
   box-shadow: 0 4px 16px rgba(158, 35, 163, 0.25) !important;
-  letter-spacing: 0.01em !important;
+  letter-spacing: 0.02em !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 body.page-id-2952 .wpcf7-submit:hover {
