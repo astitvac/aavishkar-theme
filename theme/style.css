@@ -38,6 +38,19 @@
   font-display: swap;
 }
 
+/* Global html enhancements */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+  scrollbar-color: rgba(158,35,163,0.3) transparent;
+  scrollbar-width: thin;
+}
+
+/* Branded form controls globally */
+input, select, textarea {
+  accent-color: #9e23a3;
+}
+
 /* -----------------------------------------------------------
  Aavishkar.ai Design System v2.0 (Enhanced for Divi)
  Includes robust header implementation + all section styles
@@ -104,6 +117,7 @@ color: #303244;
 max-width: 820px;
 margin: 0 auto;
 line-height: 1.6;
+text-wrap: pretty;
 }
 
 /* Buttons */
@@ -123,9 +137,9 @@ font-weight: 600;
 font-size: 16px;
 border: 2px solid transparent;
 transition: transform .15s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
-will-change: transform;
 }
 .aav-btn:hover { transform: translateY(-1px); }
+.aav-btn:active { transform: translateY(1px) scale(0.98); }
 .aav-btn-primary { background: #9e23a3; color: #ffffff; box-shadow: 0 6px 16px rgba(110,35,163,.25); }
 .aav-btn-primary:hover { background: #7f1b83; }
 .aav-btn-ghost { background: transparent; color: #ffffff; border-color: rgba(255,255,255,.6); }
@@ -3034,6 +3048,18 @@ white-space: pre-wrap !important;
 }
 }
 
+/* Rendering perf: skip layout/paint for off-screen sections */
+.et_pb_section.aav-mission,
+.et_pb_section.aav-why,
+.et_pb_section.aav-verse,
+.et_pb_section.aav-labos,
+.et_pb_section.aav-proofline-preview,
+.et_pb_section.aav-foundation,
+.et_pb_section.aav-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 /* Enhance mobile header usability with reduced height and spacing */
 @media (max-width: 480px) {
 .et_pb_row.aav-bar { height: 84px !important; }
@@ -3051,6 +3077,14 @@ body #main-content .et_pb_section.aav-hero:first-child {
 .aav-btn, button, [role="button"] { touch-action: manipulation; }
 *:focus { outline: none; }
 *:focus-visible { outline: 2px solid #9e23a3; outline-offset: 2px; }
+
+/* Brand selection colors */
+::selection { background: rgba(158,35,163,0.25); color: #0f0f1a; }
+::-moz-selection { background: rgba(158,35,163,0.25); color: #0f0f1a; }
+
+/* Light-mode selection for Proofline page */
+body.page-id-2952 ::selection { background: rgba(158,35,163,0.18); color: #0f172a; }
+body.page-id-2952 ::-moz-selection { background: rgba(158,35,163,0.18); color: #0f172a; }
 
 /* Guardrail: prevent accidental horizontal scrolling on mobile */
 html, body, #page-container, #et-main-area { overflow-x: hidden !important; }
@@ -3354,7 +3388,6 @@ box-shadow:
 min-width: 220px !important;
 letter-spacing: 0.01em !important;
 text-transform: none !important;
-will-change: transform !important;
 }
 
 .wpcf7-form input[type="submit"]:hover {
@@ -3658,6 +3691,7 @@ body.page-id-2952 .pl-h1 {
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: #0f172a;
+  text-wrap: balance;
 }
 
 /* H1 gradient highlight for "knowledge creation" */
@@ -3675,6 +3709,7 @@ body.page-id-2952 .pl-subtitle {
   line-height: 1.7;
   color: #475569;
   margin-bottom: 32px;
+  text-wrap: pretty;
 }
 
 body.page-proofline .pl-subtitle strong,
@@ -3874,6 +3909,7 @@ body.page-id-2952 .pl-h2 {
   font-size: clamp(28px, 3.6vw, 40px);
   line-height: 1.2;
   color: #0f172a;
+  text-wrap: balance;
 }
 
 body.page-proofline .pl-copy,
@@ -4381,7 +4417,7 @@ body.page-id-2952 #hero,
 body.page-id-2952 #lighthouse,
 body.page-id-2952 #demos,
 body.page-id-2952 #about {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 100px;
 }
 
 /* Responsive - tablet breakpoint */
@@ -4706,7 +4742,7 @@ body.page-id-2952 footer.et-l {
 }
 
 .aav-btn-primary {
-  animation: subtleCTAPulse 3s ease-in-out infinite;
+  animation: subtleCTAPulse 3s ease-in-out 3;
 }
 
 /* Pause animation on hover for better UX */
