@@ -3905,6 +3905,16 @@ body.page-id-2952 .pl-lighthouse-grid {
   align-items: start;
 }
 
+/* Form grid layout (used by CF7 form template) */
+body.page-id-2952 .pl-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+body.page-id-2952 .pl-field { display: grid; gap: 8px; }
+body.page-id-2952 .pl-field-wide { grid-column: 1 / -1; }
+
 /* Labels */
 body.page-id-2952 .pl-field label,
 body.page-id-2952 .wpcf7-form label {
@@ -3998,11 +4008,35 @@ body.page-id-2952 .wpcf7-form-control.wpcf7-textarea {
   border-radius: 10px !important;
   font-size: 15px !important;
   font-family: inherit !important;
-  color: #0f172a !important;
+  color: #7c3aad !important;
   background: #fff !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
   box-sizing: border-box !important;
   line-height: 1.5 !important;
+}
+
+/* Fallback selectors to beat Divi overrides */
+body.page-id-2952 .pl-lighthouse-form-card input[type="text"],
+body.page-id-2952 .pl-lighthouse-form-card input[type="email"],
+body.page-id-2952 .pl-lighthouse-form-card select,
+body.page-id-2952 .pl-lighthouse-form-card textarea {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  border-radius: 10px !important;
+  font-size: 15px !important;
+  font-family: inherit !important;
+  color: #7c3aad !important;
+  background: #fff !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  box-sizing: border-box !important;
+  line-height: 1.5 !important;
+}
+
+body.page-id-2952 .pl-lighthouse-form-card input::placeholder,
+body.page-id-2952 .pl-lighthouse-form-card textarea::placeholder {
+  color: rgba(15, 23, 42, 0.35) !important;
+  font-style: normal !important;
 }
 
 /* Hover state */
@@ -4429,6 +4463,11 @@ body.page-id-2952 #about {
   body.page-id-2952 .pl-hero-ctas .aav-btn {
     width: 100%;
     text-align: center;
+  }
+
+  /* Form grid stacks to single column */
+  body.page-id-2952 .pl-form-grid {
+    grid-template-columns: 1fr;
   }
 
   /* Radio cards stack vertically on small mobile */
