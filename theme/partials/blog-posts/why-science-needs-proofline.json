@@ -1,10 +1,10 @@
 {
-  "title": "Why Science Needs a Proofline",
+  "title": "Why Science Needs a New Medium of Knowledge Transmission",
   "slug": "why-science-needs-proofline",
-  "excerpt": "",
+  "excerpt": "Every revolution in how we share knowledge—from writing to the printing press to the scientific journal—has catalyzed an explosion of discovery. Today, the static PDF is collapsing under the weight of AI-generated content and an epistemic bottleneck. We propose Proofline, a Dynamic State Engine that captures the full lifecycle of scientific discovery, as the native format for AI-mediated science. Proofline is to knowledge work what Git is to software: a system that makes the entire evolution of ideas explorable, forkable, and verifiable.",
   "category": "Featured",
-  "tags": ["Proofline", "Science", "Knowledge IDE", "Research"],
+  "tags": ["Proofline", "Scientific Publishing", "Knowledge Transmission", "AI for Science", "Reproducibility", "Dynamic State Engine"],
   "featured_image": "",
   "status": "draft",
-  "author": "akshay"
+  "author": "Professor Akshay Rao"
 }
