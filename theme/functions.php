@@ -240,6 +240,80 @@ function render_thinking_hub() {
 add_shortcode('thinking_hub', 'render_thinking_hub');
 
 /**
+ * ARTICLE CATALOGUE - All published posts (no limit)
+ * Usage: [article_catalogue]
+ * Displays all published posts from Featured, Deep Dive, or Insights categories.
+ * Reuses .aav-thinking-card / .aav-thinking-grid CSS pattern for consistency.
+ */
+function render_article_catalogue() {
+    $args = array(
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'category_name'  => 'featured,deep-dive,insights',
+        'orderby'        => 'date',
+        'order'          => 'DESC'
+    );
+
+    $query = new WP_Query($args);
+
+    if (!$query->have_posts()) {
+        return '<p style="color:#d6d8ef;text-align:center;">No articles published yet.</p>';
+    }
+
+    ob_start();
+    ?>
+    <div class="aav-thinking-grid">
+        <?php
+        while ($query->have_posts()) : $query->the_post();
+            $categories = get_the_category();
+            $primary_category = !empty($categories) ? esc_html($categories[0]->name) : 'Insights';
+            $category_slug = !empty($categories) ? esc_attr($categories[0]->slug) : 'insights';
+
+            $content = get_post_field('post_content', get_the_ID());
+            $word_count = str_word_count(strip_tags($content));
+            $reading_time = max(1, ceil($word_count / 200));
+        ?>
+        <article class="aav-thinking-card">
+            <div class="aav-thinking-card-image">
+                <?php if (has_post_thumbnail()) : ?>
+                    <?php the_post_thumbnail('large', array('alt' => get_the_title())); ?>
+                <?php else : ?>
+                    <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(158,35,163,0.4),rgba(11,68,123,0.4));"></div>
+                <?php endif; ?>
+                <div class="aav-thinking-card-category" data-category="<?php echo $category_slug; ?>">
+                    <?php echo $primary_category; ?>
+                </div>
+            </div>
+            <div class="aav-thinking-card-content">
+                <h3 class="aav-thinking-card-title"><?php the_title(); ?></h3>
+                <p class="aav-thinking-card-excerpt">
+                    <?php
+                    $excerpt = get_the_excerpt();
+                    if (empty($excerpt)) {
+                        $excerpt = wp_trim_words(strip_tags($content), 20, '...');
+                    }
+                    echo esc_html($excerpt);
+                    ?>
+                </p>
+                <div class="aav-thinking-card-meta">
+                    <span class="aav-thinking-date"><?php echo get_the_date('F Y'); ?></span>
+                    <span class="aav-thinking-readtime"><?php echo $reading_time; ?> min read</span>
+                </div>
+                <a href="<?php the_permalink(); ?>" class="aav-thinking-card-link">Read Insight</a>
+            </div>
+        </article>
+        <?php
+        endwhile;
+        wp_reset_postdata();
+        ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('article_catalogue', 'render_article_catalogue');
+
+/**
  * Add noindex meta tag to unlisted pages
  * Prevents search engine indexing for privacy policy and other sensitive pages
  *

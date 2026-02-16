@@ -5943,3 +5943,204 @@ body.page-id-3085 .pl-privacy-document-footer p {
   }
 }
 
+/* =============================================================
+   13. About + Contact Page (page-id-33)
+   ============================================================= */
+
+/* About Hero */
+.aav-about-hero {
+  color: #fff;
+  background: transparent;
+  text-align: center;
+}
+.aav-about-hero .aav-h1 {
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,.35);
+  margin-bottom: 24px;
+}
+.aav-about-hero .aav-lead {
+  color: #e8e9f5;
+  text-shadow: 0 1px 2px rgba(0,0,0,.25);
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Team Section */
+.aav-about-team {
+  color: #fff;
+  background: transparent;
+}
+
+.aav-team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 3vw, 36px);
+  max-width: 1000px;
+  margin: 32px auto 0;
+}
+
+.aav-team-card {
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.12) 0%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0.09) 100%);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 40px);
+  backdrop-filter: saturate(130%) blur(16px);
+  -webkit-backdrop-filter: saturate(130%) blur(16px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.3),
+    inset 0 -1px 0 rgba(255,255,255,.1),
+    0 12px 32px rgba(0,0,0,.2);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aav-team-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #9e23a3;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.aav-team-card h3 {
+  font-family: dinmedium, Arial, sans-serif;
+  font-size: 22px;
+  color: #fff;
+  margin: 0 0 4px;
+  letter-spacing: 0.01em;
+}
+
+.aav-team-card .aav-team-role {
+  font-size: 14px;
+  color: #c87fd0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 16px;
+}
+
+.aav-team-card .aav-team-bio {
+  font-size: 15px;
+  color: #d6d8ef;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.aav-team-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.aav-team-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c87fd0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.aav-team-links a:hover {
+  color: #fff;
+}
+
+.aav-team-links a svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* About Writing / Article Catalogue */
+.aav-about-writing {
+  color: #fff;
+  background: transparent;
+  content-visibility: auto;
+}
+.aav-about-writing .aav-h2 {
+  color: #fff;
+}
+
+/* Author Byline (blog posts) */
+.aav-author-byline {
+  font-size: 15px;
+  color: #7c3aad;
+  margin: -8px 0 24px;
+  font-weight: 500;
+}
+.aav-author-byline a {
+  color: #9e23a3;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(158,35,163,0.3);
+  transition: border-color 0.2s ease;
+}
+.aav-author-byline a:hover {
+  border-color: #9e23a3;
+}
+
+/* Responsive: stack team cards on mobile */
+@media (max-width: 768px) {
+  .aav-team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .aav-team-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Hover effects — hover-capable devices only */
+@media (hover: hover) {
+  .aav-team-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.4),
+      inset 0 -1px 0 rgba(255,255,255,.15),
+      0 20px 48px rgba(0,0,0,.3),
+      0 8px 24px rgba(158,35,163,.15);
+  }
+}
+
+/* Visual Builder dual-targeting */
+#et-fb-app .aav-about-hero .aav-h1,
+.et-fb-root .aav-about-hero .aav-h1 {
+  color: #fff !important;
+}
+#et-fb-app .aav-about-hero .aav-lead,
+.et-fb-root .aav-about-hero .aav-lead {
+  color: #e8e9f5 !important;
+}
+#et-fb-app .aav-team-card h3,
+.et-fb-root .aav-team-card h3 {
+  color: #fff !important;
+}
+#et-fb-app .aav-team-card .aav-team-bio,
+.et-fb-root .aav-team-card .aav-team-bio {
+  color: #d6d8ef !important;
+}
+
+/* Scroll-triggered fade-in for about page sections */
+@supports (animation-timeline: view()) {
+  .aav-team-card {
+    animation: aav-fade-slide-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aav-team-card {
+      animation: none;
+    }
+  }
+}
+
