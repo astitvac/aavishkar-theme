@@ -332,3 +332,268 @@ function aav_add_noindex_to_unlisted_pages() {
 }
 add_action('wp_head', 'aav_add_noindex_to_unlisted_pages', 1);
 
+/* ==========================================================================
+   SEO: META TAGS, OPEN GRAPH, TWITTER CARDS
+   ========================================================================== */
+
+function aav_seo_meta_tags() {
+    $site_name = 'Aavishkar.ai';
+    $default_image = 'https://aavishkar.ai/wp-content/uploads/2025/05/aavishkar_logo.png';
+
+    // Page-specific meta
+    if (is_front_page()) {
+        $title = 'Aavishkar.ai — AI-Powered Knowledge Creation for Research Teams';
+        $description = 'Aavishkar builds AI tools that help research teams capture, connect, and discover knowledge. Explore Proofline, our scientific engine for knowledge creation.';
+        $canonical = home_url('/');
+        $og_type = 'website';
+    } elseif (is_page(2952)) {
+        $title = 'Proofline — Version Control for Research Knowledge | Aavishkar.ai';
+        $description = 'Capture hypotheses, evidence, and decisions. Connect them into a Proofline — a scientific engine for knowledge creation. Apply as a Founding Lab.';
+        $canonical = home_url('/proofline/');
+        $og_type = 'website';
+    } elseif (is_page() && get_page_uri() === 'contact-us') {
+        $title = 'Contact Us | Aavishkar.ai';
+        $description = 'Get in touch with the Aavishkar team. Explore research partnerships, Proofline pilot programs, or engineering opportunities.';
+        $canonical = home_url('/contact-us/');
+        $og_type = 'website';
+    } elseif (is_singular('post')) {
+        $title = get_the_title() . ' | Aavishkar.ai';
+        $excerpt = get_the_excerpt();
+        if (empty($excerpt)) {
+            $excerpt = wp_trim_words(strip_tags(get_the_content()), 25, '...');
+        }
+        $description = wp_strip_all_tags($excerpt);
+        if (strlen($description) > 160) {
+            $description = substr($description, 0, 157) . '...';
+        }
+        $canonical = get_permalink();
+        $og_type = 'article';
+        if (has_post_thumbnail()) {
+            $default_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
+        }
+    } else {
+        return; // No custom meta for other pages
+    }
+
+    // Title tag override
+    echo '<title>' . esc_html($title) . '</title>' . "\n";
+
+    // Meta description
+    echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
+
+    // Canonical
+    echo '<link rel="canonical" href="' . esc_url($canonical) . '">' . "\n";
+
+    // Open Graph
+    echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:image" content="' . esc_url($default_image) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url($canonical) . '">' . "\n";
+    echo '<meta property="og:type" content="' . esc_attr($og_type) . '">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr($site_name) . '">' . "\n";
+
+    // Twitter Card
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+    echo '<meta name="twitter:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta name="twitter:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta name="twitter:image" content="' . esc_url($default_image) . '">' . "\n";
+}
+add_action('wp_head', 'aav_seo_meta_tags', 1);
+
+/**
+ * Remove WordPress default title tag so our custom <title> takes precedence
+ */
+function aav_remove_wp_title() {
+    // Only remove on pages where we output a custom title
+    if (is_front_page() || is_page(2952) || (is_page() && get_page_uri() === 'contact-us') || is_singular('post')) {
+        remove_theme_support('title-tag');
+    }
+}
+add_action('after_setup_theme', 'aav_remove_wp_title', 99);
+
+/**
+ * Filter document title for pages we handle
+ */
+function aav_custom_document_title($title) {
+    if (is_front_page()) {
+        return 'Aavishkar.ai — AI-Powered Knowledge Creation for Research Teams';
+    } elseif (is_page(2952)) {
+        return 'Proofline — Version Control for Research Knowledge | Aavishkar.ai';
+    } elseif (is_page() && get_page_uri() === 'contact-us') {
+        return 'Contact Us | Aavishkar.ai';
+    } elseif (is_singular('post')) {
+        return get_the_title() . ' | Aavishkar.ai';
+    }
+    return $title;
+}
+add_filter('pre_get_document_title', 'aav_custom_document_title', 99);
+
+/* ==========================================================================
+   SEO: JSON-LD STRUCTURED DATA
+   ========================================================================== */
+
+function aav_structured_data() {
+    if (is_front_page()) {
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => 'Aavishkar.ai',
+            'url' => 'https://aavishkar.ai',
+            'logo' => 'https://aavishkar.ai/wp-content/uploads/2025/05/aavishkar_logo.png',
+            'description' => 'Aavishkar builds AI tools that help research teams capture, connect, and discover knowledge.',
+            'sameAs' => array(
+                'https://www.linkedin.com/company/aavishkar-ai',
+                'https://github.com/astitvac/AI4Science'
+            )
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
+    } elseif (is_page(2952)) {
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'SoftwareApplication',
+            'name' => 'Proofline',
+            'description' => 'Version control for research knowledge. Capture hypotheses, evidence, and decisions in a structured, traceable graph.',
+            'applicationCategory' => 'BusinessApplication',
+            'operatingSystem' => 'Web',
+            'offers' => array(
+                '@type' => 'Offer',
+                'price' => '0',
+                'priceCurrency' => 'USD',
+                'description' => 'Founding Labs pilot program'
+            ),
+            'publisher' => array(
+                '@type' => 'Organization',
+                'name' => 'Aavishkar.ai',
+                'url' => 'https://aavishkar.ai'
+            )
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
+    } elseif (is_singular('post')) {
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'headline' => get_the_title(),
+            'datePublished' => get_the_date('c'),
+            'dateModified' => get_the_modified_date('c'),
+            'author' => array(
+                '@type' => 'Organization',
+                'name' => 'Aavishkar.ai'
+            ),
+            'publisher' => array(
+                '@type' => 'Organization',
+                'name' => 'Aavishkar.ai',
+                'logo' => array(
+                    '@type' => 'ImageObject',
+                    'url' => 'https://aavishkar.ai/wp-content/uploads/2025/05/aavishkar_logo.png'
+                )
+            ),
+            'mainEntityOfPage' => get_permalink()
+        );
+        if (has_post_thumbnail()) {
+            $schema['image'] = get_the_post_thumbnail_url(get_the_ID(), 'large');
+        }
+        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
+    }
+}
+add_action('wp_head', 'aav_structured_data', 2);
+
+/* ==========================================================================
+   SEO: 301 REDIRECTS FOR DELETED CONTENT
+   ========================================================================== */
+
+function aav_301_redirects() {
+    if (is_admin()) {
+        return;
+    }
+
+    $redirects = array(
+        '/about-us/'                                  => '/contact-us/',
+        '/where-is-the-data/'                         => '/',
+        '/automating-literature-review-with-llms1/'   => '/',
+        '/automating-literature-review-with-llms2/'   => '/',
+        '/what-is-an-expert-system/'                  => '/',
+        '/building-llm-agents-for-data-science/'      => '/',
+        '/building-llm-agentsfor-data-science/'       => '/',
+        '/repository/'                                => 'https://github.com/astitvac/AI4Science',
+    );
+
+    $request_uri = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/') . '/';
+
+    foreach ($redirects as $old => $new) {
+        if (strcasecmp($request_uri, $old) === 0) {
+            if (strpos($new, 'http') === 0) {
+                $destination = $new;
+            } else {
+                $destination = home_url($new);
+            }
+            wp_redirect($destination, 301);
+            exit;
+        }
+    }
+}
+add_action('template_redirect', 'aav_301_redirects', 1);
+
+/* ==========================================================================
+   SEO: ROBOTS.TXT ENHANCEMENTS
+   ========================================================================== */
+
+function aav_robots_txt($output, $public) {
+    $output .= "\n";
+    $output .= "Disallow: /wp-content/plugins/\n";
+    $output .= "Disallow: /wp-content/themes/\n";
+    $output .= "Disallow: /?page_id=*\n";
+    $output .= "Disallow: /feed/\n";
+    $output .= "Disallow: /*/feed/\n";
+    $output .= "Disallow: /tag/*/feed/\n";
+    $output .= "Disallow: /author/\n";
+    return $output;
+}
+add_filter('robots_txt', 'aav_robots_txt', 10, 2);
+
+/**
+ * Noindex low-value archive pages
+ */
+function aav_noindex_archives() {
+    if (is_date() || is_tag() || is_author() || is_feed()) {
+        echo '<meta name="robots" content="noindex, follow">' . "\n";
+    }
+}
+add_action('wp_head', 'aav_noindex_archives', 1);
+
+/* ==========================================================================
+   SEO: SITEMAP CLEANUP
+   ========================================================================== */
+
+/**
+ * Remove low-value post types from sitemap
+ */
+function aav_sitemap_post_types($post_types) {
+    unset($post_types['project']);
+    unset($post_types['notebook']);
+    return $post_types;
+}
+add_filter('wp_sitemaps_post_types', 'aav_sitemap_post_types');
+
+/**
+ * Remove users sitemap
+ */
+function aav_sitemap_remove_users($provider, $name) {
+    if ($name === 'users') {
+        return false;
+    }
+    return $provider;
+}
+add_filter('wp_sitemaps_add_provider', 'aav_sitemap_remove_users', 10, 2);
+
+/**
+ * Exclude specific pages from sitemap (privacy policy)
+ */
+function aav_sitemap_exclude_pages($args, $post_type) {
+    if ($post_type === 'page') {
+        $args['post__not_in'] = isset($args['post__not_in']) ? $args['post__not_in'] : array();
+        $args['post__not_in'][] = 3085; // Privacy Policy
+    }
+    return $args;
+}
+add_filter('wp_sitemaps_posts_query_args', 'aav_sitemap_exclude_pages', 10, 2);
+
