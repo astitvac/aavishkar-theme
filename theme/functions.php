@@ -342,8 +342,8 @@ function aav_seo_meta_tags() {
 
     // Page-specific meta
     if (is_front_page()) {
-        $title = 'Aavishkar.ai — AI-Powered Knowledge Creation for Research Teams';
-        $description = 'Aavishkar builds AI tools that help research teams capture, connect, and discover knowledge. Explore Proofline, our scientific engine for knowledge creation.';
+        $title = 'Aavishkar.ai — AI for Science | AI-Powered Knowledge Creation for Research Teams';
+        $description = 'Aavishkar builds AI for science — tools that help research teams capture, connect, and discover knowledge. Explore Proofline, our scientific engine for knowledge creation.';
         $canonical = home_url('/');
         $og_type = 'website';
     } elseif (is_page(2952)) {
@@ -374,9 +374,6 @@ function aav_seo_meta_tags() {
     } else {
         return; // No custom meta for other pages
     }
-
-    // Title tag override
-    echo '<title>' . esc_html($title) . '</title>' . "\n";
 
     // Meta description
     echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
@@ -416,7 +413,7 @@ add_action('after_setup_theme', 'aav_remove_wp_title', 99);
  */
 function aav_custom_document_title($title) {
     if (is_front_page()) {
-        return 'Aavishkar.ai — AI-Powered Knowledge Creation for Research Teams';
+        return 'Aavishkar.ai — AI for Science | AI-Powered Knowledge Creation for Research Teams';
     } elseif (is_page(2952)) {
         return 'Proofline — Version Control for Research Knowledge | Aavishkar.ai';
     } elseif (is_page() && get_page_uri() === 'contact-us') {
@@ -440,7 +437,7 @@ function aav_structured_data() {
             'name' => 'Aavishkar.ai',
             'url' => 'https://aavishkar.ai',
             'logo' => 'https://aavishkar.ai/wp-content/uploads/2025/05/aavishkar_logo.png',
-            'description' => 'Aavishkar builds AI tools that help research teams capture, connect, and discover knowledge.',
+            'description' => 'Aavishkar builds AI for science — tools that help research teams capture, connect, and discover knowledge.',
             'sameAs' => array(
                 'https://www.linkedin.com/company/aavishkar-ai',
                 'https://github.com/astitvac/AI4Science'
