@@ -3963,6 +3963,14 @@ body.page-id-2952 .pl-bullet-block {
   border-radius: 14px;
   padding: 20px;
   box-shadow: 0 4px 16px rgba(2, 6, 23, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.page-id-2952 .pl-bullet-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+  }
 }
 
 body.page-id-2952 .pl-bullet-title {
@@ -4298,6 +4306,16 @@ body.page-id-2952 .pl-demo-tile {
   padding: 18px;
   box-shadow: 0 12px 32px rgba(2, 6, 23, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Demo tile hover lift (hover-capable devices only) */
+@media (hover: hover) and (pointer: fine) {
+  body.page-proofline .pl-demo-tile:hover,
+  body.page-id-2952 .pl-demo-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 48px rgba(2, 6, 23, 0.13);
+    border-color: rgba(158, 35, 163, 0.12);
+  }
 }
 
 body.page-proofline .pl-demo-kicker,
@@ -4694,6 +4712,19 @@ a.pl-nav-cta {
 a.pl-nav-cta:hover {
   background: linear-gradient(145deg, #5a24a0 0%, #8a1f8f 45%, #5a24a0 100%) !important;
   color: #fff !important;
+}
+
+/* Tighten Divi section spacing on Proofline page
+   Divi adds large default padding to et_pb_section which creates
+   excessive whitespace between Hero/Demos/Lighthouse/About */
+body.page-id-2952 .et_pb_section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Proofline text selection (lighter for light-mode page) */
+body.page-id-2952 ::selection {
+  background: rgba(158, 35, 163, 0.18);
 }
 
 /* Hide global footer on Proofline page */
