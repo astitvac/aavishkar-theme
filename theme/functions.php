@@ -342,18 +342,18 @@ function aav_seo_meta_tags() {
 
     // Page-specific meta
     if (is_front_page()) {
-        $title = 'Aavishkar.ai — AI for Science | AI-Powered Knowledge Creation for Research Teams';
-        $description = 'Aavishkar builds AI for science — tools that help research teams capture, connect, and discover knowledge. Explore Proofline, our scientific engine for knowledge creation.';
+        $title = 'Aavishkar AI — AI for Science | Discover New Knowledge with AI';
+        $description = 'Aavishkar AI builds tools for scientific discovery — helping research teams capture, connect, and create new knowledge with AI. Founded by Astitva Chopra and Akshay Rao. Explore Proofline, our knowledge engine for R&D teams.';
         $canonical = home_url('/');
         $og_type = 'website';
     } elseif (is_page(2952)) {
-        $title = 'Proofline — Version Control for Research Knowledge | Aavishkar.ai';
-        $description = 'Capture hypotheses, evidence, and decisions. Connect them into a Proofline — a scientific engine for knowledge creation. Apply as a Founding Lab.';
+        $title = 'Proofline AI — Scientific Knowledge Engine for Research Teams | Aavishkar AI';
+        $description = 'Proofline is an AI-powered knowledge engine for research teams. Capture hypotheses, evidence, and decisions — discover new insights with AI. Free for Founding Labs. Built by Aavishkar AI.';
         $canonical = home_url('/proofline/');
         $og_type = 'website';
     } elseif (is_page() && get_page_uri() === 'contact-us') {
-        $title = 'Contact Us | Aavishkar.ai';
-        $description = 'Get in touch with the Aavishkar team. Explore research partnerships, Proofline pilot programs, or engineering opportunities.';
+        $title = 'About & Contact | Aavishkar AI — AI for Science';
+        $description = 'Meet the Aavishkar AI team — Astitva Chopra, Akshay Rao, and team building AI for science. Get in touch about Proofline, research partnerships, or careers.';
         $canonical = home_url('/contact-us/');
         $og_type = 'website';
     } elseif (is_singular('post')) {
@@ -413,11 +413,11 @@ add_action('after_setup_theme', 'aav_remove_wp_title', 99);
  */
 function aav_custom_document_title($title) {
     if (is_front_page()) {
-        return 'Aavishkar.ai — AI for Science | AI-Powered Knowledge Creation for Research Teams';
+        return 'Aavishkar AI — AI for Science | Discover New Knowledge with AI';
     } elseif (is_page(2952)) {
-        return 'Proofline — Version Control for Research Knowledge | Aavishkar.ai';
+        return 'Proofline AI — Scientific Knowledge Engine for Research Teams | Aavishkar AI';
     } elseif (is_page() && get_page_uri() === 'contact-us') {
-        return 'Contact Us | Aavishkar.ai';
+        return 'About & Contact | Aavishkar AI — AI for Science';
     } elseif (is_singular('post')) {
         return get_the_title() . ' | Aavishkar.ai';
     }
@@ -435,9 +435,14 @@ function aav_structured_data() {
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
             'name' => 'Aavishkar.ai',
+            'alternateName' => 'Aavishkar AI',
             'url' => 'https://aavishkar.ai',
             'logo' => 'https://aavishkar.ai/wp-content/uploads/2025/05/aavishkar_logo.png',
             'description' => 'Aavishkar builds AI for science — tools that help research teams capture, connect, and discover knowledge.',
+            'founder' => array(
+                array('@type' => 'Person', 'name' => 'Astitva Chopra'),
+                array('@type' => 'Person', 'name' => 'Akshay Rao')
+            ),
             'sameAs' => array(
                 'https://www.linkedin.com/company/aavishkar-ai',
                 'https://github.com/astitvac/AI4Science'
@@ -449,6 +454,7 @@ function aav_structured_data() {
             '@context' => 'https://schema.org',
             '@type' => 'SoftwareApplication',
             'name' => 'Proofline',
+            'alternateName' => 'Proofline AI',
             'description' => 'Version control for research knowledge. Capture hypotheses, evidence, and decisions in a structured, traceable graph.',
             'applicationCategory' => 'BusinessApplication',
             'operatingSystem' => 'Web',
@@ -462,6 +468,23 @@ function aav_structured_data() {
                 '@type' => 'Organization',
                 'name' => 'Aavishkar.ai',
                 'url' => 'https://aavishkar.ai'
+            )
+        );
+        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
+    } elseif (is_page() && get_page_uri() === 'contact-us') {
+        $schema = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => 'Aavishkar.ai',
+            'url' => 'https://aavishkar.ai',
+            'description' => 'AI for Science — tools for research teams to capture, connect, and discover knowledge.',
+            'founder' => array(
+                array('@type' => 'Person', 'name' => 'Astitva Chopra'),
+                array('@type' => 'Person', 'name' => 'Akshay Rao')
+            ),
+            'sameAs' => array(
+                'https://www.linkedin.com/company/aavishkar-ai',
+                'https://github.com/astitvac/AI4Science'
             )
         );
         echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>' . "\n";
@@ -542,7 +565,6 @@ function aav_robots_txt($output, $public) {
     $output .= "Disallow: /feed/\n";
     $output .= "Disallow: /*/feed/\n";
     $output .= "Disallow: /tag/*/feed/\n";
-    $output .= "Disallow: /author/\n";
     return $output;
 }
 add_filter('robots_txt', 'aav_robots_txt', 10, 2);
@@ -552,6 +574,9 @@ add_filter('robots_txt', 'aav_robots_txt', 10, 2);
  */
 function aav_noindex_archives() {
     if (is_date() || is_tag() || is_author() || is_feed()) {
+        echo '<meta name="robots" content="noindex, follow">' . "\n";
+    }
+    if (is_singular('project') || is_singular('notebook')) {
         echo '<meta name="robots" content="noindex, follow">' . "\n";
     }
 }
