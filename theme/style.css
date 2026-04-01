@@ -4726,6 +4726,21 @@ body.page-id-2952 .et_pb_section {
   padding-bottom: 0 !important;
 }
 
+/* Re-apply intentional padding on specific Proofline sections
+   (must use longhand + !important to override the blanket reset above) */
+body.page-id-2952 .et_pb_section.pl-demos {
+  padding-top: 64px !important;
+  padding-bottom: 72px !important;
+}
+body.page-id-2952 .et_pb_section.pl-lighthouse {
+  padding-top: 72px !important;
+  padding-bottom: 64px !important;
+}
+body.page-id-2952 .et_pb_section.pl-about-section {
+  padding-top: 56px !important;
+  padding-bottom: 72px !important;
+}
+
 /* Proofline text selection (lighter for light-mode page) */
 body.page-id-2952 ::selection {
   background: rgba(158, 35, 163, 0.18);
