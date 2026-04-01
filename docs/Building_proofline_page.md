@@ -1,6 +1,6 @@
 # Building Proofline Page (aavishkar.ai/proofline) — Final Local → Divi → Launch Checklist
 
-**Last updated:** 2026-01-20
+**Last updated:** 2026-04-01
 **Target URL:** `https://aavishkar.ai/proofline`
 **This guide builds on:** `CompanyPage/Building_aavishkar_site.md` (Design System v2.0 + proven Divi workflow)
 
@@ -36,11 +36,29 @@
 - [x] New high-quality logo deployed: `Proofline_Logo_web_large.png`
 - [x] Logo sizing CSS (56px height with object-fit: contain)
 
+### ✅ COMPLETED (2026-04-01 — Visual Polish Sprint):
+- [x] **Playwright-based visual audit** of live page at desktop (1440px), tablet (768px), and mobile (375px)
+- [x] **Section spacing & differentiation:**
+  - Demos section: padding 64px/72px, subtle lavender gradient background + hairline borders
+  - Lighthouse section: padding 72px/64px (was 56px/20px — cramped)
+  - About section: padding 56px/72px, subtle lavender gradient background + hairline border-top
+- [x] **Typography consistency fixes:**
+  - Demo tile titles (`.pl-demo-title`): now use `dinmedium` font (was falling back to system-ui)
+  - Demo tile titles bumped to 20px / font-weight 700 (was 18px / 900)
+  - H2 margin-bottom: added 12px breathing room (was 0px)
+  - Section header margin-bottom: 24px → 32px
+  - Hero subtitle: 18px → 20px for better readability against 66px headline
+  - Section body copy (`.pl-copy`): 16px → 17px, opacity reduced from 0.72 to 0.62 for better hierarchy
+- [x] **Divi `!important` specificity fix:** Blanket reset `body.page-id-2952 .et_pb_section { padding: 0 !important }` (line ~4724) was overriding section-specific padding. Fixed by adding longhand `padding-top`/`padding-bottom` overrides placed *after* the blanket reset (see Section 18.3)
+
 ### 📋 REMAINING:
-- [ ] (Later) Create Contact Form 7 form (Founding Labs) + swap in (after layout matches mock)
 - [ ] WP Rocket hardening: ensure **visitors** get the latest child theme CSS (minified/Used CSS can serve a stale `style.css`)
 - [ ] Final QA & polish (responsive + Visual Builder parity + performance)
 - [ ] **Divi Theme Builder**: Update header nav link text from "Lighthouse Labs" to "Founding Labs"
+- [ ] Replace demo tile placeholders with real product screenshots or GIF/MP4 loops
+- [ ] Add social proof / credibility signals (logos, testimonials, or metrics)
+- [ ] Tablet (768px): nav links disappear with no hamburger replacement — navigation lost
+- [ ] "See it in action →" hero CTA links to #demos but user likely expects video — consider linking to YouTube
 
 ### 🔴 GAP ANALYSIS: What's NOT yet implemented vs `proofline-mock-light.html`
 
@@ -52,19 +70,16 @@
 | **Demos** | 212-268 | ✅ Working | 3 demo tiles present + styled via `.pl-demo-tile` |
 | **About** | 272-283 | ✅ Working | About section present + styled |
 
-### ✅ What’s live right now (checked 2026-01-12)
+### ✅ What’s live right now (checked 2026-04-01)
 - **Present**: `#hero`, `#lighthouse`, `#demos`, `#about` exist on the published page.
 - **Header nav**: fixed (no `<br>` tags inside `.pl-nav`) and anchors scroll.
 - **Background**: light mode gradient applied for `body.page-id-2952`.
+- **Section differentiation**: Demos + About have subtle lavender gradient backgrounds; Hero + Lighthouse are transparent.
 - **Footer**: hidden for Proofline (`display: none`).
-- **Known gotcha**: WP Rocket can serve a stale minified child theme CSS file, making the header "Apply" CTA appear missing/off‑screen even though it's present in the header HTML (see Troubleshooting + Phase H QA).
+- **CF7 form**: Live (form ID `a6ab583`), emails to ac@aavishkar.ai via Gmail OAuth.
+- **Known gotcha**: WP Rocket can serve a stale minified child theme CSS file, making the header “Apply” CTA appear missing/off‑screen even though it’s present in the header HTML (see Troubleshooting + Phase H QA).
 - **CSS workflow (IMPORTANT)**: `theme/style.css` is the **single source of truth** for all site CSS. Edit this file and deploy via Git push (WP Pusher auto-deploys). Then clear caches (Divi Static CSS + WP Rocket). This workflow keeps version control and WordPress perfectly in sync.
-
-### ✅ Latest edits we’re deploying (2026-01-15)
-- **Hero headline (Proofline)**: “The scientific engine for **knowledge creation**.”
-  - Uses `<strong>` for the highlighted words (same pattern as homepage) and a Proofline-scoped CSS rule to match the pink highlight.
-- **Copy refresh**: shorter, more direct “Git” framing across Hero/Lighthouse/Demos/About (see Phase J)
-- **Header visual preference**: condensed header spacing, matching the local mock more closely (see Phase E + Troubleshooting)
+- **CSS specificity (IMPORTANT)**: Proofline section padding must use longhand `padding-top`/`padding-bottom` placed after the blanket reset at ~line 4724. See Section 18.3 for details.
 
 ### ✅ Copy deployment status (WordPress)
 - **As verified live on 2026-01-15**: Hero + Lighthouse + Demos + About copy now match `CompanyPage/proofline-mock-light.html`.
@@ -1078,3 +1093,90 @@ Reply-To: [your-email]
 - **Total:** ~30 minutes from start to working form
 
 **vs. Estimated Manual OAuth Setup:** 45-60 minutes (Google Cloud Console, credentials, etc.)
+
+---
+
+## 18) Visual Polish Sprint (2026-04-01)
+
+### 18.1 What Was Done
+
+A Playwright-based visual audit of the live page identified spacing, typography, and section differentiation issues. All fixes were CSS-only, deployed via `theme/style.css` + Git push (WP Pusher).
+
+**Changes deployed:**
+
+| Element | Before | After | CSS Property |
+|---------|--------|-------|--------------|
+| Hero subtitle | 18px | 20px | `.pl-subtitle { font-size }` |
+| H2 margin-bottom | 0px | 12px | `.pl-h2 { margin }` |
+| Section header margin | 24px | 32px | `.pl-section-header { margin-bottom }` |
+| Section copy | 16px, 0.72 opacity | 17px, 0.62 opacity | `.pl-copy { font-size, color }` |
+| Demo tile titles | system-ui, 18px, 900 | dinmedium, 20px, 700 | `.pl-demo-title { font-family, font-size, font-weight }` |
+| Demos section | padding 56px/0, transparent | 64px/72px, lavender gradient + borders | `.pl-demos { padding, background, border }` |
+| Lighthouse section | padding 56px/20px | 72px/64px | `.pl-lighthouse { padding }` |
+| About section | padding 30px/60px, transparent | 56px/72px, lavender gradient + border | `.pl-about-section { padding, background, border }` |
+
+### 18.2 Section Background Pattern
+
+Demos and About sections now use a subtle lavender gradient to visually separate them from Hero and Lighthouse:
+
+```css
+/* Demos */
+background: linear-gradient(180deg,
+  rgba(248, 250, 252, 0.5) 0%,
+  rgba(238, 235, 248, 0.35) 50%,
+  rgba(248, 250, 252, 0.5) 100%) !important;
+border-top: 1px solid rgba(158, 35, 163, 0.06);
+border-bottom: 1px solid rgba(158, 35, 163, 0.06);
+
+/* About */
+background: linear-gradient(180deg,
+  rgba(248, 250, 252, 0.5) 0%,
+  rgba(238, 235, 248, 0.3) 100%) !important;
+border-top: 1px solid rgba(158, 35, 163, 0.06);
+```
+
+Hero and Lighthouse remain transparent — this creates an alternating rhythm: transparent → tinted → transparent → tinted.
+
+### 18.3 Critical CSS Specificity Lesson: Divi Section Padding
+
+**Problem:** Section padding (`padding: 64px 0 72px !important`) was being ignored despite `!important`.
+
+**Root cause:** A blanket reset in `style.css` (~line 4724) zeros all Proofline section padding:
+```css
+body.page-id-2952 .et_pb_section {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+```
+
+This uses **longhand** properties (`padding-top`, `padding-bottom`) with `!important`. Our section rules used the **shorthand** `padding` with `!important`. When both have `!important` and equal specificity, CSS resolves in source order — and the blanket reset appeared later in the file, so it always won.
+
+**Fix:** Add longhand overrides *after* the blanket reset, with the section class for specificity:
+```css
+/* Placed immediately after the blanket reset */
+body.page-id-2952 .et_pb_section.pl-demos {
+  padding-top: 64px !important;
+  padding-bottom: 72px !important;
+}
+body.page-id-2952 .et_pb_section.pl-lighthouse {
+  padding-top: 72px !important;
+  padding-bottom: 64px !important;
+}
+body.page-id-2952 .et_pb_section.pl-about-section {
+  padding-top: 56px !important;
+  padding-bottom: 72px !important;
+}
+```
+
+**Rule for future Proofline CSS:** Always use **longhand** `padding-top`/`padding-bottom` (not shorthand `padding`) for Proofline section spacing, placed after the blanket reset block. The blanket reset is intentional — it prevents Divi's large default section padding from creating excessive whitespace.
+
+### 18.4 Remaining Opportunities (identified in audit, not yet addressed)
+
+These require HTML partial changes (manual Divi deployment) or larger design decisions:
+
+1. **Tablet nav (768px):** Nav links hidden, no hamburger menu — user loses navigation
+2. **Demo tile illustrations:** Still wireframe-quality SVGs; real screenshots/GIFs would increase trust
+3. **Social proof:** No logos, testimonials, or metrics — important for B2B conversion
+4. **"See it in action" CTA:** Links to `#demos` but user likely expects video (YouTube link)
+5. **DAG visual:** Small and sparse on desktop; could be taller or tighter-cropped
+6. **Empty Divi section:** `et_pb_section_4` (unnamed) appears to take space — check Theme Builder
