@@ -3910,7 +3910,7 @@ body.page-id-2952 .pl-center {
 /* Lighthouse section */
 body.page-proofline .pl-lighthouse,
 body.page-id-2952 .pl-lighthouse {
-  padding: 72px 0 64px;
+  padding: 72px 0 64px !important;
   background: transparent !important;
 }
 
@@ -4286,7 +4286,7 @@ body.page-id-2952 .wpcf7-not-valid {
 /* Demos section */
 body.page-proofline .pl-demos,
 body.page-id-2952 .pl-demos {
-  padding: 64px 0 72px;
+  padding: 64px 0 72px !important;
   background: linear-gradient(180deg, rgba(248, 250, 252, 0.5) 0%, rgba(238, 235, 248, 0.35) 50%, rgba(248, 250, 252, 0.5) 100%) !important;
   border-top: 1px solid rgba(158, 35, 163, 0.06);
   border-bottom: 1px solid rgba(158, 35, 163, 0.06);
@@ -4394,7 +4394,7 @@ body.page-id-2952 .pl-demo-cta-row {
 /* About section */
 body.page-proofline .pl-about-section,
 body.page-id-2952 .pl-about-section {
-  padding: 56px 0 72px;
+  padding: 56px 0 72px !important;
   text-align: center;
   background: linear-gradient(180deg, rgba(248, 250, 252, 0.5) 0%, rgba(238, 235, 248, 0.3) 100%) !important;
   border-top: 1px solid rgba(158, 35, 163, 0.06);
