@@ -3687,7 +3687,7 @@ body.page-id-2952 .pl-h1 strong {
 
 body.page-proofline .pl-subtitle,
 body.page-id-2952 .pl-subtitle {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.7;
   color: #475569;
   margin-bottom: 32px;
@@ -3881,12 +3881,12 @@ body.page-id-2952 .pl-callout-track { bottom: 18px; right: 18px; }
 body.page-proofline .pl-section-header,
 body.page-id-2952 .pl-section-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 body.page-proofline .pl-h2,
 body.page-id-2952 .pl-h2 {
-  margin: 0;
+  margin: 0 0 12px 0;
   font-family: dinmedium, Arial, sans-serif;
   font-size: clamp(28px, 3.6vw, 40px);
   line-height: 1.2;
@@ -3896,10 +3896,10 @@ body.page-id-2952 .pl-h2 {
 
 body.page-proofline .pl-copy,
 body.page-id-2952 .pl-copy {
-  margin: 14px 0 0;
-  color: rgba(15, 23, 42, 0.72);
+  margin: 8px 0 0;
+  color: rgba(15, 23, 42, 0.62);
   line-height: 1.7;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 body.page-proofline .pl-center,
@@ -3910,7 +3910,7 @@ body.page-id-2952 .pl-center {
 /* Lighthouse section */
 body.page-proofline .pl-lighthouse,
 body.page-id-2952 .pl-lighthouse {
-  padding: 56px 0 20px;
+  padding: 72px 0 64px;
   background: transparent !important;
 }
 
@@ -4286,8 +4286,10 @@ body.page-id-2952 .wpcf7-not-valid {
 /* Demos section */
 body.page-proofline .pl-demos,
 body.page-id-2952 .pl-demos {
-  padding: 56px 0;
-  background: transparent !important;
+  padding: 64px 0 72px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.5) 0%, rgba(238, 235, 248, 0.35) 50%, rgba(248, 250, 252, 0.5) 100%) !important;
+  border-top: 1px solid rgba(158, 35, 163, 0.06);
+  border-bottom: 1px solid rgba(158, 35, 163, 0.06);
 }
 
 body.page-proofline .pl-demo-tiles,
@@ -4331,8 +4333,9 @@ body.page-id-2952 .pl-demo-kicker {
 body.page-proofline .pl-demo-title,
 body.page-id-2952 .pl-demo-title {
   margin: 0 0 8px 0;
-  font-size: 18px;
-  font-weight: 900;
+  font-family: dinmedium, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
   color: #0f172a;
 }
 
@@ -4391,9 +4394,10 @@ body.page-id-2952 .pl-demo-cta-row {
 /* About section */
 body.page-proofline .pl-about-section,
 body.page-id-2952 .pl-about-section {
-  padding: 30px 0 60px;
+  padding: 56px 0 72px;
   text-align: center;
-  background: transparent !important;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.5) 0%, rgba(238, 235, 248, 0.3) 100%) !important;
+  border-top: 1px solid rgba(158, 35, 163, 0.06);
 }
 
 body.page-proofline .pl-inline-link,
