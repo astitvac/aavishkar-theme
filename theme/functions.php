@@ -619,3 +619,71 @@ function aav_sitemap_exclude_pages($args, $post_type) {
 }
 add_filter('wp_sitemaps_posts_query_args', 'aav_sitemap_exclude_pages', 10, 2);
 
+/* ==========================================================================
+   PROOFLINE: UTM-AWARE EVENT BANNER
+   Reads ?ref= URL param and shows a contextual welcome banner.
+   Fully auto-deployed via functions.php + style.css — no Divi steps.
+   Also injects the ref value as a hidden field into all CF7 forms on the page.
+   ========================================================================== */
+
+function aav_proofline_event_banner() {
+    if ( ! is_page( 2952 ) ) {
+        return;
+    }
+    ?>
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var ref = params.get('ref');
+        if (!ref) return;
+
+        // Map known event slugs to display names
+        var eventNames = {
+            'buildtogether': 'Build Together',
+            'build-together': 'Build Together'
+        };
+
+        // Use mapped name or auto-prettify the slug
+        var displayName = eventNames[ref.toLowerCase()]
+            || ref.replace(/[-_]/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+
+        var banner = document.createElement('div');
+        banner.className = 'pl-event-banner';
+        banner.setAttribute('role', 'status');
+        banner.innerHTML =
+            '<div class="pl-event-banner-inner">' +
+                '<span class="pl-event-banner-text">' +
+                    'Welcome from <strong>' + displayName + '</strong> \u2014 ' +
+                    'glad you\u2019re here. Explore Proofline below, or ' +
+                    '<a href="#lighthouse">tell us about your team</a>.' +
+                '</span>' +
+                '<button class="pl-event-banner-close" aria-label="Dismiss banner">\u00d7</button>' +
+            '</div>';
+
+        // Insert at the top of the hero section
+        var hero = document.querySelector('.pl-hero .et_pb_code_inner, .pl-hero .et_pb_module_inner');
+        if (hero) {
+            hero.insertBefore(banner, hero.firstChild);
+        }
+
+        // Dismiss handler
+        banner.querySelector('.pl-event-banner-close').addEventListener('click', function() {
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(-10px)';
+            setTimeout(function() { banner.remove(); }, 300);
+        });
+
+        // Inject ref as hidden field into all CF7 forms on the page
+        document.querySelectorAll('.wpcf7-form').forEach(function(form) {
+            var hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = '_aav_event_ref';
+            hidden.value = ref;
+            form.appendChild(hidden);
+        });
+    })();
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'aav_proofline_event_banner' );
+

@@ -6,7 +6,7 @@
   NOT rendered via Git — must be manually pasted into CF7 editor.
   Version-controlled here as source of truth.
 
-  Updated: 2026-02 — Redesigned question, placeholder, submit text
+  Updated: 2026-04 — Broadened roles, domains, and placeholders for wider audience
 -->
 
 <div class="pl-form-grid">
@@ -17,32 +17,32 @@
 
     <div class="pl-field">
       <label for="pl-email">Email</label>
-      [email* your-email id:pl-email placeholder "jane@lab.com"]
+      [email* your-email id:pl-email placeholder "jane@example.com"]
     </div>
 
     <div class="pl-field">
-      <label for="pl-org">Org</label>
-      [text* your-org id:pl-org placeholder "e.g., MIT Lincoln Lab"]
+      <label for="pl-org">Organization</label>
+      [text* your-org id:pl-org placeholder "e.g., Acme Research, Smith & Partners LLP"]
     </div>
 
     <div class="pl-field">
       <label for="pl-role">Role</label>
-      [select* your-role id:pl-role include_blank "PI / Group Lead" "Postdoc / Senior Researcher" "Graduate Student / RA" "R&D / Product" "Founder / Exec" "Other"]
+      [select* your-role id:pl-role include_blank "PI / Group Lead" "Postdoc / Senior Researcher" "Graduate Student / RA" "R&D / Product Lead" "Legal / Compliance" "Investment / Strategy" "Founder / Exec" "Consultant / Advisor" "Other"]
     </div>
 
     <div class="pl-field">
       <label for="pl-size">Team size</label>
-      [select* team-size id:pl-size include_blank "1–3" "4–10" "11–30"]
+      [select* team-size id:pl-size include_blank "1–3" "4–10" "11–30" "30+"]
     </div>
 
     <div class="pl-field">
       <label for="pl-domain">Domain</label>
-      [select* your-domain id:pl-domain include_blank "Academic lab" "Deep tech" "Enterprise R&D" "Research startup" "Other"]
+      [select* your-domain id:pl-domain include_blank "Academic lab" "Deep tech" "Enterprise R&D" "Legal / Regulatory" "Finance / Investment" "Consulting / Advisory" "Product / Engineering" "Research startup" "Other"]
     </div>
 
     <div class="pl-field pl-field-wide">
       <label for="pl-decisions">What would you use Proofline for first?</label>
-      [textarea your-decisions id:pl-decisions placeholder "e.g., Literature review across a distributed team, tracking parallel experiments and why we pivoted, early-stage product exploration, building an audit trail for regulatory submissions..."]
+      [textarea your-decisions id:pl-decisions placeholder "e.g., Literature review across a distributed team, tracking parallel experiments, building an audit trail for regulatory submissions, due diligence research, case law analysis, synthesizing competitive intelligence..."]
     </div>
 
     <fieldset class="pl-field pl-field-wide pl-fieldset">
@@ -51,4 +51,4 @@
     </fieldset>
   </div>
 
-  [submit class:aav-btn class:aav-btn-primary class:pl-apply-btn "Apply as a Founding Lab"]
+  [submit class:aav-btn class:aav-btn-primary class:pl-apply-btn "Join as a Founding Lab"]
