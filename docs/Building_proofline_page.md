@@ -51,14 +51,42 @@
   - Section body copy (`.pl-copy`): 16px → 17px, opacity reduced from 0.72 to 0.62 for better hierarchy
 - [x] **Divi `!important` specificity fix:** Blanket reset `body.page-id-2952 .et_pb_section { padding: 0 !important }` (line ~4724) was overriding section-specific padding. Fixed by adding longhand `padding-top`/`padding-bottom` overrides placed *after* the blanket reset (see Section 18.3)
 
+### ✅ COMPLETED (2026-04-02 — Event Capture & Audience Broadening Sprint):
+- [x] **Lightweight email capture in hero** — 2-field form (Name + Email), CF7 form ID `5645322`
+  - Positioned between hero CTAs and hero-note
+  - Soft CTA: "Not ready to apply? **Stay connected.**" → "Get early updates"
+  - Inline layout on desktop (name | email | button), stacks on mobile
+  - CSS: `.pl-early-access`, `.pl-ea-field`, `.pl-ea-btn` (in style.css after line 5520)
+- [x] **UTM-aware event banner** — fully auto-deployed via `functions.php` + `style.css`
+  - `?ref=buildtogether` shows "Welcome from **Build Together**" banner at top of hero
+  - JS function `aav_proofline_event_banner()` in functions.php, hooked to `wp_footer`
+  - Known event names mapped; unknown slugs auto-prettified
+  - Dismissable with × button + fade-out animation
+  - Injects hidden `_aav_event_ref` field into all CF7 forms for lead source tracking
+  - No `?ref=` param → no banner (default experience unchanged)
+- [x] **CTA language softening:**
+  - Demos CTA: "Apply as a Founding Lab" → "Join the Founding Labs"
+  - Founding Labs submit: "Apply as a Founding Lab" → "Join as a Founding Lab"
+  - Hero ghost CTA corrected to YouTube link: "Watch 3 min Demo →"
+- [x] **Founding Labs form broadened** (CF7 form a6ab583):
+  - Org placeholder: "MIT Lincoln Lab" → "Acme Research, Smith & Partners LLP"
+  - Role: added "Legal / Compliance", "Investment / Strategy", "Consultant / Advisor"
+  - Domain: added "Legal / Regulatory", "Finance / Investment", "Consulting / Advisory", "Product / Engineering"
+  - Team size: added "30+" option
+  - Textarea placeholder: added business examples (due diligence, case law, competitive intelligence)
+  - Email placeholder: "jane@lab.com" → "jane@example.com"
+- [x] **Lighthouse copy broadened:**
+  - H2: "research tools" → "knowledge tools"
+  - Body: "labs" → "teams", "research workflows" → "workflows"
+  - Bullet: "R&D project" → "knowledge-intensive project"
+
 ### 📋 REMAINING:
 - [ ] WP Rocket hardening: ensure **visitors** get the latest child theme CSS (minified/Used CSS can serve a stale `style.css`)
-- [ ] Final QA & polish (responsive + Visual Builder parity + performance)
 - [ ] **Divi Theme Builder**: Update header nav link text from "Lighthouse Labs" to "Founding Labs"
 - [ ] Replace demo tile placeholders with real product screenshots or GIF/MP4 loops
 - [ ] Add social proof / credibility signals (logos, testimonials, or metrics)
 - [ ] Tablet (768px): nav links disappear with no hamburger replacement — navigation lost
-- [ ] "See it in action →" hero CTA links to #demos but user likely expects video — consider linking to YouTube
+- [ ] Empty Divi section `et_pb_section_4` (unnamed) may take space — check Theme Builder
 
 ### 🔴 GAP ANALYSIS: What's NOT yet implemented vs `proofline-mock-light.html`
 
@@ -70,13 +98,17 @@
 | **Demos** | 212-268 | ✅ Working | 3 demo tiles present + styled via `.pl-demo-tile` |
 | **About** | 272-283 | ✅ Working | About section present + styled |
 
-### ✅ What’s live right now (checked 2026-04-01)
+### ✅ What’s live right now (checked 2026-04-02)
 - **Present**: `#hero`, `#lighthouse`, `#demos`, `#about` exist on the published page.
 - **Header nav**: fixed (no `<br>` tags inside `.pl-nav`) and anchors scroll.
 - **Background**: light mode gradient applied for `body.page-id-2952`.
 - **Section differentiation**: Demos + About have subtle lavender gradient backgrounds; Hero + Lighthouse are transparent.
 - **Footer**: hidden for Proofline (`display: none`).
-- **CF7 form**: Live (form ID `a6ab583`), emails to ac@aavishkar.ai via Gmail OAuth.
+- **Dual conversion funnel**:
+  - Lightweight email capture in hero (CF7 form ID `5645322`) — 2 fields, soft CTA
+  - Full Founding Labs form in lighthouse (CF7 form ID `a6ab583`) — 8 fields, broadened for non-academic teams
+  - Both email to ac@aavishkar.ai via Gmail OAuth
+- **UTM event banner**: `?ref=eventslug` shows contextual welcome banner (auto-deployed via `functions.php`)
 - **Known gotcha**: WP Rocket can serve a stale minified child theme CSS file, making the header “Apply” CTA appear missing/off‑screen even though it’s present in the header HTML (see Troubleshooting + Phase H QA).
 - **CSS workflow (IMPORTANT)**: `theme/style.css` is the **single source of truth** for all site CSS. Edit this file and deploy via Git push (WP Pusher auto-deploys). Then clear caches (Divi Static CSS + WP Rocket). This workflow keeps version control and WordPress perfectly in sync.
 - **CSS specificity (IMPORTANT)**: Proofline section padding must use longhand `padding-top`/`padding-bottom` placed after the blanket reset at ~line 4724. See Section 18.3 for details.
@@ -1170,13 +1202,123 @@ body.page-id-2952 .et_pb_section.pl-about-section {
 
 **Rule for future Proofline CSS:** Always use **longhand** `padding-top`/`padding-bottom` (not shorthand `padding`) for Proofline section spacing, placed after the blanket reset block. The blanket reset is intentional — it prevents Divi's large default section padding from creating excessive whitespace.
 
-### 18.4 Remaining Opportunities (identified in audit, not yet addressed)
-
-These require HTML partial changes (manual Divi deployment) or larger design decisions:
+### 18.4 Remaining Opportunities (identified in audit, partially addressed in Section 19)
 
 1. **Tablet nav (768px):** Nav links hidden, no hamburger menu — user loses navigation
 2. **Demo tile illustrations:** Still wireframe-quality SVGs; real screenshots/GIFs would increase trust
 3. **Social proof:** No logos, testimonials, or metrics — important for B2B conversion
-4. **"See it in action" CTA:** Links to `#demos` but user likely expects video (YouTube link)
+4. ~~**"See it in action" CTA:** Links to `#demos` but user likely expects video~~ → Fixed in Section 19 (now "Watch 3 min Demo →" with YouTube link)
 5. **DAG visual:** Small and sparse on desktop; could be taller or tighter-cropped
 6. **Empty Divi section:** `et_pb_section_4` (unnamed) appears to take space — check Theme Builder
+
+---
+
+## 19) Event Capture & Audience Broadening Sprint (2026-04-02)
+
+### 19.1 Context
+
+Aavishkar.ai runs recurring in-person events (Build Together series, Brickell/Miami) with printed QR code flyers pointing to `aavishkar.ai/proofline?ref=buildtogether`. The page was optimized for a single persona (research PI) with a single heavy conversion path (8-field form at the bottom). Event attendees — tech, legal, real estate, creative professionals — need a lighter path.
+
+### 19.2 What Was Built
+
+**Four changes deployed:**
+
+| Change | Deploy Channel | Files Modified |
+|--------|---------------|----------------|
+| Lightweight email capture in hero | CSS auto-deploy + partial (manual paste) + new CF7 form | `style.css`, `proofline-hero.html`, WP Admin CF7 |
+| UTM-aware event banner | PHP + CSS (fully auto-deploy, zero manual steps) | `functions.php`, `style.css` |
+| CTA language softening | Partial updates (manual paste) | `proofline-hero.html`, `proofline-demos.html` |
+| Founding Labs form broadening | CF7 edit (manual) + partial (manual paste) | `proofline-lighthouse.html`, `proofline-cf7-form-template.txt`, WP Admin CF7 |
+
+### 19.3 Lightweight Email Capture
+
+**Location:** Inside hero section, between `.pl-hero-ctas` and `.pl-hero-note`
+
+**CF7 Form:** "Proofline — Stay Connected" (ID: `5645322`)
+- 2 fields: Name + Email
+- Submit: "Get early updates"
+- Success: "You're on the list — we'll be in touch soon."
+- Emails to: ac@aavishkar.ai
+
+**HTML Structure:**
+```html
+<div class="pl-early-access" aria-label="Get early updates">
+  <p class="pl-ea-label">Not ready to apply? <strong>Stay connected.</strong></p>
+  [contact-form-7 id="5645322" title="Proofline — Stay Connected"]
+</div>
+```
+
+**CSS Classes:**
+- `.pl-early-access` — glassmorphic card container (gradient bg, border, blur)
+- `.pl-early-access-fields` — flex row (name | email | submit)
+- `.pl-ea-field` — flex: 1 input wrapper
+- `.pl-ea-submit` — flex-shrink: 0 button wrapper
+- `.pl-ea-btn` — compact submit button (10px padding, 14px font)
+- `.pl-ea-label` — intro text with purple bold highlight
+
+**Responsive:** Stacks to column at 980px. Full-width button at 980px. Tighter padding at 520px.
+
+### 19.4 UTM-aware Event Banner
+
+**Fully auto-deployed** — no Divi/partial changes needed.
+
+**PHP:** `aav_proofline_event_banner()` in `functions.php`, hooked to `wp_footer`
+- Only fires on `is_page(2952)`
+- Reads `?ref=` URL param via JS `URLSearchParams`
+- Maps known slugs to display names: `{ 'buildtogether': 'Build Together' }`
+- Unknown slugs auto-prettified (e.g., `miami-tech-week` → "Miami Tech Week")
+- Creates `.pl-event-banner` div, prepends to hero section
+- Dismiss button with fade-out animation (opacity + translateY)
+- Injects hidden `_aav_event_ref` input into ALL CF7 forms on the page
+
+**To add new events:** Edit `eventNames` object in the JS within `aav_proofline_event_banner()`.
+
+**QR code URL pattern:** `https://aavishkar.ai/proofline?ref=eventslug`
+
+**CSS Classes:**
+- `.pl-event-banner` — outer wrapper (max-width 1200px, centered)
+- `.pl-event-banner-inner` — flex row with purple-tinted gradient bg
+- `.pl-event-banner-text` — message text with bold event name + link
+- `.pl-event-banner-close` — dismiss button (×)
+
+### 19.5 CTA Language Changes
+
+| Location | Before | After |
+|----------|--------|-------|
+| Demos section CTA | "Apply as a Founding Lab" | "Join the Founding Labs" |
+| Founding Labs submit button | "Apply as a Founding Lab" | "Join as a Founding Lab" |
+| Hero ghost CTA | "See it in action →" (linked to #demos) | "Watch 3 min Demo →" (linked to YouTube) |
+
+### 19.6 Founding Labs Form Broadening
+
+**Form ID:** `a6ab583` (unchanged)
+
+**Field changes:**
+
+| Field | Before | After |
+|-------|--------|-------|
+| Email placeholder | jane@lab.com | jane@example.com |
+| Org label | Org | Organization |
+| Org placeholder | e.g., MIT Lincoln Lab | e.g., Acme Research, Smith & Partners LLP |
+| Role options | 6 options (3 academic) | 9 options (+Legal/Compliance, +Investment/Strategy, +Consultant/Advisor) |
+| Team size | 3 options (1-3, 4-10, 11-30) | 4 options (+30+) |
+| Domain options | 5 options | 9 options (+Legal/Regulatory, +Finance/Investment, +Consulting/Advisory, +Product/Engineering) |
+| Textarea placeholder | research-only examples | added: due diligence, case law analysis, competitive intelligence |
+
+**Lighthouse copy changes:**
+- H2: "research tools" → "knowledge tools"
+- Body: "labs" → "teams", "research workflows" → "workflows"
+- Bullet: "R&D project" → "knowledge-intensive project"
+
+### 19.7 Key Files Reference
+
+| File | What Changed |
+|------|-------------|
+| `theme/style.css` (after line 5520) | Email capture CSS + event banner CSS |
+| `theme/functions.php` (after line 622) | `aav_proofline_event_banner()` function |
+| `theme/partials/proofline-hero.html` | Added `.pl-early-access` block, fixed ghost CTA link |
+| `theme/partials/proofline-demos.html` (line 182) | "Join the Founding Labs" CTA |
+| `theme/partials/proofline-lighthouse.html` | Broadened copy |
+| `theme/partials/proofline-cf7-form-template.txt` | Broadened form reference |
+| WP Admin: CF7 form `5645322` | New "Stay Connected" form |
+| WP Admin: CF7 form `a6ab583` | Broadened fields/options/placeholders |
