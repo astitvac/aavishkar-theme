@@ -687,3 +687,68 @@ function aav_proofline_event_banner() {
 }
 add_action( 'wp_footer', 'aav_proofline_event_banner' );
 
+/* ==========================================================================
+   DISABLE COMMENTS SITE-WIDE
+   This is a marketing/product site that does not use blog comments. Spambots
+   were POSTing directly to wp-comments-post.php (link-shortener payloads from
+   rotating fake authors/IPs), which flooded moderation email and produced
+   bounce-backs to a stale post-author address.
+
+   This block hard-disables comments everywhere. The comments_open filter
+   overrides the legacy comment_status='open' still stored on old posts in the
+   database, so it also closes the back door the bots were using.
+   Added: 2026-06-16
+   ========================================================================== */
+
+// 1. Force comments + pings closed on every post/page, regardless of the
+//    per-post status saved in the database. This also makes
+//    wp_handle_comment_submission() reject direct POSTs to wp-comments-post.php.
+add_filter( 'comments_open', '__return_false', 20, 2 );
+add_filter( 'pings_open',    '__return_false', 20, 2 );
+
+// 2. Hide any pre-existing comments from the front-end.
+add_filter( 'comments_array', '__return_empty_array', 10, 2 );
+
+// 3. Belt-and-suspenders: hard-stop any comment that somehow reaches insertion.
+add_filter( 'preprocess_comment', function ( $commentdata ) {
+    wp_die(
+        esc_html__( 'Comments are closed on this site.', 'aavishkar' ),
+        esc_html__( 'Comments closed', 'aavishkar' ),
+        array( 'response' => 403 )
+    );
+    return $commentdata; // unreachable, kept for clarity
+}, 0 );
+
+// 4. Remove comment/trackback support from all post types.
+add_action( 'init', function () {
+    foreach ( get_post_types() as $type ) {
+        if ( post_type_supports( $type, 'comments' ) ) {
+            remove_post_type_support( $type, 'comments' );
+        }
+        if ( post_type_supports( $type, 'trackbacks' ) ) {
+            remove_post_type_support( $type, 'trackbacks' );
+        }
+    }
+}, 100 );
+
+// 5. Declutter wp-admin: drop the Comments menu, admin-bar node, and dashboard
+//    widget. (The comments screen stays reachable by direct URL if ever needed.)
+add_action( 'admin_menu', function () {
+    remove_menu_page( 'edit-comments.php' );
+} );
+add_action( 'wp_before_admin_bar_render', function () {
+    global $wp_admin_bar;
+    if ( $wp_admin_bar ) {
+        $wp_admin_bar->remove_node( 'comments' );
+    }
+} );
+add_action( 'wp_dashboard_setup', function () {
+    remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
+} );
+
+// 6. Disable the XML-RPC pingback methods (a spam + DDoS amplification vector).
+add_filter( 'xmlrpc_methods', function ( $methods ) {
+    unset( $methods['pingback.ping'], $methods['pingback.extensions.getPingbacks'] );
+    return $methods;
+} );
+
